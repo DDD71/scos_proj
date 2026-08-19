@@ -1,0 +1,9 @@
+.DS_Store
+Thumbs.db
+
+# Office 临时文件
+.~*
+~$*
+
+# 本地大文件
+/参考资料/厂区图.png
