@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>成品库存补货业务流转演示</title>
+  <style>
+    :root {
+      --page: #f4f7fb;
+      --surface: #ffffff;
+      --surface-2: #f8fafc;
+      --ink: #172033;
+      --muted: #68758a;
+      --line: #dbe3ee;
+      --blue: #2257d6;
+      --blue-soft: #eaf0ff;
+      --green: #17845c;
+      --green-soft: #e7f6ef;
+      --orange: #c16a13;
+      --orange-soft: #fff1dc;
+      --red: #c23e4c;
+      --red-soft: #fdebed;
+      --purple: #7554c8;
+      --shadow: 0 16px 44px rgba(31, 53, 88, .09);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 8% 0%, rgba(34, 87, 214, .10), transparent 25%),
+        var(--page);
+      color: var(--ink);
+      font-family: "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+      line-height: 1.55;
+    }
+    button { font: inherit; cursor: pointer; }
+    button:focus-visible { outline: 3px solid rgba(34, 87, 214, .25); outline-offset: 2px; }
+
+    .page { width: min(1380px, calc(100% - 36px)); margin: 0 auto; padding: 30px 0 52px; }
+    .hero { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; margin-bottom: 20px; }
+    .eyebrow { color: var(--blue); font-size: 13px; font-weight: 700; letter-spacing: .08em; margin-bottom: 5px; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { margin-bottom: 7px; font-size: clamp(28px, 3.6vw, 42px); line-height: 1.2; }
+    h2 { margin-bottom: 12px; font-size: 20px; }
+    h3 { margin-bottom: 7px; font-size: 16px; }
+    .subtitle { color: var(--muted); margin: 0; max-width: 850px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 9px; }
+
+    .btn {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--surface);
+      color: var(--ink);
+      padding: 9px 14px;
+      font-weight: 650;
+    }
+    .btn:hover { border-color: #9fb3df; }
+    .btn.primary { color: #fff; background: var(--blue); border-color: var(--blue); }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid rgba(219, 227, 238, .95);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .scenario-bar { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 16px 18px; margin-bottom: 18px; }
+    .scenario-label { color: var(--muted); font-size: 14px; font-weight: 650; }
+    .scenario-options { display: flex; gap: 8px; flex-wrap: wrap; }
+    .scenario {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--surface-2);
+      color: var(--ink);
+      padding: 7px 13px;
+    }
+    .scenario.active { border-color: var(--blue); background: var(--blue-soft); color: var(--blue); font-weight: 700; }
+    .scenario-summary { margin-left: auto; color: var(--muted); font-size: 14px; }
+
+    .demo-grid { display: grid; grid-template-columns: minmax(680px, 1.75fr) minmax(300px, .75fr); gap: 18px; align-items: start; }
+
+    .board-card { padding: 20px; overflow: hidden; }
+    .board-top { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px; }
+    .board-top h2 { margin: 0; }
+    .progress-text { color: var(--muted); font-size: 14px; white-space: nowrap; }
+
+    .lane-heads { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 0 12px 8px 54px; }
+    .lane-head {
+      text-align: center;
+      color: var(--muted);
+      border-bottom: 3px solid var(--line);
+      padding: 7px 4px 9px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .lane-head.module { color: var(--blue); border-color: var(--blue); }
+
+    .flow-board { position: relative; min-height: 740px; padding: 8px 12px 8px 54px; }
+    .connector-layer { position: absolute; inset: 8px 12px 8px 54px; width: calc(100% - 66px); height: calc(100% - 16px); pointer-events: none; overflow: visible; z-index: 0; }
+    .connector { fill: none; stroke: #cfd8e6; stroke-width: 3; }
+    .connector.done { stroke: var(--blue); }
+    .traveler { fill: var(--blue); filter: drop-shadow(0 0 5px rgba(34, 87, 214, .5)); transition: transform 500ms ease; }
+
+    .flow-rows { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 96px; gap: 10px 12px; position: relative; z-index: 1; }
+    .node {
+      align-self: center;
+      width: 100%;
+      min-height: 78px;
+      padding: 11px 12px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--surface);
+      box-shadow: 0 5px 15px rgba(35, 55, 84, .05);
+      opacity: .48;
+      transform: scale(.985);
+      transition: opacity 220ms ease, transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease, background 220ms ease;
+      position: relative;
+    }
+    .node::before {
+      content: attr(data-step-label);
+      position: absolute;
+      right: 8px;
+      top: 7px;
+      min-width: 24px;
+      text-align: center;
+      color: var(--blue);
+      background: var(--blue-soft);
+      border-radius: 999px;
+      padding: 1px 5px;
+      font-size: 10px;
+      font-weight: 700;
+    }
+    .node.visible { opacity: 1; }
+    .node.active {
+      opacity: 1;
+      transform: scale(1.03);
+      border-color: var(--blue);
+      box-shadow: 0 0 0 4px rgba(34, 87, 214, .11), 0 10px 26px rgba(34, 87, 214, .14);
+      background: var(--blue-soft);
+    }
+    .node.module { border-left: 5px solid var(--blue); }
+    .node.production { border-left: 5px solid var(--purple); }
+    .node.execution { border-left: 5px solid var(--green); }
+    .node.business { border-left: 5px solid var(--orange); }
+    .node-time { display: block; color: var(--muted); font-size: 11px; margin-bottom: 2px; padding-right: 30px; }
+    .node-title { display: block; font-weight: 750; font-size: 14px; line-height: 1.35; }
+    .node-value { display: block; color: var(--muted); font-size: 12px; margin-top: 3px; line-height: 1.35; }
+
+    .module-card { padding: 20px; position: sticky; top: 16px; }
+    .module-heading { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 14px; }
+    .module-heading h2 { margin: 0; }
+    .live-tag { color: var(--green); background: var(--green-soft); border-radius: 999px; padding: 4px 9px; font-size: 12px; font-weight: 700; white-space: nowrap; }
+
+    .tank-zone { display: grid; grid-template-columns: 105px 1fr; gap: 20px; align-items: center; padding: 15px 0 17px; }
+    .tank {
+      height: 250px;
+      width: 90px;
+      margin: 0 auto;
+      border: 4px solid #9eacc0;
+      border-radius: 12px 12px 26px 26px;
+      position: relative;
+      overflow: hidden;
+      background: var(--surface-2);
+    }
+    .water {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 65%;
+      background: linear-gradient(180deg, #6f9cff, var(--blue));
+      transition: height 650ms cubic-bezier(.2,.8,.2,1), background 220ms ease;
+    }
+    .water.warn { background: linear-gradient(180deg, #f2a14f, var(--orange)); }
+    .water.danger { background: linear-gradient(180deg, #ed7582, var(--red)); }
+    .water::before {
+      content: "";
+      position: absolute;
+      left: -10%; top: -5px;
+      width: 120%; height: 11px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.42);
+    }
+    .tank-line { position: absolute; left: 0; right: 0; border-top: 2px dashed; z-index: 2; }
+    .tank-line.reorder { bottom: 45%; border-color: var(--orange); }
+    .tank-line.safety { bottom: 30%; border-color: var(--red); }
+    .tank-label { position: absolute; left: 7px; z-index: 3; padding: 1px 4px; border-radius: 4px; background: rgba(255,255,255,.9); font-size: 10px; }
+    .tank-label.reorder { bottom: calc(45% + 3px); color: var(--orange); }
+    .tank-label.safety { bottom: calc(30% + 3px); color: var(--red); }
+
+    .stock-value { font-size: 34px; line-height: 1.15; font-weight: 800; margin-bottom: 3px; }
+    .stock-unit { color: var(--muted); font-size: 14px; }
+    .stock-state { display: inline-flex; align-items: center; gap: 7px; margin-top: 11px; padding: 5px 9px; border-radius: 999px; color: var(--green); background: var(--green-soft); font-size: 12px; font-weight: 700; }
+    .stock-state.warn { color: var(--orange); background: var(--orange-soft); }
+    .stock-state.danger { color: var(--red); background: var(--red-soft); }
+    .state-dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+
+    .role-box { border-top: 1px solid var(--line); padding-top: 15px; }
+    .role-row { margin-bottom: 13px; }
+    .role-row:last-child { margin-bottom: 0; }
+    .role-key { color: var(--muted); font-size: 12px; margin-bottom: 3px; }
+    .role-value { font-weight: 700; }
+    .role-value.blue { color: var(--blue); }
+
+    .current-card { grid-column: 1 / -1; padding: 18px 22px; margin-top: 18px; display: grid; grid-template-columns: 130px 1fr 1fr; gap: 20px; align-items: center; }
+    .current-index { color: var(--blue); font-size: 28px; font-weight: 800; }
+    .current-index small { display: block; color: var(--muted); font-size: 12px; font-weight: 600; }
+    .current-block { border-left: 1px solid var(--line); padding-left: 20px; }
+    .current-key { color: var(--muted); font-size: 12px; margin-bottom: 3px; }
+    .current-value { font-weight: 700; }
+
+    .mini-timeline { display: flex; gap: 0; margin-top: 18px; }
+    .mini-segment { height: 6px; flex: 1; background: var(--line); transition: background 220ms ease; }
+    .mini-segment:first-child { border-radius: 4px 0 0 4px; }
+    .mini-segment:last-child { border-radius: 0 4px 4px 0; }
+    .mini-segment.done { background: var(--blue); }
+
+    @media (max-width: 1050px) {
+      .demo-grid { grid-template-columns: 1fr; }
+      .module-card { position: static; display: grid; grid-template-columns: 1fr 1.2fr; gap: 20px; }
+      .module-heading { grid-column: 1 / -1; }
+      .role-box { border-top: 0; border-left: 1px solid var(--line); padding: 0 0 0 20px; }
+    }
+
+    @media (max-width: 760px) {
+      .page { width: min(100% - 20px, 1380px); padding-top: 18px; }
+      .hero { flex-direction: column; align-items: flex-start; }
+      .scenario-summary { width: 100%; margin-left: 0; }
+      .lane-heads { display: none; }
+      .flow-board { min-height: auto; padding: 8px; }
+      .connector-layer { display: none; }
+      .flow-rows { display: block; }
+      .node { margin-bottom: 10px; opacity: .55; }
+      .node::before { top: 7px; right: 8px; }
+      .module-card { display: block; }
+      .role-box { border-left: 0; border-top: 1px solid var(--line); padding: 15px 0 0; }
+      .current-card { grid-template-columns: 1fr; }
+      .current-block { border-left: 0; border-top: 1px solid var(--line); padding: 12px 0 0; }
+    }
+
+    @media print {
+      body { background: #fff; }
+      .page { width: 100%; padding: 0; }
+      .hero-actions, .scenario-bar { display: none; }
+      .card { box-shadow: none; }
+      .module-card { position: static; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; scroll-behavior: auto !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <div>
+        <div class="eyebrow">SCOS · 成品库存优化</div>
+        <h1>成品补货与生产排程业务流转</h1>
+        <p class="subtitle">通过不同业务场景，演示月度出货计划如何转化为补货总量、周生产排程，以及库存模块如何在每日执行中持续监控和处理异常。</p>
+      </div>
+      <div class="hero-actions">
+        <button class="btn primary" id="play" type="button">播放动画</button>
+        <button class="btn" id="prev" type="button">上一步</button>
+        <button class="btn" id="next" type="button">下一步</button>
+        <button class="btn" type="button" onclick="window.print()">打印 / PDF</button>
+      </div>
+    </header>
+
+    <section class="card scenario-bar" aria-label="演示场景">
+      <span class="scenario-label">选择业务场景</span>
+      <div class="scenario-options">
+        <button class="scenario active" type="button" data-scenario="normal">正常补货</button>
+        <button class="scenario" type="button" data-scenario="demand">临时增加出货</button>
+        <button class="scenario" type="button" data-scenario="delay">生产延期</button>
+      </div>
+      <span class="scenario-summary" id="scenario-summary">按计划完成生产，库存恢复到目标水位</span>
+    </section>
+
+    <section class="demo-grid">
+      <article class="card board-card">
+        <div class="board-top">
+          <h2>业务节点与流转</h2>
+          <span class="progress-text" id="progress-text">步骤 1 / 7</span>
+        </div>
+
+        <div class="lane-heads" aria-hidden="true">
+          <div class="lane-head">销售 / 运营</div>
+          <div class="lane-head module">库存优化模块</div>
+          <div class="lane-head">生产计划</div>
+          <div class="lane-head">生产 / 质检 / 仓储</div>
+        </div>
+
+        <div class="flow-board" id="flow-board">
+          <svg class="connector-layer" id="connector-layer" aria-hidden="true"></svg>
+          <div class="flow-rows" id="flow-rows"></div>
+        </div>
+        <div class="mini-timeline" id="mini-timeline" aria-hidden="true"></div>
+      </article>
+
+      <aside class="card module-card">
+        <div class="module-heading">
+          <h2>库存模块实时视角</h2>
+          <span class="live-tag">随业务节点更新</span>
+        </div>
+
+        <div class="tank-zone">
+          <div class="tank" aria-label="成品库存水位示意">
+            <div class="tank-line reorder"></div>
+            <div class="tank-line safety"></div>
+            <span class="tank-label reorder">再订货点 s</span>
+            <span class="tank-label safety">安全库存</span>
+            <div class="water" id="water"></div>
+          </div>
+          <div>
+            <div class="stock-value"><span id="stock-value">300</span></div>
+            <div class="stock-unit">吨 · 预计可用库存</div>
+            <div class="stock-state" id="stock-state"><span class="state-dot"></span>水位正常</div>
+          </div>
+        </div>
+
+        <div class="role-box">
+          <div class="role-row">
+            <div class="role-key">本节点接收</div>
+            <div class="role-value" id="role-input">下月出货计划</div>
+          </div>
+          <div class="role-row">
+            <div class="role-key">库存模块的作用</div>
+            <div class="role-value blue" id="role-action">将出货计划作为成品需求输入</div>
+          </div>
+          <div class="role-row">
+            <div class="role-key">输出或处理结果</div>
+            <div class="role-value" id="role-output">进入月度补货测算</div>
+          </div>
+        </div>
+      </aside>
+
+      <section class="card current-card" aria-live="polite">
+        <div class="current-index"><small>当前动画节点</small><span id="current-step">01</span></div>
+        <div class="current-block">
+          <div class="current-key">业务发生了什么</div>
+          <div class="current-value" id="current-business">销售/运营发布下月成品出货计划</div>
+        </div>
+        <div class="current-block">
+          <div class="current-key">系统如何参与</div>
+          <div class="current-value" id="current-system">库存模块接收计划，作为月度需求输入</div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script>
+    (() => {
+      const scenarios = {
+        normal: {
+          summary: '按计划完成生产，库存恢复到目标水位',
+          steps: [
+            { actor: 0, time: '每月25日', title: '发布下月出货计划', value: '成品A：1,000吨', stock: 300, input: '下月出货计划', action: '将出货计划作为成品需求输入', output: '进入月度补货测算', business: '销售/运营发布下月成品出货计划', system: '库存模块接收计划，作为月度需求输入' },
+            { actor: 1, time: '每月25日', title: '汇总库存与策略数据', value: '可用库存300吨、月末目标200吨', stock: 300, input: '可用库存、已有计划入库、目标水位', action: '统一形成月度库存测算口径', output: '得到月初与月末库存基础', business: '库存数据和库存策略准备完成', system: '库存模块汇总现有库存、计划入库和目标水位' },
+            { actor: 1, time: '月计划形成', title: '计算月度补货总量', value: '1,000＋200－300＝900吨', stock: 300, input: '月度需求与库存基础', action: '计算整月生产补货缺口', output: '月度建议生产总量900吨', business: '形成下个月成品A的补货总量', system: '库存模块输出月度建议生产总量，但不安排具体日期' },
+            { actor: 1, time: '提前一周', title: '滚动未来7天库存', value: '预计第3日触及s＝180吨', stock: 180, input: '周出货计划、最新库存、已有生产安排', action: '逐日计算未来一周库存水位', output: '识别补货时间和数量', business: '开始编制未来一周生产计划', system: '库存模块发现第3日将触及再订货点' },
+            { actor: 2, time: '周生产计划', title: '确定生产日期与数量', value: '安排200吨，第4日可用入库', stock: 180, input: '库存补货建议', action: '向生产排程提供建议量和期望入库时间', output: '形成可执行生产计划', business: '生产计划确认具体生产日期和数量', system: '库存模块提供补货建议，不替代生产排程决策' },
+            { actor: 3, time: '计划执行', title: '生产、质检并形成可用库存', value: '可用入库＋200吨', stock: 340, input: '实际完工、质检放行和入库结果', action: '接收真实执行结果并更新可用库存', output: '库存水位恢复到目标区间', business: '生产完成，经质检放行后进入可用库存', system: '库存模块只在成品可用后计入库存' },
+            { actor: 1, time: '每日滚动', title: '更新库存并继续监控', value: '实际库存与未来水位正常', stock: 340, input: '每日库存、出货和生产进度', action: '重新测算未来库存并与s、安全库存比较', output: '无异常，继续按计划执行', business: '业务继续执行既定出货和生产计划', system: '库存模块每日监控，普通变化不重算整月计划' }
+          ]
+        },
+        demand: {
+          summary: '临时订单导致库存提前下降，库存模块预警并提出调整建议',
+          steps: [
+            { actor: 0, time: '每月25日', title: '发布下月出货计划', value: '成品A：1,000吨', stock: 300, input: '下月出货计划', action: '作为月度成品需求输入', output: '进入月度补货测算', business: '销售/运营发布原月度出货计划', system: '库存模块接收原计划并开始月度测算' },
+            { actor: 1, time: '月计划形成', title: '计算月度补货总量', value: '建议整月生产900吨', stock: 300, input: '需求、库存与目标水位', action: '计算月度生产补货缺口', output: '月度建议生产总量900吨', business: '原月度生产补货总量形成', system: '库存模块给出总量，具体日期留给周生产排程' },
+            { actor: 2, time: '提前一周', title: '形成原周生产计划', value: '第4日可用入库200吨', stock: 220, input: '原库存补货建议', action: '记录生产排程返回的计划入库', output: '未来库存曲线包含第4日入库', business: '生产计划安排未来一周的生产任务', system: '库存模块将计划入库纳入未来库存测算' },
+            { actor: 0, time: '第2日', title: '临时增加出货需求', value: '新增紧急订单120吨', stock: 100, input: '最新订单与出货计划变化', action: '立即更新待满足需求', output: '触发未来库存重新测算', business: '销售新增紧急订单，原计划发生变化', system: '库存模块接收新增需求，不等待下个月再处理' },
+            { actor: 1, time: '第2日滚动', title: '识别提前缺货风险', value: '预计库存跌破安全库存', stock: 100, input: '新增需求、实际库存、原计划入库', action: '重算未来7天库存并识别缺口', output: '预警＋建议增加或提前生产', business: '原周生产计划已不能完全覆盖需求', system: '库存模块提示风险时间、缺口和建议补货量' },
+            { actor: 2, time: '人工确认', title: '调整周生产排程', value: '提前生产或增加120吨', stock: 100, input: '库存预警与补货建议', action: '等待生产计划确认调整结果', output: '更新后的计划入库时间和数量', business: '生产计划结合产能人工决定是否调整', system: '库存模块提供建议，不自动修改生产排程' },
+            { actor: 3, time: '调整后执行', title: '完成生产并恢复库存', value: '质检放行后库存回升', stock: 340, input: '调整后的实际生产和入库结果', action: '更新可用库存并解除预警', output: '库存恢复目标区间', business: '调整后的生产任务完成并形成可用库存', system: '库存模块根据真实入库结果继续每日监控' }
+          ]
+        },
+        delay: {
+          summary: '计划入库延期，库存模块重新评估风险并推动业务协同',
+          steps: [
+            { actor: 0, time: '每月25日', title: '发布下月出货计划', value: '成品A：1,000吨', stock: 300, input: '下月出货计划', action: '作为月度成品需求输入', output: '进入月度补货测算', business: '销售/运营发布下月出货计划', system: '库存模块接收计划并计算月度需求缺口' },
+            { actor: 1, time: '月计划形成', title: '输出月度补货总量', value: '建议整月生产900吨', stock: 300, input: '需求、库存与目标水位', action: '计算月度生产补货缺口', output: '月度建议生产总量900吨', business: '月度生产补货总量形成', system: '库存模块完成月度总量测算' },
+            { actor: 2, time: '提前一周', title: '发布周生产计划', value: '200吨，第4日可用入库', stock: 180, input: '生产排程返回的日期和数量', action: '将计划入库纳入未来水位', output: '预计库存可按期恢复', business: '生产计划确定具体生产和入库时间', system: '库存模块按第4日可用入库计算库存曲线' },
+            { actor: 3, time: '第3日', title: '反馈生产延期', value: '预计可用入库推迟2天', stock: 140, input: '最新生产进度和预计放行时间', action: '替换原计划入库时间', output: '立即重算未来库存', business: '生产执行发生延误，原计划无法按时完成', system: '库存模块接收延期信息并更新计划入库日期' },
+            { actor: 1, time: '第3日滚动', title: '发现库存跌破安全线', value: '第5日预计仅剩100吨', stock: 100, input: '延期后的入库时间、库存和待发运量', action: '计算风险发生时间和库存缺口', output: '缺货预警＋新的期望入库时间', business: '延期将影响后续订单保障', system: '库存模块定位哪一天、差多少，并触发预警' },
+            { actor: 2, time: '人工协同', title: '选择业务处理方案', value: '加急生产或调整交付', stock: 100, input: '库存风险和补货时限', action: '接收人工确认后的处理方案', output: '新的生产或交付安排', business: '生产与销售协同决定加急生产或调整交付', system: '库存模块支持判断，不替代业务人员决策' },
+            { actor: 3, time: '第6日', title: '完成生产并可用入库', value: '实际入库＋200吨', stock: 260, input: '实际完工、质检放行和入库结果', action: '更新可用库存并继续监控', output: '风险解除或转为正常监控', business: '延期生产最终完成并形成可用库存', system: '库存模块以真实可用入库时间结束本次补货周期' }
+          ]
+        }
+      };
+
+      const actorClass = ['business', 'module', 'production', 'execution'];
+      const scenarioButtons = [...document.querySelectorAll('.scenario')];
+      const flowRows = document.getElementById('flow-rows');
+      const connectorLayer = document.getElementById('connector-layer');
+      const miniTimeline = document.getElementById('mini-timeline');
+      const playButton = document.getElementById('play');
+      let scenarioKey = 'normal';
+      let activeStep = 0;
+      let timer = null;
+
+      function currentScenario() { return scenarios[scenarioKey]; }
+
+      function renderNodes() {
+        const steps = currentScenario().steps;
+        flowRows.innerHTML = steps.map((step, index) => `
+          <div class="node ${actorClass[step.actor]} ${index === 0 ? 'visible active' : ''}"
+               data-index="${index}" data-step-label="${String(index + 1).padStart(2, '0')}"
+               style="grid-column:${step.actor + 1};grid-row:${index + 1}">
+            <span class="node-time">${step.time}</span>
+            <span class="node-title">${step.title}</span>
+            <span class="node-value">${step.value}</span>
+          </div>
+        `).join('');
+        miniTimeline.innerHTML = steps.map((_, index) => `<span class="mini-segment ${index === 0 ? 'done' : ''}" data-mini="${index}"></span>`).join('');
+        requestAnimationFrame(() => {
+          drawConnectors();
+          updateStep();
+        });
+      }
+
+      function drawConnectors() {
+        if (window.innerWidth <= 760) {
+          connectorLayer.innerHTML = '';
+          return;
+        }
+        const oldTraveler = connectorLayer.querySelector('.traveler');
+        const oldX = oldTraveler ? Number(oldTraveler.getAttribute('cx')) : null;
+        const oldY = oldTraveler ? Number(oldTraveler.getAttribute('cy')) : null;
+        const boardRect = flowRows.getBoundingClientRect();
+        const nodes = [...flowRows.querySelectorAll('.node')];
+        const centers = nodes.map((node) => {
+          const rect = node.getBoundingClientRect();
+          return {
+            x: rect.left - boardRect.left + rect.width / 2,
+            y: rect.top - boardRect.top + rect.height / 2
+          };
+        });
+        connectorLayer.setAttribute('viewBox', `0 0 ${boardRect.width} ${boardRect.height}`);
+        const paths = centers.slice(0, -1).map((point, index) => {
+          const next = centers[index + 1];
+          const midY = (point.y + next.y) / 2;
+          return `<path class="connector ${index < activeStep ? 'done' : ''}" data-connector="${index}" d="M ${point.x} ${point.y + 32} C ${point.x} ${midY}, ${next.x} ${midY}, ${next.x} ${next.y - 32}" />`;
+        }).join('');
+        const current = centers[activeStep] || centers[0];
+        connectorLayer.innerHTML = `${paths}<circle class="traveler" cx="${current.x}" cy="${current.y}" r="7"></circle>`;
+        const traveler = connectorLayer.querySelector('.traveler');
+        if (oldX !== null && oldY !== null && (oldX !== current.x || oldY !== current.y)) {
+          traveler.style.transform = `translate(${oldX - current.x}px, ${oldY - current.y}px)`;
+          requestAnimationFrame(() => { traveler.style.transform = 'translate(0, 0)'; });
+        }
+      }
+
+      function updateStep() {
+        const scenario = currentScenario();
+        const step = scenario.steps[activeStep];
+        const nodes = [...flowRows.querySelectorAll('.node')];
+        nodes.forEach((node, index) => {
+          node.classList.toggle('visible', index <= activeStep);
+          node.classList.toggle('active', index === activeStep);
+        });
+        [...miniTimeline.children].forEach((segment, index) => segment.classList.toggle('done', index <= activeStep));
+        document.getElementById('progress-text').textContent = `步骤 ${activeStep + 1} / ${scenario.steps.length}`;
+        document.getElementById('current-step').textContent = String(activeStep + 1).padStart(2, '0');
+        document.getElementById('current-business').textContent = step.business;
+        document.getElementById('current-system').textContent = step.system;
+        document.getElementById('role-input').textContent = step.input;
+        document.getElementById('role-action').textContent = step.action;
+        document.getElementById('role-output').textContent = step.output;
+        updateTank(step.stock);
+        drawConnectors();
+      }
+
+      function updateTank(stock) {
+        const water = document.getElementById('water');
+        const state = document.getElementById('stock-state');
+        const ratio = Math.max(8, Math.min(95, stock / 400 * 100));
+        water.style.height = `${ratio}%`;
+        water.className = 'water';
+        state.className = 'stock-state';
+        let label = '水位正常';
+        if (stock < 120) {
+          water.classList.add('danger');
+          state.classList.add('danger');
+          label = '低于安全库存';
+        } else if (stock <= 180) {
+          water.classList.add('warn');
+          state.classList.add('warn');
+          label = '触及再订货点';
+        }
+        document.getElementById('stock-value').textContent = stock.toLocaleString('zh-CN');
+        state.innerHTML = `<span class="state-dot"></span>${label}`;
+      }
+
+      function setStep(index) {
+        const length = currentScenario().steps.length;
+        activeStep = Math.max(0, Math.min(length - 1, index));
+        updateStep();
+      }
+
+      function stop() {
+        if (timer) window.clearInterval(timer);
+        timer = null;
+        playButton.textContent = '播放动画';
+      }
+
+      function selectScenario(key) {
+        stop();
+        scenarioKey = key;
+        activeStep = 0;
+        scenarioButtons.forEach((button) => button.classList.toggle('active', button.dataset.scenario === key));
+        document.getElementById('scenario-summary').textContent = currentScenario().summary;
+        renderNodes();
+      }
+
+      scenarioButtons.forEach((button) => button.addEventListener('click', () => selectScenario(button.dataset.scenario)));
+      document.getElementById('prev').addEventListener('click', () => { stop(); setStep(activeStep - 1); });
+      document.getElementById('next').addEventListener('click', () => { stop(); setStep(activeStep + 1); });
+      playButton.addEventListener('click', () => {
+        if (timer) { stop(); return; }
+        if (activeStep >= currentScenario().steps.length - 1) activeStep = 0;
+        updateStep();
+        playButton.textContent = '暂停动画';
+        timer = window.setInterval(() => {
+          if (activeStep >= currentScenario().steps.length - 1) {
+            stop();
+            return;
+          }
+          activeStep += 1;
+          updateStep();
+        }, 2600);
+      });
+
+      let resizeTimer;
+      window.addEventListener('resize', () => {
+        window.clearTimeout(resizeTimer);
+        resizeTimer = window.setTimeout(drawConnectors, 120);
+      });
+
+      renderNodes();
+    })();
+  </script>
+</body>
+</html>
