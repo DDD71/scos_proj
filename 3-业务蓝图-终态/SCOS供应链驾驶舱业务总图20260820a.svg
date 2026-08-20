@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1173" height="680" viewBox="0 0 1173 680">
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z"/></marker><style>
+.f,.p,.t,.d,.doc,.sub{fill:#fff;stroke:#000;stroke-width:1}.fl{fill:none;stroke:#000;stroke-width:1;marker-end:url(#a)}.ln{fill:none;stroke:#000;stroke-width:1}.tx{font:10px SimSun,'Microsoft YaHei','Noto Sans SC',sans-serif;text-anchor:middle;dominant-baseline:middle}.sm{font:9px SimSun,'Microsoft YaHei','Noto Sans SC',sans-serif;text-anchor:middle;dominant-baseline:middle}.lane{font:bold 13px SimSun,'Microsoft YaHei',sans-serif;text-anchor:middle}.sys{fill:#0070c0}.st{font:8px Arial,sans-serif;fill:#fff;text-anchor:middle;dominant-baseline:middle}
+</style></defs>
+<rect class="f" x=".5" y=".5" width="1172" height="679"/><path class="ln" d="M28.5 0V680M57.5 0V680"/>
+<text class="lane" x="43" y="210"><tspan x="43">供</tspan><tspan x="43" dy="18">应</tspan><tspan x="43" dy="18">链</tspan><tspan x="43" dy="18">驾</tspan><tspan x="43" dy="18">驶</tspan><tspan x="43" dy="18">舱</tspan><tspan x="43" dy="18">管</tspan><tspan x="43" dy="18">理</tspan></text>
+
+<!-- 进入驾驶舱并自动形成态势 -->
+<circle class="t" cx="92" cy="105" r="21"/><text class="tx" x="92" y="105">开始</text><path class="fl" d="M113 105H138"/>
+<rect class="p" x="138" y="82" width="126" height="46"/><rect class="sys" x="138" y="71" width="35" height="14"/><text class="st" x="155.5" y="78">SCOS</text><text class="tx" x="201" y="99"><tspan x="201">获取业务数据</tspan><tspan x="201" dy="13">与优化结果</tspan></text><path class="fl" d="M264 105H292"/>
+<rect class="p" x="292" y="82" width="126" height="46"/><rect class="sys" x="292" y="71" width="35" height="14"/><text class="st" x="309.5" y="78">SCOS</text><text class="tx" x="355" y="99"><tspan x="355">计算KPI、健康度</tspan><tspan x="355" dy="13">与分级预警</tspan></text><path class="fl" d="M418 105H446"/>
+<rect class="p" x="446" y="82" width="138" height="46"/><rect class="sys" x="446" y="71" width="35" height="14"/><text class="st" x="463.5" y="78">SCOS</text><text class="tx" x="515" y="99"><tspan x="515">按角色查看态势</tspan><tspan x="515" dy="13">与智能预警</tspan></text>
+<path class="doc" d="M455 40H575V68Q545 57 515 68Q485 57 455 68Z"/><text class="sm" x="515" y="53">领导｜总经理｜总监｜调度员</text><path class="fl" d="M515 68V82"/>
+<path class="doc" d="M446 145H584V184Q550 173 515 184Q480 173 446 184Z"/><text class="sm" x="515" y="158"><tspan x="515">核心KPI｜GIS地图</tspan><tspan x="515" dy="13">产销｜储运｜环保｜资金</tspan></text><path class="fl" d="M515 128V145"/>
+<path class="fl" d="M584 105H610"/><polygon class="d" points="690,67 770,105 690,143 610,105"/><text class="sm" x="690" y="99"><tspan x="690">是否发现异常</tspan><tspan x="690" dy="12">或存在决策需求？</tspan></text>
+
+<!-- No：只读监测闭环 -->
+<path class="fl" d="M770 105H800"/><text class="sm" x="785" y="92">No</text><rect class="p" x="800" y="82" width="142" height="46"/><rect class="sys" x="800" y="71" width="35" height="14"/><text class="st" x="817.5" y="78">SCOS</text><text class="tx" x="871" y="99"><tspan x="871">定时刷新</tspan><tspan x="871" dy="13">持续监测</tspan></text><path class="fl" d="M871 82V22H201V82"/><text class="sm" x="535" y="14">进入下一监测周期</text>
+
+<!-- Yes：下钻定位 -->
+<path class="fl" d="M690 143V245"/><text class="sm" x="706" y="194">Yes</text><rect class="p" x="625" y="245" width="130" height="46"/><rect class="sys" x="625" y="234" width="35" height="14"/><text class="st" x="642.5" y="241">SCOS</text><text class="tx" x="690" y="262"><tspan x="690">点击KPI、地图</tspan><tspan x="690" dy="13">或预警下钻</tspan></text><path class="fl" d="M755 268H785"/>
+<rect class="sub" x="785" y="245" width="135" height="46"/><path class="ln" d="M795 245V291M910 245V291"/><rect class="sys" x="785" y="234" width="35" height="14"/><text class="st" x="802.5" y="241">SCOS</text><text class="tx" x="852.5" y="262"><tspan x="852.5">钻取专题与业务明细</tspan><tspan x="852.5" dy="13">定位异常根因</tspan></text><path class="fl" d="M920 268H945"/>
+<polygon class="d" points="1020,230 1095,268 1020,306 945,268"/><text class="sm" x="1020" y="262"><tspan x="1020">是否需要</tspan><tspan x="1020" dy="12">沙盘推演？</tspan></text>
+
+<!-- Yes：可选沙盘推演子流程 -->
+<path class="fl" d="M1020 306V385"/><text class="sm" x="1037" y="345">Yes</text><rect class="p" x="955" y="385" width="130" height="46"/><rect class="sys" x="955" y="374" width="35" height="14"/><text class="st" x="972.5" y="381">SCOS</text><text class="tx" x="1020" y="402"><tspan x="1020">设置情景参数</tspan><tspan x="1020" dy="13">建立当前基线</tspan></text><path class="fl" d="M955 408H925"/>
+<rect class="sub" x="775" y="385" width="150" height="46"/><path class="ln" d="M785 385V431M915 385V431"/><rect class="sys" x="775" y="374" width="35" height="14"/><text class="st" x="792.5" y="381">SCOS</text><text class="tx" x="850" y="402"><tspan x="850">调用采购、库存、排程</tspan><tspan x="850" dy="13">及成本优化模型</tspan></text><path class="fl" d="M775 408H745"/>
+<path class="doc" d="M595 385H745V431Q708 420 670 431Q632 420 595 431Z"/><text class="sm" x="670" y="400"><tspan x="670">当前 vs 模拟结果</tspan><tspan x="670" dy="13">产能/库存/交期/成本</tspan></text><path class="fl" d="M595 408H570"/>
+<rect class="p" x="420" y="385" width="150" height="46"/><rect class="sys" x="420" y="374" width="35" height="14"/><text class="st" x="437.5" y="381">SCOS</text><text class="tx" x="495" y="402"><tspan x="495">形成认知</tspan><tspan x="495" dy="13">与决策参考</tspan></text><text class="sm" x="495" y="444">沙盒隔离，仅供分析，不下发生产</text><path class="fl" d="M420 408H396"/><circle class="t" cx="375" cy="408" r="21"/><text class="sm" x="375" y="408">结束推演</text>
+
+<!-- 无需推演时，转入业务模块自身的调整与执行流程 -->
+<path class="fl" d="M1095 268H1130V455H350V485"/><text class="sm" x="1110" y="254">No</text>
+<rect class="sub" x="280" y="485" width="140" height="48"/><path class="ln" d="M290 485V533M410 485V533"/><rect class="sys" x="280" y="474" width="35" height="14"/><text class="st" x="297.5" y="481">SCOS</text><text class="tx" x="350" y="502"><tspan x="350">转入相关业务模块</tspan><tspan x="350" dy="13">进行调整与处置</tspan></text><path class="fl" d="M280 509H250"/>
+<rect class="p" x="120" y="485" width="130" height="48"/><rect class="sys" x="120" y="474" width="35" height="14"/><text class="st" x="137.5" y="481">SCOS</text><text class="tx" x="185" y="502"><tspan x="185">业务模块执行</tspan><tspan x="185" dy="13">采购/库存/排程/追溯</tspan></text>
+
+<!-- 执行结果回写、回验和下一周期 -->
+<path class="fl" d="M185 533V580H315"/><rect class="p" x="315" y="557" width="145" height="46"/><rect class="sys" x="315" y="546" width="35" height="14"/><text class="st" x="332.5" y="553">SCOS</text><text class="tx" x="387.5" y="574"><tspan x="387.5">执行结果与偏差回写</tspan><tspan x="387.5" dy="13">跟踪处置状态</tspan></text><path class="fl" d="M460 580H490"/>
+<rect class="p" x="490" y="557" width="145" height="46"/><rect class="sys" x="490" y="546" width="35" height="14"/><text class="st" x="507.5" y="553">SCOS</text><text class="tx" x="562.5" y="574"><tspan x="562.5">关闭预警、刷新KPI</tspan><tspan x="562.5" dy="13">完成回验</tspan></text><path class="fl" d="M635 580H675"/><circle class="t" cx="696" cy="580" r="21"/><text class="tx" x="696" y="580">结束</text>
+<path class="fl" d="M562.5 603V645H100V150H201V128"/><text class="sm" x="330" y="659">执行反馈进入下一监测周期</text>
+</svg>
