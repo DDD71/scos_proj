@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1780" height="1020" viewBox="0 0 1780 1020">
+  <defs>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="#444"/></marker>
+    <style>
+      .title{font:bold 24px 'PingFang SC','Microsoft YaHei',sans-serif;fill:#222}.layer{font:bold 17px 'PingFang SC','Microsoft YaHei',sans-serif;fill:#222}.head{font:bold 15px 'PingFang SC','Microsoft YaHei',sans-serif;fill:#222}.txt{font:14px 'PingFang SC','Microsoft YaHei',sans-serif;fill:#222}.small{font:12px 'PingFang SC','Microsoft YaHei',sans-serif;fill:#444}.box{fill:#fff;stroke:#555;stroke-width:1.4}.soft{fill:#f5f5f5;stroke:#666;stroke-width:1.3}.scos{fill:#fff;stroke:#4f7d5b;stroke-width:1.6}.ext{fill:#fff;stroke:#c94747;stroke-width:1.4}.flow{fill:none;stroke:#444;stroke-width:1.5;marker-end:url(#arrow)}.dash{fill:#fff;stroke:#555;stroke-width:1.8;stroke-dasharray:9 6}</style>
+  </defs>
+  <rect width="1780" height="1020" fill="#fff"/>
+  <text x="30" y="42" class="title">SCOS系统边界与外围系统协同关系</text>
+
+  <text x="30" y="92" class="layer">业务用户与管理角色</text>
+  <rect x="220" y="65" width="220" height="55" rx="5" class="box"/><text x="330" y="98" text-anchor="middle" class="txt">管理层 / 运营管理人员</text>
+  <rect x="485" y="65" width="220" height="55" rx="5" class="box"/><text x="595" y="98" text-anchor="middle" class="txt">生产计划与调度人员</text>
+  <rect x="750" y="65" width="220" height="55" rx="5" class="box"/><text x="860" y="98" text-anchor="middle" class="txt">库存计划人员</text>
+  <rect x="1015" y="65" width="220" height="55" rx="5" class="box"/><text x="1125" y="98" text-anchor="middle" class="txt">采购计划与管理人员</text>
+  <rect x="1280" y="65" width="220" height="55" rx="5" class="box"/><text x="1390" y="98" text-anchor="middle" class="txt">成本 / 质量协同人员</text>
+
+  <rect x="100" y="155" width="1580" height="535" rx="12" class="dash"/>
+  <rect x="100" y="155" width="170" height="34" fill="#4f7d5b"/><text x="185" y="178" text-anchor="middle" font-family="Microsoft YaHei" font-size="15" font-weight="bold" fill="#fff">SCOS系统边界</text>
+
+  <text x="135" y="235" class="layer">决策与协同</text>
+  <rect x="310" y="202" width="1290" height="70" rx="7" class="scos"/>
+  <text x="955" y="228" text-anchor="middle" class="head">供应链驾驶舱</text>
+  <text x="955" y="253" text-anchor="middle" class="txt">全局态势｜专题看板｜KPI钻取｜预警闭环｜情景模拟｜决策协同</text>
+
+  <text x="135" y="370" class="layer">专业业务优化</text>
+  <rect x="310" y="305" width="235" height="145" rx="7" class="scos"/><text x="427" y="333" text-anchor="middle" class="head">精益生产排程</text><text x="427" y="361" text-anchor="middle" class="txt"><tspan x="427">有限产能排程</tspan><tspan x="427" dy="23">方案确认与发布</tspan><tspan x="427" dy="23">执行跟踪与重排</tspan></text>
+  <rect x="570" y="305" width="235" height="145" rx="7" class="scos"/><text x="687" y="333" text-anchor="middle" class="head">安全库存优化</text><text x="687" y="361" text-anchor="middle" class="txt"><tspan x="687">月度库存策略</tspan><tspan x="687" dy="23">周度生产补充</tspan><tspan x="687" dy="23">日度监控与调整</tspan></text>
+  <rect x="830" y="305" width="235" height="145" rx="7" class="scos"/><text x="947" y="333" text-anchor="middle" class="head">采购决策优化</text><text x="947" y="361" text-anchor="middle" class="txt"><tspan x="947">月度采购方案</tspan><tspan x="947" dy="23">供应商评价预警</tspan><tspan x="947" dy="23">滚动调整与跟踪</tspan></text>
+  <rect x="1090" y="305" width="235" height="145" rx="7" class="scos"/><text x="1207" y="333" text-anchor="middle" class="head">统计与成本核算</text><text x="1207" y="361" text-anchor="middle" class="txt"><tspan x="1207">成本归集与分摊</tspan><tspan x="1207" dy="23">成本差异分析</tspan><tspan x="1207" dy="23">多维盈利分析</tspan></text>
+  <rect x="1350" y="305" width="250" height="145" rx="7" class="scos"/><text x="1475" y="333" text-anchor="middle" class="head">全程追溯与协同</text><text x="1475" y="361" text-anchor="middle" class="txt"><tspan x="1475">正反向批次追溯</tspan><tspan x="1475" dy="23">影响范围分析</tspan><tspan x="1475" dy="23">质量协同闭环</tspan></text>
+
+  <text x="135" y="535" class="layer">公共支撑能力</text>
+  <rect x="310" y="485" width="1290" height="150" rx="7" class="soft"/>
+  <rect x="335" y="515" width="230" height="75" rx="5" class="box"/><text x="450" y="545" text-anchor="middle" class="head">优化数据准备</text><text x="450" y="571" text-anchor="middle" class="small">数据对齐｜质量校验｜特征计算</text>
+  <rect x="590" y="515" width="230" height="75" rx="5" class="box"/><text x="705" y="545" text-anchor="middle" class="head">模型服务与沙盘</text><text x="705" y="571" text-anchor="middle" class="small">参数版本｜模型调用｜数据快照</text>
+  <rect x="845" y="515" width="230" height="75" rx="5" class="box"/><text x="960" y="545" text-anchor="middle" class="head">规则与流程协同</text><text x="960" y="571" text-anchor="middle" class="small">规则引擎｜审批流｜任务协同</text>
+  <rect x="1100" y="515" width="230" height="75" rx="5" class="box"/><text x="1215" y="545" text-anchor="middle" class="head">消息与报表服务</text><text x="1215" y="571" text-anchor="middle" class="small">预警通知｜待办｜报表导出</text>
+  <rect x="1355" y="515" width="220" height="75" rx="5" class="box"/><text x="1465" y="545" text-anchor="middle" class="head">权限与审计</text><text x="1465" y="571" text-anchor="middle" class="small">组织角色｜数据权限｜操作留痕</text>
+
+  <rect x="100" y="725" width="1580" height="90" rx="7" class="soft"/>
+  <text x="135" y="758" class="layer">统一集成与数据访问</text>
+  <text x="955" y="782" text-anchor="middle" class="txt">统一数据服务层｜实时数据平台｜API网关｜企业服务总线｜标准业务事件</text>
+  <text x="955" y="804" text-anchor="middle" class="small">数据读取优先通过统一数据服务；确认后的业务指令通过API或事件总线下发</text>
+
+  <text x="30" y="895" class="layer">外部权威系统与执行系统</text>
+  <rect x="220" y="845" width="175" height="70" rx="5" class="ext"/><text x="307" y="873" text-anchor="middle" class="head">SAP / CRM</text><text x="307" y="897" text-anchor="middle" class="small">主数据、订单、财务、需求</text>
+  <rect x="420" y="845" width="175" height="70" rx="5" class="ext"/><text x="507" y="873" text-anchor="middle" class="head">MES</text><text x="507" y="897" text-anchor="middle" class="small">工单执行、产量与进度</text>
+  <rect x="620" y="845" width="175" height="70" rx="5" class="ext"/><text x="707" y="873" text-anchor="middle" class="head">WMS</text><text x="707" y="897" text-anchor="middle" class="small">库存台账、仓储执行</text>
+  <rect x="820" y="845" width="175" height="70" rx="5" class="ext"/><text x="907" y="873" text-anchor="middle" class="head">E采 / TMS</text><text x="907" y="897" text-anchor="middle" class="small">采购交易、物流执行</text>
+  <rect x="1020" y="845" width="175" height="70" rx="5" class="ext"/><text x="1107" y="873" text-anchor="middle" class="head">QMS / LIMS</text><text x="1107" y="897" text-anchor="middle" class="small">质量标准、检验与判定</text>
+  <rect x="1220" y="845" width="175" height="70" rx="5" class="ext"/><text x="1307" y="873" text-anchor="middle" class="head">EAM / EMS</text><text x="1307" y="897" text-anchor="middle" class="small">设备维护、能源数据</text>
+  <rect x="1420" y="845" width="175" height="70" rx="5" class="ext"/><text x="1507" y="873" text-anchor="middle" class="head">AI / GIS</text><text x="1507" y="897" text-anchor="middle" class="small">模型求解、空间服务</text>
+
+  <path d="M860 120V155" class="flow"/><path d="M890 690V725" class="flow"/><path d="M890 815V845" class="flow"/>
+  <path d="M920 845V815" class="flow"/><path d="M950 725V690" class="flow"/>
+  <text x="30" y="978" class="small">边界原则：SCOS负责计划、优化决策、监测与协同；外围系统负责权威主数据、正式业务单据及现场执行。沙盘模拟不修改正式业务数据。</text>
+</svg>
