@@ -7,7 +7,8 @@ from docx.enum.section import WD_SECTION
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 
-OUT = Path(__file__).parent
+BLUEPRINT_ROOT = Path(__file__).resolve().parents[1]
+OUT = BLUEPRINT_ROOT / "2-业务蓝图-draft"
 BLUE = "2E74B5"
 DARK = "1F4D78"
 LIGHT = "EAF1F8"

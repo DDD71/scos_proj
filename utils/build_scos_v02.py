@@ -12,9 +12,9 @@ from docx.enum.table import WD_TABLE_ALIGNMENT, WD_CELL_VERTICAL_ALIGNMENT
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 
-ROOT = Path(__file__).resolve().parents[2]
-SOURCE = ROOT / "蓝图设计/3-业务蓝图-终态/SCOS_中粮太仓项目研发模块蓝图方案v0.1.docx"
-OUTPUT = ROOT / "蓝图设计/3-业务蓝图-终态/SCOS_中粮太仓项目研发模块蓝图方案v0.2_业务蓝图初稿.docx"
+BLUEPRINT_ROOT = Path(__file__).resolve().parents[1]
+SOURCE = BLUEPRINT_ROOT / "3-业务蓝图-终态/SCOS_中粮太仓项目研发模块蓝图方案v0.1.docx"
+OUTPUT = BLUEPRINT_ROOT / "3-业务蓝图-终态/SCOS_中粮太仓项目研发模块蓝图方案v0.2_业务蓝图初稿.docx"
 ARCH_IMG = Path("/tmp/scos_blueprint_v02/pdfs/SCOS整体架构.png")
 EXPECTED_SHA = "466d9be41e5821c8b75c6a92071e8dacde04b15dac7afe0985a45d230e9d8cfe"
 
