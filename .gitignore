@@ -5,6 +5,9 @@ Thumbs.db
 .~*
 ~$*
 
+# 文档检查工具生成的元数据
+*.inspect.ndjson
+
 # 本地大文件
 /参考资料/厂区图.png
 
