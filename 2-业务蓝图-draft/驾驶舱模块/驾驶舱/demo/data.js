@@ -1,5 +1,5 @@
-const PT={config:'系统配置',dashboard:'供应链驾驶舱',procurement:'采购决策优化',inventory:'安全库存优化',production:'精益生产排程',costing:'成本核算分析',trace:'全程追溯协同'};
-const PB={config:'系统管理 / 系统配置',dashboard:'决策中心 / 供应链驾驶舱',procurement:'决策中心 / 采购决策优化',inventory:'决策中心 / 安全库存优化',production:'决策中心 / 精益生产排程',costing:'分析与追溯 / 成本核算分析',trace:'分析与追溯 / 全程追溯协同'};
+const PT={config:'系统配置',dashboard:'供应链驾驶舱',sandbox:'沙盘推演',procurement:'采购决策优化',inventory:'安全库存优化',production:'精益生产排程',costing:'成本核算分析',trace:'全程追溯协同'};
+const PB={config:'系统管理 / 系统配置',dashboard:'决策中心 / 供应链驾驶舱',sandbox:'决策中心 / 沙盘推演',procurement:'决策中心 / 采购决策优化',inventory:'决策中心 / 安全库存优化',production:'决策中心 / 精益生产排程',costing:'分析与追溯 / 成本核算分析',trace:'分析与追溯 / 全程追溯协同'};
 const BO={backgroundColor:'transparent',textStyle:{fontFamily:'Noto Sans SC,sans-serif',color:'#94a3b8'},legend:{textStyle:{color:'#94a3b8',fontSize:11},itemWidth:12,itemHeight:8},tooltip:{backgroundColor:'rgba(15,21,37,.95)',borderColor:'#1e293b',textStyle:{color:'#f1f5f9',fontSize:12}},grid:{top:40,right:20,bottom:30,left:50,containLabel:true},xAxis:{axisLine:{lineStyle:{color:'#1e293b'}},axisTick:{lineStyle:{color:'#1e293b'}},axisLabel:{color:'#64748b',fontSize:11},splitLine:{lineStyle:{color:'rgba(30,41,59,.5)'}}},yAxis:{axisLine:{lineStyle:{color:'#1e293b'}},axisTick:{show:false},axisLabel:{color:'#64748b',fontSize:11},splitLine:{lineStyle:{color:'rgba(30,41,59,.4)'}}}};
 
 /* ===== FINISHED-GOODS INVENTORY (TECHNICAL-SOLUTION ALIGNED) ===== */
@@ -33,48 +33,30 @@ var ALERT_ROOT={
 var SANDBOX_METRICS=[
 {key:'otd',name:'订单准时交付率',unit:'%',base:96.7,prefer:'higher',decimals:1},
 {key:'load',name:'关键产线负荷率',unit:'%',base:82.0,prefer:'lower',decimals:1},
-{key:'stock',name:'未来7天最低成品库存',unit:'吨',base:520,prefer:'higher',decimals:0},
+{key:'stock',name:'推演期最低成品库存',unit:'吨',base:520,prefer:'higher',decimals:0},
 {key:'gap',name:'模拟原材料需求缺口',unit:'吨',base:0,prefer:'lower',decimals:0},
 {key:'cost',name:'供应链总运营成本',unit:'万元/月',base:2847,prefer:'lower',decimals:0}
 ];
 
 var SANDBOX_SCENARIOS={
-demand:{name:'需求波动',priority:'P0 · 标书要求',desc:'模拟大客户订单变化对排程、成品库存、原材料需求、采购与成本的连锁影响。',
+demand:{name:'客户增单与交期变化',priority:'P0 · 标书要求',desc:'仅调整订单数量和交付提前天数，观察产能、成品库存、原料需求和客户交付的变化。',
 params:[{key:'product',label:'成品',type:'select',value:'果葡糖浆F55',options:['果葡糖浆F55','果葡糖浆F42','麦芽糊精','结晶葡萄糖']},{key:'customer',label:'客户',type:'select',value:'客户C012',options:['客户C012','统一集团','康师傅','娃哈哈']},{key:'orderChange',label:'订单数量变化',type:'range',min:-30,max:50,step:5,value:20,unit:'%',signed:true},{key:'deliveryAdvance',label:'要求交付提前',type:'range',min:0,max:7,step:1,value:2,unit:'天'}],
-modules:[{name:'生产排程',note:'评估产能与交期'},{name:'成品库存',note:'测算7日库存轨迹'},{name:'原料需求',note:'生成模拟需求计划'},{name:'采购优化',note:'计算采购缺口'},{name:'成本评估',note:'汇总全链成本'}],target:[91.4,96,285,680,3038],risk:'高风险',riskTone:'red',
+modules:[{name:'生产排程',note:'评估产能与交期'},{name:'成品库存',note:'测算推演期库存轨迹'},{name:'原料需求',note:'生成模拟需求计划'},{name:'采购优化',note:'计算采购缺口'},{name:'成本评估',note:'汇总全链成本'}],target:[91.4,100,285,680,3038],risk:'高风险',riskTone:'red',
 chain:['大客户订单显著增加','关键产线负荷接近上限','成品库存提前跌破安全线','模拟原材料需求同步增加','采购增量与运营成本上升'],
 moduleResults:[['生产排程','3#异构化线负荷升至96%，2个订单存在延迟风险。'],['成品库存','未来第4天库存降至285吨，低于安全库存。'],['原料需求','玉米淀粉模拟需求增加860吨，结果标识为未发布。'],['采购优化','现有承诺后仍有680吨缺口，可由备选供应商覆盖。'],['成本评估','供应链总运营成本预计增加6.7%。']],
 severity:function(v){return Math.max(-1.5,Math.min(1.8,Number(v.orderChange)/20*.8+Number(v.deliveryAdvance)/2*.2));}},
-supply:{name:'供应风险',priority:'P0 · 标书要求',desc:'模拟主要供应商延期、停供或可供量下降对采购组合、排程和交付的传导影响。',
+supply:{name:'供应商到货延迟',priority:'P0 · 标书要求',desc:'仅调整到货延迟天数和实际可供量，观察原料水位、生产受限和订单延期。',
 params:[{key:'supplier',label:'受影响供应商',type:'select',value:'德州金玉米',options:['德州金玉米','吉林长龙生化','齐齐哈尔龙凤','诺维信(中国)']},{key:'material',label:'受影响物料',type:'select',value:'玉米淀粉',options:['玉米淀粉','液化酶','糖化酶','活性炭']},{key:'delayDays',label:'延迟交货',type:'range',min:0,max:14,step:1,value:7,unit:'天'},{key:'supplyReduction',label:'可供量下降',type:'range',min:0,max:100,step:10,value:50,unit:'%'}],
 modules:[{name:'采购优化',note:'重算供应商分配'},{name:'生产排程',note:'校验原料可用约束'},{name:'成品库存',note:'测算交付前库存'},{name:'成本评估',note:'汇总替代成本'}],target:[92.1,88,310,1200,2975],risk:'高风险',riskTone:'red',
 chain:['主力供应商可供期后移','受影响周期可供量下降','备选采购组合重新计算','排程受原料到货约束','成品库存与OTD承压'],
 moduleResults:[['采购优化','受影响周期可供量调低，重新分配至吉林长龙与齐齐哈尔龙凤。'],['生产排程','2#线原料可用时间后移，680吨计划需调整。'],['成品库存','未来第5天最低库存310吨，交付缓冲缩小。'],['成本评估','替代采购与加急运输使成本增加4.5%。']],
 severity:function(v){return Math.max(0,Math.min(2,Number(v.delayDays)/7*.6+Number(v.supplyReduction)/50*.4));}},
-cost:{name:'成本优化 / 价格波动',priority:'P0 · 标书要求',desc:'模拟原料价格、运费与资金成本变化，评估供应商分配和供应链总成本。',
-params:[{key:'material',label:'测算物料',type:'select',value:'玉米淀粉',options:['玉米淀粉','液化酶','糖化酶','活性炭']},{key:'priceChange',label:'原料价格变化',type:'range',min:-20,max:30,step:5,value:15,unit:'%',signed:true},{key:'freightChange',label:'运输费用变化',type:'range',min:-15,max:25,step:1,value:8,unit:'%',signed:true},{key:'fundRate',label:'年化资金成本率',type:'range',min:2,max:8,step:.1,value:4.2,unit:'%'}],
-modules:[{name:'采购优化',note:'重算采购组合与成本'},{name:'成本评估',note:'统一口径汇总影响'}],target:[96.7,82,520,0,3020],risk:'成本上升',riskTone:'yellow',
-chain:['原料价格与运费发生变化','采购模型重算供应商分配','账期资金节省重新折算','成本模块统一汇总','输出采购与总成本差异'],
-moduleResults:[['采购优化','采购综合成本上升，低运费供应商分配比例增加8个百分点。'],['成本评估','供应链总运营成本预计增加6.1%，资金成本增加24万元。']],
-severity:function(v){return Math.max(-1.5,Math.min(2,Number(v.priceChange)/15*.75+Number(v.freightChange)/8*.25+(Number(v.fundRate)-4.2)/4*.1));}},
-inventory:{name:'成品库存策略',priority:'P1 · 扩展场景',desc:'模拟服务水平、生产补充周期和储罐可用状态变化，仅评估成品库存策略及资金影响。',
-params:[{key:'product',label:'成品',type:'select',value:'麦芽糊精',options:['麦芽糊精','果葡糖浆F55','果葡糖浆F42','结晶葡萄糖']},{key:'serviceLevel',label:'目标服务水平',type:'range',min:90,max:99,step:1,value:98,unit:'%'},{key:'replenishmentDays',label:'生产补充周期',type:'range',min:3,max:8,step:1,value:5,unit:'天'},{key:'tankUnavailable',label:'模拟停用储罐',type:'range',min:0,max:5,step:1,value:2,unit:'座'}],
-modules:[{name:'成品库存',note:'重算s/S与库存轨迹'},{name:'成本评估',note:'评估库存资金占用'}],target:[97.4,82,610,0,2895],risk:'策略可行',riskTone:'green',
-chain:['目标服务水平提高','成品安全库存随之增加','目标库存受有效库容校验','未来7天缺货风险降低','库存资金占用小幅上升'],
-moduleResults:[['成品库存','安全库存由300吨升至365吨，目标库存升至610吨，容量校验通过。'],['成本评估','库存资金占用增加155万元，预计OTD提升0.7个百分点。']],
-severity:function(v){return Math.max(.1,Math.min(2,Math.max(0,Number(v.serviceLevel)-95)/3*.55+Number(v.replenishmentDays)/5*.3+Number(v.tankUnavailable)/2*.15));}},
-production:{name:'生产扰动',priority:'P1 · 扩展场景',desc:'模拟设备停机或紧急插单对排程、库存、原料需求和成本的连锁冲击。',
-params:[{key:'line',label:'受影响产线',type:'select',value:'3#异构化线',options:['1#液化线','2#糖化线','3#异构化线','4#喷雾干燥线']},{key:'downHours',label:'计划外停机',type:'range',min:0,max:24,step:1,value:8,unit:'小时'},{key:'urgentOrder',label:'紧急插单数量',type:'range',min:0,max:1000,step:50,value:500,unit:'吨'},{key:'priority',label:'订单优先级',type:'select',value:'紧急',options:['紧急','高','普通']}],
-modules:[{name:'生产排程',note:'快速重排与可行性校验'},{name:'成品库存',note:'重算计划入库时间'},{name:'原料需求',note:'形成模拟需求变化'},{name:'采购优化',note:'评估原料缺口'},{name:'成本评估',note:'汇总扰动成本'}],target:[89.8,97,240,420,2960],risk:'高风险',riskTone:'red',
-chain:['关键产线计划外停机','紧急订单占用剩余产能','模拟排程出现新瓶颈','计划入库时间后移','库存、交付与成本受影响'],
-moduleResults:[['生产排程','重排后3#线负荷97%，5个订单受影响，其中2个延迟。'],['成品库存','计划入库时间后移，未来最低库存降至240吨。'],['原料需求','原料需求时点改变，总量变化较小。'],['采购优化','存在420吨时点性原料缺口，建议评估到货提前。'],['成本评估','加班、切换和延迟成本合计增加113万元。']],
-severity:function(v){return Math.max(0,Math.min(2,Number(v.downHours)/8*.6+Number(v.urgentOrder)/500*.4));}},
-combined:{name:'组合压力测试',priority:'P1 · 扩展场景',desc:'同时叠加需求、供应、设备与价格变化，用于识别最脆弱约束和风险传导链。',
-params:[{key:'orderChange',label:'订单数量变化',type:'range',min:0,max:50,step:5,value:20,unit:'%',signed:true},{key:'delayDays',label:'供应商延迟',type:'range',min:0,max:14,step:1,value:7,unit:'天'},{key:'priceChange',label:'原料价格变化',type:'range',min:0,max:30,step:5,value:15,unit:'%',signed:true},{key:'downHours',label:'关键设备停机',type:'range',min:0,max:24,step:1,value:8,unit:'小时'}],
-modules:[{name:'采购优化',note:'评估供应与价格'},{name:'生产排程',note:'重排与瓶颈识别'},{name:'成品库存',note:'测算7日库存轨迹'},{name:'成本评估',note:'汇总全链影响'}],target:[84.6,99,165,1680,3235],risk:'重大风险',riskTone:'red',
-chain:['需求、供应、设备与价格同时承压','采购替代空间快速收窄','排程出现产能与原料双约束','成品库存跌至危险水位','OTD与总成本显著恶化'],
-moduleResults:[['采购优化','备选供应商能力接近上限，仍有1680吨模拟需求缺口。'],['生产排程','产能与原料双约束导致8个订单延迟。'],['成品库存','未来第3天起低于安全库存，最低165吨。'],['成本评估','供应链总运营成本增加13.6%，结果完整性4/4。']],
-severity:function(v){return Math.max(0,Math.min(2,Number(v.orderChange)/20*.25+Number(v.delayDays)/7*.25+Number(v.priceChange)/15*.25+Number(v.downHours)/8*.25));}}
+production:{name:'生产能力下降',priority:'P0 · 核心演示',desc:'仅调整产能下降比例和持续时间，观察计划产量、成品库存与客户交付变化。',
+params:[{key:'line',label:'受影响产线',type:'select',value:'3#异构化线',options:['1#液化线','2#糖化线','3#异构化线','4#喷雾干燥线']},{key:'capacityReduction',label:'产能下降',type:'range',min:0,max:60,step:5,value:30,unit:'%'},{key:'durationDays',label:'影响持续时间',type:'range',min:0,max:5,step:1,value:2,unit:'天'}],
+modules:[{name:'生产排程',note:'重算有效产出与完工日'},{name:'成品库存',note:'测算计划入库与库存水位'},{name:'成本评估',note:'汇总延期与恢复成本'}],target:[90.8,98.5,250,0,2960],risk:'高风险',riskTone:'red',
+chain:['关键产线可用产能下降','计划产量减少且入库后移','成品库存提前越线','客户订单进入延期窗口','恢复与延期成本增加'],
+moduleResults:[['生产排程','受影响周期有效产出下降，部分计划后移。'],['成品库存','计划入库减少，未来库存提前跌破安全线。'],['成本评估','恢复生产、加班和延期损失形成成本增量。']],
+severity:function(v){return Math.max(0,Math.min(2,Number(v.capacityReduction)/30*Number(v.durationDays)/2));}}
 };
 
 var SANDBOX_PRODUCT_CASES={
