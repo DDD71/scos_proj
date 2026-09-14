@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2015" height="988" viewBox="0 0 2015 988">
+<defs><marker id="arrow" markerWidth="9" markerHeight="7" refX="8.2" refY="3.5" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L9,3.5 L0,7 z" fill="#111"/></marker></defs>
+<style>.title{font-family:SimSun,"Songti SC",STSong,serif;font-size:22px;font-weight:600;fill:#111}.lane-text{font-family:SimSun,"Songti SC",STSong,serif;font-size:17px;fill:#222}.node-text{font-family:SimSun,"Songti SC",STSong,serif;font-size:16px;fill:#333}.small-text{font-family:SimSun,"Songti SC",STSong,serif;font-size:14px;fill:#444}.note-text{font-family:SimSun,"Songti SC",STSong,serif;font-size:13px;fill:#555}.tag-text{font-family:Arial,"Microsoft YaHei",sans-serif;font-size:13px;fill:#fff}.divider{stroke:#8a8a8a;stroke-width:1;fill:none}.node{stroke:#8a8a8a;stroke-width:1.2;fill:#fff}.flow{stroke:#111;stroke-width:1.8;fill:none;marker-end:url(#arrow)}.flow-stem{stroke:#111;stroke-width:1.8;fill:none}</style>
+<rect x="18" y="18" width="1979" height="952" fill="#fff" stroke="#707070" stroke-width="1"/>
+<line class="divider" x1="18" y1="138" x2="1997" y2="138"/>
+<text class="title" x="36" y="70">流程编号及名称：（P-ZLTC-SCOS-KCYH-002 周度生产补充计划制定流程）</text>
+<line class="divider" x1="80" y1="138" x2="80" y2="898"/>
+<text class="lane-text" x="49.0" y="233.0" text-anchor="middle"><tspan x="49.0" y="196.28">数</tspan><tspan x="49.0" y="214.64">据</tspan><tspan x="49.0" y="233.0">服</tspan><tspan x="49.0" y="251.36">务</tspan><tspan x="49.0" y="269.72">层</tspan></text>
+<line class="divider" x1="18" y1="328" x2="1997" y2="328"/>
+<text class="lane-text" x="49.0" y="423.0" text-anchor="middle"><tspan x="49.0" y="395.46">S</tspan><tspan x="49.0" y="413.82">C</tspan><tspan x="49.0" y="432.17999999999995">O</tspan><tspan x="49.0" y="450.53999999999996">S</tspan></text>
+<line class="divider" x1="18" y1="518" x2="1997" y2="518"/>
+<text class="lane-text" x="49.0" y="613.0" text-anchor="middle"><tspan x="49.0" y="576.28">库</tspan><tspan x="49.0" y="594.64">存</tspan><tspan x="49.0" y="613.0">计</tspan><tspan x="49.0" y="631.36">划</tspan><tspan x="49.0" y="649.72">员</tspan></text>
+<line class="divider" x1="18" y1="708" x2="1997" y2="708"/>
+<text class="lane-text" x="49.0" y="803.0" text-anchor="middle"><tspan x="49.0" y="766.28">生</tspan><tspan x="49.0" y="784.64">产</tspan><tspan x="49.0" y="803.0">计</tspan><tspan x="49.0" y="821.36">划</tspan><tspan x="49.0" y="839.72">员</tspan></text>
+<line class="divider" x1="18" y1="898" x2="1997" y2="898"/>
+<ellipse class="node" cx="170" cy="233.0" rx="38" ry="30"/>
+<text class="node-text" x="170" y="239.0" text-anchor="middle">开始</text>
+<rect class="node" x="268.0" y="197.0" width="152" height="72"/>
+<rect x="268.0" y="196.0" width="70" height="21" fill="#00A651"/>
+<text class="tag-text" x="303.0" y="211.0" text-anchor="middle">数据服务</text>
+<text class="small-text" x="344" y="223.0" text-anchor="middle">10</text>
+<text class="node-text" x="344" y="246.0" text-anchor="middle"><tspan x="344" y="246.0">汇集周计划输入</tspan></text>
+<rect class="node" x="442.0" y="387.0" width="152" height="72"/>
+<rect x="442.0" y="386.0" width="50" height="21" fill="#008ACB"/>
+<text class="tag-text" x="467.0" y="401.0" text-anchor="middle">SCOS</text>
+<text class="small-text" x="518" y="413.0" text-anchor="middle">20</text>
+<text class="node-text" x="518" y="426.0" text-anchor="middle"><tspan x="518" y="426.0">生成未来4周日度</tspan><tspan x="518" y="445.0">补充量</tspan></text>
+<rect class="node" x="616.0" y="387.0" width="152" height="72"/>
+<rect x="616.0" y="386.0" width="50" height="21" fill="#008ACB"/>
+<text class="tag-text" x="641.0" y="401.0" text-anchor="middle">SCOS</text>
+<text class="small-text" x="692" y="413.0" text-anchor="middle">30</text>
+<text class="node-text" x="692" y="436.0" text-anchor="middle"><tspan x="692" y="436.0">汇总4周周度建议</tspan></text>
+<rect class="node" x="790.0" y="577.0" width="152" height="72"/>
+<text class="small-text" x="866" y="603.0" text-anchor="middle">40</text>
+<text class="node-text" x="866" y="626.0" text-anchor="middle"><tspan x="866" y="626.0">评审周度补充建议</tspan></text>
+<polygon class="node" points="1040,568.0 1128.0,613.0 1040,658.0 952.0,613.0"/>
+<text class="small-text" x="1040" y="603.0" text-anchor="middle">50</text>
+<text class="node-text" x="1040" y="626.0" text-anchor="middle"><tspan x="1040" y="626.0">库存侧是否确认</tspan></text>
+<rect class="node" x="1138.0" y="767.0" width="152" height="72"/>
+<text class="small-text" x="1214" y="793.0" text-anchor="middle">60</text>
+<text class="node-text" x="1214" y="816.0" text-anchor="middle"><tspan x="1214" y="816.0">确认排程承接安排</tspan></text>
+<polygon class="node" points="1388,758.0 1476.0,803.0 1388,848.0 1300.0,803.0"/>
+<text class="small-text" x="1388" y="793.0" text-anchor="middle">70</text>
+<text class="node-text" x="1388" y="816.0" text-anchor="middle"><tspan x="1388" y="816.0">是否纳入生产排程</tspan></text>
+<rect class="node" x="1486.0" y="387.0" width="152" height="72"/>
+<rect x="1486.0" y="386.0" width="50" height="21" fill="#008ACB"/>
+<text class="tag-text" x="1511.0" y="401.0" text-anchor="middle">SCOS</text>
+<text class="small-text" x="1562" y="413.0" text-anchor="middle">80</text>
+<text class="node-text" x="1562" y="436.0" text-anchor="middle"><tspan x="1562" y="436.0">锁定第1周补充量</tspan></text>
+<rect class="node" x="1660.0" y="387.0" width="152" height="72"/>
+<rect x="1660.0" y="386.0" width="50" height="21" fill="#008ACB"/>
+<text class="tag-text" x="1685.0" y="401.0" text-anchor="middle">SCOS</text>
+<text class="small-text" x="1736" y="413.0" text-anchor="middle">90</text>
+<text class="node-text" x="1736" y="426.0" text-anchor="middle"><tspan x="1736" y="426.0">发布第1周补货计</tspan><tspan x="1736" y="445.0">划</tspan></text>
+<ellipse class="node" cx="1910" cy="423.0" rx="38" ry="30"/>
+<text class="node-text" x="1910" y="429.0" text-anchor="middle">结束</text>
+<path class="flow" d="M 208 233.0 H 238.0 V 233.0 H 268.0"/>
+<path class="flow" d="M 420.0 233.0 H 431.0 V 423.0 H 442.0"/>
+<path class="flow" d="M 594.0 423.0 H 605.0 V 423.0 H 616.0"/>
+<path class="flow" d="M 768.0 423.0 H 779.0 V 613.0 H 790.0"/>
+<path class="flow" d="M 942.0 613.0 H 947.0 V 613.0 H 952.0"/>
+<path class="flow" d="M 1128.0 613.0 H 1133.0 V 803.0 H 1138.0"/>
+<text class="small-text" x="1150.0" y="604.0" text-anchor="middle"><tspan x="1150.0" y="604.0">Y</tspan></text>
+<path class="flow" d="M 1040 568.0 V 165 H 842 V 577.0"/>
+<text class="small-text" x="941.0" y="158" text-anchor="middle"><tspan x="941.0" y="158">N：返回评审</tspan></text>
+<path class="flow" d="M 1290.0 803.0 H 1295.0 V 803.0 H 1300.0"/>
+<path class="flow" d="M 1476.0 803.0 H 1481.0 V 423.0 H 1486.0"/>
+<text class="small-text" x="1498.0" y="794.0" text-anchor="middle"><tspan x="1498.0" y="794.0">Y</tspan></text>
+<path class="flow" d="M 1388 758.0 V 190 H 1238 V 767.0"/>
+<text class="small-text" x="1313.0" y="183" text-anchor="middle"><tspan x="1313.0" y="183">N：协调承接</tspan></text>
+<path class="flow" d="M 1638.0 423.0 H 1649.0 V 423.0 H 1660.0"/>
+<path class="flow" d="M 1812.0 423.0 H 1842.0 V 423.0 H 1872"/>
+<text class="note-text" x="94" y="941">业务口径：每周五滚动计算未来4周；第1周按周六至下周五锁定且不可自动修改，第2至第4周为后续滚动建议。</text>
+</svg>

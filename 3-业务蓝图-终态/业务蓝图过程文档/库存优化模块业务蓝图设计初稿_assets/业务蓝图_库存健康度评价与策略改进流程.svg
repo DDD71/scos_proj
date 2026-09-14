@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1667" height="988" viewBox="0 0 1667 988">
+<defs><marker id="arrow" markerWidth="9" markerHeight="7" refX="8.2" refY="3.5" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L9,3.5 L0,7 z" fill="#111"/></marker></defs>
+<style>.title{font-family:SimSun,"Songti SC",STSong,serif;font-size:22px;font-weight:600;fill:#111}.lane-text{font-family:SimSun,"Songti SC",STSong,serif;font-size:17px;fill:#222}.node-text{font-family:SimSun,"Songti SC",STSong,serif;font-size:16px;fill:#333}.small-text{font-family:SimSun,"Songti SC",STSong,serif;font-size:14px;fill:#444}.note-text{font-family:SimSun,"Songti SC",STSong,serif;font-size:13px;fill:#555}.tag-text{font-family:Arial,"Microsoft YaHei",sans-serif;font-size:13px;fill:#fff}.divider{stroke:#8a8a8a;stroke-width:1;fill:none}.node{stroke:#8a8a8a;stroke-width:1.2;fill:#fff}.flow{stroke:#111;stroke-width:1.8;fill:none;marker-end:url(#arrow)}.flow-stem{stroke:#111;stroke-width:1.8;fill:none}</style>
+<rect x="18" y="18" width="1631" height="952" fill="#fff" stroke="#707070" stroke-width="1"/>
+<line class="divider" x1="18" y1="138" x2="1649" y2="138"/>
+<text class="title" x="36" y="70">流程编号及名称：（P-ZLTC-SCOS-KCYH-005 库存健康度评价与策略改进流程）</text>
+<line class="divider" x1="80" y1="138" x2="80" y2="898"/>
+<text class="lane-text" x="49.0" y="233.0" text-anchor="middle"><tspan x="49.0" y="196.28">数</tspan><tspan x="49.0" y="214.64">据</tspan><tspan x="49.0" y="233.0">服</tspan><tspan x="49.0" y="251.36">务</tspan><tspan x="49.0" y="269.72">层</tspan></text>
+<line class="divider" x1="18" y1="328" x2="1649" y2="328"/>
+<text class="lane-text" x="49.0" y="423.0" text-anchor="middle"><tspan x="49.0" y="395.46">S</tspan><tspan x="49.0" y="413.82">C</tspan><tspan x="49.0" y="432.17999999999995">O</tspan><tspan x="49.0" y="450.53999999999996">S</tspan></text>
+<line class="divider" x1="18" y1="518" x2="1649" y2="518"/>
+<text class="lane-text" x="49.0" y="613.0" text-anchor="middle"><tspan x="49.0" y="576.28">库</tspan><tspan x="49.0" y="594.64">存</tspan><tspan x="49.0" y="613.0">计</tspan><tspan x="49.0" y="631.36">划</tspan><tspan x="49.0" y="649.72">员</tspan></text>
+<line class="divider" x1="18" y1="708" x2="1649" y2="708"/>
+<text class="lane-text" x="49.0" y="803.0" text-anchor="middle"><tspan x="49.0" y="766.28">库</tspan><tspan x="49.0" y="784.64">存</tspan><tspan x="49.0" y="803.0">负</tspan><tspan x="49.0" y="821.36">责</tspan><tspan x="49.0" y="839.72">人</tspan></text>
+<line class="divider" x1="18" y1="898" x2="1649" y2="898"/>
+<ellipse class="node" cx="170" cy="233.0" rx="38" ry="30"/>
+<text class="node-text" x="170" y="239.0" text-anchor="middle">开始</text>
+<rect class="node" x="268.0" y="197.0" width="152" height="72"/>
+<rect x="268.0" y="196.0" width="70" height="21" fill="#00A651"/>
+<text class="tag-text" x="303.0" y="211.0" text-anchor="middle">数据服务</text>
+<text class="small-text" x="344" y="223.0" text-anchor="middle">10</text>
+<text class="node-text" x="344" y="236.0" text-anchor="middle"><tspan x="344" y="236.0">提供策略与执行数</tspan><tspan x="344" y="255.0">据</tspan></text>
+<rect class="node" x="442.0" y="387.0" width="152" height="72"/>
+<rect x="442.0" y="386.0" width="50" height="21" fill="#008ACB"/>
+<text class="tag-text" x="467.0" y="401.0" text-anchor="middle">SCOS</text>
+<text class="small-text" x="518" y="413.0" text-anchor="middle">20</text>
+<text class="node-text" x="518" y="426.0" text-anchor="middle"><tspan x="518" y="426.0">生成库存健康度评</tspan><tspan x="518" y="445.0">价</tspan></text>
+<rect class="node" x="616.0" y="577.0" width="152" height="72"/>
+<text class="small-text" x="692" y="603.0" text-anchor="middle">30</text>
+<text class="node-text" x="692" y="616.0" text-anchor="middle"><tspan x="692" y="616.0">复核健康度与策略</tspan><tspan x="692" y="635.0">效果</tspan></text>
+<polygon class="node" points="866,568.0 954.0,613.0 866,658.0 778.0,613.0"/>
+<text class="small-text" x="866" y="603.0" text-anchor="middle">40</text>
+<text class="node-text" x="866" y="626.0" text-anchor="middle"><tspan x="866" y="626.0">是否需要改进策略</tspan></text>
+<rect class="node" x="964.0" y="577.0" width="152" height="72"/>
+<text class="small-text" x="1040" y="603.0" text-anchor="middle">50</text>
+<text class="node-text" x="1040" y="626.0" text-anchor="middle"><tspan x="1040" y="626.0">形成策略改进建议</tspan></text>
+<polygon class="node" points="1214,758.0 1302.0,803.0 1214,848.0 1126.0,803.0"/>
+<text class="small-text" x="1214" y="793.0" text-anchor="middle">60</text>
+<text class="node-text" x="1214" y="816.0" text-anchor="middle"><tspan x="1214" y="816.0">是否纳入策略调整</tspan></text>
+<rect class="node" x="1312.0" y="387.0" width="152" height="72"/>
+<rect x="1312.0" y="386.0" width="50" height="21" fill="#008ACB"/>
+<text class="tag-text" x="1337.0" y="401.0" text-anchor="middle">SCOS</text>
+<text class="small-text" x="1388" y="413.0" text-anchor="middle">70</text>
+<text class="node-text" x="1388" y="426.0" text-anchor="middle"><tspan x="1388" y="426.0">发布健康度报告与</tspan><tspan x="1388" y="445.0">结论</tspan></text>
+<ellipse class="node" cx="1562" cy="423.0" rx="38" ry="30"/>
+<text class="node-text" x="1562" y="429.0" text-anchor="middle">结束</text>
+<path class="flow" d="M 208 233.0 H 238.0 V 233.0 H 268.0"/>
+<path class="flow" d="M 420.0 233.0 H 431.0 V 423.0 H 442.0"/>
+<path class="flow" d="M 594.0 423.0 H 605.0 V 613.0 H 616.0"/>
+<path class="flow" d="M 768.0 613.0 H 773.0 V 613.0 H 778.0"/>
+<path class="flow" d="M 954.0 613.0 H 959.0 V 613.0 H 964.0"/>
+<text class="small-text" x="976.0" y="604.0" text-anchor="middle"><tspan x="976.0" y="604.0">Y</tspan></text>
+<path class="flow" d="M 866 658.0 V 874 H 1388 V 459.0"/>
+<text class="small-text" x="1127.0" y="867" text-anchor="middle"><tspan x="1127.0" y="867">N：无需改进</tspan></text>
+<path class="flow" d="M 1116.0 613.0 H 1121.0 V 803.0 H 1126.0"/>
+<path class="flow" d="M 1302.0 803.0 H 1307.0 V 423.0 H 1312.0"/>
+<text class="small-text" x="1324.0" y="794.0" text-anchor="middle"><tspan x="1324.0" y="794.0">Y：形成任务</tspan></text>
+<path class="flow" d="M 1214 758.0 V 165 H 1364 V 387.0"/>
+<text class="small-text" x="1289.0" y="158" text-anchor="middle"><tspan x="1289.0" y="158">N：保留建议</tspan></text>
+<path class="flow" d="M 1464.0 423.0 H 1494.0 V 423.0 H 1524"/>
+<text class="note-text" x="94" y="941">业务口径：健康度评价用于验证策略效果；分析和改进建议不自动修改正式库存策略，必须进入后续月度制定或异常调整流程。</text>
+</svg>
