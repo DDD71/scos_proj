@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="820" viewBox="0 0 1800 820" role="img" aria-labelledby="svg-title svg-desc">
+  <title id="svg-title">SCOS要货计划模块业务流程</title>
+  <desc id="svg-desc">展示要货计划从生产需求、库存、在途和合同数据输入，到计算到货需求、按供应商顺序生成计划、人工微调、确认下达和执行跟踪的业务流程。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#000000"/>
+    </marker>
+    <style>
+      .title{font-family:SimSun,"Songti SC",STSong,serif;font-size:21px;font-weight:600;fill:#000000}
+      .lane-text{font-family:SimSun,"Songti SC",STSong,serif;font-size:17px;fill:#000000;text-anchor:middle}
+      .node-text{font-family:SimSun,"Songti SC",STSong,serif;font-size:16px;fill:#000000;text-anchor:middle}
+      .small-text{font-family:SimSun,"Songti SC",STSong,serif;font-size:14px;fill:#404040;text-anchor:middle}
+      .note-text{font-family:SimSun,"Songti SC",STSong,serif;font-size:14px;fill:#404040}
+      .node,.doc,.decision,.terminal{fill:#ffffff;stroke:#808080;stroke-width:1.2}
+      .divider{fill:none;stroke:#808080;stroke-width:1.2}
+      .flow{fill:none;stroke:#000000;stroke-width:1.7;stroke-linejoin:miter;marker-end:url(#arrow)}
+      .flow-stem{fill:none;stroke:#000000;stroke-width:1.7;stroke-linejoin:miter}
+      .tag-scos{fill:#008acb}
+      .tag-external{fill:#00a651}
+      .tag-offline{fill:#7030a0}
+      .tag-text{font-family:Arial,"Microsoft YaHei",sans-serif;font-size:12px;fill:#ffffff;text-anchor:middle}
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="1800" height="820" fill="#ffffff"/>
+
+  <rect x="1" y="1" width="1798" height="54" class="node"/>
+  <text x="16" y="35" class="title">流程编号及名称：（P-ZLTC-SCOS-YHJH-000  要货计划模块业务流程）</text>
+
+  <rect x="1" y="55" width="1798" height="764" class="divider"/>
+  <line x1="52" y1="55" x2="52" y2="819" class="divider"/>
+  <line x1="112" y1="55" x2="112" y2="819" class="divider"/>
+  <line x1="52" y1="190" x2="1799" y2="190" class="divider"/>
+  <line x1="52" y1="555" x2="1799" y2="555" class="divider"/>
+
+  <text x="26" y="330" class="lane-text">
+    <tspan x="26" dy="0">要</tspan><tspan x="26" dy="25">货</tspan><tspan x="26" dy="25">计</tspan><tspan x="26" dy="25">划</tspan><tspan x="26" dy="25">管</tspan><tspan x="26" dy="25">理</tspan>
+  </text>
+  <text x="82" y="91" class="lane-text">
+    <tspan x="82" dy="0">业</tspan><tspan x="82" dy="24">务</tspan><tspan x="82" dy="24">数</tspan><tspan x="82" dy="24">据</tspan>
+  </text>
+  <text x="82" y="298" class="lane-text">
+    <tspan x="82" dy="0">S</tspan><tspan x="82" dy="22">C</tspan><tspan x="82" dy="22">O</tspan><tspan x="82" dy="22">S</tspan><tspan x="82" dy="22">系</tspan><tspan x="82" dy="22">统</tspan>
+  </text>
+  <text x="82" y="610" class="lane-text">
+    <tspan x="82" dy="0">采</tspan><tspan x="82" dy="22">购</tspan><tspan x="82" dy="22">计</tspan><tspan x="82" dy="22">划</tspan><tspan x="82" dy="22">员</tspan><tspan x="82" dy="22">及</tspan><tspan x="82" dy="22">执</tspan><tspan x="82" dy="22">行</tspan>
+  </text>
+
+  <!-- 业务数据 -->
+  <path d="M145 91 H335 V140 Q287 126 240 140 Q192 154 145 140 Z" class="doc"/>
+  <rect x="145" y="83" width="48" height="20" class="tag-scos"/>
+  <text x="169" y="97" class="tag-text">SCOS</text>
+  <text x="240" y="113" class="node-text">日度原材料需求</text>
+
+  <path d="M375 91 H565 V140 Q517 126 470 140 Q422 154 375 140 Z" class="doc"/>
+  <rect x="375" y="83" width="48" height="20" class="tag-external"/>
+  <text x="399" y="97" class="tag-text">WMS</text>
+  <text x="470" y="113" class="node-text">可用库存</text>
+
+  <path d="M605 91 H795 V140 Q747 126 700 140 Q652 154 605 140 Z" class="doc"/>
+  <rect x="605" y="83" width="48" height="20" class="tag-external"/>
+  <text x="629" y="97" class="tag-text">TMS</text>
+  <text x="700" y="109" class="node-text">固定到货及</text>
+  <text x="700" y="130" class="node-text">预计到货日</text>
+
+  <path d="M850 91 H1060 V140 Q1007 126 955 140 Q902 154 850 140 Z" class="doc"/>
+  <rect x="850" y="83" width="62" height="20" class="tag-external"/>
+  <text x="881" y="97" class="tag-text">合同系统</text>
+  <text x="955" y="109" class="node-text">有效合同及</text>
+  <text x="955" y="130" class="node-text">可安排余量</text>
+
+  <path d="M1100 91 H1330 V140 Q1272 126 1215 140 Q1157 154 1100 140 Z" class="doc"/>
+  <rect x="1100" y="83" width="48" height="20" class="tag-scos"/>
+  <text x="1124" y="97" class="tag-text">SCOS</text>
+  <text x="1215" y="109" class="node-text">供应商合同顺序及</text>
+  <text x="1215" y="130" class="node-text">到货能力</text>
+
+  <!-- 数据进入计算节点 -->
+  <path d="M240 140 L240 215 L300 215 L300 250" class="flow"/>
+  <path d="M470 140 L470 225 L350 225 L350 250" class="flow"/>
+  <path d="M700 140 L700 235 L400 235 L400 250" class="flow"/>
+  <path d="M955 140 L955 215 L820 215 L820 250" class="flow"/>
+  <path d="M1215 140 L1215 225 L875 225 L875 250" class="flow"/>
+
+  <!-- SCOS主流程 -->
+  <ellipse cx="155" cy="285" rx="38" ry="27" class="terminal"/>
+  <text x="155" y="291" class="node-text">开始</text>
+
+  <path d="M193 285 H250" class="flow"/>
+
+  <rect x="250" y="250" width="200" height="70" class="node"/>
+  <rect x="250" y="242" width="48" height="20" class="tag-scos"/>
+  <text x="274" y="256" class="tag-text">SCOS</text>
+  <text x="350" y="280" class="node-text">汇集需求、库存</text>
+  <text x="350" y="302" class="node-text">与已有在途</text>
+
+  <path d="M450 285 H500" class="flow"/>
+
+  <rect x="500" y="250" width="200" height="70" class="node"/>
+  <rect x="500" y="242" width="48" height="20" class="tag-scos"/>
+  <text x="524" y="256" class="tag-text">SCOS</text>
+  <text x="600" y="280" class="node-text">计算逐日库存</text>
+  <text x="600" y="302" class="node-text">与安全缓冲</text>
+
+  <path d="M700 285 H750" class="flow"/>
+
+  <rect x="750" y="250" width="200" height="70" class="node"/>
+  <rect x="750" y="242" width="48" height="20" class="tag-scos"/>
+  <text x="774" y="256" class="tag-text">SCOS</text>
+  <text x="850" y="280" class="node-text">形成需到货日期与数量</text>
+  <text x="850" y="302" class="small-text">按合同顺序匹配供应商</text>
+
+  <path d="M950 285 H970" class="flow"/>
+
+  <polygon points="1065,235 1160,285 1065,335 970,285" class="decision"/>
+  <text x="1065" y="280" class="node-text">前序供应商</text>
+  <text x="1065" y="302" class="node-text">可以满足？</text>
+
+  <path d="M1160 285 L1185 285 L1185 257 L1210 257" class="flow"/>
+  <text x="1172" y="275" class="small-text">Y</text>
+  <rect x="1210" y="225" width="180" height="65" class="node"/>
+  <rect x="1210" y="217" width="48" height="20" class="tag-scos"/>
+  <text x="1234" y="231" class="tag-text">SCOS</text>
+  <text x="1300" y="253" class="node-text">单一供应商安排</text>
+  <text x="1300" y="275" class="small-text">不主动拆分</text>
+
+  <path d="M1065 335 L1065 377 L1210 377" class="flow"/>
+  <text x="1078" y="366" class="small-text">N</text>
+  <rect x="1210" y="345" width="180" height="65" class="node"/>
+  <rect x="1210" y="337" width="48" height="20" class="tag-scos"/>
+  <text x="1234" y="351" class="tag-text">SCOS</text>
+  <text x="1300" y="373" class="node-text">后续供应商补位</text>
+  <text x="1300" y="395" class="small-text">允许必要交叉到货</text>
+
+  <path d="M1390 257 L1440 257 L1440 282 L1480 282" class="flow"/>
+  <path d="M1390 377 L1450 377 L1450 332 L1480 332" class="flow"/>
+
+  <path d="M1480 260 H1690 V340 Q1637 326 1585 340 Q1532 354 1480 340 Z" class="doc"/>
+  <rect x="1480" y="252" width="48" height="20" class="tag-scos"/>
+  <text x="1504" y="266" class="tag-text">SCOS</text>
+  <text x="1585" y="286" class="node-text">生成要货计划</text>
+  <text x="1585" y="309" class="small-text">供应商、合同、到货日、数量</text>
+  <text x="1585" y="330" class="small-text">及补位原因</text>
+
+  <!-- 计划进入人工评审 -->
+  <path d="M1585 340 L1585 585 L255 585 L255 625" class="flow"/>
+
+  <!-- 采购计划员及执行 -->
+  <rect x="160" y="625" width="190" height="70" class="node"/>
+  <rect x="160" y="617" width="48" height="20" class="tag-offline"/>
+  <text x="184" y="631" class="tag-text">线下</text>
+  <text x="255" y="655" class="node-text">评审并微调</text>
+  <text x="255" y="677" class="node-text">供应商、日期和数量</text>
+
+  <path d="M350 660 H410" class="flow"/>
+
+  <rect x="410" y="625" width="200" height="70" class="node"/>
+  <rect x="410" y="617" width="48" height="20" class="tag-scos"/>
+  <text x="434" y="631" class="tag-text">SCOS</text>
+  <text x="510" y="655" class="node-text">增量重算并校验</text>
+  <text x="510" y="677" class="small-text">库存、合同与到货能力</text>
+
+  <path d="M610 660 H660" class="flow"/>
+
+  <polygon points="755,615 850,660 755,705 660,660" class="decision"/>
+  <text x="755" y="655" class="node-text">计划可执行？</text>
+  <text x="755" y="678" class="small-text">无阻断性冲突</text>
+
+  <path d="M850 660 H900" class="flow"/>
+  <text x="869" y="650" class="small-text">Y</text>
+
+  <rect x="900" y="625" width="170" height="70" class="node"/>
+  <rect x="900" y="617" width="48" height="20" class="tag-offline"/>
+  <text x="924" y="631" class="tag-text">线下</text>
+  <text x="985" y="655" class="node-text">人工确认</text>
+  <text x="985" y="677" class="node-text">当前计划</text>
+
+  <path d="M1070 660 H1120" class="flow"/>
+
+  <rect x="1120" y="625" width="190" height="70" class="node"/>
+  <rect x="1120" y="617" width="48" height="20" class="tag-scos"/>
+  <text x="1144" y="631" class="tag-text">SCOS</text>
+  <text x="1215" y="655" class="node-text">下达要货计划</text>
+  <text x="1215" y="677" class="small-text">供应商确认到货承诺</text>
+
+  <path d="M1310 660 H1360" class="flow"/>
+
+  <rect x="1360" y="625" width="210" height="70" class="node"/>
+  <rect x="1360" y="617" width="48" height="20" class="tag-external"/>
+  <text x="1384" y="631" class="tag-text">TMS</text>
+  <text x="1465" y="655" class="node-text">反馈预计到货变化</text>
+  <text x="1465" y="677" class="small-text">触发未锁定计划滚动更新</text>
+
+  <path d="M1570 660 H1630" class="flow"/>
+  <ellipse cx="1672" cy="660" rx="42" ry="28" class="terminal"/>
+  <text x="1672" y="666" class="node-text">结束</text>
+
+  <path d="M755 705 L755 748 L255 748 L255 695" class="flow"/>
+  <text x="771" y="731" class="small-text">N</text>
+  <text x="505" y="742" class="small-text">保留人工调整，继续处理冲突</text>
+
+  <text x="132" y="794" class="note-text">业务口径：要货计划只在已签有效合同范围内安排“哪个供应商、哪天到货、到货多少”；一家能满足时由一家供货，不足时后续供应商补位。</text>
+</svg>
