@@ -1,0 +1,122 @@
+/* Sandbox: one setup area, one daily animation, optional detail. */
+#page-sandbox { max-width: 1440px; margin: 0 auto; min-width: 0; }
+#page-sandbox .page-header { margin-bottom: 18px; }
+#page-sandbox .page-subtitle { font-size: 13px; }
+.sim-badge { font-size: 12px; color: var(--text-muted); white-space: nowrap; }
+.sim-simple { background: var(--bg-card); box-shadow: none; }
+.sim-simple::before { display: none; }
+.sim-simple .sandbox-workspace { padding: 20px 24px; }
+.sim-simple .sandbox-library { margin-bottom: 20px; }
+.sim-simple .sandbox-library-title,.sim-config-title,.sim-stage-head { font-size: 13px; font-weight: 600; color: var(--text-secondary); }
+.sim-simple .sandbox-scenario-item { min-width: 180px; display: flex; flex-direction: column; gap: 5px; align-items: flex-start; padding: 14px 16px; }
+.sim-simple .sandbox-scenario-name { font-size: 15px; }
+.sim-simple .sandbox-scenario-meta { font-size: 12px; }
+.sim-config-title { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; gap: 12px; }
+.sim-simple .sandbox-horizon { margin: 0; padding: 0; border: 0; }
+.sim-simple .sandbox-horizon-btn { font-size: 12px; padding: 5px 12px; }
+.sim-simple .sandbox-horizon .sandbox-horizon-label { font-size: 12px; }
+.sim-simple .sandbox-param-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 14px 28px; padding: 0; background: none; border: 0; }
+.sim-simple .sandbox-param { border: 0; padding: 0; background: none; }
+.sim-simple .sandbox-param-top { font-size: 12px; margin-bottom: 8px; }
+.sim-simple .sandbox-param-value { font-size: 14px; }
+.sim-simple .sandbox-select { font-size: 13px; padding: 8px 10px; }
+.sim-simple input[type=range] { cursor: pointer; accent-color: var(--blue); }
+.sim-simple .sandbox-actions { margin-top: 18px; }
+.sim-simple .btn { min-height: 34px; }
+.sim-simple [hidden] { display: none !important; }
+.sim-hint { font-size: 12px; color: var(--text-muted); margin-left: 4px; }
+.sim-simple .sandbox-results { padding: 0 24px 18px; background: transparent; scroll-margin-top: 16px; }
+.sim-overview { padding: 15px 0; font-size: 15px; color: var(--text-primary); display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.sim-overview span { font-size: 12px; color: var(--text-muted); }
+.sim-experience { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; padding: 18px 22px 0; }
+.sim-stage-head { display:flex; justify-content: space-between; gap: 12px; }
+.sim-stage-head #simObjectName { color: var(--text-muted); font-weight: 400; }
+.sim-transport { display: grid; grid-template-columns: minmax(125px,1fr) minmax(40px,.45fr) 190px minmax(40px,.45fr) minmax(125px,1fr); align-items: center; max-width: 950px; margin: 20px auto 16px; gap: 12px; }
+.sim-endpoint { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 7px; font-size: 13px; color: var(--text-secondary); }
+.sim-end-icon { width: 44px; height: 44px; display: grid; place-items: center; font-size: 26px; border: 1px solid var(--border-light); border-radius: 12px; color: var(--cyan); margin-bottom: 4px; background: var(--bg-card); }
+.sim-endpoint strong { font: 600 23px 'JetBrains Mono', monospace; color: var(--text-primary); }
+.sim-base,.sim-caption { font-size: 11px; color: var(--text-muted); line-height: 1.5; }
+.sim-caption { min-height: 17px; max-width: 180px; }
+.sim-pipe { height: 4px; border-radius: 3px; position: relative; background: var(--border-light); overflow: hidden; }
+.sim-pipe i { position: absolute; left: -20%; width: 20%; height: 100%; border-radius: 3px; background: var(--cyan); opacity: 0; }
+.sim-pipe-out i { background: var(--yellow); }
+.sim-pipe i:nth-child(2) { animation-delay: -.5s !important; }
+.sim-pipe i:nth-child(3) { animation-delay: -1s !important; }
+.playing.has-in .sim-pipe-in i,.playing.has-out .sim-pipe-out i { opacity: 1; animation: sim-travel 1.5s linear infinite; }
+@keyframes sim-travel { from { left: -20%; } to { left: 110%; } }
+.sim-tank-top { display:flex; justify-content: space-between; align-items: center; font-size: 12px; margin-bottom: 10px; color: var(--text-secondary); gap: 6px; }
+#simStockState { font-size: 11px; color: var(--cyan); }
+.sim-vessel { position:relative; height:185px; width:164px; margin:0 auto 10px; border:2px solid #46546a; border-top-width:5px; border-radius:16px 16px 28px 28px; overflow:hidden; background: var(--bg-card); }
+.sim-vessel-water { position:absolute; bottom:0; left:0; right:0; height:0; background:linear-gradient(0deg,rgba(59,130,246,.3),rgba(6,182,212,.6)); transition: background .3s; }
+.sim-wave { position:absolute; top:-4px; left:-25%; width:150%; height:10px; border-radius:45%; background:rgba(255,255,255,.23); }
+.playing .sim-wave { animation:sim-wave 2.2s ease-in-out infinite alternate; }
+@keyframes sim-wave { from {transform:translateX(-4%) rotate(-2deg);} to {transform:translateX(4%) rotate(2deg);} }
+.sim-safe-mark { position:absolute; left:0; right:0; bottom:15%; border-top:1px dashed var(--yellow); z-index:2; }
+.sim-safe-mark span { position:absolute; right:5px; bottom:3px; color:var(--yellow); font-size:10px; }
+.sim-vessel-number { position:absolute; inset:0; display:flex; justify-content:center; align-items:center; gap:5px; z-index:3; text-shadow:0 1px 8px var(--bg-card); }
+.sim-vessel-number strong { font:600 30px 'JetBrains Mono',monospace; color:var(--text-primary); }
+.sim-vessel-number small { font-size:12px; color:var(--text-secondary); }
+.sim-tank-block>.sim-base { text-align:center; }
+.sim-transport[data-state=warning] #simStockState { color:var(--yellow); }
+.sim-transport[data-state=danger] #simStockState,.sim-transport[data-state=danger] #simDestNote { color:var(--red); }
+.sim-transport[data-state=warning] .sim-vessel-water { background:linear-gradient(0deg,rgba(245,158,11,.25),rgba(245,158,11,.65)); }
+.sim-transport[data-state=danger] .sim-vessel { border-color:#a65358; }
+.sim-transport[data-state=danger] .sim-vessel-water { background:rgba(239,68,68,.45); }
+.sim-daily-story { min-height:48px; padding:12px 16px; font-size:13px; color:var(--text-primary); line-height:1.7; border-radius:6px; background:var(--bg-card); border-left:2px solid var(--blue); }
+.sim-playbar { display:flex; align-items:center; gap:9px; margin-top:18px; }
+.sim-playbar strong { font:500 12px 'JetBrains Mono',monospace; min-width:142px; text-align:center; }
+.sim-speed { display:flex; align-items:center; gap:8px; margin-left:auto; font-size:12px; color:var(--text-muted); }
+.sim-speed select { background:var(--bg-card); color:var(--text-primary); border:1px solid var(--border-light); border-radius:5px; padding:6px; }
+.sim-slider { display:block; margin:16px 0 10px; width:100%; }
+.sim-days { display:grid; grid-template-columns:repeat(var(--day-count),minmax(54px,1fr)); gap:4px; overflow-x:auto; padding:3px 1px; position:relative; }
+.sim-day { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:7px; padding:8px 2px; border:1px solid transparent; background:transparent; border-radius:6px; color:var(--text-muted); cursor:pointer; font:11px 'JetBrains Mono',monospace; }
+.sim-day i { width:6px; height:6px; border-radius:50%; background:#4a647f; }
+.sim-day.warning i { background:var(--yellow); }.sim-day.danger i { background:var(--red); }
+.sim-day small { font:10px 'Noto Sans SC',sans-serif; }
+.sim-day.selected { background:rgba(59,130,246,.1); border-color:var(--blue); color:var(--text-primary); }
+.sim-day:hover { background:rgba(59,130,246,.08); }
+.sim-timeline-legend { font-size:11px; color:var(--text-muted); padding:10px 0 14px; }
+.sim-details { border-top:1px solid var(--border); font-size:12px; color:var(--text-secondary); }
+.sim-details summary { padding:13px 0; cursor:pointer; user-select:none; }
+.sim-details-body { padding:0 0 15px; line-height:1.7; }
+.sim-details-body .sandbox-baseline { margin:0; padding:0; display:grid; gap:12px; grid-template-columns:1fr 1fr; border:0; }
+.sim-details-body .sandbox-baseline b { display:block; font-weight:400; color:var(--text-primary); }
+.sim-data { margin:0 24px; }
+.sim-ledger { overflow-x:auto; }
+.sim-simple button:focus-visible,.sim-simple summary:focus-visible,.sim-simple input:focus-visible { outline:2px solid var(--cyan); outline-offset:3px; }
+@media(max-width:1000px) {
+ .sim-transport { grid-template-columns:minmax(110px,1fr) 30px 164px 30px minmax(110px,1fr); gap:6px; }
+ .sim-endpoint strong { font-size:19px; }
+}
+@media(max-width:768px) {
+ .sim-simple .sandbox-workspace { padding:16px; }
+ .sim-simple .sandbox-results { padding:0 12px 12px; }
+ .sim-experience { padding:14px 10px 0; }
+ .sim-overview { align-items:flex-start; flex-direction:column; font-size:13px; }
+ .sim-simple .sandbox-param-grid { gap:12px; }
+ .sim-transport { grid-template-columns:minmax(70px,1fr) 14px 125px 14px minmax(70px,1fr); gap:3px; }
+ .sim-vessel { width:114px; height:145px; }
+ .sim-vessel-number strong { font-size:22px; }
+ .sim-tank-top { display:block; text-align:center; }
+ #simStockState { display:block; margin-top:3px; }
+ .sim-endpoint strong { font-size:15px; }
+ .sim-endpoint { font-size:11px; }.sim-end-icon { width:32px; height:32px; font-size:20px; }
+ .sim-playbar { flex-wrap:wrap; }.sim-speed { margin-left:0; }
+ .sim-daily-story { font-size:12px; padding:10px; }
+ .sim-data { margin:0 16px; }
+ .sim-details-body .sandbox-baseline { grid-template-columns:1fr; }
+}
+@media(max-width:480px) {
+ .sim-transport { grid-template-columns:minmax(0,1fr) 110px minmax(0,1fr); gap:4px; }
+ .sim-pipe { display:none; }
+ .sim-vessel { width:100px; }
+ .sim-endpoint strong { font-size:13px; }
+ .sim-endpoint .sim-base,.sim-endpoint .sim-caption { font-size:10px; overflow-wrap:anywhere; }
+ .sim-config-title { align-items:flex-start; flex-direction:column; }
+ .sim-simple .sandbox-param-grid { grid-template-columns:1fr; }
+ .sim-playbar { gap:6px; }
+ .sim-playbar strong { min-width:118px; font-size:11px; }
+}
+@media(prefers-reduced-motion:reduce) {
+ .sim-simple *, .sim-simple *::before, .sim-simple *::after { animation:none!important; transition:none!important; scroll-behavior:auto!important; }
+}
