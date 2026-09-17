@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1000" viewBox="0 0 1800 1000">
+  <defs>
+    <marker id="arrowBlue" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#39A5FF"/>
+    </marker>
+    <marker id="arrowOrange" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#FF932E"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#061020" flood-opacity="0.55"/>
+    </filter>
+    <style>
+      text { font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", Arial, sans-serif; }
+      .title { fill:#FFFFFF; font-size:32px; font-weight:700; }
+      .section { fill:#FFFFFF; font-size:22px; font-weight:700; }
+      .system { fill:#FFFFFF; font-size:22px; font-weight:700; }
+      .small { fill:#B9C8DD; font-size:14px; }
+      .iface-in { fill:#52B2FF; font-size:14px; font-weight:600; }
+      .iface-out { fill:#FFA24A; font-size:14px; font-weight:600; }
+      .theme { fill:#DDE9F9; font-size:16px; font-weight:600; }
+      .module { fill:#FFFFFF; font-size:17px; font-weight:700; }
+    </style>
+  </defs>
+
+  <rect width="1800" height="1000" fill="#0E1C31"/>
+  <text x="42" y="52" class="title">SCOS数据流架构</text>
+  <text x="42" y="79" class="small">外部业务事实经统一接入和数据服务形成标准数据主题，支撑六大业务模块，并将执行计划下发至业务系统闭环。</text>
+
+  <g transform="translate(1040,25)">
+    <line x1="0" y1="20" x2="46" y2="20" stroke="#39A5FF" stroke-width="3" marker-end="url(#arrowBlue)"/>
+    <text x="62" y="25" class="small">数据获取/订阅</text>
+    <line x1="235" y1="20" x2="281" y2="20" stroke="#FF932E" stroke-width="3" stroke-dasharray="8 6" marker-end="url(#arrowOrange)"/>
+    <text x="297" y="25" class="small">数据下发/发布</text>
+  </g>
+
+  <rect x="30" y="100" width="430" height="850" rx="18" fill="#13243D" stroke="#2A3E5B" stroke-width="2"/>
+  <text x="55" y="137" class="section">外部业务系统与获取/订阅接口</text>
+
+  <!-- CRM -->
+  <g transform="translate(50,158)" filter="url(#shadow)">
+    <rect width="390" height="82" rx="13" fill="#182B48" stroke="#315170"/>
+    <text x="18" y="31" class="system">CRM</text>
+    <text x="18" y="57" class="small">客户关系管理</text>
+    <text x="112" y="31" class="iface-in">SCOS-CRM-001</text>
+    <text x="112" y="57" class="small">每日出货计划</text>
+  </g>
+  <!-- CON -->
+  <g transform="translate(50,250)" filter="url(#shadow)">
+    <rect width="390" height="82" rx="13" fill="#182B48" stroke="#315170"/>
+    <text x="18" y="31" class="system">CON</text>
+    <text x="18" y="57" class="small">合同系统</text>
+    <text x="112" y="27" class="iface-in">SCOS-CON-001 采购合同</text>
+    <text x="112" y="55" class="iface-in">SCOS-CON-002 销售合同</text>
+  </g>
+  <!-- SAP -->
+  <g transform="translate(50,342)" filter="url(#shadow)">
+    <rect width="390" height="82" rx="13" fill="#182B48" stroke="#315170"/>
+    <text x="18" y="31" class="system">SAP</text>
+    <text x="18" y="57" class="small">ERP系统</text>
+    <text x="112" y="27" class="iface-in">SCOS-SAP-001 主数据</text>
+    <text x="112" y="55" class="iface-in">SCOS-SAP-002 业务数据</text>
+  </g>
+  <!-- WMS -->
+  <g transform="translate(50,434)" filter="url(#shadow)">
+    <rect width="390" height="82" rx="13" fill="#182B48" stroke="#315170"/>
+    <text x="18" y="31" class="system">WMS</text>
+    <text x="18" y="57" class="small">仓储管理</text>
+    <text x="112" y="25" class="iface-in">SCOS-WMS-001～004</text>
+    <text x="112" y="50" class="small">原辅包在库、成品库存、入库批次</text>
+    <text x="112" y="70" class="small">在途库存</text>
+  </g>
+  <!-- TMS -->
+  <g transform="translate(50,526)" filter="url(#shadow)">
+    <rect width="390" height="82" rx="13" fill="#182B48" stroke="#315170"/>
+    <text x="18" y="31" class="system">TMS</text>
+    <text x="18" y="57" class="small">物流管理</text>
+    <text x="112" y="25" class="iface-in">SCOS-TMS-001～003</text>
+    <text x="112" y="50" class="small">原料入场批次、成品出厂批次</text>
+    <text x="112" y="70" class="small">物流信息</text>
+  </g>
+  <!-- MES -->
+  <g transform="translate(50,618)" filter="url(#shadow)">
+    <rect width="390" height="82" rx="13" fill="#182B48" stroke="#315170"/>
+    <text x="18" y="31" class="system">MES</text>
+    <text x="18" y="57" class="small">生产管理</text>
+    <text x="112" y="25" class="iface-in">SCOS-MES-001～003</text>
+    <text x="112" y="50" class="small">生产进度、生产批次</text>
+    <text x="112" y="70" class="small">工艺及原辅料用量成本</text>
+  </g>
+  <!-- DCS -->
+  <g transform="translate(50,710)" filter="url(#shadow)">
+    <rect width="390" height="82" rx="13" fill="#182B48" stroke="#315170"/>
+    <text x="18" y="31" class="system">DCS</text>
+    <text x="18" y="57" class="small">自动化管理</text>
+    <text x="112" y="31" class="iface-in">SCOS-DCS-001</text>
+    <text x="112" y="57" class="small">自动化设备数据</text>
+  </g>
+  <!-- QMS -->
+  <g transform="translate(50,802)" filter="url(#shadow)">
+    <rect width="390" height="82" rx="13" fill="#182B48" stroke="#315170"/>
+    <text x="18" y="31" class="system">QMS/LIMS</text>
+    <text x="18" y="57" class="small">质量管理</text>
+    <text x="145" y="31" class="iface-in">SCOS-QMS-001</text>
+    <text x="145" y="57" class="small">质检结果</text>
+  </g>
+
+  <!-- Inbound connectors -->
+  <g fill="none" stroke="#39A5FF" stroke-width="2" marker-end="url(#arrowBlue)">
+    <path d="M440 199 H490"/><path d="M440 291 H490"/><path d="M440 383 H490"/><path d="M440 475 H490"/>
+    <path d="M440 567 H490"/><path d="M440 659 H490"/><path d="M440 751 H490"/><path d="M440 843 H490"/>
+  </g>
+
+  <!-- Integration and data service layer -->
+  <rect x="500" y="125" width="240" height="770" rx="24" fill="#2A235D" stroke="#7047DC" stroke-width="3"/>
+  <text x="620" y="168" text-anchor="middle" class="section">统一集成与数据服务层</text>
+  <g>
+    <rect x="530" y="205" width="180" height="68" rx="12" fill="#362D72" stroke="#8668E8"/>
+    <text x="620" y="234" text-anchor="middle" class="theme">协议接入</text><text x="620" y="257" text-anchor="middle" class="small">API  推送  定时获取</text>
+    <rect x="530" y="295" width="180" height="68" rx="12" fill="#362D72" stroke="#8668E8"/>
+    <text x="620" y="324" text-anchor="middle" class="theme">标准化与映射</text><text x="620" y="347" text-anchor="middle" class="small">编码  单位  状态  时间</text>
+    <rect x="530" y="385" width="180" height="68" rx="12" fill="#362D72" stroke="#8668E8"/>
+    <text x="620" y="414" text-anchor="middle" class="theme">质量校验</text><text x="620" y="437" text-anchor="middle" class="small">完整性  一致性  去重</text>
+    <rect x="530" y="475" width="180" height="68" rx="12" fill="#362D72" stroke="#8668E8"/>
+    <text x="620" y="504" text-anchor="middle" class="theme">数据服务</text><text x="620" y="527" text-anchor="middle" class="small">主题服务  快照  版本</text>
+    <rect x="530" y="565" width="180" height="68" rx="12" fill="#362D72" stroke="#8668E8"/>
+    <text x="620" y="594" text-anchor="middle" class="theme">状态追踪</text><text x="620" y="617" text-anchor="middle" class="small">回调  幂等  对账</text>
+    <rect x="530" y="655" width="180" height="68" rx="12" fill="#362D72" stroke="#8668E8"/>
+    <text x="620" y="684" text-anchor="middle" class="theme">异常补偿</text><text x="620" y="707" text-anchor="middle" class="small">重试  告警  人工补发</text>
+    <rect x="530" y="745" width="180" height="68" rx="12" fill="#362D72" stroke="#8668E8"/>
+    <text x="620" y="774" text-anchor="middle" class="theme">审计监控</text><text x="620" y="797" text-anchor="middle" class="small">日志  链路  权限</text>
+  </g>
+  <path d="M740 510 H775" fill="none" stroke="#39A5FF" stroke-width="3" marker-end="url(#arrowBlue)"/>
+
+  <!-- SCOS -->
+  <rect x="790" y="125" width="540" height="770" rx="24" fill="#0B3155" stroke="#2778C8" stroke-width="3"/>
+  <text x="1060" y="170" text-anchor="middle" class="section">SCOS供应链数据中枢</text>
+  <text x="1060" y="197" text-anchor="middle" class="small">统一数据主题 统一口径 统一版本 全程可追溯</text>
+  <text x="825" y="235" class="theme">标准数据主题</text>
+  <g>
+    <rect x="820" y="255" width="225" height="58" rx="10" fill="#144A78"/><text x="932" y="290" text-anchor="middle" class="theme">主数据</text>
+    <rect x="1075" y="255" width="225" height="58" rx="10" fill="#144A78"/><text x="1187" y="290" text-anchor="middle" class="theme">需求与合同</text>
+    <rect x="820" y="327" width="225" height="58" rx="10" fill="#144A78"/><text x="932" y="362" text-anchor="middle" class="theme">库存与在途</text>
+    <rect x="1075" y="327" width="225" height="58" rx="10" fill="#144A78"/><text x="1187" y="362" text-anchor="middle" class="theme">采购与要货</text>
+    <rect x="820" y="399" width="225" height="58" rx="10" fill="#144A78"/><text x="932" y="434" text-anchor="middle" class="theme">生产与批次</text>
+    <rect x="1075" y="399" width="225" height="58" rx="10" fill="#144A78"/><text x="1187" y="434" text-anchor="middle" class="theme">质量与设备</text>
+    <rect x="820" y="471" width="225" height="58" rx="10" fill="#144A78"/><text x="932" y="506" text-anchor="middle" class="theme">成本与费用</text>
+    <rect x="1075" y="471" width="225" height="58" rx="10" fill="#144A78"/><text x="1187" y="506" text-anchor="middle" class="theme">指标 预警与审计</text>
+  </g>
+  <line x1="820" y1="558" x2="1300" y2="558" stroke="#2C6EA4"/>
+  <text x="825" y="595" class="theme">六大业务模块</text>
+  <g>
+    <rect x="820" y="616" width="145" height="70" rx="12" fill="#0868B4"/><text x="892" y="658" text-anchor="middle" class="module">库存优化</text>
+    <rect x="985" y="616" width="145" height="70" rx="12" fill="#0868B4"/><text x="1057" y="658" text-anchor="middle" class="module">采购优化</text>
+    <rect x="1150" y="616" width="145" height="70" rx="12" fill="#0868B4"/><text x="1222" y="658" text-anchor="middle" class="module">要货计划</text>
+    <rect x="820" y="710" width="145" height="70" rx="12" fill="#0868B4"/><text x="892" y="752" text-anchor="middle" class="module">精益排程</text>
+    <rect x="985" y="710" width="145" height="70" rx="12" fill="#0868B4"/><text x="1057" y="752" text-anchor="middle" class="module">成本分摊</text>
+    <rect x="1150" y="710" width="145" height="70" rx="12" fill="#0868B4"/><text x="1222" y="752" text-anchor="middle" class="module">供应链驾驶舱</text>
+  </g>
+  <rect x="850" y="818" width="420" height="45" rx="10" fill="#082845" stroke="#2D70A6"/>
+  <text x="1060" y="847" text-anchor="middle" class="small">输入快照  参数版本  方案发布  执行反馈  异常闭环</text>
+
+  <!-- Outbound targets -->
+  <rect x="1370" y="100" width="400" height="850" rx="18" fill="#13243D" stroke="#2A3E5B" stroke-width="2"/>
+  <text x="1395" y="137" class="section">数据下发与业务闭环</text>
+
+  <g transform="translate(1390,175)" filter="url(#shadow)">
+    <rect width="360" height="105" rx="13" fill="#332B2D" stroke="#935C31"/>
+    <text x="18" y="32" class="system">CON</text>
+    <text x="95" y="32" class="iface-out">SCOS-CON-003</text>
+    <text x="18" y="66" class="small">原辅包采购需求</text><text x="18" y="89" class="small">支撑采购合同与采购执行</text>
+  </g>
+  <g transform="translate(1390,300)" filter="url(#shadow)">
+    <rect width="360" height="105" rx="13" fill="#332B2D" stroke="#935C31"/>
+    <text x="18" y="32" class="system">SAP</text>
+    <text x="95" y="32" class="iface-out">SCOS-SAP-003～004</text>
+    <text x="18" y="66" class="small">生产订单、要货计划</text><text x="18" y="89" class="small">形成正式业务单据并进入执行</text>
+  </g>
+  <g transform="translate(1390,425)" filter="url(#shadow)">
+    <rect width="360" height="105" rx="13" fill="#332B2D" stroke="#935C31"/>
+    <text x="18" y="32" class="system">WMS</text>
+    <text x="105" y="32" class="iface-out">SCOS-WMS-005</text>
+    <text x="18" y="66" class="small">玉米淀粉日投料需求</text><text x="18" y="89" class="small">驱动仓储备料与投料执行</text>
+  </g>
+  <g transform="translate(1390,550)" filter="url(#shadow)">
+    <rect width="360" height="105" rx="13" fill="#332B2D" stroke="#935C31"/>
+    <text x="18" y="32" class="system">TMS</text>
+    <text x="95" y="32" class="iface-out">SCOS-TMS-004</text>
+    <text x="18" y="66" class="small">要货计划</text><text x="18" y="89" class="small">驱动到厂计划与物流调度</text>
+  </g>
+  <g transform="translate(1390,675)" filter="url(#shadow)">
+    <rect width="360" height="105" rx="13" fill="#332B2D" stroke="#935C31"/>
+    <text x="18" y="32" class="system">MES</text>
+    <text x="100" y="32" class="iface-out">SCOS-MES-004</text>
+    <text x="18" y="66" class="small">生产订单</text><text x="18" y="89" class="small">驱动生产组织并回传进度与批次</text>
+  </g>
+
+  <g fill="none" stroke="#FF932E" stroke-width="2" stroke-dasharray="8 6" marker-end="url(#arrowOrange)">
+    <path d="M1330 227 H1390"/><path d="M1330 352 H1390"/><path d="M1330 477 H1390"/><path d="M1330 602 H1390"/><path d="M1330 727 H1390"/>
+  </g>
+
+</svg>
