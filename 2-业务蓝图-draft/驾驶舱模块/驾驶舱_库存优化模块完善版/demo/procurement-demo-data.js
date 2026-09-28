@@ -1,0 +1,30 @@
+window.PROCUREMENT_DEMO_DATA = {
+  "meta": {"factory":"中粮太仓工厂","material":"玉米淀粉","materialCode":"RM-CORN-STARCH","planMonth":"2026-10","demandVersion":"MATDEM-202610-V3","demandQty":10300,"snapshotTime":"2026-09-29 08:30:00","currency":"CNY","demoDataNote":"本数据集仅供离线演示，不连接真实业务系统"},
+  "suppliers": [
+    {"id":"SUP-001","sapCode":"V100238","name":"德州金玉米有限公司","shortName":"德州金玉米","region":"山东德州","status":"准入","level":"A","monthlyCapacity":4200,"periodCapacity":3600,"moq":300,"quote":3188,"freight":68,"paymentTerm":60,"bagOffset":22,"qualityRate":99.4,"onTimeRate":97.8,"priceScore":91,"riskScore":12,"qualificationExpiry":"2027-06-30","quoteValidTo":"2026-10-31","updatedAt":"2026-09-28 17:20","notes":"主力供应商，质量与交付稳定"},
+    {"id":"SUP-002","sapCode":"V100416","name":"吉林长龙生化有限公司","shortName":"吉林长龙","region":"吉林吉林","status":"准入","level":"A","monthlyCapacity":3800,"periodCapacity":3200,"moq":300,"quote":3160,"freight":118,"paymentTerm":90,"bagOffset":26,"qualityRate":99.0,"onTimeRate":95.6,"priceScore":94,"riskScore":18,"qualificationExpiry":"2027-03-31","quoteValidTo":"2026-10-31","updatedAt":"2026-09-28 16:45","notes":"账期优势明显，运输距离较长"},
+    {"id":"SUP-003","sapCode":"V100587","name":"齐齐哈尔龙凤生物有限公司","shortName":"齐齐哈尔龙凤","region":"黑龙江齐齐哈尔","status":"准入","level":"B","monthlyCapacity":3100,"periodCapacity":2600,"moq":300,"quote":3145,"freight":146,"paymentTerm":45,"bagOffset":12,"qualityRate":98.4,"onTimeRate":91.8,"priceScore":96,"riskScore":32,"qualificationExpiry":"2027-01-31","quoteValidTo":"2026-10-20","updatedAt":"2026-09-28 16:12","notes":"近期准时交付率下降，需重点复核"},
+    {"id":"SUP-004","sapCode":"V100663","name":"山东福洋生物淀粉有限公司","shortName":"山东福洋","region":"山东德州","status":"准入","level":"A","monthlyCapacity":3300,"periodCapacity":2800,"moq":300,"quote":3210,"freight":52,"paymentTerm":120,"bagOffset":30,"qualityRate":99.7,"onTimeRate":99.2,"priceScore":88,"riskScore":7,"qualificationExpiry":"2027-09-30","quoteValidTo":"2026-10-31","updatedAt":"2026-09-28 15:55","notes":"综合履约表现最佳"},
+    {"id":"SUP-005","sapCode":"V100742","name":"黑龙江昊运淀粉有限公司","shortName":"黑龙江昊运","region":"黑龙江绥化","status":"限制","level":"B","monthlyCapacity":2900,"periodCapacity":2400,"moq":300,"quote":3128,"freight":175,"paymentTerm":30,"bagOffset":0,"qualityRate":97.6,"onTimeRate":93.1,"priceScore":97,"riskScore":48,"qualificationExpiry":"2026-10-18","quoteValidTo":"2026-10-15","updatedAt":"2026-09-28 15:10","notes":"食品安全体系证书临期，限制新增份额"},
+    {"id":"SUP-006","sapCode":"V100815","name":"河北玉星生物工程有限公司","shortName":"河北玉星","region":"河北邢台","status":"暂停","level":"C","monthlyCapacity":3000,"periodCapacity":2500,"moq":300,"quote":3205,"freight":61,"paymentTerm":30,"bagOffset":18,"qualityRate":96.8,"onTimeRate":88.5,"priceScore":87,"riskScore":67,"qualificationExpiry":"2026-09-20","quoteValidTo":"2026-09-30","updatedAt":"2026-09-27 18:40","notes":"准入资质已过期，暂停参与新方案"}
+  ],
+  "marketHistory": {"months":["2024-10","2024-11","2024-12","2025-01","2025-02","2025-03","2025-04","2025-05","2025-06","2025-07","2025-08","2025-09","2025-10","2025-11","2025-12","2026-01","2026-02","2026-03","2026-04","2026-05","2026-06","2026-07","2026-08","2026-09"],"futures":[2860,2835,2798,2760,2735,2708,2680,2662,2645,2672,2690,2660,2638,2610,2588,2560,2535,2552,2570,2598,2612,2582,2605,2628],"purchase":[2960,2940,2918,2892,2865,2838,2810,2795,2780,2792,2815,2795,2770,2748,2720,2698,2675,2680,2692,2710,2725,2702,2720,2748]},
+  "plans": [
+    {"id":"PUR-202610-D1","version":"草稿","month":"2026-10","material":"玉米淀粉","demandVersion":"MATDEM-202610-V3","demandQty":10300,"candidateCount":5,"currentStep":1,"status":"草稿","owner":"张晨","updatedAt":"2026-09-29 08:42"},
+    {"id":"PUR-202609-V2","version":"V2","month":"2026-09","material":"玉米淀粉","demandVersion":"MATDEM-202609-V4","demandQty":9800,"candidateCount":4,"currentStep":5,"status":"已发布","owner":"张晨","updatedAt":"2026-08-29 16:18"},
+    {"id":"PUR-202608-V1","version":"V1","month":"2026-08","material":"玉米淀粉","demandVersion":"MATDEM-202608-V2","demandQty":9600,"candidateCount":4,"currentStep":5,"status":"已发布","owner":"张晨","updatedAt":"2026-07-28 15:50"}
+  ],
+  "rolling": {"basePlan":"PUR-202610-V1","baseDemand":10300,"latestDemandVersion":"MATDEM-202610-V4","latestDemand":10900,"lockedExecutedQty":4800,"originalOpenQty":5500,"trigger":"新版需求增加600吨","checkTime":"2026-10-09 08:05","currentOpenAllocation":{"SUP-001":1200,"SUP-002":1600,"SUP-003":1800,"SUP-004":900}},
+  "contracts": [
+    {"id":"CTR-202610-01","supplierId":"SUP-001","qty":3600,"releasedQty":3200,"validTo":"2026-12-31","status":"执行中"},
+    {"id":"CTR-202610-02","supplierId":"SUP-004","qty":3000,"releasedQty":2700,"validTo":"2026-12-31","status":"执行中"},
+    {"id":"CTR-202610-03","supplierId":"SUP-002","qty":3000,"releasedQty":2600,"validTo":"2026-12-31","status":"执行中"},
+    {"id":"CTR-202610-04","supplierId":"SUP-003","qty":2000,"releasedQty":1800,"validTo":"2026-11-30","status":"执行中"}
+  ],
+  "orders": [
+    {"id":"PO-20261001-001","contractId":"CTR-202610-01","supplierId":"SUP-001","qty":3200,"shippedQty":3200,"receivedQty":2400,"qualifiedQty":2400,"eta":"2026-10-03","status":"部分到货","risk":"正常","updatedAt":"2026-10-03 14:20"},
+    {"id":"PO-20261001-002","contractId":"CTR-202610-02","supplierId":"SUP-004","qty":2700,"shippedQty":2700,"receivedQty":0,"qualifiedQty":0,"eta":"2026-10-04","status":"运输中","risk":"正常","updatedAt":"2026-10-03 13:45"},
+    {"id":"PO-20261001-003","contractId":"CTR-202610-03","supplierId":"SUP-002","qty":2600,"shippedQty":1200,"receivedQty":0,"qualifiedQty":0,"eta":"2026-10-06","status":"发货中","risk":"预警","updatedAt":"2026-10-03 12:10"},
+    {"id":"PO-20261001-004","contractId":"CTR-202610-04","supplierId":"SUP-003","qty":1800,"shippedQty":0,"receivedQty":0,"qualifiedQty":0,"eta":"2026-10-08","status":"待下发","risk":"正常","updatedAt":"2026-10-03 10:35"}
+  ]
+};

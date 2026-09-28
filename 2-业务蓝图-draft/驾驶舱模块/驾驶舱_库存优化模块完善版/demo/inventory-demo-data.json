@@ -1,0 +1,183 @@
+{
+  "meta": {
+    "factory": "中粮太仓工厂", "orgCode": "ZLTC", "strategyMonth": "202610", "snapshotId": "STKSNP20260928002", "snapshotTime": "2026-09-28 10:30:00",
+    "strategyId": "STGY202610001", "strategyVersion": "V1.2", "parameterVersion": "INV-STRATEGY-V12", "weeklyCalcDate": "2026-09-25",
+    "horizonStart": "2026-09-26", "horizonDays": 28, "lockDays": 7, "dataQuality": "正常", "demoDataNote": "本数据集仅供离线演示，不连接真实业务系统"
+  },
+  "strategyEffect": {
+    "period": "2026-09-26至2026-10-23",
+    "baseline": {"inventoryDays": 6.3, "stockoutSkuCount": 3, "orderFillRate": 0.973},
+    "dynamic": {"inventoryDays": 2.5, "stockoutSkuCount": 0, "orderFillRate": 0.991},
+    "caliber": "同一需求与生产周期下，对比原参数方案和当前动态策略28天滚动仿真；日级投影按有日期排程入库并对有效在途去重"
+  },
+  "parameterProfiles": [
+    {"scopeType": "category", "scopeCode": "CAT-FRUCTOSE", "scopeName": "果糖类", "strategyType": "dynamic", "serviceLevel": 0.97, "productionLeadDays": 3, "reviewDays": 1, "historyWindowDays": 90, "recommended": true, "version": "V3", "status": "已发布"},
+    {"scopeType": "abc", "scopeCode": "A", "scopeName": "A类品", "strategyType": "dynamic", "serviceLevel": 0.98, "productionLeadDays": 3, "reviewDays": 1, "historyWindowDays": 90, "recommended": true, "version": "V2", "status": "已发布"},
+    {"scopeType": "abc", "scopeCode": "B", "scopeName": "B类品", "strategyType": "dynamic", "serviceLevel": 0.96, "productionLeadDays": 4, "reviewDays": 1, "historyWindowDays": 90, "recommended": true, "version": "V2", "status": "已发布"},
+    {"scopeType": "abc", "scopeCode": "C", "scopeName": "C类品", "strategyType": "static", "staticMode": "days", "safetyDays": 5, "productionLeadDays": 4, "reviewDays": 1, "recommended": true, "version": "V2", "status": "已发布"},
+    {"scopeType": "product", "scopeCode": "FG-F55", "scopeName": "果糖F55", "strategyType": "dynamic", "serviceLevel": 0.98, "productionLeadDays": 3, "reviewDays": 1, "historyWindowDays": 90, "recommended": true, "version": "V5", "status": "已发布"},
+    {"scopeType": "product", "scopeCode": "FG-F60", "scopeName": "果糖F60", "strategyType": "dynamic", "serviceLevel": 0.965, "productionLeadDays": 4, "reviewDays": 1, "historyWindowDays": 90, "recommended": false, "version": "V4", "status": "已发布"},
+    {"scopeType": "product", "scopeCode": "FG-MALT-LOW", "scopeName": "麦芽糖低DE", "strategyType": "dynamic", "serviceLevel": 0.96, "productionLeadDays": 4, "reviewDays": 1, "historyWindowDays": 90, "recommended": true, "version": "V3", "status": "已发布"},
+    {"scopeType": "product", "scopeCode": "FG-MALT-HIGH", "scopeName": "麦芽糖高DE", "strategyType": "static", "staticMode": "quantity", "safetyQty": 360, "productionLeadDays": 4, "reviewDays": 1, "recommended": false, "version": "V2", "status": "已发布"}
+  ],
+  "products": [
+    {
+      "code": "FG-F42", "name": "果糖F42", "categoryCode": "CAT-FRUCTOSE", "categoryName": "果糖类", "abcClass": "A", "unit": "吨", "monthlyPlan": 6500,
+      "stock": {"qualified": 1060, "allocated": 120, "frozen": 30, "pendingInspection": 80, "qualityAbnormal": 10}, "effectiveTransit": 300,
+      "historyStats": {"sampleCount": 90, "mean": 216.7, "stdDev": 31.6, "quality": "可靠"}, "historyDemandPreview": [188,221,206,245,193,230,274,201,215,238,182,226,249,205],
+      "batchSize": 200, "batchEnabled": true, "storageType": "shared", "storageGroup": "TG-FRUCTOSE-SHARED",
+      "explicitOrders": {"2026-10-04": 360, "2026-10-10": 420, "2026-10-17": 380, "2026-10-24": 450, "2026-10-29": 390},
+      "scheduledReceipts": [{"date": "2026-09-30", "qty": 400, "locked": true, "status": "已承接"}, {"date": "2026-10-08", "qty": 600, "locked": false, "status": "待确认"}]
+    },
+    {
+      "code": "FG-F55", "name": "果糖F55", "categoryCode": "CAT-FRUCTOSE", "categoryName": "果糖类", "abcClass": "A", "unit": "吨", "monthlyPlan": 12000,
+      "stock": {"qualified": 2080, "allocated": 220, "frozen": 40, "pendingInspection": 160, "qualityAbnormal": 20}, "effectiveTransit": 720,
+      "historyStats": {"sampleCount": 90, "mean": 400.0, "stdDev": 46.8, "quality": "可靠"}, "historyDemandPreview": [338,405,392,462,374,421,488,365,410,446,329,432,471,389],
+      "batchSize": 300, "batchEnabled": true, "storageType": "dedicated", "storageGroup": "DED-F55",
+      "explicitOrders": {"2026-10-02": 760, "2026-10-06": 680, "2026-10-11": 820, "2026-10-16": 740, "2026-10-21": 900, "2026-10-27": 860, "2026-10-30": 720},
+      "scheduledReceipts": [{"date": "2026-09-29", "qty": 900, "locked": true, "status": "已承接"}, {"date": "2026-10-03", "qty": 750, "locked": true, "status": "已承接"}, {"date": "2026-10-09", "qty": 1200, "locked": false, "status": "待确认"}]
+    },
+    {
+      "code": "FG-F60", "name": "果糖F60", "categoryCode": "CAT-FRUCTOSE", "categoryName": "果糖类", "abcClass": "B", "unit": "吨", "monthlyPlan": 4200,
+      "stock": {"qualified": 700, "allocated": 70, "frozen": 20, "pendingInspection": 60, "qualityAbnormal": 10}, "effectiveTransit": 220,
+      "historyStats": {"sampleCount": 90, "mean": 140.0, "stdDev": 24.5, "quality": "可靠"}, "historyDemandPreview": [112,146,137,169,121,153,181,126,142,158,109,149,173,134],
+      "batchSize": 160, "batchEnabled": true, "storageType": "shared", "storageGroup": "TG-FRUCTOSE-SHARED",
+      "explicitOrders": {"2026-10-03": 260, "2026-10-09": 300, "2026-10-15": 280, "2026-10-22": 320, "2026-10-28": 290},
+      "scheduledReceipts": [{"date": "2026-10-01", "qty": 320, "locked": true, "status": "已承接"}, {"date": "2026-10-12", "qty": 480, "locked": false, "status": "部分承接"}]
+    },
+    {
+      "code": "FG-F90", "name": "果糖F90", "categoryCode": "CAT-FRUCTOSE", "categoryName": "果糖类", "abcClass": "C", "unit": "吨", "monthlyPlan": 3100,
+      "stock": {"qualified": 450, "allocated": 50, "frozen": 15, "pendingInspection": 40, "qualityAbnormal": 5}, "effectiveTransit": 180,
+      "historyStats": {"sampleCount": 90, "mean": 103.3, "stdDev": 19.2, "quality": "可靠"}, "historyDemandPreview": [82,111,96,126,87,117,139,91,105,122,79,113,131,98],
+      "batchSize": 120, "batchEnabled": true, "storageType": "shared", "storageGroup": "TG-FRUCTOSE-SHARED",
+      "explicitOrders": {"2026-10-05": 220, "2026-10-12": 250, "2026-10-19": 230, "2026-10-26": 270},
+      "scheduledReceipts": [{"date": "2026-09-30", "qty": 240, "locked": true, "status": "已承接"}, {"date": "2026-10-14", "qty": 360, "locked": false, "status": "待确认"}]
+    },
+    {
+      "code": "FG-MALT-LOW", "name": "麦芽糖低DE", "categoryCode": "CAT-MALTOSE", "categoryName": "麦芽糖类", "abcClass": "B", "unit": "吨", "monthlyPlan": 3800,
+      "stock": {"qualified": 610, "allocated": 60, "frozen": 20, "pendingInspection": 55, "qualityAbnormal": 10}, "effectiveTransit": 200,
+      "historyStats": {"sampleCount": 90, "mean": 126.7, "stdDev": 28.4, "quality": "可靠"}, "historyDemandPreview": [96,137,119,161,103,145,178,108,132,154,91,141,169,116],
+      "batchSize": 160, "batchEnabled": true, "storageType": "dedicated", "storageGroup": "DED-MALT-LOW",
+      "explicitOrders": {"2026-10-04": 240, "2026-10-11": 280, "2026-10-18": 260, "2026-10-25": 300},
+      "scheduledReceipts": [{"date": "2026-10-02", "qty": 320, "locked": true, "status": "已承接"}, {"date": "2026-10-13", "qty": 480, "locked": false, "status": "待确认"}]
+    },
+    {
+      "code": "FG-MALT-MID", "name": "麦芽糖中DE", "categoryCode": "CAT-MALTOSE", "categoryName": "麦芽糖类", "abcClass": "C", "unit": "吨", "monthlyPlan": 3000,
+      "stock": {"qualified": 490, "allocated": 45, "frozen": 10, "pendingInspection": 40, "qualityAbnormal": 5}, "effectiveTransit": 160,
+      "historyStats": {"sampleCount": 90, "mean": 100.0, "stdDev": 22.1, "quality": "可靠"}, "historyDemandPreview": [75,108,94,128,81,116,142,86,103,121,72,111,135,91],
+      "batchSize": 120, "batchEnabled": true, "storageType": "dedicated", "storageGroup": "DED-MALT-MID",
+      "explicitOrders": {"2026-10-06": 210, "2026-10-13": 230, "2026-10-20": 220, "2026-10-27": 250},
+      "scheduledReceipts": [{"date": "2026-10-01", "qty": 240, "locked": true, "status": "已承接"}, {"date": "2026-10-15", "qty": 360, "locked": false, "status": "待确认"}]
+    },
+    {
+      "code": "FG-MALT-HIGH", "name": "麦芽糖高DE", "categoryCode": "CAT-MALTOSE", "categoryName": "麦芽糖类", "abcClass": "C", "unit": "吨", "monthlyPlan": 2200,
+      "stock": {"qualified": 365, "allocated": 30, "frozen": 10, "pendingInspection": 35, "qualityAbnormal": 5}, "effectiveTransit": 100,
+      "historyStats": {"sampleCount": 90, "mean": 73.3, "stdDev": 17.6, "quality": "需关注：高DE订单间歇性较强"}, "historyDemandPreview": [51,82,68,97,57,86,109,61,75,93,48,84,101,65],
+      "batchSize": 100, "batchEnabled": true, "storageType": "dedicated", "storageGroup": "DED-MALT-HIGH",
+      "explicitOrders": {"2026-10-07": 170, "2026-10-14": 190, "2026-10-21": 180, "2026-10-28": 200},
+      "scheduledReceipts": [{"date": "2026-10-03", "qty": 200, "locked": true, "status": "已承接"}, {"date": "2026-10-17", "qty": 300, "locked": false, "status": "不承接"}]
+    }
+  ],
+  "storageLocations": [
+    {"code": "TK-SH-01", "group": "TG-FRUCTOSE-SHARED", "type": "shared", "workCapacity": 1800, "available": true, "currentProduct": "FG-F42", "currentQty": 1080, "compatibleProducts": ["FG-F42", "FG-F60", "FG-F90"]},
+    {"code": "TK-SH-02", "group": "TG-FRUCTOSE-SHARED", "type": "shared", "workCapacity": 1600, "available": true, "currentProduct": "FG-F60", "currentQty": 720, "compatibleProducts": ["FG-F42", "FG-F60", "FG-F90"]},
+    {"code": "TK-SH-03", "group": "TG-FRUCTOSE-SHARED", "type": "shared", "workCapacity": 1400, "available": false, "unavailableReason": "计划清洗", "currentProduct": null, "currentQty": 0, "compatibleProducts": ["FG-F42", "FG-F60", "FG-F90"]},
+    {"code": "LOC-F55", "group": "DED-F55", "type": "dedicated", "workCapacity": 6200, "available": true, "currentProduct": "FG-F55", "currentQty": 3050, "compatibleProducts": ["FG-F55"]},
+    {"code": "LOC-MALT-LOW", "group": "DED-MALT-LOW", "type": "dedicated", "workCapacity": 2600, "available": true, "currentProduct": "FG-MALT-LOW", "currentQty": 710, "compatibleProducts": ["FG-MALT-LOW"]},
+    {"code": "LOC-MALT-MID", "group": "DED-MALT-MID", "type": "dedicated", "workCapacity": 2200, "available": true, "currentProduct": "FG-MALT-MID", "currentQty": 510, "compatibleProducts": ["FG-MALT-MID"]},
+    {"code": "LOC-MALT-HIGH", "group": "DED-MALT-HIGH", "type": "dedicated", "workCapacity": 1600, "available": true, "currentProduct": "FG-MALT-HIGH", "currentQty": 365, "compatibleProducts": ["FG-MALT-HIGH"]},
+    {"code": "TK-QC-07", "group": "QC", "type": "qc", "workCapacity": 480, "available": true, "currentProduct": "FG-F60", "currentQty": 160, "compatibleProducts": ["FG-F42", "FG-F55", "FG-F60", "FG-F90", "FG-MALT-LOW", "FG-MALT-MID", "FG-MALT-HIGH"], "qcTank": true, "splitAllowed": false}
+  ],
+  "plans": [
+    {"id": "MP-202610-V1", "type": "month", "name": "2026年10月库存计划", "periodStart": "2026-10-01", "periodEnd": "2026-10-31", "version": "V1", "strategyVersion": "STGY-V1.2", "status": "已发布", "finalPublished": true, "source": "自动创建", "upstreamId": null, "createdAt": "2026-09-25 08:05", "updatedAt": "2026-09-25 16:50", "owner": "王建华", "approval": "已通过"},
+    {"id": "WP-20260926-V1", "type": "week", "name": "W1生产补充计划", "periodStart": "2026-09-26", "periodEnd": "2026-10-02", "version": "V1", "strategyVersion": "STGY-V1.2", "status": "已发布", "finalPublished": true, "source": "自动创建", "upstreamId": "MP-202610-V1", "createdAt": "2026-09-25 17:10", "updatedAt": "2026-09-25 18:20", "owner": "张晓峰", "approval": "已通过"},
+    {"id": "WP-20261003-D1", "type": "week", "name": "W2生产补充计划", "periodStart": "2026-10-03", "periodEnd": "2026-10-09", "version": "D1", "strategyVersion": "STGY-V1.2", "status": "草稿", "finalPublished": false, "source": "自动创建", "upstreamId": "MP-202610-V1", "createdAt": "2026-09-25 17:11", "updatedAt": "2026-09-28 09:18", "owner": "张晓峰", "approval": "未提交"},
+    {"id": "DP-20260928-V1", "type": "day", "name": "2026-09-28日库存计划", "periodStart": "2026-09-28", "periodEnd": "2026-09-28", "version": "V1", "strategyVersion": "STGY-V1.2", "status": "已发布", "finalPublished": true, "source": "自动创建", "upstreamId": "WP-20260926-V1", "createdAt": "2026-09-28 07:05", "updatedAt": "2026-09-28 07:40", "owner": "SCOS系统", "approval": "已通过"},
+    {"id": "DP-20260929-D1", "type": "day", "name": "2026-09-29日库存计划", "periodStart": "2026-09-29", "periodEnd": "2026-09-29", "version": "D1", "strategyVersion": "STGY-V1.2", "status": "待审批", "finalPublished": false, "source": "人工创建", "upstreamId": "WP-20260926-V1", "createdAt": "2026-09-28 10:12", "updatedAt": "2026-09-28 10:25", "owner": "李明哲", "approval": "待审批"}
+  ],
+  "autoCreateRules": [
+    {"type": "month", "label": "月计划", "trigger": "每月25日上游数据准备完成", "periodDefinition": "下一个自然月", "upstreamRequired": false, "resultStatus": "草稿"},
+    {"type": "week", "label": "周计划", "trigger": "每周五上游数据准备完成", "periodDefinition": "下周六至下周五", "upstreamRequired": true, "upstreamType": "month", "resultStatus": "草稿"},
+    {"type": "day", "label": "日计划", "trigger": "每日上游数据准备完成", "periodDefinition": "自然日", "upstreamRequired": true, "upstreamType": "week", "resultStatus": "草稿"}
+  ],
+  "dataQualityRecords": [
+    {"source": "CRM", "object": "日出货计划", "version": "SHIP-202610-V5", "timestamp": "2026-09-28 10:18", "status": "正常"},
+    {"source": "历史数据服务", "object": "90天真实日需求与截断修正", "version": "HIST-DEM-V3", "timestamp": "2026-09-28 09:50", "status": "正常"},
+    {"source": "SAP/WMS", "object": "成品库存与独立/共享库位", "version": "WMS-SNP-1029", "timestamp": "2026-09-28 10:29", "status": "正常"},
+    {"source": "MES", "object": "生产、入罐与封罐计划", "version": "SCH-W40-V7", "timestamp": "2026-09-28 10:26", "status": "正常"},
+    {"source": "QMS/LIMS", "object": "质检状态", "version": "QMS-REL-0928", "timestamp": "2026-09-28 10:25", "status": "正常"},
+    {"source": "WMS", "object": "TK-SH-03罐状态", "version": "TANK-0928-08", "timestamp": "2026-09-28 07:40", "status": "过期", "handling": "按清洗停用处理并提示人工复核"},
+    {"source": "MES", "object": "FG-MALT-HIGH计划入库", "version": "MES-IN-0928-04", "timestamp": "2026-09-28 10:11", "status": "冲突", "handling": "以已确认排程版本为准，冲突记录不入模"}
+  ],
+  "interfaces": [
+    {"id": "SCOS-CRM-001", "direction": "CRM→SCOS", "content": "每日出货计划", "frequency": "每日计划发布后", "status": "正常"},
+    {"id": "SCOS-HIS-001", "direction": "历史服务→SCOS", "content": "真实日需求、异常日与截断修正", "frequency": "每日/每月复核", "status": "正常"},
+    {"id": "SCOS-WMS-002", "direction": "WMS→SCOS", "content": "成品库存和库位容量", "frequency": "库存变动后", "status": "正常"},
+    {"id": "SCOS-MES-001", "direction": "MES→SCOS", "content": "生产、入罐、封罐和首个可销售日", "frequency": "报工完成后", "status": "正常"},
+    {"id": "SCOS-QMS-001", "direction": "QMS/LIMS→SCOS", "content": "质检结果与放行", "frequency": "检验完成后", "status": "正常"},
+    {"id": "SCOS→排程", "direction": "SCOS→生产排程", "content": "周总量、日明细、期望可销售日期", "frequency": "计划发布/调整后", "status": "演示"},
+    {"id": "SCOS→驾驶舱", "direction": "库存优化→驾驶舱", "content": "成品库存预警与健康度", "frequency": "事件/报告发布后", "status": "演示"}
+  ],
+  "alerts": [
+    {"id": "ALT-20260928-01", "level": "提示", "type": "锁定补货", "productCode": "FG-MALT-HIGH", "date": "2026-10-03", "title": "麦芽糖高DE锁定补货已承接", "detail": "200吨补货量已纳入滚动投影，未来28天无预计缺货", "action": "plan", "status": "已确认"},
+    {"id": "ALT-20260928-02", "level": "警告", "type": "低于安全库存", "productCode": "FG-MALT-MID", "date": "2026-09-30", "title": "麦芽糖中DE将低于安全库存", "detail": "预计库存低于静态安全库存约96吨", "action": "plan", "status": "待处置"},
+    {"id": "ALT-20260928-03", "level": "警告", "type": "共享库容", "productCode": "FG-F60", "date": "2026-10-04", "title": "果糖共享库容存在时窗冲突", "detail": "F42与F60计划入库重叠，需调整未锁定补充时窗", "action": "abnormal", "status": "处理中"},
+    {"id": "ALT-20260928-04", "level": "提示", "type": "计划执行", "productCode": "FG-F60", "date": "2026-10-12", "title": "果糖F60补充计划仅部分承接", "detail": "480吨建议量中仍有160吨待生产确认", "action": "plan", "status": "待协同"},
+    {"id": "ALT-20260928-05", "level": "提示", "type": "库龄", "productCode": "FG-F55", "date": "2026-10-15", "title": "果糖F55慢动库存需关注", "detail": "80吨预计进入慢动区间，建议优先安排销售", "action": "health", "status": "待分析"}
+  ],
+  "health": [
+    {"productCode": "FG-F42", "averageStock": 362, "inventoryDays": 1.7, "stockoutCount": 0, "orderFillRate": 0.991, "overcapacityCount": 1, "slowQty": 24, "obsoleteQty": 0, "expiringQty": 0, "level": "黄", "effectiveness": "需关注", "cause": "动态策略已降低库存，共享库容仍存在时窗冲突", "suggestion": "保持服务水平，优化共享罐补充时窗"},
+    {"productCode": "FG-F55", "averageStock": 653, "inventoryDays": 1.7, "stockoutCount": 0, "orderFillRate": 0.995, "overcapacityCount": 0, "slowQty": 32, "obsoleteQty": 0, "expiringQty": 0, "level": "绿", "effectiveness": "有效", "cause": "高需求下动态补充执行稳定", "suggestion": "保持98%服务水平并跟踪需求波动"},
+    {"productCode": "FG-F60", "averageStock": 272, "inventoryDays": 2.0, "stockoutCount": 0, "orderFillRate": 0.989, "overcapacityCount": 1, "slowQty": 18, "obsoleteQty": 0, "expiringQty": 0, "level": "黄", "effectiveness": "需关注", "cause": "动态策略无缺货，共享库容仍需协同", "suggestion": "保持产品级周期配置并调整共享库容时窗"},
+    {"productCode": "FG-F90", "averageStock": 202, "inventoryDays": 2.0, "stockoutCount": 0, "orderFillRate": 0.988, "overcapacityCount": 0, "slowQty": 12, "obsoleteQty": 0, "expiringQty": 0, "level": "绿", "effectiveness": "有效", "cause": "分类动态参数与补充批量匹配", "suggestion": "保持分类参数"},
+    {"productCode": "FG-MALT-LOW", "averageStock": 255, "inventoryDays": 2.1, "stockoutCount": 0, "orderFillRate": 0.989, "overcapacityCount": 0, "slowQty": 16, "obsoleteQty": 0, "expiringQty": 0, "level": "绿", "effectiveness": "有效", "cause": "独立库位与动态参数匹配", "suggestion": "保持当前配置"},
+    {"productCode": "FG-MALT-MID", "averageStock": 591, "inventoryDays": 6.1, "stockoutCount": 0, "orderFillRate": 0.985, "overcapacityCount": 0, "slowQty": 32, "obsoleteQty": 8, "expiringQty": 0, "level": "黄", "effectiveness": "需关注", "cause": "静态安全天数保持无缺货，但库存覆盖偏高", "suggestion": "评估改为产品级动态策略"},
+    {"productCode": "FG-MALT-HIGH", "averageStock": 439, "inventoryDays": 6.2, "stockoutCount": 0, "orderFillRate": 0.982, "overcapacityCount": 0, "slowQty": 18, "obsoleteQty": 0, "expiringQty": 6, "level": "黄", "effectiveness": "需关注", "cause": "固定安全库存保障无缺货，但间歇需求下库存偏高", "suggestion": "评估动态策略并继续监控历史波动可靠性"}
+  ],
+  "healthReports": [
+    {
+      "id": "STKHLT-202608-V1", "month": "2026-08", "title": "2026年8月库存健康度报告", "status": "已发布", "publishedAt": "2026-09-03 16:20", "publisher": "李明哲", "reviewer": "王建华",
+      "summary": {"healthySkuCount": 3, "avgInventoryDays": 5.8, "orderFillRate": 0.972, "stockoutCount": 3},
+      "conclusion": "动态策略试运行后订单满足率改善，但果糖共享库容与麦芽糖静态安全库存仍需继续优化。",
+      "rows": [
+        {"productCode": "FG-F42", "level": "黄", "inventoryDays": 5.6, "orderFillRate": 0.978, "stockoutCount": 0, "cause": "共享库容时窗冲突", "suggestion": "错开F42与F60补充时窗", "path": "进入下月策略"},
+        {"productCode": "FG-F55", "level": "绿", "inventoryDays": 5.4, "orderFillRate": 0.991, "stockoutCount": 0, "cause": "策略与需求匹配", "suggestion": "保持98%目标服务水平", "path": "继续观察"},
+        {"productCode": "FG-F60", "level": "黄", "inventoryDays": 5.2, "orderFillRate": 0.964, "stockoutCount": 1, "cause": "生产周期波动", "suggestion": "复核产品级生产周期", "path": "进入下月策略"},
+        {"productCode": "FG-F90", "level": "绿", "inventoryDays": 5.1, "orderFillRate": 0.975, "stockoutCount": 0, "cause": "分类参数适用", "suggestion": "维持分类动态策略", "path": "继续观察"},
+        {"productCode": "FG-MALT-LOW", "level": "绿", "inventoryDays": 5.7, "orderFillRate": 0.979, "stockoutCount": 0, "cause": "独立库位执行稳定", "suggestion": "维持当前配置", "path": "继续观察"},
+        {"productCode": "FG-MALT-MID", "level": "黄", "inventoryDays": 6.4, "orderFillRate": 0.956, "stockoutCount": 1, "cause": "静态安全天数偏高", "suggestion": "评估切换动态策略", "path": "进入下月策略"},
+        {"productCode": "FG-MALT-HIGH", "level": "红", "inventoryDays": 7.2, "orderFillRate": 0.938, "stockoutCount": 1, "cause": "间歇订单与生产不承接", "suggestion": "发起策略异常调整", "path": "进入异常调整"}
+      ]
+    },
+    {
+      "id": "STKHLT-202607-V1", "month": "2026-07", "title": "2026年7月库存健康度报告", "status": "已发布", "publishedAt": "2026-08-04 14:10", "publisher": "李明哲", "reviewer": "王建华",
+      "summary": {"healthySkuCount": 2, "avgInventoryDays": 6.4, "orderFillRate": 0.958, "stockoutCount": 5},
+      "conclusion": "原库存参数整体偏保守且局部补充不及时，已决定在8月启动服务水平驱动的动态策略试运行。",
+      "rows": [
+        {"productCode": "FG-F42", "level": "黄", "inventoryDays": 6.2, "orderFillRate": 0.966, "stockoutCount": 0, "cause": "共享库容利用不均", "suggestion": "建立共享罐时窗协同", "path": "进入下月策略"},
+        {"productCode": "FG-F55", "level": "绿", "inventoryDays": 6.0, "orderFillRate": 0.982, "stockoutCount": 0, "cause": "独立库位保障稳定", "suggestion": "逐步降低初始库存", "path": "进入下月策略"},
+        {"productCode": "FG-F60", "level": "红", "inventoryDays": 5.8, "orderFillRate": 0.941, "stockoutCount": 2, "cause": "补充周期设置偏短", "suggestion": "调整完整生产周期参数", "path": "进入异常调整"},
+        {"productCode": "FG-F90", "level": "绿", "inventoryDays": 5.7, "orderFillRate": 0.971, "stockoutCount": 0, "cause": "分类参数适用", "suggestion": "维持现有策略", "path": "继续观察"},
+        {"productCode": "FG-MALT-LOW", "level": "黄", "inventoryDays": 6.3, "orderFillRate": 0.958, "stockoutCount": 1, "cause": "需求波动扩大", "suggestion": "提高目标服务水平", "path": "进入下月策略"},
+        {"productCode": "FG-MALT-MID", "level": "黄", "inventoryDays": 7.1, "orderFillRate": 0.946, "stockoutCount": 1, "cause": "静态参数与需求不匹配", "suggestion": "改用动态安全库存", "path": "进入下月策略"},
+        {"productCode": "FG-MALT-HIGH", "level": "红", "inventoryDays": 7.7, "orderFillRate": 0.941, "stockoutCount": 1, "cause": "间歇需求未纳入评审", "suggestion": "建立产品级异常策略", "path": "进入异常调整"}
+      ]
+    }
+  ],
+  "entities": [
+    {"name": "库存策略版本", "code": "STGY", "coreFields": ["策略月份", "目标服务水平", "历史样本标准差", "生产补充周期", "检查天数", "逐日SS/s/S", "来源快照", "审批人", "版本号", "业务状态"]},
+    {"name": "库存计算输入快照", "code": "STKSNP", "coreFields": ["快照时点", "计划需求量", "可用库存量", "已锁定补充量", "有效在途量", "历史样本版本", "库位有效容量", "数据质量状态"]},
+    {"name": "周度生产补货计划", "code": "WRPL", "coreFields": ["上游月计划", "周起止日", "建议补充量", "锁定补充量", "预计可销售日", "生产承接状态", "容量风险", "版本号"]},
+    {"name": "日度库存投影", "code": "STKPRJ", "coreFields": ["上游周计划", "投影日期", "计划需求", "计划可用入库", "期末可用库存", "SS/s/S", "容量余量", "风险类型"]},
+    {"name": "库存风险预警", "code": "STKALT", "coreFields": ["风险日期", "风险类型", "风险缺口量", "风险期间", "预警级别", "锁定保持标识", "建议处置"]},
+    {"name": "库存策略调整记录", "code": "STGADJ", "coreFields": ["原月计划", "新月计划", "关联周计划", "关联日计划", "变化事件", "调整顺序", "审批意见", "版本号"]},
+    {"name": "库存健康度评价", "code": "STKHLT", "coreFields": ["评价期间", "平均库存", "周转天数", "缺货次数", "订单满足率", "超容量次数", "健康等级", "改进建议"]}
+  ],
+  "audit": [
+    {"time": "2026-09-25 08:05", "user": "SCOS系统", "action": "自动创建次月计划草稿", "object": "MP-202610-D1", "result": "成功"},
+    {"time": "2026-09-25 16:50", "user": "王建华", "action": "发布月度库存策略", "object": "MP-202610-V1 / STGY V1.1", "result": "成功"},
+    {"time": "2026-09-25 17:10", "user": "SCOS系统", "action": "自动创建下周计划草稿", "object": "WP-20260926-D1", "result": "成功"},
+    {"time": "2026-09-25 18:20", "user": "李明哲", "action": "发布并锁定第1周计划", "object": "WP-20260926-V1", "result": "成功"},
+    {"time": "2026-09-28 07:05", "user": "SCOS系统", "action": "自动创建自然日计划", "object": "DP-20260928-D1", "result": "成功"}
+  ]
+}
