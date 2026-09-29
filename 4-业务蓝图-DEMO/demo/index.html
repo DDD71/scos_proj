@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>COFCO SCOS - 供应链优化系统</title>
 <!-- 静态演示使用系统字体，避免字体文件缺失；ECharts 使用随页面交付的本地副本。 -->
-<script src="assets/echarts.min.js"></script>
-<script src="data.js"></script>
+<script src="assets/vendor/echarts.min.js"></script>
+<script src="assets/scripts/core/data.js"></script>
 <style>
 :root{
 --bg-primary:#0a0e1a;--bg-secondary:#0f1525;--bg-card:#111827;--bg-card-hover:#1a2236;
@@ -458,11 +458,16 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
 html,body{overflow:hidden}.sidebar{display:none}.main-wrap{width:100vw}.header{padding:0 12px}.header-breadcrumb,.header-env,.header-user{display:none}.header-right{gap:8px}.content{padding:12px;overflow-x:hidden}.content::before{left:0}.page-header{align-items:flex-start;gap:10px;flex-direction:column}.page-header>.flex{width:100%;overflow-x:auto;padding-bottom:3px}.grid-2,.grid-3,.grid-4,.grid-5,.grid-6,.grid-23,.grid-32,.grid-13{grid-template-columns:1fr!important}.tab-bar{overflow-x:auto}.tab-btn{padding:7px 10px}.dash-map-wrap{height:320px}.sandbox-workspace{grid-template-columns:1fr}.sandbox-baseline{grid-template-columns:1fr 1fr}.sandbox-param-grid{grid-template-columns:1fr}.sandbox-result-grid{grid-template-columns:1fr}.sandbox-stock-panel{display:block}.sandbox-stock-panel-head{text-align:center}.sandbox-stock-tank-wrap{height:190px}.sandbox-stock-flows,.sandbox-stock-policy{margin-top:9px}.sandbox-module-results{grid-template-columns:1fr}.sandbox-case-main{grid-template-columns:1fr}.sandbox-case-kpis{grid-template-columns:1fr 1fr}.sandbox-causal-strip{grid-template-columns:1fr}.sandbox-causal-arrow{height:20px;transform:rotate(90deg)}.sandbox-day-toolbar{grid-template-columns:1fr}.sandbox-day-current{text-align:left}.sandbox-day-grid{grid-template-columns:1fr 1fr}.sandbox-detail-grid{grid-template-columns:1fr}.logic-flow{align-items:stretch}.logic-arrow{transform:rotate(90deg);justify-content:center}.dashboard-control-strip .spacer{display:none}.prediction-item{grid-template-columns:70px 1fr}.prediction-item .tag{grid-column:2}.audit-row{grid-template-columns:80px 70px 1fr}.audit-row>:last-child{display:none}
 }
 </style>
-<link rel="stylesheet" href="sandbox-simple.css">
-<link rel="stylesheet" href="inventory-v1.css">
-<link rel="stylesheet" href="inventory-v3.css">
-<link rel="stylesheet" href="procurement-v2.css">
-<link rel="stylesheet" href="requisition-v1.css">
+<link rel="stylesheet" href="assets/styles/sandbox/sandbox-simple.css">
+<link rel="stylesheet" href="assets/styles/inventory/inventory-v1.css">
+<link rel="stylesheet" href="assets/styles/inventory/inventory-v3.css">
+<link rel="stylesheet" href="assets/styles/procurement/procurement-v2.css">
+<link rel="stylesheet" href="assets/styles/requisition/requisition-v1.css">
+<link rel="stylesheet" href="assets/styles/costing/costing-v2.css">
+<link rel="stylesheet" href="assets/styles/costing/costing-lineage-v3.css">
+<link rel="stylesheet" href="assets/styles/costing/costing-batch-v3.css">
+<link rel="stylesheet" href="assets/styles/costing/costing-multidim-v4.css">
+<link rel="stylesheet" href="assets/styles/costing/costing-management-v2.css">
 </head>
 <body>
 <div class="app">
@@ -509,7 +514,15 @@ html,body{overflow:hidden}.sidebar{display:none}.main-wrap{width:100vw}.header{p
 </div>
 <div class="nav-item" data-page="production" onclick="navigate('production')"><span class="nav-icon">▣</span>精益生产排程</div>
 <div class="sidebar-section">分析与追溯</div>
-<div class="nav-item" data-page="costing" onclick="navigate('costing')"><span class="nav-icon">◎</span>成本核算分析</div>
+<div class="nav-inventory-group nav-costing-group" id="costingNavGroup">
+<div class="nav-item inventory-parent" data-page="costing" role="button" tabindex="0" onclick="navigateCosting('lineage')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();navigateCosting('lineage')}"><span class="nav-icon">◎</span><span class="nav-label">成本核算分析</span><button class="nav-expand" type="button" aria-label="展开或收起成本核算分析子模块" onclick="event.stopPropagation();toggleCostingMenu()">⌄</button></div>
+<div class="nav-submenu" id="costingSubmenu"><div class="nav-submenu-inner">
+<button class="nav-subitem" data-cost-section="lineage" onclick="navigateCosting('lineage')">批次和批次谱系管理</button>
+<button class="nav-subitem" data-cost-section="batch" onclick="navigateCosting('batch')">批次成本管理</button>
+<button class="nav-subitem" data-cost-section="multidim" onclick="navigateCosting('multidim')">多维度成本和盈利分析</button>
+<button class="nav-subitem" data-cost-section="management" onclick="navigateCosting('management')">管理决策分析</button>
+</div></div>
+</div>
 <div class="nav-item" data-page="trace" onclick="navigate('trace')"><span class="nav-icon">◉</span>全程追溯协同<span class="nav-badge">3</span></div>
 </aside>
 <div class="main-wrap">
@@ -2650,13 +2663,23 @@ else if(idx===4){initChart('procExecFeedback',mOpt({legend:{data:['计划到货�
 /* ===== RESIZE ===== */
 window.addEventListener('resize',()=>{Object.values(charts).forEach(c=>{if(c&&!c.isDisposed())c.resize();});});
 /* ===== INIT ===== */
-fetch('china.json').then(r=>{if(!r.ok)throw new Error();return r.json();}).then(d=>{mapGeoJSON=d;echarts.registerMap('china',d);initDashboard();}).catch(()=>{fetch('https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json').then(r=>r.json()).then(d=>{mapGeoJSON=d;echarts.registerMap('china',d);initDashboard();}).catch(()=>{initDashboard();});});
+fetch('assets/maps/china.json').then(r=>{if(!r.ok)throw new Error();return r.json();}).then(d=>{mapGeoJSON=d;echarts.registerMap('china',d);initDashboard();}).catch(()=>{fetch('https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json').then(r=>r.json()).then(d=>{mapGeoJSON=d;echarts.registerMap('china',d);initDashboard();}).catch(()=>{initDashboard();});});
 </script>
-<script src="procurement-demo-data.js"></script>
-<script src="procurement-v2.js"></script>
-<script src="requisition-demo-data.js"></script>
-<script src="requisition-v1.js"></script>
-<script src="inventory-demo-data.js"></script>
-<script src="inventory-v3.js"></script>
+<script src="assets/scripts/procurement/procurement-demo-data.js"></script>
+<script src="assets/scripts/procurement/procurement-v2.js"></script>
+<script src="assets/scripts/requisition/requisition-demo-data.js"></script>
+<script src="assets/scripts/requisition/requisition-v1.js"></script>
+<script src="assets/scripts/inventory/inventory-demo-data.js"></script>
+<script src="assets/scripts/inventory/inventory-v3.js"></script>
+<script src="assets/scripts/costing/costing-demo-data.js"></script>
+<script src="assets/scripts/costing/costing-v2.js"></script>
+<script src="assets/scripts/costing/costing-lineage-data.js"></script>
+<script src="assets/scripts/costing/costing-lineage-v3.js"></script>
+<script src="assets/scripts/costing/costing-batch-data-v3.js"></script>
+<script src="assets/scripts/costing/costing-rule-engine-v1.js"></script>
+<script src="assets/scripts/costing/costing-batch-v3.js"></script>
+<script src="assets/scripts/costing/costing-multidim-data-v4.js"></script>
+<script src="assets/scripts/costing/costing-multidim-v4.js"></script>
+<script src="assets/scripts/costing/costing-management-v2.js"></script>
 </body>
 </html>
