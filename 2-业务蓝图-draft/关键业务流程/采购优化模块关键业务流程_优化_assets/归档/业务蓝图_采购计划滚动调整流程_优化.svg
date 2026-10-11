@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="2800" height="860" viewBox="0 0 2800 860">
+  <defs>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="9" refY="4.5" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L9,4.5 L0,9 Z" fill="#111111"/></marker>
+    <style>
+      .title{font-family:"SimSun","Songti SC","STSong",serif;font-size:23px;font-weight:600;fill:#1a1a1a}
+      .lane-text{font-family:"SimSun","Songti SC","STSong",serif;font-size:18px;fill:#222;text-anchor:middle}
+      .node-text{font-family:"SimSun","Songti SC","STSong",serif;font-size:16px;fill:#222;text-anchor:middle}
+      .small-text{font-family:"SimSun","Songti SC","STSong",serif;font-size:15px;fill:#222}
+      .note-text{font-family:"SimSun","Songti SC","STSong",serif;font-size:14px;fill:#444}
+      .tag-text{font-family:Arial,"Microsoft YaHei",sans-serif;font-size:14px;fill:#fff;text-anchor:middle}
+      .frame{fill:#fff;stroke:#777;stroke-width:1.15}.divider{fill:none;stroke:#888;stroke-width:1}
+      .node{fill:#fff;stroke:#8b8b8b;stroke-width:1.35}
+      .flow{fill:none;stroke:#111;stroke-width:2;stroke-linejoin:round;stroke-linecap:square;marker-end:url(#arrow)}
+      .flow-stem{fill:none;stroke:#111;stroke-width:2;stroke-linejoin:round;stroke-linecap:square}
+      .tag-scos{fill:#0088c7}.tag-external{fill:#00a651}
+    </style>
+  </defs>
+
+  <rect width="2800" height="860" fill="#ffffff"/>
+  <rect x="40" y="26" width="2720" height="809" class="frame"/>
+  <line x1="40" y1="102" x2="2760" y2="102" class="divider"/>
+  <text x="51" y="70" class="title">流程编号及名称：（P-ZLTC-SCOS-CGYH-003 采购计划滚动调整流程）</text>
+
+  <!-- 泳道 -->
+  <line x1="85" y1="102" x2="85" y2="835" class="divider"/>
+  <line x1="40" y1="330" x2="2760" y2="330" class="divider"/>
+  <line x1="40" y1="600" x2="2760" y2="600" class="divider"/>
+  <text x="62.5" y="158" class="lane-text"><tspan x="62.5">S</tspan><tspan x="62.5" dy="27">C</tspan><tspan x="62.5" dy="27">O</tspan><tspan x="62.5" dy="27">S</tspan></text>
+  <text x="62.5" y="390" class="lane-text"><tspan x="62.5">采</tspan><tspan x="62.5" dy="25">购</tspan><tspan x="62.5" dy="25">计</tspan><tspan x="62.5" dy="25">划</tspan><tspan x="62.5" dy="25">员</tspan></text>
+  <text x="62.5" y="625" class="lane-text"><tspan x="62.5">E</tspan><tspan x="62.5" dy="23">采</tspan><tspan x="62.5" dy="23">／</tspan><tspan x="62.5" dy="23">S</tspan><tspan x="62.5" dy="23">A</tspan><tspan x="62.5" dy="23">P</tspan><tspan x="62.5" dy="23">、</tspan><tspan x="62.5" dy="23">T</tspan><tspan x="62.5" dy="23">M</tspan><tspan x="62.5" dy="23">S</tspan></text>
+
+  <!-- SCOS：影响判断与调整建议 -->
+  <circle cx="145" cy="200" r="32" class="node"/><text x="145" y="206" class="node-text">开始</text>
+
+  <polygon points="360,130 460,200 360,270 260,200" class="node"/>
+  <rect x="255" y="129" width="58" height="22" class="tag-scos"/><text x="284" y="145" class="tag-text">SCOS</text>
+  <text x="360" y="192" class="node-text"><tspan x="360">10</tspan><tspan x="360" dy="21">未执行安排</tspan><tspan x="360" dy="21">受影响？</tspan></text>
+
+  <rect x="540" y="145" width="350" height="110" class="node"/>
+  <rect x="530" y="134" width="58" height="22" class="tag-scos"/><text x="559" y="150" class="tag-text">SCOS</text>
+  <text x="715" y="169" class="node-text"><tspan x="715">20</tspan><tspan x="715" dy="21">生成滚动调整建议</tspan><tspan x="715" dy="21">仅重算受影响的</tspan><tspan x="715" dy="21">未执行部分</tspan></text>
+
+  <!-- 采购计划员：评审与确认 -->
+  <rect x="1040" y="385" width="350" height="110" class="node"/>
+  <rect x="1030" y="374" width="58" height="22" class="tag-scos"/><text x="1059" y="390" class="tag-text">SCOS</text>
+  <text x="1215" y="409" class="node-text"><tspan x="1215">30</tspan><tspan x="1215" dy="21">评审调整建议</tspan><tspan x="1215" dy="21">确认调整范围</tspan><tspan x="1215" dy="21">已执行部分保持不变</tspan></text>
+
+  <polygon points="1530,370 1630,440 1530,510 1430,440" class="node"/>
+  <rect x="1425" y="369" width="58" height="22" class="tag-scos"/><text x="1454" y="385" class="tag-text">SCOS</text>
+  <text x="1530" y="432" class="node-text"><tspan x="1530">40</tspan><tspan x="1530" dy="21">是否确认</tspan><tspan x="1530" dy="21">调整？</tspan></text>
+
+  <!-- SCOS：发布新版本 -->
+  <rect x="1750" y="145" width="300" height="100" class="node"/>
+  <rect x="1740" y="134" width="58" height="22" class="tag-scos"/><text x="1769" y="150" class="tag-text">SCOS</text>
+  <text x="1900" y="169" class="node-text"><tspan x="1900">50</tspan><tspan x="1900" dy="21">发布采购计划</tspan><tspan x="1900" dy="21">新版本</tspan></text>
+
+  <!-- 外部系统：接收新计划 -->
+  <rect x="2200" y="640" width="300" height="80" class="node"/>
+  <rect x="2190" y="629" width="82" height="22" class="tag-external"/><text x="2231" y="645" class="tag-text">E采/TMS</text>
+  <text x="2350" y="664" class="node-text"><tspan x="2350">60</tspan><tspan x="2350" dy="21">接收调整后的</tspan><tspan x="2350" dy="21">未执行计划</tspan></text>
+
+  <!-- 唯一结束节点 -->
+  <circle cx="2670" cy="680" r="32" class="node"/><text x="2670" y="686" class="node-text">结束</text>
+
+  <!-- 输出物：无连线，轻微覆盖父节点右下角 -->
+  <path d="M700,245 H940 V300 C880,286 820,311 760,300 C740,296 720,296 700,300 Z" class="node"/>
+  <text x="820" y="276" class="small-text" text-anchor="middle">采购计划调整方案</text>
+  <path d="M1900,235 H2110 V290 C2058,276 2005,301 1953,290 C1935,286 1918,286 1900,290 Z" class="node"/>
+  <text x="2005" y="266" class="small-text" text-anchor="middle">采购计划新版本</text>
+
+  <!-- 主流程 -->
+  <path d="M177,200 H260" class="flow"/>
+  <path d="M460,200 H540" class="flow"/><text x="486" y="188" class="small-text">Y</text>
+  <path d="M890,200 H970 V440 H1040" class="flow"/>
+  <path d="M1390,440 H1430" class="flow"/>
+  <path d="M1630,440 H1680 V195 H1750" class="flow"/><text x="1645" y="428" class="small-text">Y</text>
+  <path d="M2050,195 H2350 V640" class="flow"/>
+  <path d="M2500,680 H2638" class="flow"/>
+
+  <!-- 不调整分支：分别沿底部路由返回，仅进入结束的最后一段重合 -->
+  <path d="M360,270 V785 H2650 V735" class="flow-stem"/>
+  <text x="430" y="778" class="small-text">N：保留当前计划并结束</text>
+  <path d="M1530,510 V755 H2650 V735" class="flow-stem"/>
+  <text x="1600" y="748" class="small-text">N：保留当前计划</text>
+  <path d="M2650,735 H2670 V712" class="flow"/>
+
+  <text x="110" y="817" class="note-text">业务口径：先判断未执行计划是否受影响，只有受影响时才生成调整建议，避免把“每周检查”等同于“每周必调”。</text>
+</svg>

@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1780" height="1220" viewBox="0 0 1780 1220">
+  <defs><style>.title{font:bold 24px 'PingFang SC','Microsoft YaHei',sans-serif;fill:#222}.layer{font:bold 17px 'PingFang SC','Microsoft YaHei',sans-serif;fill:#222}.head{font:bold 15px 'PingFang SC','Microsoft YaHei',sans-serif;fill:#222}.txt{font:13px 'PingFang SC','Microsoft YaHei',sans-serif;fill:#222}.small{font:12px 'PingFang SC','Microsoft YaHei',sans-serif;fill:#444}.box{fill:#fff;stroke:#555;stroke-width:1.3}.scos{fill:#fff;stroke:#4f7d5b;stroke-width:1.5}.soft{fill:#f4f4f4;stroke:#666;stroke-width:1.3}.ext{fill:#fff;stroke:#c94747;stroke-width:1.3}</style></defs>
+  <rect width="1780" height="1220" fill="#fff"/><text x="30" y="42" class="title">SCOS功能架构</text>
+  <rect x="80" y="70" width="1620" height="100" rx="8" class="soft"/><text x="110" y="102" class="layer">用户入口层</text>
+  <rect x="300" y="92" width="210" height="52" rx="5" class="box"/><text x="405" y="124" text-anchor="middle" class="txt">PC端业务门户</text>
+  <rect x="535" y="92" width="210" height="52" rx="5" class="box"/><text x="640" y="124" text-anchor="middle" class="txt">移动端核心视图</text>
+  <rect x="770" y="92" width="210" height="52" rx="5" class="box"/><text x="875" y="124" text-anchor="middle" class="txt">驾驶舱大屏</text>
+  <rect x="1005" y="92" width="210" height="52" rx="5" class="box"/><text x="1110" y="124" text-anchor="middle" class="txt">管理层角色视图</text>
+  <rect x="1240" y="92" width="210" height="52" rx="5" class="box"/><text x="1345" y="124" text-anchor="middle" class="txt">业务人员工作台</text>
+
+  <rect x="80" y="195" width="1620" height="135" rx="8" class="scos"/><text x="110" y="228" class="layer">全局决策与协同层</text><text x="285" y="228" class="head">供应链驾驶舱</text>
+  <rect x="300" y="252" width="180" height="50" rx="5" class="box"/><text x="390" y="282" text-anchor="middle" class="txt">指标与规则配置</text>
+  <rect x="500" y="252" width="180" height="50" rx="5" class="box"/><text x="590" y="282" text-anchor="middle" class="txt">全局态势监测</text>
+  <rect x="700" y="252" width="180" height="50" rx="5" class="box"/><text x="790" y="282" text-anchor="middle" class="txt">KPI钻取分析</text>
+  <rect x="900" y="252" width="180" height="50" rx="5" class="box"/><text x="990" y="282" text-anchor="middle" class="txt">预警分级派发</text>
+  <rect x="1100" y="252" width="180" height="50" rx="5" class="box"/><text x="1190" y="282" text-anchor="middle" class="txt">处置闭环验证</text>
+  <rect x="1300" y="252" width="180" height="50" rx="5" class="box"/><text x="1390" y="282" text-anchor="middle" class="txt">沙盘模拟与协同</text>
+
+  <rect x="80" y="355" width="1620" height="455" rx="8" class="scos"/><text x="110" y="390" class="layer">核心业务优化层</text>
+  <rect x="110" y="420" width="300" height="350" rx="7" class="box"/><rect x="110" y="420" width="300" height="45" fill="#f1f1f1" stroke="#555"/><text x="260" y="448" text-anchor="middle" class="head">精益生产排程</text><text x="135" y="495" class="txt"><tspan x="135">计划需求接收</tspan><tspan x="135" dy="34">资源、工艺与约束管理</tspan><tspan x="135" dy="34">有限产能智能排程</tspan><tspan x="135" dy="34">方案评估与人工调整</tspan><tspan x="135" dy="34">排程确认与发布</tspan><tspan x="135" dy="34">执行进度跟踪</tspan><tspan x="135" dy="34">异常响应与滚动重排</tspan></text>
+  <rect x="425" y="420" width="300" height="350" rx="7" class="box"/><rect x="425" y="420" width="300" height="45" fill="#f1f1f1" stroke="#555"/><text x="575" y="448" text-anchor="middle" class="head">安全库存优化</text><text x="450" y="495" class="txt"><tspan x="450">服务水平与库存参数管理</tspan><tspan x="450" dy="34">月度成品库存策略</tspan><tspan x="450" dy="34">周度生产补充建议</tspan><tspan x="450" dy="34">日度库存水位监控</tspan><tspan x="450" dy="34">库存策略异常调整</tspan><tspan x="450" dy="34">库存健康度评价</tspan><tspan x="450" dy="34">策略有效性验证</tspan></text>
+  <rect x="740" y="420" width="300" height="350" rx="7" class="box"/><rect x="740" y="420" width="300" height="45" fill="#f1f1f1" stroke="#555"/><text x="890" y="448" text-anchor="middle" class="head">采购决策优化</text><text x="765" y="495" class="txt"><tspan x="765">采购需求汇总</tspan><tspan x="765" dy="34">供应商画像与评价</tspan><tspan x="765" dy="34">供应商资质风险预警</tspan><tspan x="765" dy="34">月度采购方案制定</tspan><tspan x="765" dy="34">采购计划滚动调整</tspan><tspan x="765" dy="34">采购执行状态跟踪</tspan><tspan x="765" dy="34">执行反馈与模型校准</tspan></text>
+  <rect x="1055" y="420" width="300" height="350" rx="7" class="box"/><rect x="1055" y="420" width="300" height="45" fill="#f1f1f1" stroke="#555"/><text x="1205" y="448" text-anchor="middle" class="head">统计与成本核算分析</text><text x="1080" y="495" class="txt"><tspan x="1080">多维成本数据归集</tspan><tspan x="1080" dy="34">成本动因与分摊规则</tspan><tspan x="1080" dy="34">产品及批次成本核算</tspan><tspan x="1080" dy="34">联副产品成本分摊</tspan><tspan x="1080" dy="34">成本差异与业务追溯</tspan><tspan x="1080" dy="34">多维盈利分析</tspan><tspan x="1080" dy="34">供应链总成本分析</tspan></text>
+  <rect x="1370" y="420" width="300" height="350" rx="7" class="box"/><rect x="1370" y="420" width="300" height="45" fill="#f1f1f1" stroke="#555"/><text x="1520" y="448" text-anchor="middle" class="head">全程追溯与协同分析</text><text x="1395" y="495" class="txt"><tspan x="1395">全局批次链建模</tspan><tspan x="1395" dy="34">正向与反向追溯</tspan><tspan x="1395" dy="34">库存与客户影响分析</tspan><tspan x="1395" dy="34">质量数据关联分析</tspan><tspan x="1395" dy="34">冻结与召回建议</tspan><tspan x="1395" dy="34">跨部门协同处置</tspan><tspan x="1395" dy="34">追溯报告与合规审计</tspan></text>
+
+  <rect x="80" y="835" width="1620" height="155" rx="8" class="soft"/><text x="110" y="870" class="layer">优化与应用公共能力层</text>
+  <rect x="250" y="895" width="215" height="62" rx="5" class="box"/><text x="357" y="920" text-anchor="middle" class="head">优化数据准备</text><text x="357" y="943" text-anchor="middle" class="small">对齐、校验、特征计算</text>
+  <rect x="485" y="895" width="215" height="62" rx="5" class="box"/><text x="592" y="920" text-anchor="middle" class="head">模型与参数管理</text><text x="592" y="943" text-anchor="middle" class="small">参数、版本、发布、监控</text>
+  <rect x="720" y="895" width="215" height="62" rx="5" class="box"/><text x="827" y="920" text-anchor="middle" class="head">沙盘数据快照</text><text x="827" y="943" text-anchor="middle" class="small">基线冻结、数据隔离</text>
+  <rect x="955" y="895" width="215" height="62" rx="5" class="box"/><text x="1062" y="920" text-anchor="middle" class="head">规则与工作流</text><text x="1062" y="943" text-anchor="middle" class="small">规则、审批、任务协同</text>
+  <rect x="1190" y="895" width="215" height="62" rx="5" class="box"/><text x="1297" y="920" text-anchor="middle" class="head">消息与报表</text><text x="1297" y="943" text-anchor="middle" class="small">通知、待办、报表导出</text>
+  <rect x="1425" y="895" width="215" height="62" rx="5" class="box"/><text x="1532" y="920" text-anchor="middle" class="head">系统管理与审计</text><text x="1532" y="943" text-anchor="middle" class="small">组织、权限、配置、日志</text>
+
+  <rect x="80" y="1015" width="1620" height="80" rx="8" class="soft"/><text x="110" y="1048" class="layer">统一集成与数据访问层</text><text x="940" y="1067" text-anchor="middle" class="txt">统一数据服务消费｜实时数据订阅｜API网关｜企业服务总线｜标准业务事件｜接口监控</text>
+  <rect x="80" y="1120" width="1620" height="70" rx="8" class="ext"/><text x="110" y="1150" class="layer">外围系统</text><text x="950" y="1167" text-anchor="middle" class="txt">SAP｜CRM｜MES｜WMS｜E采｜TMS｜QMS/LIMS｜EAM/EMS｜统一身份认证｜AI平台/求解器｜数字孪生/GIS</text>
+</svg>

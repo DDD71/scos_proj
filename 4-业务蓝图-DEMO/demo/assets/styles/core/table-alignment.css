@@ -1,0 +1,9 @@
+/* Same column edge for headings, values and numeric editors across all modules. */
+:is(.data-table,.proc2-table,.req-table,.cost-table,.lv3-table) > :is(thead,tbody,tfoot) > tr > .scos-numeric-column {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+:is(.data-table,.proc2-table,.req-table,.cost-table,.lv3-table) .scos-numeric-column input[type="number"] {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}

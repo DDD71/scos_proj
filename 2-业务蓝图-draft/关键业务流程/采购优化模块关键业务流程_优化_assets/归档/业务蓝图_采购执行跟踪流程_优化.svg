@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="2800" height="860" viewBox="0 0 2800 860">
+  <defs>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="9" refY="4.5" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L9,4.5 L0,9 Z" fill="#111111"/></marker>
+    <style>
+      .title{font-family:"SimSun","Songti SC","STSong",serif;font-size:23px;font-weight:600;fill:#1a1a1a}
+      .lane-text{font-family:"SimSun","Songti SC","STSong",serif;font-size:15px;fill:#222;text-anchor:middle}
+      .node-text{font-family:"SimSun","Songti SC","STSong",serif;font-size:16px;fill:#222;text-anchor:middle}
+      .small-text{font-family:"SimSun","Songti SC","STSong",serif;font-size:15px;fill:#222}
+      .note-text{font-family:"SimSun","Songti SC","STSong",serif;font-size:14px;fill:#444}
+      .tag-text{font-family:Arial,"Microsoft YaHei",sans-serif;font-size:14px;fill:#fff;text-anchor:middle}
+      .frame{fill:#fff;stroke:#777;stroke-width:1.15}.divider{fill:none;stroke:#888;stroke-width:1}
+      .node{fill:#fff;stroke:#8b8b8b;stroke-width:1.35}
+      .flow{fill:none;stroke:#111;stroke-width:2;stroke-linejoin:round;stroke-linecap:square;marker-end:url(#arrow)}
+      .flow-stem{fill:none;stroke:#111;stroke-width:2;stroke-linejoin:round;stroke-linecap:square}
+      .tag-scos{fill:#0088c7}.tag-external{fill:#00a651}
+    </style>
+  </defs>
+
+  <rect width="2800" height="860" fill="#ffffff"/>
+  <rect x="40" y="26" width="2720" height="809" class="frame"/>
+  <line x1="40" y1="102" x2="2760" y2="102" class="divider"/>
+  <text x="51" y="70" class="title">流程编号及名称：（P-ZLTC-SCOS-CGYH-004 采购执行跟踪流程）</text>
+
+  <!-- 泳道 -->
+  <line x1="85" y1="102" x2="85" y2="835" class="divider"/>
+  <line x1="40" y1="225" x2="2760" y2="225" class="divider"/>
+  <line x1="40" y1="350" x2="2760" y2="350" class="divider"/>
+  <line x1="40" y1="475" x2="2760" y2="475" class="divider"/>
+  <line x1="40" y1="600" x2="2760" y2="600" class="divider"/>
+  <text x="62.5" y="125" class="lane-text"><tspan x="62.5">采</tspan><tspan x="62.5" dy="21">购</tspan><tspan x="62.5" dy="21">计</tspan><tspan x="62.5" dy="21">划</tspan><tspan x="62.5" dy="21">员</tspan></text>
+  <text x="62.5" y="240" class="lane-text"><tspan x="62.5">E</tspan><tspan x="62.5" dy="16">采</tspan><tspan x="62.5" dy="16">／</tspan><tspan x="62.5" dy="16">S</tspan><tspan x="62.5" dy="16">A</tspan><tspan x="62.5" dy="16">P</tspan></text>
+  <text x="62.5" y="360" class="lane-text"><tspan x="62.5">供</tspan><tspan x="62.5" dy="16">应</tspan><tspan x="62.5" dy="16">商</tspan><tspan x="62.5" dy="16">／</tspan><tspan x="62.5" dy="16">T</tspan><tspan x="62.5" dy="16">M</tspan><tspan x="62.5" dy="16">S</tspan></text>
+  <text x="62.5" y="483" class="lane-text"><tspan x="62.5">Q</tspan><tspan x="62.5" dy="15">M</tspan><tspan x="62.5" dy="15">S</tspan><tspan x="62.5" dy="15">／</tspan><tspan x="62.5" dy="15">L</tspan><tspan x="62.5" dy="15">I</tspan><tspan x="62.5" dy="15">M</tspan><tspan x="62.5" dy="15">S</tspan></text>
+  <text x="62.5" y="645" class="lane-text"><tspan x="62.5">S</tspan><tspan x="62.5" dy="23">C</tspan><tspan x="62.5" dy="23">O</tspan><tspan x="62.5" dy="23">S</tspan></text>
+
+  <!-- 采购计划员 -->
+  <circle cx="145" cy="165" r="32" class="node"/><text x="145" y="171" class="node-text">开始</text>
+
+  <!-- E采/SAP -->
+  <rect x="300" y="250" width="300" height="80" class="node"/>
+  <rect x="290" y="239" width="82" height="22" class="tag-external"/><text x="331" y="255" class="tag-text">E采/SAP</text>
+  <text x="450" y="274" class="node-text"><tspan x="450">10</tspan><tspan x="450" dy="21">执行采购订单</tspan><tspan x="450" dy="21">或合同</tspan></text>
+
+  <!-- 供应商/TMS -->
+  <rect x="700" y="375" width="300" height="80" class="node"/>
+  <rect x="690" y="364" width="58" height="22" class="tag-external"/><text x="719" y="380" class="tag-text">TMS</text>
+  <text x="850" y="399" class="node-text"><tspan x="850">20</tspan><tspan x="850" dy="21">按计划发货</tspan><tspan x="850" dy="21">并反馈在途状态</tspan></text>
+
+  <!-- QMS/LIMS -->
+  <rect x="1100" y="500" width="300" height="80" class="node"/>
+  <rect x="1090" y="489" width="92" height="22" class="tag-external"/><text x="1136" y="505" class="tag-text">QMS/LIMS</text>
+  <text x="1250" y="524" class="node-text"><tspan x="1250">30</tspan><tspan x="1250" dy="21">到厂收货</tspan><tspan x="1250" dy="21">与质检</tspan></text>
+
+  <!-- SCOS -->
+  <rect x="1500" y="655" width="320" height="90" class="node"/>
+  <rect x="1490" y="644" width="58" height="22" class="tag-scos"/><text x="1519" y="660" class="tag-text">SCOS</text>
+  <text x="1660" y="679" class="node-text"><tspan x="1660">40</tspan><tspan x="1660" dy="21">更新执行状态</tspan><tspan x="1660" dy="21">识别执行偏差</tspan></text>
+
+  <polygon points="1990,630 2090,700 1990,770 1890,700" class="node"/>
+  <rect x="1885" y="629" width="58" height="22" class="tag-scos"/><text x="1914" y="645" class="tag-text">SCOS</text>
+  <text x="1990" y="692" class="node-text"><tspan x="1990">50</tspan><tspan x="1990" dy="21">是否需要</tspan><tspan x="1990" dy="21">调整？</tspan></text>
+
+  <!-- 异常处理回到采购计划员 -->
+  <rect x="2210" y="120" width="320" height="90" class="node"/>
+  <rect x="2200" y="109" width="58" height="22" class="tag-scos"/><text x="2229" y="125" class="tag-text">SCOS</text>
+  <text x="2370" y="144" class="node-text"><tspan x="2370">60</tspan><tspan x="2370" dy="21">发起滚动调整</tspan><tspan x="2370" dy="21">或异常处理</tspan></text>
+
+  <!-- 唯一结束节点 -->
+  <circle cx="2700" cy="700" r="32" class="node"/><text x="2700" y="706" class="node-text">结束</text>
+
+  <!-- 输出物：无连线，轻微覆盖父节点右下角 -->
+  <path d="M450,320 H660 V375 C608,361 555,386 503,375 C485,371 468,371 450,375 Z" class="node"/>
+  <text x="555" y="351" class="small-text" text-anchor="middle">采购订单/合同</text>
+  <path d="M1250,570 H1460 V625 C1408,611 1355,636 1303,625 C1285,621 1268,621 1250,625 Z" class="node"/>
+  <text x="1355" y="601" class="small-text" text-anchor="middle">到货及质检结果</text>
+
+  <!-- 主流程 -->
+  <path d="M177,165 H250 V290 H300" class="flow"/>
+  <path d="M600,290 H680 V415 H700" class="flow"/>
+  <path d="M1000,415 H1050 V540 H1100" class="flow"/>
+  <path d="M1400,540 H1480 V700 H1500" class="flow"/>
+  <path d="M1820,700 H1890" class="flow"/>
+
+  <!-- 需调整：发起滚动调整或异常处理后结束 -->
+  <path d="M1990,630 V165 H2210" class="flow"/><text x="2005" y="610" class="small-text">Y</text>
+  <path d="M2530,165 H2590 V700" class="flow-stem"/>
+
+  <!-- 无需调整：完成本次跟踪 -->
+  <path d="M2090,700 H2590" class="flow-stem"/><text x="2130" y="688" class="small-text">N：完成本次跟踪</text>
+  <path d="M2590,700 H2668" class="flow"/>
+
+  <text x="110" y="817" class="note-text">业务口径：订单、运输、到货与质检状态默认通过接口回传；流程图只保留执行阶段和异常闭环。</text>
+</svg>

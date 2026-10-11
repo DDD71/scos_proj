@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2800" height="860" viewBox="0 0 2800 860">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#111"/>
+    </marker>
+    <style>
+      .title{font-family:"SimSun","Songti SC","STSong",serif;font-size:23px;font-weight:600;fill:#1a1a1a}
+      .lane-text{font-family:"SimSun","Songti SC","STSong",serif;font-size:18px;fill:#222;text-anchor:middle}
+      .node-text{font-family:"SimSun","Songti SC","STSong",serif;font-size:16px;fill:#222;text-anchor:middle}
+      .small-text{font-family:"SimSun","Songti SC","STSong",serif;font-size:15px;fill:#222}
+      .note-text{font-family:"SimSun","Songti SC","STSong",serif;font-size:14px;fill:#444}
+      .node{fill:#fff;stroke:#999;stroke-width:1.5}
+      .divider{stroke:#aaa;stroke-width:1;fill:none}
+      .flow{fill:none;stroke:#111;stroke-width:2;stroke-linejoin:round;stroke-linecap:square;marker-end:url(#arrow)}
+      .flow-stem{fill:none;stroke:#111;stroke-width:2;stroke-linejoin:round;stroke-linecap:square}
+      .tag-data{fill:#00ad68}
+      .tag-scos{fill:#008fc8}
+      .tag-text{font-family:Arial,"Microsoft YaHei",sans-serif;font-size:14px;fill:#fff;text-anchor:middle}
+    </style>
+  </defs>
+
+  <rect width="2800" height="860" fill="#fff"/>
+  <rect x="40" y="26" width="2720" height="809" fill="#fff" stroke="#999" stroke-width="1.2"/>
+  <text x="51" y="70" class="title">流程编号及名称：（P-ZLTC-SCOS-CGYH-002 供应商评价与准入预警流程）</text>
+  <line x1="40" y1="100" x2="2760" y2="100" class="divider"/>
+  <line x1="85" y1="100" x2="85" y2="835" class="divider"/>
+  <line x1="40" y1="280" x2="2760" y2="280" class="divider"/>
+  <line x1="40" y1="490" x2="2760" y2="490" class="divider"/>
+  <line x1="40" y1="660" x2="2760" y2="660" class="divider"/>
+
+  <text x="62.5" y="132" class="lane-text"><tspan x="62.5">数</tspan><tspan x="62.5" dy="24">据</tspan><tspan x="62.5" dy="24">服</tspan><tspan x="62.5" dy="24">务</tspan><tspan x="62.5" dy="24">层</tspan></text>
+  <text x="62.5" y="340" class="lane-text"><tspan x="62.5">S</tspan><tspan x="62.5" dy="27">C</tspan><tspan x="62.5" dy="27">O</tspan><tspan x="62.5" dy="27">S</tspan></text>
+  <text x="62.5" y="520" class="lane-text"><tspan x="62.5">采</tspan><tspan x="62.5" dy="25">购</tspan><tspan x="62.5" dy="25">专</tspan><tspan x="62.5" dy="25">员</tspan></text>
+  <text x="62.5" y="683" class="lane-text"><tspan x="62.5">采</tspan><tspan x="62.5" dy="25">购</tspan><tspan x="62.5" dy="25">负</tspan><tspan x="62.5" dy="25">责</tspan><tspan x="62.5" dy="25">人</tspan></text>
+
+  <!-- 开始与数据输入 -->
+  <circle cx="145" cy="185" r="32" class="node"/>
+  <text x="145" y="191" class="node-text">开始</text>
+  <rect x="280" y="140" width="300" height="90" class="node"/>
+  <rect x="270" y="129" width="82" height="22" class="tag-data"/>
+  <text x="311" y="145" class="tag-text">数据服务</text>
+  <text x="430" y="164" class="node-text"><tspan x="430">10</tspan><tspan x="430" dy="21">提供供应商</tspan><tspan x="430" dy="21">评价与资质数据</tspan></text>
+
+  <!-- SCOS评价与预警 -->
+  <rect x="650" y="330" width="360" height="120" class="node"/>
+  <rect x="640" y="319" width="58" height="22" class="tag-scos"/>
+  <text x="669" y="335" class="tag-text">SCOS</text>
+  <text x="830" y="354" class="node-text"><tspan x="830">20</tspan><tspan x="830" dy="21">生成供应商画像</tspan><tspan x="830" dy="21">绩效评分与</tspan><tspan x="830" dy="21">资质预警</tspan></text>
+
+  <polygon points="1210,320 1310,390 1210,460 1110,390" class="node"/>
+  <rect x="1105" y="319" width="58" height="22" class="tag-scos"/>
+  <text x="1134" y="335" class="tag-text">SCOS</text>
+  <text x="1210" y="382" class="node-text"><tspan x="1210">30</tspan><tspan x="1210" dy="21">是否存在</tspan><tspan x="1210" dy="21">异常或预警？</tspan></text>
+
+  <!-- 采购专员复核 -->
+  <rect x="1430" y="525" width="320" height="100" class="node"/>
+  <rect x="1420" y="514" width="58" height="22" class="tag-scos"/>
+  <text x="1449" y="530" class="tag-text">SCOS</text>
+  <text x="1590" y="549" class="node-text"><tspan x="1590">40</tspan><tspan x="1590" dy="21">复核评价结果</tspan><tspan x="1590" dy="21">核实资质、绩效及风险信息</tspan></text>
+
+  <polygon points="1930,505 2030,575 1930,645 1830,575" class="node"/>
+  <rect x="1825" y="504" width="58" height="22" class="tag-scos"/>
+  <text x="1854" y="520" class="tag-text">SCOS</text>
+  <text x="1930" y="567" class="node-text"><tspan x="1930">50</tspan><tspan x="1930" dy="21">是否调整</tspan><tspan x="1930" dy="21">供应商状态？</tspan></text>
+
+  <!-- 采购负责人审批 -->
+  <rect x="2070" y="700" width="300" height="90" class="node"/>
+  <rect x="2060" y="689" width="58" height="22" class="tag-scos"/>
+  <text x="2089" y="705" class="tag-text">SCOS</text>
+  <text x="2220" y="724" class="node-text"><tspan x="2220">60</tspan><tspan x="2220" dy="21">审批状态调整</tspan><tspan x="2220" dy="21">及处置意见</tspan></text>
+
+  <!-- 发布与结束 -->
+  <rect x="2420" y="345" width="250" height="90" class="node"/>
+  <rect x="2410" y="334" width="58" height="22" class="tag-scos"/>
+  <text x="2439" y="350" class="tag-text">SCOS</text>
+  <text x="2545" y="369" class="node-text"><tspan x="2545">70</tspan><tspan x="2545" dy="21">发布评价结果</tspan><tspan x="2545" dy="21">供采购决策参考</tspan></text>
+  <circle cx="2730" cy="390" r="30" class="node"/>
+  <text x="2730" y="396" class="node-text">结束</text>
+
+  <!-- 评价输出：无连线，轻微覆盖父节点右下角 -->
+  <path d="M770,440 H945 V490 C902,477 858,501 814,490 C799,486 784,486 770,490 Z" class="node"/>
+  <text x="857.5" y="469" class="small-text" text-anchor="middle">供应商评价结果</text>
+  <path d="M920,440 H1085 V490 C1044,477 1003,501 961,490 C948,486 934,486 920,490 Z" class="node"/>
+  <text x="1002.5" y="469" class="small-text" text-anchor="middle">资质/风险预警</text>
+
+  <!-- 主流程 -->
+  <path d="M177,185 H280" class="flow"/>
+  <path d="M580,185 H615 V390 H650" class="flow"/>
+  <path d="M1010,390 H1110" class="flow"/>
+  <path d="M1210,460 V575 H1430" class="flow"/>
+  <text x="1225" y="484" class="small-text">Y：存在异常或预警</text>
+  <path d="M1750,575 H1830" class="flow"/>
+  <path d="M1930,645 V745 H2070" class="flow"/>
+  <text x="1945" y="676" class="small-text">Y：调整状态</text>
+  <path d="M2370,745 H2545 V470" class="flow-stem"/>
+  <path d="M2545,470 V435" class="flow"/>
+  <path d="M2670,390 H2700" class="flow"/>
+
+  <!-- 30的N分支：直接发布正常评价结果 -->
+  <path d="M1310,390 H2420" class="flow"/>
+  <text x="1500" y="378" class="small-text">N：直接发布正常评价结果</text>
+
+  <!-- 50的N分支：保留当前状态并记录意见后发布 -->
+  <path d="M2030,575 H2320 V470 H2545" class="flow-stem"/>
+  <text x="2050" y="563" class="small-text">N：保留当前状态并记录意见</text>
+
+  <text x="110" y="817" class="note-text">业务口径：评价结果用于采购人员决策参考；是否将评分作为优化模型硬约束，应按本期确认的模型边界执行。</text>
+</svg>

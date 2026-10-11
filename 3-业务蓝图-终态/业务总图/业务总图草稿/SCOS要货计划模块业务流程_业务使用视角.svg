@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="760" viewBox="0 0 1800 760" role="img" aria-labelledby="svg-title svg-desc">
+  <title id="svg-title">SCOS要货计划模块业务流程（业务使用视角）</title>
+  <desc id="svg-desc">从用户进入要货计划、选择计划范围、查看合同货物和供应商、设置参数、生成计划、查看理由、人工微调到确认保存的完整使用流程。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#000000"/>
+    </marker>
+    <style>
+      .title{font-family:SimSun,"Songti SC",STSong,serif;font-size:21px;font-weight:600;fill:#000000}
+      .module-text{font-family:SimSun,"Songti SC",STSong,serif;font-size:18px;fill:#000000;text-anchor:middle}
+      .node-text{font-family:SimSun,"Songti SC",STSong,serif;font-size:16px;fill:#000000;text-anchor:middle}
+      .small-text{font-family:SimSun,"Songti SC",STSong,serif;font-size:14px;fill:#404040;text-anchor:middle}
+      .tiny-text{font-family:SimSun,"Songti SC",STSong,serif;font-size:12px;fill:#404040;text-anchor:middle}
+      .node,.doc,.decision,.terminal{fill:#ffffff;stroke:#808080;stroke-width:1.2}
+      .frame{fill:none;stroke:#808080;stroke-width:1.2}
+      .flow{fill:none;stroke:#000000;stroke-width:1.7;stroke-linejoin:miter;marker-end:url(#arrow)}
+      .rule{fill:#f7fbfd;stroke:#008acb;stroke-width:1.2;stroke-dasharray:6 4}
+      .input{fill:#ffffff;stroke:#b3b3b3;stroke-width:1}
+      .table-line{stroke:#b3b3b3;stroke-width:1}
+      .badge-auto{fill:#008acb}
+      .badge-manual{fill:#7030a0}
+      .badge-text{font-family:Arial,"Microsoft YaHei",sans-serif;font-size:12px;fill:#ffffff;text-anchor:middle}
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="1800" height="760" fill="#ffffff"/>
+  <rect x="1" y="1" width="1798" height="54" class="node"/>
+  <text x="16" y="35" class="title">流程编号及名称：（P-ZLTC-SCOS-YHJH-001  要货计划模块业务流程——业务使用视角）</text>
+
+  <rect x="1" y="55" width="1798" height="704" class="frame"/>
+  <line x1="62" y1="55" x2="62" y2="759" class="frame"/>
+  <text x="31" y="278" class="module-text">
+    <tspan x="31" dy="0">要</tspan><tspan x="31" dy="27">货</tspan><tspan x="31" dy="27">计</tspan><tspan x="31" dy="27">划</tspan><tspan x="31" dy="27">管</tspan><tspan x="31" dy="27">理</tspan>
+  </text>
+
+  <!-- 主操作流程 -->
+  <ellipse cx="112" cy="190" rx="34" ry="26" class="terminal"/>
+  <text x="112" y="196" class="node-text">开始</text>
+
+  <path d="M146 190 H175" class="flow"/>
+  <rect x="175" y="151" width="155" height="78" class="node"/>
+  <text x="252.5" y="183" class="node-text">进入</text>
+  <text x="252.5" y="207" class="node-text">供应商要货计划</text>
+
+  <path d="M330 190 H375" class="flow"/>
+  <rect x="375" y="145" width="185" height="90" class="node"/>
+  <text x="467.5" y="174" class="node-text">选择计划范围</text>
+  <text x="467.5" y="199" class="small-text">原料／工厂／计划周期</text>
+  <text x="467.5" y="220" class="small-text">需要安排的合同货物</text>
+
+  <path d="M560 190 H610" class="flow"/>
+  <path d="M610 140 H850 V226 Q790 211 730 226 Q670 241 610 226 Z" class="doc"/>
+  <text x="730" y="167" class="node-text">查看合同货物与供应商</text>
+  <text x="730" y="192" class="small-text">显示可供供应商数量（共 N 家）</text>
+  <text x="730" y="214" class="small-text">合同号、剩余量、允许到货日</text>
+
+  <path d="M850 190 H900" class="flow"/>
+  <rect x="900" y="118" width="265" height="144" class="node"/>
+  <rect x="900" y="107" width="64" height="21" class="badge-manual"/>
+  <text x="932" y="122" class="badge-text">输入参数</text>
+  <text x="1032.5" y="146" class="node-text">设置计划参数</text>
+  <rect x="920" y="162" width="105" height="30" rx="3" class="input"/>
+  <rect x="1040" y="162" width="105" height="30" rx="3" class="input"/>
+  <rect x="920" y="205" width="105" height="30" rx="3" class="input"/>
+  <rect x="1040" y="205" width="105" height="30" rx="3" class="input"/>
+  <text x="972.5" y="182" class="tiny-text">安全缓冲</text>
+  <text x="1092.5" y="182" class="tiny-text">允许到货日</text>
+  <text x="972.5" y="225" class="tiny-text">单日到货上限</text>
+  <text x="1092.5" y="225" class="tiny-text">最小到货量</text>
+
+  <path d="M1165 190 H1210" class="flow"/>
+  <rect x="1210" y="151" width="150" height="78" class="node"/>
+  <rect x="1210" y="140" width="64" height="21" class="badge-auto"/>
+  <text x="1242" y="155" class="badge-text">一键生成</text>
+  <text x="1285" y="183" class="node-text">点击生成</text>
+  <text x="1285" y="207" class="node-text">要货计划</text>
+
+  <path d="M1360 190 H1410" class="flow"/>
+  <path d="M1410 106 H1740 V270 Q1658 254 1575 270 Q1492 286 1410 270 Z" class="doc"/>
+  <rect x="1410" y="95" width="64" height="21" class="badge-auto"/>
+  <text x="1442" y="110" class="badge-text">计划结果</text>
+  <text x="1575" y="132" class="node-text">供应商要货计划</text>
+  <line x1="1430" y1="147" x2="1720" y2="147" class="table-line"/>
+  <line x1="1430" y1="176" x2="1720" y2="176" class="table-line"/>
+  <line x1="1430" y1="207" x2="1720" y2="207" class="table-line"/>
+  <line x1="1500" y1="147" x2="1500" y2="238" class="table-line"/>
+  <line x1="1580" y1="147" x2="1580" y2="238" class="table-line"/>
+  <line x1="1655" y1="147" x2="1655" y2="238" class="table-line"/>
+  <text x="1465" y="167" class="tiny-text">供应商</text>
+  <text x="1540" y="167" class="tiny-text">合同货物</text>
+  <text x="1617.5" y="167" class="tiny-text">到货日</text>
+  <text x="1687.5" y="167" class="tiny-text">数量</text>
+  <text x="1465" y="197" class="tiny-text">A供应商</text>
+  <text x="1540" y="197" class="tiny-text">合同01</text>
+  <text x="1617.5" y="197" class="tiny-text">9月18日</text>
+  <text x="1687.5" y="197" class="tiny-text">500吨</text>
+  <text x="1465" y="228" class="tiny-text">B供应商*</text>
+  <text x="1540" y="228" class="tiny-text">合同02</text>
+  <text x="1617.5" y="228" class="tiny-text">9月20日</text>
+  <text x="1687.5" y="228" class="tiny-text">200吨</text>
+  <text x="1575" y="254" class="tiny-text">*仅一家不足时安排后续供应商补位</text>
+
+  <!-- 业务规则 -->
+  <rect x="835" y="298" width="595" height="56" rx="4" class="rule"/>
+  <text x="1132.5" y="322" class="small-text">生成原则：优先补足安全缓冲缺口；一家可满足时不拆分；</text>
+  <text x="1132.5" y="344" class="small-text">一家不足时才由后续供应商补位，允许交叉到货。</text>
+
+  <!-- 结果查看、调整与确认 -->
+  <path d="M1575 270 V390" class="flow"/>
+  <rect x="1415" y="390" width="320" height="104" class="node"/>
+  <text x="1575" y="418" class="node-text">展开查看生成理由</text>
+  <text x="1575" y="443" class="small-text">预计 9月18日低于安全缓冲</text>
+  <text x="1575" y="465" class="small-text">A合同余量可满足，因此只安排A</text>
+  <text x="1575" y="485" class="tiny-text">若A不足，则说明B补位数量及日期</text>
+
+  <path d="M1415 442 H1340" class="flow"/>
+  <polygon points="1210,377 1340,442 1210,507 1080,442" class="decision"/>
+  <text x="1210" y="437" class="node-text">是否需要</text>
+  <text x="1210" y="462" class="node-text">人工调整？</text>
+
+  <path d="M1080 442 H405 V548" class="flow"/>
+  <text x="1048" y="429" class="small-text">否</text>
+
+  <path d="M1210 507 V545" class="flow"/>
+  <text x="1230" y="531" class="small-text">是</text>
+  <rect x="1080" y="545" width="260" height="76" class="node"/>
+  <rect x="1080" y="534" width="64" height="21" class="badge-manual"/>
+  <text x="1112" y="549" class="badge-text">人工微调</text>
+  <text x="1210" y="576" class="node-text">调整供应商、到货日或数量</text>
+  <text x="1210" y="601" class="small-text">保留人工修改记录</text>
+
+  <path d="M1080 583 H1030" class="flow"/>
+  <rect x="790" y="545" width="240" height="76" class="node"/>
+  <rect x="790" y="534" width="64" height="21" class="badge-auto"/>
+  <text x="822" y="549" class="badge-text">即时校验</text>
+  <text x="910" y="576" class="node-text">重新计算库存与缺口</text>
+  <text x="910" y="601" class="small-text">校验合同余量、日期和到货能力</text>
+
+  <path d="M790 583 H750" class="flow"/>
+  <polygon points="650,532 750,583 650,634 550,583" class="decision"/>
+  <text x="650" y="578" class="node-text">计划可执行？</text>
+  <text x="650" y="602" class="small-text">无缺口与冲突</text>
+
+  <path d="M550 583 H500" class="flow"/>
+  <text x="526" y="570" class="small-text">是</text>
+  <rect x="310" y="548" width="190" height="70" class="node"/>
+  <rect x="310" y="537" width="64" height="21" class="badge-manual"/>
+  <text x="342" y="552" class="badge-text">最终确认</text>
+  <text x="405" y="578" class="node-text">确认当前要货计划</text>
+  <text x="405" y="602" class="small-text">锁定供应商、到货日和数量</text>
+
+  <path d="M310 583 H270" class="flow"/>
+  <rect x="105" y="548" width="165" height="70" class="node"/>
+  <text x="187.5" y="578" class="node-text">保存要货计划</text>
+  <text x="187.5" y="602" class="small-text">形成可执行版本</text>
+
+  <path d="M187.5 618 V674" class="flow"/>
+  <ellipse cx="187.5" cy="706" rx="38" ry="27" class="terminal"/>
+  <text x="187.5" y="712" class="node-text">结束</text>
+
+  <path d="M650 634 V680 H1210 V621" class="flow"/>
+  <text x="875" y="702" class="small-text">否：提示冲突，返回修改后重新校验</text>
+</svg>

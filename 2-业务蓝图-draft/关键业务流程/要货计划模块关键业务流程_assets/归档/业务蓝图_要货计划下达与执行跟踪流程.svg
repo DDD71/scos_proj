@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1780" height="640" viewBox="0 0 1780 640">
+  <defs>
+    <marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0 0L8 4 0 8Z" fill="#333"/>
+    </marker>
+    <style>.tt{font:bold 18px 'PingFang SC','Microsoft YaHei',sans-serif;fill:#222}.lh{font:bold 15px 'PingFang SC','Microsoft YaHei',sans-serif;fill:#222}.tx{font:13px 'PingFang SC','Microsoft YaHei',sans-serif;fill:#222;transform:translateY(8px)}.d+text.tx{transform:none}.sm{font:12px 'PingFang SC','Microsoft YaHei',sans-serif;fill:#444}.b{fill:#fff;stroke:#c94747;stroke-width:1.4}.s{fill:#fff;stroke:#4f7d5b;stroke-width:1.4}.x,.d{fill:#fff;stroke:#555;stroke-width:1.3}.f{fill:none;stroke:#333;stroke-width:1.35;marker-end:url(#a)}</style>
+  </defs>
+  <rect width="1780" height="640" fill="#fff"/>
+  <text x="24" y="34" class="tt">&#x6D41;&#x7A0B;&#x7F16;&#x53F7;&#x53CA;&#x540D;&#x79F0;&#xFF1A;&#xFF08;P-ZLTC-SCOS-YHJH-003 &#x8981;&#x8D27;&#x8BA1;&#x5212;&#x4E0B;&#x8FBE;&#x4E0E;&#x6267;&#x884C;&#x8DDF;&#x8E2A;&#x6D41;&#x7A0B;&#xFF09;</text>
+  <rect x="20" y="55" width="1740" height="500" fill="#fff" stroke="#555"/>
+  <rect x="20" y="55" width="155" height="500" fill="#f3f3f3" stroke="#555"/>
+  <path d="M20 180H1760M20 305H1760M20 430H1760" stroke="#aaa"/>
+  <text x="38" y="122" class="lh">&#x91C7;&#x8D2D;&#x8BA1;&#x5212;&#x5458;</text>
+  <text x="38" y="247" class="lh">SCOS</text>
+  <text x="38" y="372" class="lh">&#x4F9B;&#x5E94;&#x5546;/E&#x91C7;</text>
+  <text x="38" y="497" class="lh">TMS/WMS/QMS</text>
+  <circle cx="205" cy="117" r="20" class="x"/>
+  <text x="205" y="122" text-anchor="middle" class="sm">&#x5F00;&#x59CB;</text>
+  <rect x="245" y="81" width="180" height="72" class="s"/>
+  <text x="335" y="105" text-anchor="middle" class="tx">
+    <tspan x="335">10 &#x4E0B;&#x8FBE;&#x5DF2;&#x786E;&#x8BA4;</tspan>
+    <tspan x="335" dy="19">&#x8981;&#x8D27;&#x8BA1;&#x5212;</tspan>
+  </text>
+  <rect x="465" y="206" width="180" height="72" class="s"/>
+  <text x="555" y="230" text-anchor="middle" class="tx">
+    <tspan x="555">20 &#x53D1;&#x9001;&#x8BA1;&#x5212;&#x5E76;</tspan>
+    <tspan x="555" dy="19">&#x8BB0;&#x5F55;&#x4E0B;&#x8FBE;&#x72B6;&#x6001;</tspan>
+  </text>
+  <rect x="685" y="331" width="180" height="72" class="b"/>
+  <text x="775" y="355" text-anchor="middle" class="tx">
+    <tspan x="775">30 &#x63A5;&#x6536;&#x8BA1;&#x5212;&#x5E76;</tspan>
+    <tspan x="775" dy="19">&#x53CD;&#x9988;&#x9001;&#x8D27;&#x627F;&#x8BFA;</tspan>
+  </text>
+  <rect x="905" y="456" width="180" height="72" class="b"/>
+  <text x="995" y="480" text-anchor="middle" class="tx">
+    <tspan x="995">40 &#x53CD;&#x9988;&#x53D1;&#x8D27;&#x5728;&#x9014;</tspan>
+    <tspan x="995" dy="19">&#x53CA;&#x9884;&#x8BA1;&#x5230;&#x8D27;&#x65E5;</tspan>
+  </text>
+  <rect x="1125" y="456" width="180" height="72" class="b"/>
+  <text x="1215" y="480" text-anchor="middle" class="tx">
+    <tspan x="1215">50 &#x5230;&#x5382;&#x6536;&#x8D27;</tspan>
+    <tspan x="1215" dy="19">&#x5E76;&#x53CD;&#x9988;&#x8D28;&#x68C0;&#x72B6;&#x6001;</tspan>
+  </text>
+  <rect x="1345" y="206" width="180" height="72" class="s"/>
+  <text x="1435" y="230" text-anchor="middle" class="tx">
+    <tspan x="1435">60 &#x66F4;&#x65B0;&#x6267;&#x884C;&#x72B6;&#x6001;</tspan>
+    <tspan x="1435" dy="19">&#x4E0E;&#x56FA;&#x5B9A;&#x5230;&#x8D27;</tspan>
+  </text>
+  <polygon points="1640,198 1710,242 1640,286 1570,242" class="d"/>
+  <text x="1640" y="237" text-anchor="middle" class="tx">
+    <tspan x="1640">70 &#x662F;&#x5426;&#x5B58;&#x5728;</tspan>
+    <tspan x="1640" dy="19">&#x6267;&#x884C;&#x504F;&#x5DEE;&#xFF1F;</tspan>
+  </text>
+  <path d="M225 117H245M425 117H445V242H465M645 242H665V367H685M865 367H885V492H905M1085 492H1125M1305 492H1325V242H1345M1525 242H1570" class="f"/>
+  <path d="M1640 286V535H1435V278" class="f"/>
+  <text x="1460" y="530" class="sm">Y&#xFF1A;&#x8F6C;&#x6EDA;&#x52A8;&#x8C03;&#x6574;&#x6216;&#x5F02;&#x5E38;&#x534F;&#x8C03;</text>
+  <circle cx="1740" cy="117" r="18" class="x"/>
+  <text x="1740" y="122" text-anchor="middle" class="sm">&#x7ED3;&#x675F;</text>
+  <path d="M1640 198V117H1722" class="f"/>
+  <text x="1650" y="174" class="sm">N</text>
+  <text x="24" y="592" class="sm">SCOS&#x8D1F;&#x8D23;&#x8BA1;&#x5212;&#x4E0B;&#x8FBE;&#x548C;&#x72B6;&#x6001;&#x8DDF;&#x8E2A;&#xFF1B;&#x5177;&#x4F53;&#x53D1;&#x8D27;&#x3001;&#x8FD0;&#x8F93;&#x3001;&#x6536;&#x8D27;&#x4E0E;&#x8D28;&#x91CF;&#x5224;&#x5B9A;&#x7531;&#x4F9B;&#x5E94;&#x5546;&#x3001;E&#x91C7;&#x3001;TMS&#x3001;WMS&#x548C;QMS&#x627F;&#x63A5;&#x3002;</text>
+  <g font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="11" font-weight="bold" fill="#fff">
+    <rect x="245" y="81" width="54" height="18" fill="#4f7d5b"/>
+    <text x="272" y="94" text-anchor="middle">SCOS</text>
+    <rect x="465" y="206" width="54" height="18" fill="#4f7d5b"/>
+    <text x="492" y="219" text-anchor="middle">SCOS</text>
+    <rect x="685" y="331" width="54" height="18" fill="#c94747"/>
+    <text x="712" y="344" text-anchor="middle">&#x6267;&#x884C;&#x7CFB;&#x7EDF;</text>
+    <rect x="905" y="456" width="54" height="18" fill="#c94747"/>
+    <text x="932" y="469" text-anchor="middle">&#x6267;&#x884C;&#x7CFB;&#x7EDF;</text>
+    <rect x="1125" y="456" width="54" height="18" fill="#c94747"/>
+    <text x="1152" y="469" text-anchor="middle">&#x6267;&#x884C;&#x7CFB;&#x7EDF;</text>
+    <rect x="1345" y="206" width="54" height="18" fill="#4f7d5b"/>
+    <text x="1372" y="219" text-anchor="middle">SCOS</text>
+    <rect x="1550" y="206" width="54" height="18" fill="#4f7d5b"/>
+    <text x="1577" y="219" text-anchor="middle">SCOS</text>
+  </g>
+</svg>
