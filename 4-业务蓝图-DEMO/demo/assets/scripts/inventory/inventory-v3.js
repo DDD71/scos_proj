@@ -360,7 +360,7 @@ function healthRow(h,editable){
   var pathOptions=['进入下月策略','进入异常调整','继续观察'].map(function(x){return selectedOption(x,path===x);}).join('');
   return '<tr><td><b>'+p.name+'</b><br><span class="text-xs text-muted">'+p.categoryName+' / '+p.abcClass+'类</span></td>'+
     '<td class="text-mono">覆盖 '+h.inventoryDays.toFixed(1)+'天 · 满足率 '+(h.orderFillRate*100).toFixed(1)+'%<br>缺货 '+h.stockoutCount+'次 · 超容量 '+h.overcapacityCount+'次<br>慢动/呆滞/临期 '+h.slowQty+'/'+h.obsoleteQty+'/'+h.expiringQty+'吨</td>'+
-    '<td>'+statusTag(h.level)+'</td><td><select class="inv-select inv-health-input" '+(!editable?'disabled':'')+' onchange="inv3HealthChange(\''+h.productCode+'\',\'decisionCause\',this.value)">'+causeOptions+'</select><small>系统候选：'+esc(h.cause)+'</small></td>'+
+    '<td>'+statusTag(h.level)+'</td><td><div class="inv-health-cause"><select class="inv-select inv-health-input" '+(!editable?'disabled':'')+' onchange="inv3HealthChange(\''+h.productCode+'\',\'decisionCause\',this.value)">'+causeOptions+'</select><small>系统候选：'+esc(h.cause)+'</small></div></td>'+
     '<td><textarea class="inv-textarea inv-health-input" '+(!editable?'disabled':'')+' onchange="inv3HealthChange(\''+h.productCode+'\',\'decisionSuggestion\',this.value)">'+esc(h.decisionSuggestion||h.suggestion)+'</textarea></td>'+
     '<td><select class="inv-select inv-health-input" '+(!editable?'disabled':'')+' onchange="inv3HealthChange(\''+h.productCode+'\',\'decisionPath\',this.value)">'+pathOptions+'</select></td></tr>';
 }
