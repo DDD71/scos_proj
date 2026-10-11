@@ -1,9 +1,45 @@
-/* Same column edge for headings, values and numeric editors across all modules. */
-:is(.data-table,.proc2-table,.req-table,.cost-table,.lv3-table) > :is(thead,tbody,tfoot) > tr > .scos-numeric-column {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
+/*
+ * SCOS global table alignment contract.
+ * Loaded after every module stylesheet so native, dynamic and modal tables
+ * share one visual baseline across the complete demo.
+ */
+table :is(th, td) {
+  text-align: center !important;
+  vertical-align: middle !important;
 }
-:is(.data-table,.proc2-table,.req-table,.cost-table,.lv3-table) .scos-numeric-column input[type="number"] {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
+
+/* Child elements with their own alignment rules must follow the cell baseline. */
+table :is(th, td) * {
+  text-align: center !important;
+}
+
+/* Keep composite cell content and action groups centered as a whole. */
+table :is(th, td) :is(
+  .flex,
+  .proc2-actions,
+  .req-actions,
+  .cost3-actions,
+  .proc2-trend-input
+) {
+  justify-content: center !important;
+}
+
+/* Center editable values as well as native select display text. */
+table :is(th, td) :is(
+  input:not([type="checkbox"]):not([type="radio"]),
+  select,
+  textarea
+) {
+  text-align: center !important;
+  text-align-last: center;
+}
+
+/* Named compound fields use local width constraints; center those blocks too. */
+table :is(th, td) :is(
+  .proc2-name,
+  .proc2-full-name,
+  .req-name,
+  .lv3-source
+) {
+  margin-inline: auto;
 }
