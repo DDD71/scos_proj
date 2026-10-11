@@ -59,6 +59,16 @@ moduleResults:[['生产排程','受影响周期有效产出下降，部分计划
 severity:function(v){return Math.max(0,Math.min(2,Number(v.capacityReduction)/30*Number(v.durationDays)/2));}}
 };
 
+SANDBOX_SCENARIOS.cost={
+  name:'原料价格与生产负荷',priority:'成本与利润',desc:'固定售价合同下，调整玉米淀粉价格和产线负荷，查看每吨成本与剩余履约利润。',
+  params:[
+    {key:'contractId',label:'销售合同',type:'select',value:'SC-DEMO-F55-001'},
+    {key:'rawPriceChangePct',label:'玉米淀粉价格变化',type:'range',min:-100,max:100,step:1,value:15,unit:'%',signed:true},
+    {key:'loadPct',label:'产能负荷',type:'range',min:50,max:100,step:1,value:70,unit:'%'}
+  ],
+  modules:[{name:'合同基线',note:'读取固定售价和交付量'},{name:'单位成本',note:'原料价格与历史负荷成本'},{name:'月度利润',note:'按计划交付量汇总'}]
+};
+
 var SANDBOX_PRODUCT_CASES={
 '果葡糖浆F55':{short:'F55',stock:1850,daily:300,safety:385,inbound:1200,expected:3,line:'3#异构化线'},
 '果葡糖浆F42':{short:'F42',stock:920,daily:150,safety:245,inbound:650,expected:3,line:'2#糖化线'},

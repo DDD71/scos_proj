@@ -19,7 +19,8 @@
 .sim-simple .sandbox-param { border: 0; padding: 0; background: none; }
 .sim-simple .sandbox-param-top { font-size: 12px; margin-bottom: 8px; }
 .sim-simple .sandbox-param-value { font-size: 14px; }
-.sim-simple .sandbox-select { font-size: 13px; padding: 8px 10px; }
+/* Override the legacy 30px height alongside padding so selected text is not clipped. */
+.sim-simple .sandbox-select { height: 42px; min-height: 42px; line-height: normal; font-size: 13px; padding: 8px 10px; max-width: 100%; text-overflow: ellipsis; }
 .sim-simple input[type=range] { cursor: pointer; accent-color: var(--blue); }
 .sim-simple .sandbox-actions { margin-top: 18px; }
 .sim-simple .btn { min-height: 34px; }

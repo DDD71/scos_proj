@@ -460,6 +460,7 @@ html,body{overflow:hidden}.sidebar{display:none}.main-wrap{width:100vw}.header{p
 }
 </style>
 <link rel="stylesheet" href="assets/styles/sandbox/sandbox-simple.css">
+<link rel="stylesheet" href="assets/styles/sandbox/sandbox-cost.css">
 <link rel="stylesheet" href="assets/styles/inventory/inventory-v1.css">
 <link rel="stylesheet" href="assets/styles/inventory/inventory-v3.css">
 <link rel="stylesheet" href="assets/styles/procurement/procurement-v2.css">
@@ -560,7 +561,7 @@ function updateClock(){const d=new Date();document.getElementById('clock').textC
 setInterval(updateClock,1000);updateClock();
 /* ===== NAV ===== */
 function navigate(p){
-if(p!=='sandbox'&&typeof stopSandboxPlayback==='function'){stopSandboxPlayback();if(sandboxRunning)cancelSandboxRun(true);}
+if(p!=='sandbox'&&typeof stopSandboxPlayback==='function'){stopSandboxPlayback();if(sandboxRunning)cancelSandboxRun(true);if(window.SCOS_COST_SANDBOX)SCOS_COST_SANDBOX.dispose();}
 document.querySelectorAll('.page').forEach(e=>e.classList.remove('active'));
 document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
 if(p!=='inventory')document.querySelectorAll('.nav-subitem').forEach(n=>n.classList.remove('active'));
@@ -1773,22 +1774,24 @@ return `<div class="page-header"><div><div class="page-title">供应链驾驶舱
 }
 
 function buildSandboxHTML(){
-return `<div class="page-header"><div><div class="page-title">沙盘推演</div><div class="page-subtitle">选一个变化，看看未来每天的生产与库存会怎样。</div></div><span class="sim-badge">模拟数据 · 仅供决策参考</span></div>
+return `<div class="page-header"><div><div class="page-title">沙盘推演</div><div class="page-subtitle">选一个变化，看看生产、库存或合同利润会怎样。</div></div><span class="sim-badge">模拟数据 · 仅供决策参考</span></div>
 <div class="card sandbox-card sim-simple" id="sandboxCard">
 <div class="sandbox-workspace">
 <div class="sandbox-library"><div class="sandbox-library-title">1　推演场景</div><div class="sandbox-scenario-tab-list" role="tablist" aria-label="推演场景">
 <button class="sandbox-scenario-item active" role="tab" aria-selected="true" data-scenario="demand" onclick="selectSandboxScenario('demand')"><span class="sandbox-scenario-name">客户增单</span><span class="sandbox-scenario-meta">订单多了，能按时交吗？</span></button>
 <button class="sandbox-scenario-item" role="tab" aria-selected="false" data-scenario="supply" onclick="selectSandboxScenario('supply')"><span class="sandbox-scenario-name">到货延迟</span><span class="sandbox-scenario-meta">原料晚了，能撑几天？</span></button>
 <button class="sandbox-scenario-item" role="tab" aria-selected="false" data-scenario="production" onclick="selectSandboxScenario('production')"><span class="sandbox-scenario-name">产能下降</span><span class="sandbox-scenario-meta">生产慢了，库存够吗？</span></button>
+<button class="sandbox-scenario-item" role="tab" aria-selected="false" data-scenario="cost" onclick="selectSandboxScenario('cost')"><span class="sandbox-scenario-name">原料价格与生产负荷</span><span class="sandbox-scenario-meta">售价固定，合同还赚钱吗？</span></button>
 </div></div>
 <div class="sandbox-editor">
-<div class="sim-config-title"><span>2　调整条件</span><div class="sandbox-horizon"><span class="sandbox-horizon-label">观察未来</span><button class="sandbox-horizon-btn active" data-horizon="7" onclick="setSandboxHorizon(7)">7天</button><button class="sandbox-horizon-btn" data-horizon="14" onclick="setSandboxHorizon(14)">14天</button></div></div>
+<div class="sim-config-title"><span>2　调整条件</span><span id="costPeriodNote" class="cost-period-note" hidden></span><div class="sandbox-horizon"><span class="sandbox-horizon-label">观察未来</span><button class="sandbox-horizon-btn active" data-horizon="7" onclick="setSandboxHorizon(7)">7天</button><button class="sandbox-horizon-btn" data-horizon="14" onclick="setSandboxHorizon(14)">14天</button></div></div>
 <div hidden><span id="sandboxScenarioName"></span><span id="sandboxScenarioDesc"></span><span id="sandboxScenarioPriority"></span></div>
 <div class="sandbox-param-grid" id="sandboxParamGrid"></div>
 <div class="sandbox-actions"><button class="btn btn-primary" id="sandboxRunBtn" onclick="runSandboxSimulation()">▶ 开始推演</button><button class="btn btn-sm" onclick="resetSandboxScenario()">恢复默认</button><button class="btn btn-sm" id="sandboxCancelBtn" onclick="cancelSandboxRun()" disabled hidden>取消</button><span class="sim-hint" id="simConfigHint">已准备示例参数，可直接开始。</span></div>
 </div></div>
 <div class="sandbox-run-state" id="sandboxRunState"><div class="sandbox-run-top"><span id="sandboxRunLabel">正在计算…</span><span id="sandboxRunPercent">0%</span></div><div class="progress"><div class="progress-bar purple" id="sandboxRunBar" style="width:0%"></div></div></div>
 <div class="sandbox-results" id="sandboxResults"></div>
+<details class="sim-details" id="costDataDetails" hidden><summary>数据与计算说明</summary><div class="sim-details-body" id="costDataBody"></div></details>
 <details class="sim-details sim-data"><summary>数据与计算说明</summary><div class="sim-details-body">
 <div class="sandbox-baseline">
 <div>基线快照 <b id="sandboxSnapshotId">SNAP-20260823-0900</b></div><div>数据截止 <b id="sandboxSnapshotTime">2026-08-23 09:00</b></div><div>组织与时域 <b>长春工厂 · <span id="sandboxHorizonLabel">未来7天</span></b></div><div>计划版本 <b>SALE-V28 · SCH-V116 · INV-V12</b></div></div>
@@ -1847,7 +1850,7 @@ if(Math.abs(severity)<.01)return {risk:'无新增冲击',tone:'green'};
 if(key==='combined'){if(severity>=1)return {risk:'重大风险',tone:'red'};if(severity>=.6)return {risk:'高风险',tone:'red'};if(severity>=.25)return {risk:'需要关注',tone:'yellow'};return {risk:'低风险',tone:'green'};}
 if(severity<.45)return {risk:'低风险',tone:'green'};if(severity<.9)return {risk:'需要关注',tone:'yellow'};return {risk:'高风险',tone:'red'};
 }
-function sandboxParamSummary(result){var sc=SANDBOX_SCENARIOS[result.scenarioKey];var variables=sc.params.filter(function(p){return p.type==='range';}).slice(0,2).map(function(p){return p.label+' '+formatSandboxParam(p,result.params[p.key]);}).join(' / ');return '未来'+(result.horizon||7)+'天 · '+variables;}
+function sandboxParamSummary(result){if(result.resultType==='contractCost')return SCOS_COST_SANDBOX.summary(result);var sc=SANDBOX_SCENARIOS[result.scenarioKey];var variables=sc.params.filter(function(p){return p.type==='range';}).slice(0,2).map(function(p){return p.label+' '+formatSandboxParam(p,result.params[p.key]);}).join(' / ');return '未来'+(result.horizon||7)+'天 · '+variables;}
 function buildSandboxCaseData(result){
 var p=result.params,key=result.scenarioKey,dates=sandboxDates((result.horizon||sandboxHorizon)+1),base,scenario,mitigated,safety,title,desc,kpis,events,rows,moduleResults,chain,verdictBase,verdictMitigated,seriesName='风险暴露',mitigatedName='叠加应对假设',yName='库存水位（吨）',yMin=null,operationName='',operationUnit='',operationBaseline=[],operationScenario=[],inboundBaseline=[],inboundScenario=[],outboundBaseline=[],outboundScenario=[],targetStock=0,reorderPoint=0,stockCapacity=0,flowNodes=[],breachDate='',stockoutDate='';
 if(key==='supply'){
@@ -1978,6 +1981,7 @@ var btn=document.getElementById('sandboxDayPlay');if(btn){btn.textContent=sandbo
 
 
 function selectSandboxDay(index){
+if(sandboxActiveCase&&sandboxActiveCase.resultType==='contractCost'){SCOS_COST_SANDBOX.selectMonth(index);return;}
 var c=sandboxActiveCase;if(!c)return;var i=Math.max(0,Math.min(c.dates.length-1,Number(index)||0));sandboxSelectedDay=i;
 var d=simDailyLedger(c,i,false),b=simDailyLedger(c,i,true),state=d.gap>0?'danger':d.closing===0?'danger':d.closing<c.safety?'warning':'normal';
 var set=function(id,v){var el=document.getElementById(id);if(el)el.textContent=v;};
@@ -2013,7 +2017,7 @@ sandboxPlaybackTimer=setInterval(function(){if(!sandboxActiveCase){stopSandboxPl
 simUpdatePlayback();
 }
 
-function setSandboxHorizon(days){if(sandboxRunning)return;var next=Number(days)===14?14:7;if(next===sandboxHorizon)return;stopSandboxPlayback();sandboxHorizon=next;document.querySelectorAll('.sandbox-horizon-btn').forEach(function(b){b.classList.toggle('active',Number(b.getAttribute('data-horizon'))===next);});var label=document.getElementById('sandboxHorizonLabel');if(label)label.textContent='未来'+next+'天';invalidateSandboxResult();appendDashAudit('切换沙盘推演时域：未来'+next+'天','成功');}
+function setSandboxHorizon(days){if(sandboxRunning||sandboxScenarioKey==='cost')return;var next=Number(days)===14?14:7;if(next===sandboxHorizon)return;stopSandboxPlayback();sandboxHorizon=next;document.querySelectorAll('.sandbox-horizon-btn').forEach(function(b){b.classList.toggle('active',Number(b.getAttribute('data-horizon'))===next);});var label=document.getElementById('sandboxHorizonLabel');if(label)label.textContent='未来'+next+'天';invalidateSandboxResult();appendDashAudit('切换沙盘推演时域：未来'+next+'天','成功');}
 
 function formatSandboxParam(p,value){
 if(p.type==='select')return value;
@@ -2022,6 +2026,7 @@ if(p.signed&&num>0)txt='+'+txt;
 return txt+(p.unit||'');
 }
 function renderSandboxParams(sc){
+if(sandboxScenarioKey==='cost'){SCOS_COST_SANDBOX.renderParams();return;}
 var el=document.getElementById('sandboxParamGrid');if(!el)return;
 el.innerHTML=sc.params.map(function(p){
 if(p.type==='select'){
@@ -2045,32 +2050,37 @@ function selectSandboxScenario(key){
 if(!SANDBOX_SCENARIOS[key])return;
 cancelSandboxRun(true);sandboxScenarioKey=key;var sc=SANDBOX_SCENARIOS[key];sandboxParamValues={};
 sc.params.forEach(function(p){sandboxParamValues[p.key]=p.value;});
+if(key==='cost')sandboxParamValues=Object.assign({},SANDBOX_COST_DATA.defaults);
 document.querySelectorAll('.sandbox-scenario-item').forEach(function(b){var selected=b.getAttribute('data-scenario')===key;b.classList.toggle('active',selected);b.setAttribute('aria-selected',selected?'true':'false');});
 var name=document.getElementById('sandboxScenarioName');if(name)name.textContent=sc.name;
 var desc=document.getElementById('sandboxScenarioDesc');if(desc)desc.textContent=sc.desc;
 var priority=document.getElementById('sandboxScenarioPriority');if(priority){priority.textContent=sc.priority;priority.className='tag '+(sc.priority.indexOf('P0')===0?'tag-blue':'tag-purple');}
-renderSandboxParams(sc);renderSandboxFlow(-1,0);invalidateSandboxResult();
+renderSandboxParams(sc);SCOS_COST_SANDBOX.context(key==='cost');renderSandboxFlow(-1,0);invalidateSandboxResult();
 }
 function updateSandboxParam(key,value){
 if(sandboxRunning)cancelSandboxRun(true);
 var sc=SANDBOX_SCENARIOS[sandboxScenarioKey];var p=sc.params.find(function(x){return x.key===key;});if(!p)return;
-sandboxParamValues[key]=p.type==='range'?Number(value):value;
+sandboxParamValues[key]=(p.type==='range'||p.type==='choice')?Number(value):value;
+if(sandboxScenarioKey==='cost')SCOS_COST_SANDBOX.updateParams(key);
 var label=document.getElementById('sandboxValue_'+key);if(label)label.textContent=formatSandboxParam(p,sandboxParamValues[key]);
 invalidateSandboxResult();
 }
 function invalidateSandboxResult(){
+SCOS_COST_SANDBOX.dispose();
 stopSandboxPlayback();if(simFrame){cancelAnimationFrame(simFrame);simFrame=null;}if(charts.dashSandboxCaseChart){charts.dashSandboxCaseChart.dispose();delete charts.dashSandboxCaseChart;}sandboxActiveCase=null;sandboxLastResult=null;var runButton=document.getElementById('sandboxRunBtn');if(runButton)runButton.textContent='▶ 开始推演';var hint=document.getElementById('simConfigHint');if(hint)hint.textContent='条件已更新，点击开始查看影响。';var results=document.getElementById('sandboxResults');if(results){results.classList.remove('visible');results.innerHTML='';}
 var state=document.getElementById('sandboxRunState');if(state)state.classList.remove('visible');
 }
 function resetSandboxScenario(){selectSandboxScenario(sandboxScenarioKey);}
 function saveSandboxDraft(){appendDashAudit('保存沙盘情景草稿：'+SANDBOX_SCENARIOS[sandboxScenarioKey].name,'成功');alert('情景草稿已保存到沙盘结果库。\n仅保存快照引用与参数差量，不影响正式业务数据。');}
 function refreshSandboxSnapshot(){
+if(sandboxScenarioKey==='cost'){invalidateSandboxResult();SCOS_COST_SANDBOX.updateParams();appendDashAudit('重新读取固定成本演示快照','成功');return;}
 if(sandboxRunning)return;var d=new Date();var pad=function(n){return String(n).padStart(2,'0');};
 var id='SNAP-'+d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate())+'-'+pad(d.getHours())+pad(d.getMinutes());
 var ts=d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())+' '+pad(d.getHours())+':'+pad(d.getMinutes());
 document.getElementById('sandboxSnapshotId').textContent=id;document.getElementById('sandboxSnapshotTime').textContent=ts;invalidateSandboxResult();appendDashAudit('复制最新数据快照：'+id,'成功');
 }
 function computeSandboxResult(){
+if(sandboxScenarioKey==='cost'){var costResult=SCOS_COST_SANDBOX.calculate(SANDBOX_COST_DATA,sandboxParamValues);costResult.id='RUN-'+Date.now();costResult.time=new Date().toLocaleString('zh-CN',{hour12:false});return costResult;}
 var sc=SANDBOX_SCENARIOS[sandboxScenarioKey];var severity=sc.severity(sandboxParamValues);var vals=sc.target.map(function(target,i){var base=SANDBOX_METRICS[i].base;var v=base+(target-base)*severity;if(i===0||i===1)v=Math.max(0,Math.min(100,v));else v=Math.max(0,v);return SANDBOX_METRICS[i].decimals?v:Number(v.toFixed(0));});
 vals=vals.map(function(v,i){return Number(v.toFixed(SANDBOX_METRICS[i].decimals));});
 var risk=sandboxRiskMeta(sandboxScenarioKey,sandboxParamValues,severity);
@@ -2080,20 +2090,23 @@ return result;
 }
 function sandboxWait(ms){return new Promise(function(resolve){setTimeout(resolve,ms);});}
 async function runSandboxSimulation(){
-if(sandboxRunning)return;stopSandboxPlayback();if(simFrame){cancelAnimationFrame(simFrame);simFrame=null;}if(charts.dashSandboxCaseChart){charts.dashSandboxCaseChart.dispose();delete charts.dashSandboxCaseChart;}sandboxActiveCase=null;var sc=SANDBOX_SCENARIOS[sandboxScenarioKey];var token=++sandboxRunToken;sandboxRunning=true;sandboxLastResult=null;
+if(sandboxRunning)return;
+var preparedCost=null;
+if(sandboxScenarioKey==='cost'){try{preparedCost=computeSandboxResult();SCOS_COST_SANDBOX.error('');}catch(e){invalidateSandboxResult();SCOS_COST_SANDBOX.error(e.message);return;}}
+SCOS_COST_SANDBOX.dispose();stopSandboxPlayback();if(simFrame){cancelAnimationFrame(simFrame);simFrame=null;}if(charts.dashSandboxCaseChart){charts.dashSandboxCaseChart.dispose();delete charts.dashSandboxCaseChart;}sandboxActiveCase=null;var sc=SANDBOX_SCENARIOS[sandboxScenarioKey];var token=++sandboxRunToken;sandboxRunning=true;sandboxLastResult=null;
 var runBtn=document.getElementById('sandboxRunBtn');var cancelBtn=document.getElementById('sandboxCancelBtn');if(runBtn)runBtn.disabled=true;if(cancelBtn){cancelBtn.disabled=false;cancelBtn.hidden=false;}
 var state=document.getElementById('sandboxRunState');var results=document.getElementById('sandboxResults');if(state)state.classList.add('visible');if(results){results.classList.remove('visible');results.innerHTML='';}
 var label=document.getElementById('sandboxRunLabel');var percent=document.getElementById('sandboxRunPercent');var bar=document.getElementById('sandboxRunBar');
 var steps=['锁定基线快照并校验数据质量'].concat(sc.modules.map(function(m){return '调用 '+m.name+' 模拟接口';})).concat(['聚合跨模块指标并生成影响链']);
 for(var i=0;i<steps.length;i++){
 if(token!==sandboxRunToken)return;
-if(label)label.textContent='正在计算未来'+sandboxHorizon+'天的生产与库存变化…';var pct=Math.round(i/steps.length*100);if(percent)percent.textContent=pct+'%';if(bar)bar.style.width=pct+'%';
+if(label)label.textContent=preparedCost?'正在测算合同成本与月度利润…':'正在计算未来'+sandboxHorizon+'天的生产与库存变化…';var pct=Math.round(i/steps.length*100);if(percent)percent.textContent=pct+'%';if(bar)bar.style.width=pct+'%';
 if(i>0&&i<=sc.modules.length)renderSandboxFlow(i-1,i-1);
 await sandboxWait(100);
 }
 if(token!==sandboxRunToken)return;
-renderSandboxFlow(-1,sc.modules.length);if(label)label.textContent='模拟完成 · 结果已写入独立沙盘结果库';if(percent)percent.textContent='100%';if(bar)bar.style.width='100%';
-sandboxLastResult=computeSandboxResult();renderSandboxResults(sandboxLastResult);sandboxRunning=false;if(state)state.classList.remove('visible');if(runBtn){runBtn.disabled=false;runBtn.textContent='↻ 重新推演';}if(cancelBtn){cancelBtn.disabled=true;cancelBtn.hidden=true;}document.getElementById('simConfigHint').textContent='调整条件后，可重新推演并比较变化。';document.getElementById('sandboxResults').scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches)toggleSandboxPlayback();appendDashAudit('运行沙盘：'+sc.name+'（'+sandboxParamSummary(sandboxLastResult)+'）','成功');
+renderSandboxFlow(-1,sc.modules.length);if(label)label.textContent=preparedCost?'本地模拟完成 · 结果保留在当前会话':'模拟完成 · 结果已写入独立沙盘结果库';if(percent)percent.textContent='100%';if(bar)bar.style.width='100%';
+sandboxLastResult=preparedCost||computeSandboxResult();renderSandboxResults(sandboxLastResult);sandboxRunning=false;if(state)state.classList.remove('visible');if(runBtn){runBtn.disabled=false;runBtn.textContent='↻ 重新推演';}if(cancelBtn){cancelBtn.disabled=true;cancelBtn.hidden=true;}document.getElementById('simConfigHint').textContent='调整条件后，可重新推演并比较变化。';document.getElementById('sandboxResults').scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches)toggleSandboxPlayback();appendDashAudit('运行沙盘：'+sc.name+'（'+sandboxParamSummary(sandboxLastResult)+'）','成功');
 }
 function cancelSandboxRun(silent){
 var cancelControl=document.getElementById('sandboxCancelBtn');if(cancelControl)cancelControl.hidden=true;
@@ -2106,6 +2119,7 @@ var delta=Number(value)-metric.base;var cls='sandbox-delta-flat';if(Math.abs(del
 var sign=delta>0?'+':'';return {text:sign+Number(delta.toFixed(metric.decimals)).toLocaleString('zh-CN')+metric.unit,cls:cls};
 }
 function renderSandboxResults(result){
+if(result.resultType==='contractCost'){SCOS_COST_SANDBOX.render(result);return;}
 var el=document.getElementById('sandboxResults');if(!el)return;var c=buildSandboxCaseData(result);sandboxActiveCase=c;
 var shortage=c.stockoutDate==='时域内未发生'?'未来'+result.horizon+'天内库存未耗尽':'预计 '+c.stockoutDate+' 库存耗尽';
 var metrics=SANDBOX_METRICS.map(function(m,i){return '<tr><td>'+m.name+'</td><td>'+formatSandboxMetric(m,m.base)+'</td><td>'+formatSandboxMetric(m,result.values[i])+'</td></tr>';}).join('');
@@ -2120,16 +2134,20 @@ initChart('dashSandboxImpactChart',mOpt({grid:{top:34,right:14,bottom:38,left:44
 }
 function addSandboxComparison(){
 if(!sandboxLastResult){alert('请先运行模拟。');return;}
+if(sandboxLastResult.resultType==='contractCost'){SCOS_COST_SANDBOX.addComparison(sandboxLastResult);appendDashAudit('加入成本情景对比：'+SCOS_COST_SANDBOX.summary(sandboxLastResult),'成功');return;}
 sandboxComparisons.push(Object.assign({},sandboxLastResult,{values:sandboxLastResult.values.slice(),params:Object.assign({},sandboxLastResult.params)}));if(sandboxComparisons.length>3)sandboxComparisons.shift();renderSandboxCompare();appendDashAudit('加入沙盘情景对比：'+sandboxLastResult.name+'（'+sandboxParamSummary(sandboxLastResult)+'）','成功');
 }
 function renderSandboxCompare(){
+if(sandboxLastResult&&sandboxLastResult.resultType==='contractCost'){SCOS_COST_SANDBOX.renderCompare(sandboxLastResult);return;}
 var el=document.getElementById('sandboxCompare');if(!el)return;if(!sandboxComparisons.length){el.classList.remove('visible');el.innerHTML='';return;}
 var head='<th>指标</th><th>基线</th>'+sandboxComparisons.map(function(r){return '<th>'+r.name+'<br><span class="text-xs text-muted">'+sandboxParamSummary(r)+'</span></th>';}).join('');
 var rows=SANDBOX_METRICS.map(function(m,i){return '<tr><td>'+m.name+'</td><td class="text-mono">'+formatSandboxMetric(m,m.base)+'</td>'+sandboxComparisons.map(function(r){return '<td class="text-mono">'+formatSandboxMetric(m,r.values[i])+'</td>';}).join('')+'</tr>';}).join('');
 el.innerHTML='<div class="sandbox-subtitle"><span class="dot" style="background:var(--blue)"></span>情景横向对比 <span class="text-muted">（最多保留3个情景）</span></div><div class="overflow-auto"><table class="data-table"><thead><tr>'+head+'</tr></thead><tbody>'+rows+'</tbody></table></div>';el.classList.add('visible');
 }
 function exportSandboxReport(){
-if(!sandboxLastResult){alert('请先完成一次模拟。');return;}var result=sandboxLastResult;var sc=SANDBOX_SCENARIOS[result.scenarioKey];var caseData=buildSandboxCaseData(result);var strip=function(s){var d=document.createElement('div');d.innerHTML=s;return d.textContent||d.innerText||'';};var lines=['SCOS 供应链驾驶舱 · 沙盘推演报告','SIMULATION ONLY · 模拟结果仅供分析，不下发生产','', '情景：'+result.name,'运行编号：'+result.id,'推演时域：未来'+(result.horizon||7)+'天','基线快照：'+document.getElementById('sandboxSnapshotId').textContent,'运行时间：'+result.time,'完整性：'+sc.modules.length+'/'+sc.modules.length,''];
+if(!sandboxLastResult){alert('请先完成一次模拟。');return;}
+if(sandboxLastResult.resultType==='contractCost'){SCOS_COST_SANDBOX.exportReport(sandboxLastResult);appendDashAudit('导出成本推演报告','成功');return;}
+var result=sandboxLastResult;var sc=SANDBOX_SCENARIOS[result.scenarioKey];var caseData=buildSandboxCaseData(result);var strip=function(s){var d=document.createElement('div');d.innerHTML=s;return d.textContent||d.innerText||'';};var lines=['SCOS 供应链驾驶舱 · 沙盘推演报告','SIMULATION ONLY · 模拟结果仅供分析，不下发生产','', '情景：'+result.name,'运行编号：'+result.id,'推演时域：未来'+(result.horizon||7)+'天','基线快照：'+document.getElementById('sandboxSnapshotId').textContent,'运行时间：'+result.time,'完整性：'+sc.modules.length+'/'+sc.modules.length,''];
 lines.push('【参数差量】');sc.params.forEach(function(p){lines.push('- '+p.label+'：'+formatSandboxParam(p,result.params[p.key]));});lines.push('','【具体案例】','- '+caseData.title,'- '+caseData.desc,'- '+strip(caseData.verdictBase),'','【关键节点】');caseData.events.forEach(function(e){lines.push('- '+e[0]+'：'+e[1]);});lines.push('','【基线 vs 模拟】');SANDBOX_METRICS.forEach(function(m,i){lines.push('- '+m.name+'：'+formatSandboxMetric(m,m.base)+' → '+formatSandboxMetric(m,result.values[i])+'（'+sandboxDeltaMeta(m,result.values[i]).text+'）');});lines.push('','【影响链】','- '+caseData.chain.join(' → '),'','本报告仅用于认知与决策支持，不构成采购、排程、库存或生产执行指令。');
 var blob=new Blob([lines.join('\n')],{type:'text/plain;charset=utf-8'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='SCOS沙盘推演_'+result.name+'_'+result.id+'.txt';a.click();setTimeout(function(){URL.revokeObjectURL(a.href);},1000);
 appendDashAudit('导出沙盘模拟报告：'+result.name,'成功');
@@ -2668,6 +2686,8 @@ window.addEventListener('resize',()=>{Object.values(charts).forEach(c=>{if(c&&!c
 /* ===== INIT ===== */
 fetch('assets/maps/china.json').then(r=>{if(!r.ok)throw new Error();return r.json();}).then(d=>{mapGeoJSON=d;echarts.registerMap('china',d);initDashboard();}).catch(()=>{fetch('https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json').then(r=>r.json()).then(d=>{mapGeoJSON=d;echarts.registerMap('china',d);initDashboard();}).catch(()=>{initDashboard();});});
 </script>
+<script src="assets/scripts/sandbox/sandbox-cost-data.js"></script>
+<script src="assets/scripts/sandbox/sandbox-cost.js"></script>
 <script src="assets/scripts/procurement/procurement-demo-data.js"></script>
 <script src="assets/scripts/procurement/procurement-v2.js"></script>
 <script src="assets/scripts/requisition/requisition-demo-data.js"></script>
