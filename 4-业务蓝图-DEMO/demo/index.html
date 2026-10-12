@@ -2100,7 +2100,7 @@ var label=document.getElementById('sandboxRunLabel');var percent=document.getEle
 var steps=['锁定基线快照并校验数据质量'].concat(sc.modules.map(function(m){return '调用 '+m.name+' 模拟接口';})).concat(['聚合跨模块指标并生成影响链']);
 for(var i=0;i<steps.length;i++){
 if(token!==sandboxRunToken)return;
-if(label)label.textContent=preparedCost?'正在测算合同成本与月度利润…':'正在计算未来'+sandboxHorizon+'天的生产与库存变化…';var pct=Math.round(i/steps.length*100);if(percent)percent.textContent=pct+'%';if(bar)bar.style.width=pct+'%';
+if(label)label.textContent=preparedCost?'正在联动推演销售、采购、生产负荷与经营结果…':'正在计算未来'+sandboxHorizon+'天的生产与库存变化…';var pct=Math.round(i/steps.length*100);if(percent)percent.textContent=pct+'%';if(bar)bar.style.width=pct+'%';
 if(i>0&&i<=sc.modules.length)renderSandboxFlow(i-1,i-1);
 await sandboxWait(100);
 }

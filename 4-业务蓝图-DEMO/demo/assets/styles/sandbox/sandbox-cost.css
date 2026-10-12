@@ -5,6 +5,15 @@
 #page-sandbox .cost-horizon{grid-column:1/-1;display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 12px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:8px;font-size:12px}
 #page-sandbox .cost-horizon .cost-summary{margin:0}
 #page-sandbox .cost-summary{font-size:12px;color:var(--text-muted);line-height:1.7;margin-top:7px}
+#page-sandbox .cost-reconciliation{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+#page-sandbox .cost-recon{display:flex;flex-direction:column;gap:7px;min-width:0;padding:14px 16px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:9px}
+#page-sandbox .cost-recon span{font-size:12px;color:var(--text-secondary)}
+#page-sandbox .cost-recon b{font-size:20px;color:var(--cyan);font-variant-numeric:tabular-nums}
+#page-sandbox .cost-recon small{font-size:11px;line-height:1.5;color:var(--text-muted)}
+#page-sandbox .cost-recon.ok{border-color:rgba(16,185,129,.45)}
+#page-sandbox .cost-recon.ok small{color:#6ee7b7}
+#page-sandbox .cost-recon.bad{border-color:rgba(239,68,68,.55);background:rgba(239,68,68,.06)}
+#page-sandbox .cost-recon.bad b,#page-sandbox .cost-recon.bad small{color:#fca5a5}
 #page-sandbox .cost-load-control{display:flex;align-items:center;gap:16px;min-height:38px}
 #page-sandbox .cost-load-control input[type=range]{flex:1;min-width:0}
 #page-sandbox .cost-load-number{display:flex;align-items:center;gap:7px;color:var(--cyan);flex-shrink:0}
@@ -13,6 +22,30 @@
 #page-sandbox .cost-load-number input[aria-invalid=true]{border-color:var(--red)}
 #page-sandbox .cost-load-modes{display:flex;gap:8px;margin-bottom:10px}
 #page-sandbox .cost-month-editor{grid-column:1/-1;min-width:0}
+#page-sandbox .cost-plan-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+#page-sandbox .cost-plan-toolbar>div:first-child{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+#page-sandbox .cost-plan-toolbar small{color:var(--text-muted);font-size:12px}
+#page-sandbox .cost-plan-section{margin-top:14px;padding:15px;background:rgba(15,23,42,.36);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+#page-sandbox .cost-sales-section{border-left:3px solid #3b82f6}
+#page-sandbox .cost-purchase-section{border-left:3px solid #8b5cf6}
+#page-sandbox .cost-production-section{border-left:3px solid #10b981}
+#page-sandbox .cost-section-head{display:flex;align-items:flex-start;gap:11px;margin-bottom:12px}
+#page-sandbox .cost-section-head>div{display:flex;flex-direction:column;gap:4px;min-width:0}
+#page-sandbox .cost-section-head b{font-size:14px;color:var(--text-primary)}
+#page-sandbox .cost-section-head small{font-size:12px;line-height:1.55;color:var(--text-muted)}
+#page-sandbox .cost-step{display:inline-grid;place-items:center;width:24px;height:24px;flex:0 0 24px;border-radius:50%;background:rgba(59,130,246,.2);border:1px solid rgba(96,165,250,.55);color:#93c5fd;font-size:12px;font-weight:700}
+#page-sandbox .cost-purchase-section .cost-step{background:rgba(139,92,246,.18);border-color:rgba(167,139,250,.55);color:#c4b5fd}
+#page-sandbox .cost-production-section .cost-step{background:rgba(16,185,129,.18);border-color:rgba(52,211,153,.5);color:#6ee7b7}
+#page-sandbox .cost-production-rule{margin:0 0 12px;padding:9px 12px;border-radius:7px;background:rgba(16,185,129,.07);color:#a7f3d0;font-size:12px;line-height:1.6}
+#page-sandbox .cost-plan-table{min-width:760px}
+#page-sandbox .cost-sales-table{min-width:560px}
+#page-sandbox .cost-purchase-table{min-width:760px}
+#page-sandbox .cost-production-table{min-width:1260px}
+#page-sandbox .cost-plan-table th,#page-sandbox .cost-plan-table td,#page-sandbox .cost-result-table th,#page-sandbox .cost-result-table td{text-align:center;vertical-align:middle}
+#page-sandbox .cost-plan-table input{width:116px;max-width:100%;height:34px;padding:5px 8px;border:1px solid var(--border-light);border-radius:6px;background:var(--bg-card);color:var(--text-primary);font-family:inherit;text-align:center;font-variant-numeric:tabular-nums}
+#page-sandbox .cost-plan-table input:focus{outline:2px solid var(--blue);outline-offset:1px}
+#page-sandbox .cost-plan-table input[aria-invalid=true]{border-color:var(--red);background:rgba(239,68,68,.06)}
+#page-sandbox .cost-plan-table tfoot th{color:var(--text-primary);background:rgba(59,130,246,.08)}
 #page-sandbox .cost-month-editor-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px;font-size:13px}
 #page-sandbox .cost-month-editor-head small{color:var(--text-muted);font-size:12px;margin-left:10px}
 #page-sandbox .cost-month-input-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
@@ -34,6 +67,7 @@
 #page-sandbox .cost-kpi em{font-size:12px;font-style:normal;font-weight:400}
 #page-sandbox .cost-kpi small{font-size:11px;color:var(--text-muted)}
 #page-sandbox .cost-negative strong{color:#f87171}
+#page-sandbox .cost-warning strong{color:#fbbf24}
 #page-sandbox .cost-explanation{font-size:13px;line-height:1.8;padding:12px 0;color:var(--text-secondary)}
 #page-sandbox .cost-month-panel{padding:18px;border:1px solid var(--border);border-radius:10px;background:var(--bg-secondary)}
 #page-sandbox .cost-month-head{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
@@ -51,13 +85,18 @@
 #page-sandbox .cost-chart-title{font-size:13px;margin:22px 0 8px}
 #page-sandbox .cost-chart-title span{font-size:11px;color:var(--text-muted);margin-left:10px}
 #page-sandbox .cost-chart{height:260px;width:100%}
+#page-sandbox .cost-kpis-5{grid-template-columns:repeat(5,minmax(0,1fr))}
+#page-sandbox .cost-month-values-6{grid-template-columns:repeat(6,minmax(0,1fr))}
+#page-sandbox .cost-month-values-7{grid-template-columns:repeat(7,minmax(0,1fr))}
+#page-sandbox .cost-result-table{min-width:2120px}
 #page-sandbox .cost-compare-title{font-size:13px;margin:20px 0 12px}
 #page-sandbox #costDataDetails p{font-size:12px;line-height:1.8;color:var(--text-secondary)}
-@media(max-width:1100px){#page-sandbox .cost-kpis,#page-sandbox .cost-month-input-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:1100px){#page-sandbox .cost-kpis,#page-sandbox .cost-kpis-5,#page-sandbox .cost-month-input-grid,#page-sandbox .cost-reconciliation{grid-template-columns:repeat(2,minmax(0,1fr))}#page-sandbox .cost-month-values-6,#page-sandbox .cost-month-values-7{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:640px){
  #page-sandbox .cost-mode .sandbox-param-grid{grid-template-columns:minmax(0,1fr)}
  #page-sandbox .cost-kpi{padding:12px}#page-sandbox .cost-kpi strong{font-size:20px}
  #page-sandbox .cost-month-values{grid-template-columns:repeat(2,minmax(0,1fr))}
+ #page-sandbox .cost-reconciliation{grid-template-columns:minmax(0,1fr)}
  #page-sandbox .cost-result .sim-overview{align-items:flex-start;flex-direction:column}
  #page-sandbox .cost-month-panel{padding:12px}#page-sandbox .cost-chart-title span{display:block;margin:5px 0}
  #page-sandbox .cost-period-note{max-width:100%;text-align:left}

@@ -60,13 +60,11 @@ severity:function(v){return Math.max(0,Math.min(2,Number(v.capacityReduction)/30
 };
 
 SANDBOX_SCENARIOS.cost={
-  name:'原料价格与生产负荷',priority:'成本与利润',desc:'固定售价合同下，调整玉米淀粉价格和产线负荷，查看每吨成本与剩余履约利润。',
+  name:'原料价格与生产负荷',priority:'成本与利润',desc:'固定售价合同下，依次调整销售节奏、玉米淀粉采购节奏与价格、生产负荷，由系统计算计划生产量并查看履约与利润。',
   params:[
-    {key:'contractId',label:'销售合同',type:'select',value:'SC-DEMO-F55-001'},
-    {key:'rawPriceChangePct',label:'玉米淀粉价格变化',type:'range',min:-100,max:100,step:1,value:15,unit:'%',signed:true},
-    {key:'loadPct',label:'产能负荷',type:'range',min:50,max:100,step:1,value:70,unit:'%'}
+    {key:'contractId',label:'销售合同',type:'select',value:'SC-DEMO-F55-001'}
   ],
-  modules:[{name:'合同基线',note:'读取固定售价和交付量'},{name:'单位成本',note:'原料价格与历史负荷成本'},{name:'月度利润',note:'按计划交付量汇总'}]
+  modules:[{name:'合同与BOM',note:'读取合同总量、折算比例和原料总需求'},{name:'销售节奏',note:'校验月度履约销量与合同总量'},{name:'采购节奏',note:'结转原料库存和移动加权价格'},{name:'生产负荷',note:'计算系统计划生产量与单位成本'},{name:'经营结果',note:'汇总实际履约、收入、成本和利润'}]
 };
 
 var SANDBOX_PRODUCT_CASES={

@@ -1,189 +1,154 @@
 (function(){
 'use strict';
-var ASSUMPTION='按合同计划交付量测算，从下月起，最晚至合同结束；未校验该负荷下的交付能力。';
+
+var ASSUMPTION='合同总量与 BOM 总采购需求必须守恒；单位原料成本 = 原料移动加权价（元/吨原料）× 固定 BOM 耗用系数（吨原料/吨成品），该换算与负荷无关；负荷仅影响单位加工成本；预计单位生产成本 = 单位原料成本 + 单位加工成本；期末未耗用原料作为库存资产结转，不进入本销售合同成本。';
 var comparisons=[];
 var clone=function(v){return JSON.parse(JSON.stringify(v));};
 var esc=function(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});};
-var round=function(v,n){var k=Math.pow(10,n);return Math.round((v+Number.EPSILON)*k)/k;};
-var fmt=function(v,n){return Number(v).toLocaleString('zh-CN',{minimumFractionDigits:n==null?2:n,maximumFractionDigits:n==null?2:n});};
-var wan=function(v){return fmt(v/10000)+' 万元';};
-var signed=function(v,n){return (v>0?'+':'')+fmt(v,n);};
-function validDate(s){if(typeof s!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(s))return false;var d=new Date(s+'T00:00:00Z');return Number.isFinite(d.getTime())&&d.toISOString().slice(0,10)===s;}
+var round=function(v,n){var k=Math.pow(10,n);return Math.round((Number(v)+Number.EPSILON)*k)/k;};
+var fmt=function(v,n){return Number(v||0).toLocaleString('zh-CN',{minimumFractionDigits:n==null?2:n,maximumFractionDigits:n==null?2:n});};
+var wan=function(v){return fmt(Number(v||0)/10000)+' 万元';};
+var sum=function(rows,key){return round(rows.reduce(function(a,r){return a+Number(r[key]||0);},0),2);};
+var mapSum=function(map,months){return round(months.reduce(function(a,m){return a+Number(map&&map[m]||0);},0),4);};
+var closeEnough=function(a,b){return Math.abs(Number(a)-Number(b))<=0.01;};
+
+function validDate(s){
+  if(typeof s!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(s))return false;
+  var d=new Date(s+'T00:00:00Z');return Number.isFinite(d.getTime())&&d.toISOString().slice(0,10)===s;
+}
 function nextMonth(s){var a=s.split('-').map(Number);return a[1]===12?(a[0]+1)+'-01':a[0]+'-'+String(a[1]+1).padStart(2,'0');}
-function monthsFor(c,meta,params){
+function monthsFor(c,meta){
   var start=nextMonth(meta.asOfDate.slice(0,7));if(c.startDate.slice(0,7)>start)start=c.startDate.slice(0,7);
   var out=[],end=c.endDate.slice(0,7);for(var m=start;m<=end;m=nextMonth(m)){out.push(m);if(out.length>120)throw new Error('合同推演期间超过 120 个月，请检查日期。');}
-  if(params&&params.horizonMonths!=null){
-    if(!Number.isInteger(params.horizonMonths)||params.horizonMonths<1||params.horizonMonths>out.length)throw new Error('推演时长请输入 1～'+out.length+' 个月，不能超过合同到期时间。');
-    return out.slice(0,params.horizonMonths);
-  }
   return out;
 }
 function finite(v,label,positive){if(typeof v!=='number'||!Number.isFinite(v)||(positive?v<=0:v<0))throw new Error(label+'必须为有效'+(positive?'正数':'非负数')+'。');}
-function validLoad(load){return Number.isInteger(load)&&load>=50&&load<=100;}
-function validPriceChange(value){return Number.isInteger(value)&&value>=-100&&value<=100;}
-function isMonthly(r){return r.params.loadMode==='monthly'||r.params.priceMode==='monthly';}
-function processingCost(contract,load){
-  if(!validLoad(load))throw new Error('产能负荷请输入 50%～100% 之间的整数。');
-  var lower=load<=70?50:70,upper=load<=70?70:100,table=contract.processingCostByLoad;
-  return round(table[lower]+(table[upper]-table[lower])*(load-lower)/(upper-lower),4);
-}
-function calculate(data,params){
-  if(!data||!data.meta||!Array.isArray(data.contracts))throw new Error('合同基线数据未就绪。');
-  var meta=data.meta,c=data.contracts.find(function(x){return x.id===params.contractId;});
-  if(!c)throw new Error('请选择有效销售合同。');
-  if(!validDate(meta.asOfDate)||!validDate(c.startDate)||!validDate(c.endDate)||c.startDate>c.endDate)throw new Error('合同或快照日期无效。');
-  ['snapshotId','dataVersion','modelVersion'].forEach(function(k){if(!meta[k])throw new Error('缺少快照或模型版本。');});
-  if(!c.processingCostVersion)throw new Error('缺少加工成本版本。');
-  if(meta.currency!=='CNY'||meta.taxBasis!=='excludingTax')throw new Error('请统一为人民币不含税口径。');
-  finite(c.salePrice,'合同售价',true);finite(c.baseRawPrice,'原料基价',true);finite(c.rawUsagePerTon,'原料耗用系数',true);finite(c.otherUnitCost,'其他单位成本',false);
-  if(!c.processingCostByLoad)throw new Error('缺少历史负荷成本。');
-  [100,70,50].forEach(function(l){finite(c.processingCostByLoad[l],l+'%负荷加工成本',false);});
-  var loadMode=params.loadMode||'uniform',priceMode=params.priceMode||'uniform';
-  if(['uniform','monthly'].indexOf(loadMode)<0)throw new Error('请选择有效的负荷设置方式。');
-  if(['uniform','monthly'].indexOf(priceMode)<0)throw new Error('请选择有效的原料价格设置方式。');
-  if(!validLoad(c.baseLoadPct)||(loadMode==='uniform'&&!validLoad(params.loadPct)))throw new Error('产能负荷请输入 50%～100% 之间的整数。');
-  if(priceMode==='uniform'&&!validPriceChange(params.rawPriceChangePct))throw new Error('原料价格变化请输入 -100%～+100% 之间的整数。');
-  if(!Array.isArray(c.monthlyDeliveries))throw new Error('缺少月度交付计划。');
-  var seen={};c.monthlyDeliveries.forEach(function(row){
-    if(!/^\d{4}-\d{2}$/.test(row.month)||!validDate(row.month+'-01')||seen[row.month]!=null)throw new Error('交付月份无效或重复。');
-    finite(row.quantity,'月度交付量',false);seen[row.month]=row.quantity;
-  });
-  var months=monthsFor(c,meta,params);if(!months.length)throw new Error('无可推演的后续交付。');
-  months.forEach(function(m){if(seen[m]==null)throw new Error(m+' 交付计划缺失，请补齐数据（无交付请明确填 0）。');});
-  var totalQty=months.reduce(function(a,m){return a+seen[m];},0);if(totalQty<=0)throw new Error('无可推演的后续交付。');
-  var loads={},priceChanges={};months.forEach(function(m){
-    var load=loadMode==='monthly'?(params.monthlyLoads||{})[m]:params.loadPct;
-    if(!validLoad(load))throw new Error(m+' 产能负荷请输入 50%～100% 之间的整数。');
-    loads[m]=load;
-    var change=priceMode==='monthly'?(params.monthlyPriceChanges||{})[m]:params.rawPriceChangePct;
-    if(!validPriceChange(change))throw new Error(m+' 原料价格变化请输入 -100%～+100% 之间的整数。');
-    priceChanges[m]=change;
-  });
-  var processing0=processingCost(c,c.baseLoadPct);
-  var cost0=round(c.rawUsagePerTon*c.baseRawPrice+processing0+c.otherUnitCost,4);
-  var u0=round(c.salePrice-cost0,4),cum0=0,cum1=0;
-  var rows=months.map(function(m){
-    var rawPrice=round(c.baseRawPrice*(1+priceChanges[m]/100),4);
-    var q=seen[m],processing=processingCost(c,loads[m]),unitCost=round(c.rawUsagePerTon*rawPrice+processing+c.otherUnitCost,4),unitProfit=round(c.salePrice-unitCost,4);
-    var rev=round(q*c.salePrice,2),b=round(q*cost0,2),s=round(q*unitCost,2),bp=round(rev-b,2),sp=round(rev-s,2);
-    cum0=round(cum0+bp,2);cum1=round(cum1+sp,2);
-    return {month:m,rawPriceChangePct:priceChanges[m],rawPrice:rawPrice,loadPct:loads[m],processingCost:processing,unitCost:unitCost,unitProfit:unitProfit,quantity:q,revenue:rev,baseCost:b,cost:s,baseProfit:bp,profit:sp,baseCumulative:cum0,cumulative:cum1};
-  });
-  var sum=function(key){return round(rows.reduce(function(a,r){return a+r[key];},0),2);};
-  // Contract-level unit metrics are volume weighted, not a mean of monthly loads.
-  var processing1=round(rows.reduce(function(a,m){return a+m.processingCost*m.quantity;},0)/totalQty,4);
-  var raw1=round(rows.reduce(function(a,m){return a+m.rawPrice*m.quantity;},0)/totalQty,4);
-  var uniform=loadMode==='uniform'&&priceMode==='uniform';
-  var cost1=uniform?rows[0].unitCost:round(sum('cost')/totalQty,4);
-  var u1=uniform?rows[0].unitProfit:round(sum('profit')/totalQty,4);
-  var visible=round(u1,2),baseVisible=round(u0,2);
-  var status=visible<0?'预计亏损':visible===0?'预计保本':visible<baseVisible?'利润下降':visible>baseVisible?'利润提升':'保持盈利';
-  var result={scenarioKey:'cost',resultType:'contractCost',name:'原料价格与生产负荷',snapshot:{meta:clone(meta),contract:clone(c)},params:clone(params),period:{unit:'month',start:months[0],end:months[months.length-1],months:months},quantity:totalQty,
-    baseline:{rawPrice:c.baseRawPrice,processingCost:processing0,unitCost:cost0,unitProfit:u0,revenue:sum('revenue'),cost:sum('baseCost'),profit:sum('baseProfit')},
-    simulation:{rawPrice:raw1,processingCost:processing1,unitCost:cost1,unitProfit:u1,revenue:sum('revenue'),cost:sum('cost'),profit:sum('profit')},
-    attribution:{raw:round(c.rawUsagePerTon*(raw1-c.baseRawPrice),4),load:round(processing1-processing0,4),unitCost:round(cost1-cost0,4),profit:round(sum('profit')-sum('baseProfit'),2)},
-    monthlyRows:rows,status:status,assumptions:ASSUMPTION};
-  result.params.loadMode=loadMode;result.params.monthlyLoads=loads;
-  result.params.priceMode=priceMode;result.params.monthlyPriceChanges=priceChanges;
-  result.params.horizonMonths=months.length;
-  // Full immutable baseline fingerprint prevents comparison of changed contracts under the same label.
-  result.comparisonKey=JSON.stringify([result.resultType,meta,c,months]);return result;
-}
 function data(){return window.SANDBOX_COST_DATA;}
 function currentContract(){return data().contracts.find(function(c){return c.id===sandboxParamValues.contractId;});}
-function setText(id,s){var el=document.getElementById(id);if(el)el.textContent=s;}
-function error(message){var el=document.getElementById('costInputError');if(el){el.textContent=message||'';el.hidden=!message;}}
-function initializeMonths(c,p){
-  p.monthlyLoads={};monthsFor(c,data().meta).forEach(function(m){p.monthlyLoads[m]=validLoad(p.loadPct)?p.loadPct:c.baseLoadPct;});
-  p.monthlyContractId=c.id;
+function contractDeliveries(c,months){
+  var byMonth={};c.monthlyDeliveries.forEach(function(r){byMonth[r.month]=Number(r.quantity);});
+  return months.map(function(m){if(byMonth[m]==null)throw new Error(m+' 销售合同月度基线缺失。');return {month:m,quantity:byMonth[m]};});
 }
-function initializePrices(c,p){
-  p.monthlyPriceChanges={};monthsFor(c,data().meta).forEach(function(m){p.monthlyPriceChanges[m]=validPriceChange(p.rawPriceChangePct)?p.rawPriceChangePct:0;});
-  p.monthlyPriceContractId=c.id;
+function contractQuantity(c,months){return round(contractDeliveries(c,months).reduce(function(a,r){return a+r.quantity;},0),4);}
+function processingCost(c,load){
+  var effective=Number(load),table=c.processingCostByLoad;
+  var lower=effective<=70?50:70,upper=effective<=70?70:100;
+  return round(table[lower]+(table[upper]-table[lower])*(effective-lower)/(upper-lower),4);
 }
-function monthlyEditor(c,p){
-  var host=document.getElementById('costMonthlyEditor'),loadMonthly=p.loadMode==='monthly',priceMonthly=p.priceMode==='monthly';
-  if(!host||(!loadMonthly&&!priceMonthly))return;
-  if(loadMonthly&&p.monthlyContractId!==c.id)initializeMonths(c,p);
-  if(priceMonthly&&p.monthlyPriceContractId!==c.id)initializePrices(c,p);
-  var activeMonths=monthsFor(c,data().meta,p);
-  // Keep edited months when shortening the horizon; initialize only newly shown months.
-  activeMonths.forEach(function(m){
-    if(loadMonthly&&!Object.prototype.hasOwnProperty.call(p.monthlyLoads,m))p.monthlyLoads[m]=validLoad(p.loadPct)?p.loadPct:c.baseLoadPct;
-    if(priceMonthly&&!Object.prototype.hasOwnProperty.call(p.monthlyPriceChanges,m))p.monthlyPriceChanges[m]=validPriceChange(p.rawPriceChangePct)?p.rawPriceChangePct:0;
+function baselinePlan(c,months){
+  var deliveries=contractDeliveries(c,months),priceByMonth={};
+  c.monthlyDeliveries.forEach(function(r,i){priceByMonth[r.month]=Number((c.monthlyPurchasePrices||[])[i]||c.baseRawPrice);});
+  var plan={sales:{},purchases:{},purchasePrices:{},loads:{}};
+  deliveries.forEach(function(r){
+    plan.sales[r.month]=r.quantity;
+    plan.purchases[r.month]=round(r.quantity*c.rawUsagePerTon,4);
+    plan.purchasePrices[r.month]=priceByMonth[r.month];
+    plan.loads[r.month]=Number(c.baseLoadPct);
   });
-  var layout=c.id+':'+loadMonthly+':'+priceMonthly+':'+activeMonths.join(',');
+  return plan;
+}
+function initializePlan(c,p){
+  var months=monthsFor(c,data().meta),plan=baselinePlan(c,months);
+  p.monthlySales=plan.sales;p.monthlyPurchases=plan.purchases;p.monthlyPurchasePrices=plan.purchasePrices;p.monthlyLoads=plan.loads;
+  p.monthlyPlanContractId=c.id;
+}
+function normalizedPlan(c,months,p){
+  var base=baselinePlan(c,months);
+  return {
+    sales:Object.assign({},base.sales,p.monthlySales||{}),
+    purchases:Object.assign({},base.purchases,p.monthlyPurchases||{}),
+    purchasePrices:Object.assign({},base.purchasePrices,p.monthlyPurchasePrices||{}),
+    loads:Object.assign({},base.loads,p.monthlyLoads||{})
+  };
+}
+function validateContract(dataSet,c,months){
+  if(!validDate(dataSet.meta.asOfDate)||!validDate(c.startDate)||!validDate(c.endDate)||c.startDate>c.endDate)throw new Error('合同或快照日期无效。');
+  ['snapshotId','dataVersion','modelVersion'].forEach(function(k){if(!dataSet.meta[k])throw new Error('缺少快照或模型版本。');});
+  if(dataSet.meta.currency!=='CNY'||dataSet.meta.taxBasis!=='excludingTax')throw new Error('请统一为人民币不含税口径。');
+  finite(c.salePrice,'合同售价',true);finite(c.rawUsagePerTon,'BOM 玉米淀粉耗用系数',true);finite(c.monthlyCapacity,'产线月产能',true);finite(c.baseLoadPct,'基线负荷',true);
+  if(c.baseLoadPct<50||c.baseLoadPct>100||!Number.isInteger(c.baseLoadPct))throw new Error('基线负荷必须为 50%～100% 的整数。');
+  if(!c.bomVersion||!c.materialCode||!c.processingCostVersion)throw new Error('缺少 BOM、物料或加工成本版本。');
+  [100,70,50].forEach(function(l){finite(Number(c.processingCostByLoad&&c.processingCostByLoad[l]),l+'%负荷加工成本',false);});
+  if(!months.length)throw new Error('无可推演的合同剩余月份。');
+  var seen={};c.monthlyDeliveries.forEach(function(r){
+    if(!/^\d{4}-\d{2}$/.test(r.month)||!validDate(r.month+'-01')||seen[r.month])throw new Error('销售合同月份无效或重复。');
+    finite(Number(r.quantity),'合同月度数量',false);seen[r.month]=true;
+  });
+}
+function validatePlan(c,months,plan){
+  var fieldIssues=[];
+  months.forEach(function(m){
+    var fields=[['销售履约量',plan.sales[m],false],['采购量',plan.purchases[m],false],['采购单价',plan.purchasePrices[m],true]];
+    fields.forEach(function(f){if(typeof f[1]!=='number'||!Number.isFinite(f[1])||(f[2]?f[1]<=0:f[1]<0))fieldIssues.push(m+' '+f[0]+'无效');});
+    var load=plan.loads[m];if(typeof load!=='number'||!Number.isFinite(load)||load<50||load>100||!Number.isInteger(load))fieldIssues.push(m+' 产能负荷必须为 50%～100% 的整数');
+  });
+  var totalContract=contractQuantity(c,months),rawNeed=round(totalContract*c.rawUsagePerTon,4),salesTotal=mapSum(plan.sales,months),purchaseTotal=mapSum(plan.purchases,months),issues=fieldIssues.slice();
+  if(!closeEnough(salesTotal,totalContract))issues.push('月度销售合计必须等于合同总量，当前差额 '+fmt(salesTotal-totalContract,2)+' 吨');
+  if(!closeEnough(purchaseTotal,rawNeed))issues.push('月度采购合计必须等于 BOM 总需求，当前差额 '+fmt(purchaseTotal-rawNeed,2)+' 吨');
+  return {issues:issues,fieldIssues:fieldIssues,totalContract:totalContract,rawNeed:rawNeed,salesTotal:salesTotal,purchaseTotal:purchaseTotal};
+}
+function runPlan(c,months,plan){
+  var rawQty=0,rawValue=0,fgQty=0,fgValue=0,cumRevenue=0,cumCost=0,cumProfit=0,cumFulfilled=0,cumAbandoned=0;
+  var rows=months.map(function(m){
+    var salesPlan=Number(plan.sales[m]),purchaseQty=Number(plan.purchases[m]),purchasePrice=Number(plan.purchasePrices[m]),loadPct=Number(plan.loads[m]);
+    rawQty=round(rawQty+purchaseQty,4);rawValue=round(rawValue+purchaseQty*purchasePrice,2);
+    var availableRaw=rawQty,rawWac=rawQty>0?round(rawValue/rawQty,4):0;
+    var plannedProduction=round(Math.min(salesPlan,availableRaw/c.rawUsagePerTon),4);
+    var rawConsumed=round(plannedProduction*c.rawUsagePerTon,4),rawConsumedCost=round(rawConsumed*rawWac,2);
+    rawQty=round(Math.max(0,rawQty-rawConsumed),4);rawValue=round(Math.max(0,rawValue-rawConsumedCost),2);
+    var processUnit=processingCost(c,loadPct),processingAmount=round(plannedProduction*processUnit,2),productionCost=round(rawConsumedCost+processingAmount,2);
+    var expectedRawPrice=rawWac>0?rawWac:purchasePrice,unitRawCost=round(expectedRawPrice*c.rawUsagePerTon,4),unitProductionCost=round(unitRawCost+processUnit,4);
+    fgQty=round(fgQty+plannedProduction,4);fgValue=round(fgValue+productionCost,2);
+    var fgWac=fgQty>0?round(fgValue/fgQty,4):0,fulfilled=round(Math.min(salesPlan,fgQty),4),abandoned=round(salesPlan-fulfilled,4),salesCost=round(fulfilled*fgWac,2),revenue=round(fulfilled*c.salePrice,2),profit=round(revenue-salesCost,2);
+    fgQty=round(Math.max(0,fgQty-fulfilled),4);fgValue=round(Math.max(0,fgValue-salesCost),2);
+    cumRevenue=round(cumRevenue+revenue,2);cumCost=round(cumCost+salesCost,2);cumProfit=round(cumProfit+profit,2);cumFulfilled=round(cumFulfilled+fulfilled,4);cumAbandoned=round(cumAbandoned+abandoned,4);
+    return {month:m,salesPlan:salesPlan,purchaseQty:purchaseQty,purchasePrice:purchasePrice,purchaseAmount:round(purchaseQty*purchasePrice,2),availableRaw:availableRaw,plannedProduction:plannedProduction,rawConsumed:rawConsumed,rawConsumedCost:rawConsumedCost,loadPct:loadPct,processingCost:processUnit,processingAmount:processingAmount,unitRawCost:unitRawCost,unitProductionCost:unitProductionCost,rawWac:rawWac,rawEndingQty:rawQty,rawEndingValue:rawValue,productionCost:productionCost,fgWac:fgWac,fulfilled:fulfilled,abandoned:abandoned,fgEndingQty:fgQty,fgEndingValue:fgValue,revenue:revenue,cost:salesCost,profit:profit,cumulativeRevenue:cumRevenue,cumulativeCost:cumCost,cumulativeProfit:cumProfit,cumulativeFulfilled:cumFulfilled,cumulativeAbandoned:cumAbandoned};
+  });
+  var totalContract=contractQuantity(c,months),fulfilled=sum(rows,'fulfilled'),abandoned=sum(rows,'abandoned'),revenue=sum(rows,'revenue'),cost=sum(rows,'cost'),profit=sum(rows,'profit');
+  return {rows:rows,contractQuantity:totalContract,rawRequirement:round(totalContract*c.rawUsagePerTon,4),fulfilled:fulfilled,abandoned:abandoned,fulfillmentRate:totalContract?round(fulfilled/totalContract*100,2):0,revenue:revenue,cost:cost,profit:profit,unitCost:fulfilled?round(cost/fulfilled,4):0,unitProfit:fulfilled?round(profit/fulfilled,4):0,consumedRawCost:sum(rows,'rawConsumedCost'),processingAmount:sum(rows,'processingAmount'),endingRawQty:rawQty,endingRawValue:rawValue,endingFgQty:fgQty,endingFgValue:fgValue,purchaseAmount:sum(rows,'purchaseAmount'),production:sum(rows,'plannedProduction')};
+}
+function calculate(dataSet,params){
+  if(!dataSet||!dataSet.meta||!Array.isArray(dataSet.contracts))throw new Error('合同基线数据未就绪。');
+  var c=dataSet.contracts.find(function(x){return x.id===params.contractId;});if(!c)throw new Error('请选择有效销售合同。');
+  var months=monthsFor(c,dataSet.meta);validateContract(dataSet,c,months);
+  var plan=normalizedPlan(c,months,params),audit=validatePlan(c,months,plan);if(audit.issues.length)throw new Error(audit.issues[0]);
+  var basePlan=baselinePlan(c,months),baselineRun=runPlan(c,months,basePlan),simulationRun=runPlan(c,months,plan);
+  var rows=simulationRun.rows.map(function(r,i){var b=baselineRun.rows[i];return Object.assign({},r,{baseFulfilled:b.fulfilled,baseCost:b.cost,baseProfit:b.profit});});
+  var status=simulationRun.abandoned>0?(simulationRun.profit<0?'履约不足且亏损':'履约不足'):(simulationRun.profit<0?'全量履约但亏损':simulationRun.profit===0?'全量履约并保本':'全量履约并盈利');
+  var result={scenarioKey:'cost',resultType:'contractCost',name:'原料价格与生产负荷',snapshot:{meta:clone(dataSet.meta),contract:clone(c)},params:Object.assign(clone(params),{monthlySales:plan.sales,monthlyPurchases:plan.purchases,monthlyPurchasePrices:plan.purchasePrices,monthlyLoads:plan.loads}),period:{unit:'month',start:months[0],end:months[months.length-1],months:months},contractQuantity:audit.totalContract,rawRequirement:audit.rawNeed,baseline:baselineRun,simulation:simulationRun,monthlyRows:rows,status:status,assumptions:ASSUMPTION};
+  result.attribution={fulfilled:round(simulationRun.fulfilled-baselineRun.fulfilled,4),abandoned:round(simulationRun.abandoned-baselineRun.abandoned,4),revenue:round(simulationRun.revenue-baselineRun.revenue,2),cost:round(simulationRun.cost-baselineRun.cost,2),profit:round(simulationRun.profit-baselineRun.profit,2)};
+  result.comparisonKey=JSON.stringify([result.resultType,dataSet.meta,c,months]);return result;
+}
+
+function setText(id,value){var el=document.getElementById(id);if(el)el.textContent=value;}
+function setTextBySelector(selector,value){var el=document.querySelector(selector);if(el)el.textContent=value;}
+function error(message){var el=document.getElementById('costInputError');if(el){el.textContent=message||'';el.hidden=!message;}}
+function toneForDiff(diff){return closeEnough(diff,0)?'ok':'bad';}
+function signedQty(v){return (v>0?'+':'')+fmt(v,2)+' 吨';}
+function sectionHeader(step,title,help){return '<div class="cost-section-head"><span class="cost-step">'+step+'</span><div><b>'+title+'</b><small>'+help+'</small></div></div>';}
+function renderPlanEditor(c,p,months){
+  var host=document.getElementById('costPlanEditor');if(!host)return;
+  var layout=c.id+':'+months.join(',');
   if(host.dataset.layout!==layout){
     host.dataset.layout=layout;
-    host.innerHTML='<div class="cost-month-editor-head"><span>逐月设置 <small>价格涨跌均相对基准价，不逐月累乘</small></span><div class="cost-month-reset">'+
-      (priceMonthly?'<button class="btn btn-sm" data-reset-price onclick="SCOS_COST_SANDBOX.resetPrices()"></button>':'')+
-      (loadMonthly?'<button class="btn btn-sm" data-reset-load onclick="SCOS_COST_SANDBOX.resetMonths()"></button>':'')+'</div></div><div class="cost-month-input-grid">'+activeMonths.map(function(m){
-      var q=c.monthlyDeliveries.find(function(x){return x.month===m;});
-      return `<div class="cost-month-input"><div class="cost-month-input-title">${m} <small>计划 ${q?fmt(q.quantity,0):'—'} 吨</small></div>
-        ${priceMonthly?`<label class="cost-month-field" for="priceNumber-${m}">原料价格变化</label><div class="cost-load-control"><input type="range" min="-100" max="100" step="1" data-month-price-range="${m}" aria-label="${m}原料涨跌滑块" oninput="SCOS_COST_SANDBOX.updatePriceMonth('${m}',this.value)"><div class="cost-load-number"><input id="priceNumber-${m}" type="number" min="-100" max="100" step="1" data-month-price-number="${m}" aria-label="${m}原料涨跌百分比" aria-describedby="costInputError" oninput="SCOS_COST_SANDBOX.updatePriceMonth('${m}',this.value)"><span>%</span></div></div><small class="cost-summary" data-month-price="${m}"></small>`:''}
-        ${loadMonthly?`<label class="cost-month-field" for="loadNumber-${m}">产能负荷</label><div class="cost-load-control"><input type="range" min="50" max="100" step="1" data-month-range="${m}" aria-label="${m}负荷滑块" oninput="SCOS_COST_SANDBOX.updateMonth('${m}',this.value)"><div class="cost-load-number"><input id="loadNumber-${m}" type="number" min="50" max="100" step="1" data-month-number="${m}" aria-label="${m}负荷百分比" aria-describedby="costInputError" oninput="SCOS_COST_SANDBOX.updateMonth('${m}',this.value)"><span>%</span></div></div><small class="cost-summary" data-month-cost="${m}"></small>`:''}</div>`;
-    }).join('')+'</div>';
+    host.innerHTML='<div class="cost-plan-toolbar"><div><b>月度经营方案</b><small>按销售 → 采购 → 生产顺序调整；计划生产量由系统计算。</small></div><button class="btn btn-sm" onclick="SCOS_COST_SANDBOX.resetPlan()">恢复合同基线</button></div>'+
+      '<section class="cost-plan-section cost-sales-section">'+sectionHeader('1','销售节奏','调整各月履约销量，合计必须等于合同总量。')+'<div class="overflow-auto"><table class="data-table cost-plan-table cost-sales-table"><thead><tr><th>月份</th><th>合同基线销量（吨）</th><th>履约销量（吨）</th></tr></thead><tbody>'+months.map(function(m){return '<tr><td class="text-mono">'+m+'</td><td data-cost-sales-base="'+m+'"></td><td><input type="number" min="0" step="10" data-cost-field="sales" data-month="'+m+'" aria-label="'+m+'履约销量" oninput="SCOS_COST_SANDBOX.updateSchedule(\''+m+'\',\'sales\',this.value)"></td></tr>';}).join('')+'</tbody><tfoot><tr><th>合计</th><th id="costSalesBaseTotalCell"></th><th id="costSalesTotalCell"></th></tr></tfoot></table></div></section>'+
+      '<section class="cost-plan-section cost-purchase-section">'+sectionHeader('2','采购节奏与价格','调整各月玉米淀粉采购量和采购单价；采购量合计必须等于 BOM 总需求。')+'<div class="overflow-auto"><table class="data-table cost-plan-table cost-purchase-table"><thead><tr><th>月份</th><th>采购量（吨）</th><th>采购单价（元/吨）</th><th>月末原料库存（吨）</th></tr></thead><tbody>'+months.map(function(m){return '<tr><td class="text-mono">'+m+'</td><td><input type="number" min="0" step="10" data-cost-field="purchases" data-month="'+m+'" aria-label="'+m+'玉米淀粉采购量" oninput="SCOS_COST_SANDBOX.updateSchedule(\''+m+'\',\'purchases\',this.value)"></td><td><input type="number" min="0.01" step="10" data-cost-field="purchasePrices" data-month="'+m+'" aria-label="'+m+'玉米淀粉采购单价" oninput="SCOS_COST_SANDBOX.updateSchedule(\''+m+'\',\'purchasePrices\',this.value)"></td><td data-cost-raw-ending="'+m+'"></td></tr>';}).join('')+'</tbody><tfoot><tr><th>合计</th><th id="costPurchaseTotalCell"></th><th>—</th><th id="costRawEndingCell"></th></tr></tfoot></table></div></section>'+
+      '<section class="cost-plan-section cost-production-section">'+sectionHeader('3','生产负荷与系统计划','只维护产能负荷；系统按当月履约销量与累计可用原料计算计划生产量。')+'<div class="cost-production-rule">原料充足：计划生产量 = 履约销量；原料不足：计划生产量 = 累计可用原料 ÷ '+fmt(c.rawUsagePerTon,4)+'。单位原料成本 = 原料移动加权价 × 固定 BOM 耗用系数（单位换算，与负荷无关）；预计单位生产成本 = 单位原料成本 + 单位加工成本。</div><div class="overflow-auto"><table class="data-table cost-plan-table cost-production-table"><thead><tr><th>月份</th><th>履约销量（吨）</th><th>系统计划生产量（吨）</th><th>产能负荷（%）</th><th>预计单位原料成本（元/吨成品）</th><th>单位加工成本（元/吨成品）</th><th>预计单位生产成本（元/吨成品）</th></tr></thead><tbody>'+months.map(function(m){return '<tr><td class="text-mono">'+m+'</td><td data-cost-sales-view="'+m+'"></td><td data-cost-production="'+m+'"></td><td><input type="number" min="50" max="100" step="1" data-cost-field="loads" data-month="'+m+'" aria-label="'+m+'产能负荷" oninput="SCOS_COST_SANDBOX.updateSchedule(\''+m+'\',\'loads\',this.value)"></td><td data-cost-raw-unit="'+m+'"></td><td data-cost-process="'+m+'"></td><td data-cost-unit="'+m+'"></td></tr>';}).join('')+'</tbody><tfoot><tr><th>合计/参考</th><th id="costSalesViewTotalCell"></th><th id="costProductionTotalCell"></th><th>—</th><th>原料价 × 固定 BOM</th><th>仅随负荷变化</th><th>单位原料成本 + 单位加工成本</th></tr></tfoot></table></div></section>';
   }
-  if(loadMonthly){
-    host.querySelector('[data-reset-load]').textContent='负荷全部设为 '+(validLoad(p.loadPct)?p.loadPct:c.baseLoadPct)+'%';
-    host.querySelectorAll('[data-month-number]').forEach(function(input){
-      var m=input.dataset.monthNumber,load=p.monthlyLoads[m],valid=validLoad(load);
-      if(valid){host.querySelector('[data-month-range="'+m+'"]').value=load;if(input.value===''||Number(input.value)!==load)input.value=load;}
-      input.setAttribute('aria-invalid',String(!valid));
-      host.querySelector('[data-month-cost="'+m+'"]').textContent=valid?'加工成本 '+fmt(processingCost(c,load))+' 元/吨':'请输入 50～100 的整数';
-    });
-  }
-  if(priceMonthly){
-    host.querySelector('[data-reset-price]').textContent='原料全部设为 '+signed(validPriceChange(p.rawPriceChangePct)?p.rawPriceChangePct:0,0)+'%';
-    host.querySelectorAll('[data-month-price-number]').forEach(function(input){
-      var m=input.dataset.monthPriceNumber,value=p.monthlyPriceChanges[m],valid=validPriceChange(value);
-      if(valid){host.querySelector('[data-month-price-range="'+m+'"]').value=value;if(input.value===''||Number(input.value)!==value)input.value=value;}
-      input.setAttribute('aria-invalid',String(!valid));
-      host.querySelector('[data-month-price="'+m+'"]').textContent=valid?'原料价格 '+fmt(c.baseRawPrice*(1+value/100))+' 元/吨':'请输入 -100～100 的整数';
-    });
-  }
+  var keys={sales:'monthlySales',purchases:'monthlyPurchases',purchasePrices:'monthlyPurchasePrices',loads:'monthlyLoads'},base=baselinePlan(c,months);
+  Object.keys(keys).forEach(function(field){
+    host.querySelectorAll('[data-cost-field="'+field+'"]').forEach(function(input){var m=input.dataset.month,value=p[keys[field]][m];if(Number.isFinite(value)&&(input.value===''||Number(input.value)!==value))input.value=value;input.setAttribute('aria-invalid',String(!Number.isFinite(value)));});
+  });
+  months.forEach(function(m){setTextBySelector('[data-cost-sales-base="'+m+'"]',fmt(base.sales[m],0));setTextBySelector('[data-cost-sales-view="'+m+'"]',Number.isFinite(p.monthlySales[m])?fmt(p.monthlySales[m],0):'—');});
+  setText('costSalesBaseTotalCell',fmt(mapSum(base.sales,months),0)+' 吨');
 }
-function updateHorizon(value){
-  if(sandboxRunning)cancelSandboxRun(true);
-  sandboxParamValues.horizonMonths=value===null?null:String(value).trim()===''?NaN:Number(value);
-  updateParams();invalidateSandboxResult();
-}
-function setPriceMode(mode){
-  if(['uniform','monthly'].indexOf(mode)<0)return;
-  if(sandboxRunning)cancelSandboxRun(true);
-  sandboxParamValues.priceMode=mode;updateParams();invalidateSandboxResult();
-}
-function updatePrice(value){
-  if(sandboxRunning)cancelSandboxRun(true);
-  sandboxParamValues.rawPriceChangePct=value.trim()===''?NaN:Number(value);
-  updateParams();invalidateSandboxResult();
-}
-function updatePriceMonth(month,value){
-  if(sandboxParamValues.priceMode!=='monthly'||!Object.prototype.hasOwnProperty.call(sandboxParamValues.monthlyPriceChanges||{},month))return;
-  if(sandboxRunning)cancelSandboxRun(true);
-  sandboxParamValues.monthlyPriceChanges[month]=value.trim()===''?NaN:Number(value);
-  updateParams();invalidateSandboxResult();
-}
-function resetPrices(){
-  if(sandboxRunning)cancelSandboxRun(true);
-  initializePrices(currentContract(),sandboxParamValues);updateParams();invalidateSandboxResult();
-}
-function setLoadMode(mode){
-  if(['uniform','monthly'].indexOf(mode)<0)return;
-  if(sandboxRunning)cancelSandboxRun(true);
-  sandboxParamValues.loadMode=mode;
-  updateParams();invalidateSandboxResult();
-}
-function updateMonth(month,value){
-  if(sandboxParamValues.loadMode!=='monthly'||!Object.prototype.hasOwnProperty.call(sandboxParamValues.monthlyLoads||{},month))return;
-  if(sandboxRunning)cancelSandboxRun(true);
-  sandboxParamValues.monthlyLoads[month]=value===''?NaN:Number(value);
-  updateParams();invalidateSandboxResult();
-}
-function resetMonths(){
-  if(sandboxRunning)cancelSandboxRun(true);
-  initializeMonths(currentContract(),sandboxParamValues);updateParams();invalidateSandboxResult();
+function renderAudit(c,p,months){
+  var plan=normalizedPlan(c,months,p),audit=validatePlan(c,months,plan),salesDiff=round(audit.salesTotal-audit.totalContract,4),purchaseDiff=round(audit.purchaseTotal-audit.rawNeed,4),preview=audit.fieldIssues.length?null:runPlan(c,months,plan),productionTotal=preview?preview.production:NaN;
+  document.getElementById('costReconciliation').innerHTML='<div class="cost-recon '+toneForDiff(salesDiff)+'"><span>销售合同总量</span><b>'+fmt(audit.totalContract,0)+' 吨</b><small>月度履约 '+fmt(audit.salesTotal,0)+' 吨 · 差额 '+signedQty(salesDiff)+'</small></div><div class="cost-recon"><span>销售转玉米淀粉比例</span><b>'+fmt(c.rawUsagePerTon,4)+' 吨/吨</b><small>1 吨玉米淀粉约可生产 '+fmt(1/c.rawUsagePerTon,4)+' 吨成品</small></div><div class="cost-recon '+toneForDiff(purchaseDiff)+'"><span>BOM 折算采购总需求</span><b>'+fmt(audit.rawNeed,0)+' 吨</b><small>月度采购 '+fmt(audit.purchaseTotal,0)+' 吨 · 差额 '+signedQty(purchaseDiff)+'</small></div><div class="cost-recon"><span>系统计划生产合计</span><b>'+(Number.isFinite(productionTotal)?fmt(productionTotal,0)+' 吨':'—')+'</b><small>由履约销量与累计可用原料自动计算</small></div>';
+  setText('costSalesTotalCell',fmt(audit.salesTotal,0)+' 吨');setText('costPurchaseTotalCell',fmt(audit.purchaseTotal,0)+' 吨');setText('costSalesViewTotalCell',fmt(audit.salesTotal,0)+' 吨');setText('costProductionTotalCell',Number.isFinite(productionTotal)?fmt(productionTotal,0)+' 吨':'—');setText('costRawEndingCell',preview?fmt(preview.endingRawQty,1)+' 吨':'—');
+  months.forEach(function(m){var row=preview&&preview.rows.find(function(r){return r.month===m;});setTextBySelector('[data-cost-raw-ending="'+m+'"]',row?fmt(row.rawEndingQty,1):'—');setTextBySelector('[data-cost-production="'+m+'"]',row?fmt(row.plannedProduction,0):'—');setTextBySelector('[data-cost-raw-unit="'+m+'"]',row?fmt(row.unitRawCost):'—');setTextBySelector('[data-cost-process="'+m+'"]',row?fmt(row.processingCost):'—');setTextBySelector('[data-cost-unit="'+m+'"]',row?fmt(row.unitProductionCost):'—');setTextBySelector('[data-cost-sales-view="'+m+'"]',Number.isFinite(plan.sales[m])?fmt(plan.sales[m],0):'—');});
+  error(audit.issues.join('；'));return audit;
 }
 function context(isCost){
   var host=document.getElementById('sandboxCard');if(host)host.classList.toggle('cost-mode',isCost);
@@ -194,108 +159,61 @@ function context(isCost){
 }
 function renderParams(){
   var p=sandboxParamValues;
-  document.getElementById('sandboxParamGrid').innerHTML=`
-    <div class="sandbox-param cost-contract"><label class="sandbox-param-top" for="costContract">销售合同</label><select id="costContract" class="sandbox-select" onchange="updateSandboxParam('contractId',this.value)">${data().contracts.map(function(c){return '<option value="'+esc(c.id)+'" '+(c.id===p.contractId?'selected':'')+'>'+esc(c.customer+' · '+c.product+' · '+c.id)+'</option>';}).join('')}</select><div id="costContractSummary" class="cost-summary"></div></div>
-    <div class="cost-horizon"><label for="costHorizonInput">推演时长</label><div class="cost-load-number"><input id="costHorizonInput" type="number" min="1" step="1" aria-label="推演月数" aria-describedby="costHorizonHint costInputError" oninput="SCOS_COST_SANDBOX.updateHorizon(this.value)"><span>个月</span></div><button class="btn btn-sm" onclick="SCOS_COST_SANDBOX.updateHorizon(null)">至合同结束</button><span id="costHorizonHint" class="cost-summary"></span></div>
-    <div class="sandbox-param"><div class="sandbox-param-top"><span id="costPriceLabel">玉米淀粉价格变化</span><span id="costPriceValue" class="sandbox-param-value"></span></div>
-      <div class="cost-load-modes" role="group" aria-label="原料价格设置方式"><button class="btn btn-sm" data-price-mode="uniform" onclick="SCOS_COST_SANDBOX.setPriceMode('uniform')">统一涨跌</button><button class="btn btn-sm" data-price-mode="monthly" onclick="SCOS_COST_SANDBOX.setPriceMode('monthly')">按月设置</button></div>
-      <div id="costUniformPrice"><div class="cost-load-control"><input id="costPrice" type="range" min="-100" max="100" step="1" value="${p.rawPriceChangePct}" aria-labelledby="costPriceLabel" oninput="SCOS_COST_SANDBOX.updatePrice(this.value)"><div class="cost-load-number"><input id="costPriceInput" type="number" min="-100" max="100" step="1" value="${p.rawPriceChangePct}" aria-label="原料价格变化百分比" aria-describedby="costInputError" oninput="SCOS_COST_SANDBOX.updatePrice(this.value)"><span>%</span></div></div><div class="cost-price-scale"><span>-100%</span><span>0%</span><span>+100%</span></div></div>
-      <div id="costRawPrice" class="cost-summary"></div>
-    </div>
-    <div class="sandbox-param"><div class="sandbox-param-top"><span id="costLoadLabel">产能负荷</span><span id="costBaseLoad" class="cost-summary"></span></div>
-      <div class="cost-load-modes" role="group" aria-label="负荷设置方式"><button class="btn btn-sm" data-load-mode="uniform" onclick="SCOS_COST_SANDBOX.setLoadMode('uniform')">统一负荷</button><button class="btn btn-sm" data-load-mode="monthly" onclick="SCOS_COST_SANDBOX.setLoadMode('monthly')">按月设置</button></div>
-      <div id="costUniformLoad"><div class="cost-load-control"><input id="costLoadRange" type="range" min="50" max="100" step="1" value="${p.loadPct}" aria-labelledby="costLoadLabel" oninput="updateSandboxParam('loadPct',this.value)"><div class="cost-load-number"><input id="costLoadInput" type="number" min="50" max="100" step="1" value="${p.loadPct}" aria-label="产能负荷百分比" aria-describedby="costInputError" oninput="updateSandboxParam('loadPct',this.value)"><span>%</span></div></div><div class="cost-load-scale"><span>50%</span><span>100%</span></div><div id="costProcessingHint" class="cost-summary"></div></div>
-    </div>
-    <div id="costMonthlyEditor" class="cost-month-editor" hidden></div><p class="cost-assumption">${ASSUMPTION}</p><div id="costInputError" class="cost-error" role="alert" hidden></div>`;
+  document.getElementById('sandboxParamGrid').innerHTML='<div class="sandbox-param cost-contract"><label class="sandbox-param-top" for="costContract">销售合同</label><select id="costContract" class="sandbox-select" onchange="updateSandboxParam(\'contractId\',this.value)">'+data().contracts.map(function(c){return '<option value="'+esc(c.id)+'" '+(c.id===p.contractId?'selected':'')+'>'+esc(c.customer+' · '+c.product+' · '+c.id)+'</option>';}).join('')+'</select><div id="costContractSummary" class="cost-summary"></div></div><div id="costReconciliation" class="cost-reconciliation"></div><div id="costPlanEditor" class="cost-month-editor"></div><p class="cost-assumption">'+ASSUMPTION+'</p><div id="costInputError" class="cost-error" role="alert" hidden></div>';
   context(true);updateParams();
 }
 function updateParams(changedKey){
   var c=currentContract(),p=sandboxParamValues;if(!c){error('请选择有效合同。');return;}
-  if(changedKey==='contractId')p.horizonMonths=null;
-  var available=monthsFor(c,data().meta).length,horizon=p.horizonMonths==null?available:p.horizonMonths;
-  var horizonInput=document.getElementById('costHorizonInput'),horizonValid=Number.isInteger(horizon)&&horizon>=1&&horizon<=available;
-  horizonInput.max=available;horizonInput.disabled=available===0;
-  if(horizonValid&&(horizonInput.value===''||Number(horizonInput.value)!==horizon))horizonInput.value=horizon;
-  horizonInput.setAttribute('aria-invalid',String(!horizonValid));
-  setText('costHorizonHint','合同到期 '+c.endDate+' · 最多 '+available+' 个月');
-  if(changedKey==='contractId'&&p.loadMode==='monthly')initializeMonths(c,p);
-  if(changedKey==='contractId'&&p.priceMode==='monthly')initializePrices(c,p);
-  var monthly=p.loadMode==='monthly',priceMonthly=p.priceMode==='monthly';
-  document.getElementById('costUniformLoad').hidden=monthly;
-  document.getElementById('costMonthlyEditor').hidden=!monthly&&!priceMonthly;
-  document.getElementById('costUniformPrice').hidden=priceMonthly;
-  document.querySelectorAll('[data-price-mode]').forEach(function(b){var on=b.dataset.priceMode===(priceMonthly?'monthly':'uniform');b.classList.toggle('btn-primary',on);b.setAttribute('aria-pressed',String(on));});
-  document.querySelectorAll('[data-load-mode]').forEach(function(b){var on=b.dataset.loadMode===(monthly?'monthly':'uniform');b.classList.toggle('btn-primary',on);b.setAttribute('aria-pressed',String(on));});
-  try{monthlyEditor(c,p);}catch(e){error(e.message);}
-  var priceValid=validPriceChange(p.rawPriceChangePct),priceInput=document.getElementById('costPriceInput');
-  if(priceValid){document.getElementById('costPrice').value=p.rawPriceChangePct;if(priceInput.value===''||Number(priceInput.value)!==p.rawPriceChangePct)priceInput.value=p.rawPriceChangePct;}
-  priceInput.setAttribute('aria-invalid',String(!priceValid));
-  setText('costPriceValue',priceMonthly?'按月设置':priceValid?signed(p.rawPriceChangePct,0)+'%':'待填写');
-  setText('costRawPrice',priceMonthly?'基准原料价 '+fmt(c.baseRawPrice)+' 元/吨，各月涨跌相对此价格':priceValid?fmt(c.baseRawPrice)+' → '+fmt(c.baseRawPrice*(1+p.rawPriceChangePct/100))+' 元/吨原料':'支持 -100%～+100%，每次调节 1%');
-  setText('costBaseLoad','原负荷 '+c.baseLoadPct+'%');
-  var loadRange=document.getElementById('costLoadRange'),loadInput=document.getElementById('costLoadInput');
-  if(validLoad(p.loadPct)){
-    loadRange.value=p.loadPct;
-    if(loadInput.value===''||Number(loadInput.value)!==p.loadPct)loadInput.value=p.loadPct;
-  }
-  loadInput.setAttribute('aria-invalid',String(!validLoad(p.loadPct)));
-  setText('costProcessingHint',validLoad(p.loadPct)?'预计单位加工成本 '+fmt(processingCost(c,p.loadPct))+' 元/吨':'支持 50%～100%，每次调节 1%');
-  try{
-    var r=calculate(data(),p);error('');
-    setText('costContractSummary',c.line+' · 固定售价 '+fmt(c.salePrice)+' 元/吨 · '+r.period.start+'—'+r.period.end+' · '+fmt(r.quantity,0)+' 吨');
-    setText('costPeriodNote','推演 '+r.period.months.length+' 个月 · '+r.period.start+'—'+r.period.end);
-  }catch(e){error(e.message);setText('costContractSummary',c.line+' · 固定售价 '+fmt(c.salePrice)+' 元/吨');setText('costPeriodNote','按月推演至合同结束');}
-  var details=document.getElementById('costDataBody');if(details)details.innerHTML='<p>'+ASSUMPTION+' 原料涨跌和负荷均可统一或逐月设置。各月涨跌相对基准原料价计算，不按上月累乘；-100% 表示原料价格为 0，+100% 表示基准价的两倍。合同单位指标按计划交付量加权，不计算库存或锁价缓冲。</p><p>基线快照 '+esc(data().meta.snapshotId)+' · 数据截止 '+esc(data().meta.asOfDate)+' · 模型 '+esc(data().meta.modelVersion)+' · '+esc(c.processingCostVersion)+'</p><p>人民币不含税；原料耗用 '+fmt(c.rawUsagePerTon,4)+' 吨/吨成品，已含收率与正常损耗；其他成本 '+fmt(c.otherUnitCost)+' 元/吨。</p><table class="data-table"><thead><tr><th>产能负荷</th><th>单位加工成本（元/吨成品）</th></tr></thead><tbody>'+[100,70,50].map(function(l){return '<tr><td>'+l+'%</td><td>'+fmt(c.processingCostByLoad[l])+'</td></tr>';}).join('')+'</tbody></table><p>单位成本＝原料耗用×原料价格＋对应负荷加工成本＋其他成本。50%～100%之间按相邻历史档位分段线性插值，不外推。加工成本含制造费用，不含单列的原料与其他成本；当前均为 Mock 参考值。预计履约利润不等于企业净利润。</p>';
+  if(changedKey==='contractId'||p.monthlyPlanContractId!==c.id)initializePlan(c,p);
+  var months=monthsFor(c,data().meta),qty=contractQuantity(c,months),rawNeed=round(qty*c.rawUsagePerTon,4);
+  setText('costContractSummary',c.line+' · 固定售价 '+fmt(c.salePrice)+' 元/吨 · '+months[0]+'—'+months[months.length-1]+' · 合同总量 '+fmt(qty,0)+' 吨');
+  setText('costPeriodNote','按月推演 '+months.length+' 个月 · '+months[0]+'—'+months[months.length-1]);renderPlanEditor(c,p,months);renderAudit(c,p,months);
+  var details=document.getElementById('costDataBody');if(details)details.innerHTML='<p>'+ASSUMPTION+' 当月采购先入原料库存，再按移动加权价领用生产；负荷不改变计划生产量、原料移动加权价、固定 BOM 耗用系数或单位原料成本。</p><p>基线快照 '+esc(data().meta.snapshotId)+' · 数据截止 '+esc(data().meta.asOfDate)+' · 模型 '+esc(data().meta.modelVersion)+' · '+esc(c.processingCostVersion)+'</p><p>合同总量 '+fmt(qty,0)+' 吨；'+esc(c.bomVersion)+'：'+fmt(c.rawUsagePerTon,4)+' 吨玉米淀粉/吨成品，即 1 吨玉米淀粉约可生产 '+fmt(1/c.rawUsagePerTon,4)+' 吨成品；折算采购总需求 '+fmt(rawNeed,2)+' 吨。BOM 相乘只是把“元/吨原料”换算为“元/吨成品”，不是负荷调整因子。</p><table class="data-table"><thead><tr><th>产能负荷</th><th>单位加工成本（元/吨成品）</th></tr></thead><tbody>'+[100,70,50].map(function(l){return '<tr><td>'+l+'%</td><td>'+fmt(c.processingCostByLoad[l])+'</td></tr>';}).join('')+'</tbody></table><p>负荷必须在 50%～100%，中间值按相邻历史档位线性插值，且仅改变单位加工成本。销售成本只结转已履约成品的已耗用原料与加工成本；未耗用原料的数量和金额作为期末库存资产保留，不进入本合同成本。</p>';
 }
-function schedule(r,key,showSign){
-  var groups=[];r.monthlyRows.forEach(function(m){var value=m[key],last=groups[groups.length-1];if(last&&last.value===value)last.end=m.month;else groups.push({start:m.month,end:m.month,value:value});});
-  return groups.map(function(g){return g.start+(g.start===g.end?'':'—'+g.end)+'：'+(showSign?signed(g.value,0):g.value)+'%';}).join('；');
+function updateSchedule(month,field,value){
+  var mapKey={sales:'monthlySales',purchases:'monthlyPurchases',purchasePrices:'monthlyPurchasePrices',loads:'monthlyLoads'}[field];if(!mapKey)return;
+  if(sandboxRunning)cancelSandboxRun(true);sandboxParamValues[mapKey][month]=String(value).trim()===''?NaN:Number(value);updateParams();invalidateSandboxResult();
 }
-function summary(r){return (r.params.priceMode==='monthly'?'原料按月 '+schedule(r,'rawPriceChangePct',true):'原料 '+signed(r.params.rawPriceChangePct,0)+'%')+' · '+(r.params.loadMode==='monthly'?'负荷按月 '+schedule(r,'loadPct',false):'统一负荷 '+r.params.loadPct+'%');}
-function delta(v,unit){return v===0?'较基线无变化':'较基线'+(v>0?'增加 ':'减少 ')+fmt(Math.abs(v))+unit;}
-function card(label,value,base,change,tone){return '<div class="cost-kpi '+(tone||'')+'"><span>'+label+'</span><strong>'+value+'</strong><small>'+base+'</small><small>'+change+'</small></div>';}
-function explanation(r){return (isMonthly(r)?'按交付量加权，':'')+'每吨成本'+(r.attribution.unitCost===0?'不变':r.attribution.unitCost>0?'增加 '+fmt(r.attribution.unitCost)+' 元':'减少 '+fmt(-r.attribution.unitCost)+' 元')+'：原料影响 '+signed(r.attribution.raw)+' 元，负荷影响 '+signed(r.attribution.load)+' 元。';}
-function monthTable(r){return '<div class="overflow-auto"><table class="data-table"><thead><tr><th>月份</th><th>原料涨跌</th><th>原料价（元/吨）</th><th>负荷</th><th>单位成本（元/吨）</th><th>单位利润（元/吨）</th><th>交付（吨）</th><th>收入（万元）</th><th>基线成本（万元）</th><th>模拟成本（万元）</th><th>基线利润（万元）</th><th>模拟利润（万元）</th><th>模拟累计利润（万元）</th></tr></thead><tbody>'+r.monthlyRows.map(function(m){return '<tr>'+[m.month,signed(m.rawPriceChangePct,0)+'%',fmt(m.rawPrice),m.loadPct+'%',fmt(m.unitCost),fmt(m.unitProfit),fmt(m.quantity,0),fmt(m.revenue/10000),fmt(m.baseCost/10000),fmt(m.cost/10000),fmt(m.baseProfit/10000),fmt(m.profit/10000),fmt(m.cumulative/10000)].map(function(v){return '<td>'+esc(v)+'</td>';}).join('')+'</tr>';}).join('')+'</tbody></table></div>';}
+function resetPlan(){if(sandboxRunning)cancelSandboxRun(true);initializePlan(currentContract(),sandboxParamValues);updateParams();invalidateSandboxResult();}
+
+function summary(r){return '履约 '+fmt(r.simulation.fulfillmentRate,1)+'% · 放弃 '+fmt(r.simulation.abandoned,0)+'吨 · 利润 '+fmt(r.simulation.profit/10000,1)+'万';}
+function card(label,value,detail,tone){return '<div class="cost-kpi '+(tone||'')+'"><span>'+label+'</span><strong>'+value+'</strong><small>'+detail+'</small></div>';}
+function explanation(r){var s=r.simulation;return '合同总量 '+fmt(r.contractQuantity,0)+' 吨，系统计划生产并实际履约 '+fmt(s.fulfilled,0)+' 吨，放弃 '+fmt(s.abandoned,0)+' 吨。销售成本 '+wan(s.cost)+' = 已耗用原料 '+wan(s.consumedRawCost)+' + 加工成本 '+wan(s.processingAmount)+'；期末玉米淀粉 '+fmt(s.endingRawQty,1)+' 吨（'+wan(s.endingRawValue)+'）作为库存资产结转，不计入本合同销售成本。合同收入 '+wan(s.revenue)+'，利润 '+wan(s.profit)+'。';}
+function monthTable(r){
+  return '<div class="overflow-auto"><table class="data-table cost-result-table"><thead><tr><th>月份</th><th>履约销量</th><th>采购量</th><th>采购价</th><th>累计可用原料</th><th>系统计划生产</th><th>产能负荷</th><th>预计单位原料成本</th><th>单位加工成本</th><th>预计单位生产成本</th><th>实际履约</th><th>放弃销量</th><th>期末原料</th><th>收入(万元)</th><th>销售成本(万元)</th><th>利润(万元)</th><th>累计利润(万元)</th></tr></thead><tbody>'+r.monthlyRows.map(function(m){var vals=[m.month,fmt(m.salesPlan,0),fmt(m.purchaseQty,0),fmt(m.purchasePrice),fmt(m.availableRaw,1),fmt(m.plannedProduction,0),fmt(m.loadPct,0)+'%',fmt(m.unitRawCost),fmt(m.processingCost),fmt(m.unitProductionCost),fmt(m.fulfilled,0),fmt(m.abandoned,0),fmt(m.rawEndingQty,1),fmt(m.revenue/10000),fmt(m.cost/10000),fmt(m.profit/10000),fmt(m.cumulativeProfit/10000)];return '<tr>'+vals.map(function(v){return '<td>'+esc(v)+'</td>';}).join('')+'</tr>';}).join('')+'</tbody></table></div>';
+}
 function render(r){
   sandboxActiveCase={resultType:'contractCost',dates:r.period.months};sandboxSelectedDay=0;
-  var el=document.getElementById('sandboxResults'),s=r.simulation,b=r.baseline,weighted=isMonthly(r),lossMonths=r.monthlyRows.filter(function(m){return m.profit<0;}).length;
-  el.innerHTML='<div class="cost-result"><div class="sim-overview"><b>'+esc(r.status)+' · '+(weighted?'加权每吨利润 ':'每吨利润 ')+fmt(b.unitProfit)+' → '+fmt(s.unitProfit)+' 元</b><span>'+esc(r.snapshot.contract.customer)+' · '+r.period.start+'—'+r.period.end+'</span></div><div class="cost-kpis">'+
-    card(weighted?'加权每吨成本':'每吨成本',fmt(s.unitCost)+' <em>元</em>','原来 '+fmt(b.unitCost)+' 元',delta(s.unitCost-b.unitCost,' 元'))+
-    card(weighted?'加权每吨预计利润':'每吨预计利润',fmt(s.unitProfit)+' <em>元</em>','原来 '+fmt(b.unitProfit)+' 元',delta(s.unitProfit-b.unitProfit,' 元'),s.unitProfit<0?'cost-negative':'')+
-    card('推演期合同预计利润',fmt(s.profit/10000)+' <em>万元</em>','原来 '+wan(b.profit),delta(r.attribution.profit/10000,' 万元'),s.profit<0?'cost-negative':'')+
-    card('合同盈利状态',esc(r.status),'所选 '+r.period.months.length+' 个月的履约','按计划交付 '+fmt(r.quantity,0)+' 吨 · '+lossMonths+' 个月亏损',s.unitProfit<0?'cost-negative':'')+'</div><p class="cost-explanation">'+explanation(r)+'</p><div class="cost-month-panel"><div class="cost-month-head"><b id="sandboxDayCurrent"></b><span>合同售价固定 · 月度履约测算</span></div><div class="cost-month-values" id="costMonthValues"></div><div class="cost-story" id="costMonthStory" aria-live="polite"></div><div class="cost-controls"><button class="btn btn-sm" id="simPrev" onclick="simSeek(sandboxSelectedDay-1)">← 上一月</button><button class="btn btn-sm btn-primary" id="sandboxDayPlay" onclick="toggleSandboxPlayback()">▶ 播放</button><button class="btn btn-sm" id="simNext" onclick="simSeek(sandboxSelectedDay+1)">下一月 →</button><select id="simSpeed" aria-label="播放速度" onchange="simChangeSpeed(this.value)"><option value="1600">正常速度</option><option value="800">2 倍速度</option><option value="2600">慢速</option></select></div><input id="sandboxDaySlider" aria-label="推演月份" type="range" min="0" max="'+(r.monthlyRows.length-1)+'" value="0" oninput="simSeek(this.value)"><div class="cost-month-rail">'+r.period.months.map(function(m,i){return '<button class="btn btn-sm cost-month" data-cost-month="'+i+'" onclick="simSeek('+i+')">'+m+'</button>';}).join('')+'</div></div><div class="cost-chart-title">每吨售价与成本 <span>元/吨成品 · 模拟成本高于售价时为亏损</span></div><div id="costTrendChart" class="cost-chart"></div><details class="sim-details"><summary>月度明细与报告</summary><div class="sim-details-body"><p>'+esc(r.assumptions)+'</p><div class="flex gap-8 mb-12"><button class="btn btn-sm" onclick="addSandboxComparison()">加入情景对比</button><button class="btn btn-sm" onclick="exportSandboxReport()">导出报告</button></div>'+monthTable(r)+'<div id="sandboxCompare"></div></div></details></div>';
+  var el=document.getElementById('sandboxResults'),s=r.simulation,lossTone=s.profit<0?'cost-negative':'',fulfillTone=s.abandoned>0?'cost-warning':'';
+  el.innerHTML='<div class="cost-result"><div class="sim-overview"><b>'+esc(r.status)+' · 履约率 '+fmt(s.fulfillmentRate,1)+'% · 合同利润 '+wan(s.profit)+'</b><span>'+esc(r.snapshot.contract.customer)+' · '+r.period.start+'—'+r.period.end+'</span></div><div class="cost-kpis cost-kpis-5">'+card('实际履约量',fmt(s.fulfilled,0)+' <em>吨</em>','合同 '+fmt(r.contractQuantity,0)+' 吨 · 放弃 '+fmt(s.abandoned,0)+' 吨',fulfillTone)+card('销售收入',wan(s.revenue),'按实际履约量确认')+card('销售成本',wan(s.cost),'仅含已耗用原料 + 加工成本')+card('合同利润',wan(s.profit),'实际履约加权每吨利润 '+fmt(s.unitProfit)+' 元',lossTone)+card('期末库存',fmt(s.endingRawQty,1)+' / '+fmt(s.endingFgQty,1)+' <em>吨</em>','玉米淀粉 / 成品 · 不计入合同成本')+'</div><p class="cost-explanation">'+explanation(r)+'</p><div class="cost-month-panel"><div class="cost-month-head"><b id="sandboxDayCurrent"></b><span>负荷仅影响单位加工成本 · 单位原料成本按固定 BOM 换算</span></div><div class="cost-month-values cost-month-values-7" id="costMonthValues"></div><div class="cost-story" id="costMonthStory" aria-live="polite"></div><div class="cost-controls"><button class="btn btn-sm" id="simPrev" onclick="simSeek(sandboxSelectedDay-1)">← 上一月</button><button class="btn btn-sm btn-primary" id="sandboxDayPlay" onclick="toggleSandboxPlayback()">▶ 播放</button><button class="btn btn-sm" id="simNext" onclick="simSeek(sandboxSelectedDay+1)">下一月 →</button><select id="simSpeed" aria-label="播放速度" onchange="simChangeSpeed(this.value)"><option value="1600">正常速度</option><option value="800">2 倍速度</option><option value="2600">慢速</option></select></div><input id="sandboxDaySlider" aria-label="推演月份" type="range" min="0" max="'+(r.monthlyRows.length-1)+'" value="0" oninput="simSeek(this.value)"><div class="cost-month-rail">'+r.period.months.map(function(m,i){return '<button class="btn btn-sm cost-month" data-cost-month="'+i+'" onclick="simSeek('+i+')">'+m+'</button>';}).join('')+'</div></div><div class="cost-chart-title">月度收入、销售成本与利润 <span>万元 · 收入只按实际履约量确认</span></div><div id="costTrendChart" class="cost-chart"></div><details class="sim-details"><summary>月度经营明细与报告</summary><div class="sim-details-body"><p>'+esc(r.assumptions)+'</p><div class="flex gap-8 mb-12"><button class="btn btn-sm" onclick="addSandboxComparison()">加入情景对比</button><button class="btn btn-sm" onclick="exportSandboxReport()">导出报告</button></div>'+monthTable(r)+'<div id="sandboxCompare"></div></div></details></div>';
   el.classList.add('visible');document.getElementById('simSpeed').value=String(simSpeed);
-  var prices=r.period.months.map(function(){return r.snapshot.contract.salePrice;});
-  var chart=initChart('costTrendChart',mOpt({animation:false,tooltip:{trigger:'axis',valueFormatter:function(v){return fmt(v)+' 元/吨';}},legend:{data:['固定售价','基线成本','模拟成本'],top:4},grid:{left:68,right:24,top:48,bottom:40},xAxis:{type:'category',data:r.period.months},yAxis:{type:'value',scale:true},series:[{name:'固定售价',type:'line',data:prices,lineStyle:{type:'dashed'},itemStyle:{color:'#f59e0b'}},{name:'基线成本',type:'line',data:r.period.months.map(function(){return b.unitCost;}),itemStyle:{color:'#64748b'}},{name:'模拟成本',type:'line',data:r.monthlyRows.map(function(m){return {value:m.unitCost,itemStyle:{color:m.unitProfit<0?'#f87171':'#22d3ee'}};}),itemStyle:{color:s.unitProfit<0?'#f87171':'#22d3ee'},lineStyle:{width:3}}]}));
-  if(chart)chart.on('click',function(p){if(typeof p.dataIndex==='number')simSeek(p.dataIndex);});
-  selectSandboxDay(0);renderCompare(r);
+  var chart=initChart('costTrendChart',mOpt({animation:false,tooltip:{trigger:'axis',valueFormatter:function(v){return fmt(v)+' 万元';}},legend:{data:['销售收入','销售成本','利润'],top:4},grid:{left:68,right:24,top:48,bottom:40},xAxis:{type:'category',data:r.period.months},yAxis:{type:'value',name:'万元'},series:[{name:'销售收入',type:'bar',data:r.monthlyRows.map(function(m){return round(m.revenue/10000,2);}),itemStyle:{color:'rgba(34,211,238,.65)'}},{name:'销售成本',type:'bar',data:r.monthlyRows.map(function(m){return round(m.cost/10000,2);}),itemStyle:{color:'rgba(139,92,246,.65)'}},{name:'利润',type:'line',data:r.monthlyRows.map(function(m){return round(m.profit/10000,2);}),lineStyle:{width:3},itemStyle:{color:s.profit<0?'#f87171':'#10b981'}}]}));
+  if(chart)chart.on('click',function(p){if(typeof p.dataIndex==='number')simSeek(p.dataIndex);});selectSandboxDay(0);renderCompare(r);
 }
 function selectMonth(index){
   var r=sandboxLastResult;if(!r||r.resultType!=='contractCost')return;
   var i=Math.max(0,Math.min(r.monthlyRows.length-1,Number(index)||0)),m=r.monthlyRows[i];sandboxSelectedDay=i;
-  setText('sandboxDayCurrent',m.month+' · 原料 '+signed(m.rawPriceChangePct,0)+'% · 负荷 '+m.loadPct+'% · 第 '+(i+1)+' / '+r.monthlyRows.length+' 月');
-  document.getElementById('costMonthValues').innerHTML=[['计划交付',fmt(m.quantity,0)+' 吨'],['当月收入',wan(m.revenue)],['当月成本',wan(m.cost)],['当月利润',wan(m.profit)]].map(function(x){return '<div><span>'+x[0]+'</span><b>'+x[1]+'</b></div>';}).join('');
-  setText('costMonthStory',m.quantity===0?'本月无计划交付，收入、成本与利润均为 0；累计利润保持不变。':'按计划交付 '+fmt(m.quantity,0)+' 吨，原料价格 '+fmt(m.rawPrice)+' 元/吨，本月负荷 '+m.loadPct+'%，单位成本 '+fmt(m.unitCost)+' 元，每吨利润 '+fmt(m.unitProfit)+' 元，本月预计'+(m.profit<0?'亏损 ':'利润 ')+wan(Math.abs(m.profit))+'；累计利润 '+wan(m.cumulative)+'。');
-  var slider=document.getElementById('sandboxDaySlider');slider.value=i;slider.setAttribute('aria-valuetext',m.month);
-  document.getElementById('simPrev').disabled=i===0;document.getElementById('simNext').disabled=i===r.monthlyRows.length-1;
+  setText('sandboxDayCurrent',m.month+' · 履约销量 '+fmt(m.salesPlan,0)+' 吨 · 采购 '+fmt(m.purchaseQty,0)+' 吨 · 系统计划生产 '+fmt(m.plannedProduction,0)+' 吨 · 第 '+(i+1)+' / '+r.monthlyRows.length+' 月');
+  document.getElementById('costMonthValues').innerHTML=[['实际履约',fmt(m.fulfilled,0)+' 吨'],['放弃销量',fmt(m.abandoned,0)+' 吨'],['产能负荷',fmt(m.loadPct,0)+'%'],['单位原料成本',fmt(m.unitRawCost)+' 元/吨'],['单位加工成本',fmt(m.processingCost)+' 元/吨'],['单位生产成本',fmt(m.unitProductionCost)+' 元/吨'],['当月利润',wan(m.profit)]].map(function(x){return '<div><span>'+x[0]+'</span><b>'+x[1]+'</b></div>';}).join('');
+  setText('costMonthStory','单位原料成本 '+fmt(m.unitRawCost)+' 元/吨成品 = 原料移动加权价 '+fmt(m.rawWac||m.purchasePrice)+' 元/吨原料 × 固定 BOM '+fmt(r.snapshot.contract.rawUsagePerTon,4)+' 吨原料/吨成品，此换算与负荷无关。产能负荷 '+fmt(m.loadPct,0)+'% 仅决定单位加工成本 '+fmt(m.processingCost)+' 元/吨；两者相加得到预计单位生产成本 '+fmt(m.unitProductionCost)+' 元/吨。累计可用原料 '+fmt(m.availableRaw,1)+' 吨，系统计划生产 '+fmt(m.plannedProduction,0)+' 吨；'+(m.abandoned>0?'原料不足，放弃当月销量 '+fmt(m.abandoned,0)+' 吨。':'累计可用原料可覆盖当月履约销量。')+'累计利润 '+wan(m.cumulativeProfit)+'。');
+  var slider=document.getElementById('sandboxDaySlider');slider.value=i;slider.setAttribute('aria-valuetext',m.month);document.getElementById('simPrev').disabled=i===0;document.getElementById('simNext').disabled=i===r.monthlyRows.length-1;
   document.querySelectorAll('[data-cost-month]').forEach(function(b){var on=Number(b.dataset.costMonth)===i;b.classList.toggle('btn-primary',on);b.setAttribute('aria-current',on?'date':'false');});
   var selected=document.querySelector('.cost-month.btn-primary');if(selected){var rail=selected.parentElement;rail.scrollLeft=Math.max(0,selected.offsetLeft-rail.offsetLeft-rail.clientWidth/2);}
-  var chart=charts.costTrendChart;if(chart)chart.setOption({series:[{markLine:{silent:true,symbol:'none',label:{formatter:m.month,position:'insideEndTop',color:'#93c5fd',fontSize:10},data:[{xAxis:m.month}]}},{},{}]});
-  simUpdatePlayback();
+  var chart=charts.costTrendChart;if(chart)chart.setOption({series:[{markLine:{silent:true,symbol:'none',label:{formatter:m.month,position:'insideEndTop',color:'#93c5fd',fontSize:10},data:[{xAxis:m.month}]}},{},{}]});simUpdatePlayback();
 }
 function addComparison(r){comparisons.push(clone(r));var group=comparisons.filter(function(x){return x.comparisonKey===r.comparisonKey;});if(group.length>3){var first=group[0];comparisons.splice(comparisons.indexOf(first),1);}renderCompare(r);}
 function renderCompare(r){
-  var el=document.getElementById('sandboxCompare');if(!el)return;var list=comparisons.filter(function(x){return x.comparisonKey===r.comparisonKey;});
-  if(!list.length){el.innerHTML='';return;}
-  var fields=[['加权每吨成本（元）',function(x){return fmt(x.simulation.unitCost);} ],['加权每吨利润（元）',function(x){return fmt(x.simulation.unitProfit);} ],['推演期利润（万元）',function(x){return fmt(x.simulation.profit/10000);} ],['盈利状态',function(x){return x.status;} ]];
-  el.innerHTML='<h4 class="cost-compare-title">同合同情景对比 · 最多 3 个</h4><div class="overflow-auto"><table class="data-table"><thead><tr><th>指标</th>'+list.map(function(x){return '<th>'+esc(summary(x))+'</th>';}).join('')+'</tr></thead><tbody>'+fields.map(function(f){return '<tr><td>'+f[0]+'</td>'+list.map(function(x){return '<td>'+esc(f[1](x))+'</td>';}).join('')+'</tr>';}).join('')+'</tbody></table></div>';
+  var el=document.getElementById('sandboxCompare');if(!el)return;var list=comparisons.filter(function(x){return x.comparisonKey===r.comparisonKey;});if(!list.length){el.innerHTML='';return;}
+  var fields=[['实际履约量（吨）',function(x){return fmt(x.simulation.fulfilled,0);} ],['放弃销量（吨）',function(x){return fmt(x.simulation.abandoned,0);} ],['销售收入（万元）',function(x){return fmt(x.simulation.revenue/10000);} ],['销售成本（万元）',function(x){return fmt(x.simulation.cost/10000);} ],['合同利润（万元）',function(x){return fmt(x.simulation.profit/10000);} ],['经营状态',function(x){return x.status;} ]];
+  el.innerHTML='<h4 class="cost-compare-title">同合同用户方案对比 · 最多 3 个</h4><div class="overflow-auto"><table class="data-table"><thead><tr><th>指标</th>'+list.map(function(x){return '<th>'+esc(summary(x))+'</th>';}).join('')+'</tr></thead><tbody>'+fields.map(function(f){return '<tr><td>'+f[0]+'</td>'+list.map(function(x){return '<td>'+esc(f[1](x))+'</td>';}).join('')+'</tr>';}).join('')+'</tbody></table></div>';
 }
 function report(r){
-  var c=r.snapshot.contract,meta=r.snapshot.meta;
-  var lines=['SCOS 沙盘推演 · 原料价格与生产负荷','模拟数据，仅供决策参考，不下发生产','合同：'+c.id+' / '+c.customer+' / '+c.product,'产线：'+c.line,'推演期间：'+r.period.start+'—'+r.period.end+' / '+r.period.months.length+' 个月','合同到期日：'+c.endDate+'（不延长）','数据快照：'+meta.snapshotId+' / 截止 '+meta.asOfDate,'数据版本：'+meta.dataVersion+' / 加工成本：'+c.processingCostVersion+' / 模型：'+meta.modelVersion,'运行：'+r.id+' / '+r.time,'条件：'+summary(r),'各月原料涨跌相对基准价，不逐月累乘；-100% 为 0 元，+100% 为基准价的两倍。','负荷加工成本：按 50%、70%、100% 历史参考点分段线性插值，不外推。','口径：人民币不含税；元/吨成品；利润为预计履约利润','原料基价：'+fmt(c.baseRawPrice)+' 元/吨原料；耗用系数：'+c.rawUsagePerTon,'固定售价：'+fmt(c.salePrice)+' 元/吨；基线负荷：'+c.baseLoadPct+'%','按交付量加权的模拟原料价：'+fmt(r.simulation.rawPrice)+' 元/吨原料','加权单位加工成本：'+fmt(r.baseline.processingCost)+' → '+fmt(r.simulation.processingCost)+' 元/吨；其他成本：'+fmt(c.otherUnitCost)+' 元/吨','',r.assumptions,'本期不计算库存/采购锁价缓冲、交付缺口及企业净利润。','', '【基线 → 模拟】','加权每吨成本：'+fmt(r.baseline.unitCost)+' → '+fmt(r.simulation.unitCost)+' 元','加权每吨利润：'+fmt(r.baseline.unitProfit)+' → '+fmt(r.simulation.unitProfit)+' 元','所选推演期合同利润：'+wan(r.baseline.profit)+' → '+wan(r.simulation.profit),'利润变化：'+signed(r.attribution.profit)+' 元','盈利状态：'+r.status,explanation(r),'','【月度明细：金额单位元，数量单位吨】','月份\t原料涨跌%\t原料价\t负荷%\t单位加工成本\t单位成本\t单位利润\t交付量\t收入\t基线成本\t模拟成本\t基线利润\t模拟利润\t模拟累计利润'];
-  r.monthlyRows.forEach(function(m){lines.push([m.month,m.rawPriceChangePct,m.rawPrice,m.loadPct,m.processingCost,m.unitCost,m.unitProfit,m.quantity,m.revenue,m.baseCost,m.cost,m.baseProfit,m.profit,m.cumulative].join('\t'));});return lines.join('\n');
+  var c=r.snapshot.contract,meta=r.snapshot.meta,s=r.simulation;
+  var lines=['SCOS 沙盘推演 · 原料价格与生产负荷','模拟数据，仅供决策参考，不下发销售、采购或生产计划','合同：'+c.id+' / '+c.customer+' / '+c.product,'合同固定售价：'+fmt(c.salePrice)+' 元/吨','产线：'+c.line,'推演期间：'+r.period.start+'—'+r.period.end+' / '+r.period.months.length+' 个月','数据快照：'+meta.snapshotId+' / 截止 '+meta.asOfDate,'BOM：'+c.bomVersion+' / '+c.rawUsagePerTon+' 吨玉米淀粉/吨成品 / 1 吨玉米淀粉约可生产 '+fmt(1/c.rawUsagePerTon,4)+' 吨成品','单位原料成本 = 原料移动加权价 × 固定 BOM 耗用系数（单位换算，与负荷无关）；负荷仅影响单位加工成本。','模型：'+meta.modelVersion+' / 加工成本：'+c.processingCostVersion,'运行：'+r.id+' / '+r.time,'',r.assumptions,'合同总量：'+fmt(r.contractQuantity,0)+' 吨','BOM 折算玉米淀粉总采购需求：'+fmt(r.rawRequirement,2)+' 吨','系统计划生产合计：'+fmt(s.production,2)+' 吨','实际履约：'+fmt(s.fulfilled,2)+' 吨 / '+fmt(s.fulfillmentRate,2)+'%','放弃销量：'+fmt(s.abandoned,2)+' 吨','销售收入：'+wan(s.revenue),'销售成本（已耗用原料 + 加工）：'+wan(s.cost),'其中已耗用原料成本：'+wan(s.consumedRawCost),'其中加工成本：'+wan(s.processingAmount),'合同利润：'+wan(s.profit),'期末玉米淀粉（库存资产，不计入本合同销售成本）：'+fmt(s.endingRawQty,2)+' 吨 / '+wan(s.endingRawValue),'期末成品：'+fmt(s.endingFgQty,2)+' 吨 / '+wan(s.endingFgValue),'经营状态：'+r.status,'','【月度明细：金额单位元，数量单位吨】','月份\t履约销量\t采购量\t采购价\t累计可用原料\t系统计划生产\t产能负荷%\t预计单位原料成本\t单位加工成本\t预计单位生产成本\t实际履约\t放弃销量\t期末原料\t收入\t销售成本\t利润\t累计利润'];
+  r.monthlyRows.forEach(function(m){lines.push([m.month,m.salesPlan,m.purchaseQty,m.purchasePrice,m.availableRaw,m.plannedProduction,m.loadPct,m.unitRawCost,m.processingCost,m.unitProductionCost,m.fulfilled,m.abandoned,m.rawEndingQty,m.revenue,m.cost,m.profit,m.cumulativeProfit].join('\t'));});return lines.join('\n');
 }
-function exportReport(r){var url=URL.createObjectURL(new Blob([report(r)],{type:'text/plain;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download='SCOS成本推演_'+r.params.contractId+'_'+r.id+'.txt';a.click();setTimeout(function(){URL.revokeObjectURL(url);},1000);}
+function exportReport(r){var url=URL.createObjectURL(new Blob([report(r)],{type:'text/plain;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download='SCOS节奏推演_'+r.params.contractId+'_'+r.id+'.txt';a.click();setTimeout(function(){URL.revokeObjectURL(url);},1000);}
 function dispose(){if(typeof charts!=='undefined'&&charts.costTrendChart){charts.costTrendChart.dispose();delete charts.costTrendChart;}}
-window.SCOS_COST_SANDBOX={updateHorizon:updateHorizon,setPriceMode:setPriceMode,updatePrice:updatePrice,updatePriceMonth:updatePriceMonth,resetPrices:resetPrices,setLoadMode:setLoadMode,updateMonth:updateMonth,resetMonths:resetMonths,calculate:calculate,renderParams:renderParams,updateParams:updateParams,context:context,error:error,render:render,selectMonth:selectMonth,summary:summary,addComparison:addComparison,renderCompare:renderCompare,report:report,exportReport:exportReport,dispose:dispose};
+
+window.SCOS_COST_SANDBOX={calculate:calculate,renderParams:renderParams,updateParams:updateParams,updateSchedule:updateSchedule,resetPlan:resetPlan,context:context,error:error,render:render,selectMonth:selectMonth,summary:summary,addComparison:addComparison,renderCompare:renderCompare,report:report,exportReport:exportReport,dispose:dispose};
 })();
