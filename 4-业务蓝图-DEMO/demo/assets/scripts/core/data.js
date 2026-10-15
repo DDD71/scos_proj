@@ -11,23 +11,23 @@ const INV_PRODUCTS=[
 ];
 
 var DASH_ALERTS=[
-{rid:0,level:'critical',cat:'equip',title:'2#液化喷射泵压力异常',desc:'当前压力0.72MPa，超出上限0.65MPa，需立即检修',time:'09:42',link:'production'},
-{rid:1,level:'critical',cat:'material',title:'山东供应商玉米发货延迟',desc:'供应商SD-003预计延迟2天，影响下周生产计划680吨',time:'09:15',link:'procurement'},
-{rid:2,level:'warning',cat:'stock',title:'麦芽糊精库存低于安全线',desc:'当前285吨/安全线300吨，预计3天后缺货',time:'08:30',link:'inventory'},
-{rid:3,level:'warning',cat:'order',title:'客户C012果葡糖浆F55交期风险',desc:'500吨订单预计延迟1天，建议协调3#线加班',time:'08:10',link:'production'},
-{rid:4,level:'info',cat:'energy',title:'蒸汽单耗超出目标值',desc:'当前1.28t/t产品 vs 目标1.2t/t，建议检查疏水阀',time:'07:45',link:'costing'},
-{rid:5,level:'warning',cat:'equip',title:'4#喷雾干燥塔出口温度偏低',desc:'当前82°C，低于设定值85°C，影响麦芽糊精水分',time:'07:20',link:'production'},
-{rid:6,level:'info',cat:'stock',title:'结晶葡萄糖库存达到上限',desc:'当前1850吨/上限2000吨，建议加速发运',time:'06:50',link:'inventory'}
+{rid:0,level:'critical',cat:'equip',title:'果糖F55异构化线压力异常',desc:'当前压力0.72MPa，超出上限0.65MPa，需立即检修',time:'09:42',link:'production'},
+{rid:1,level:'critical',cat:'material',title:'京粮龙江玉米淀粉到货延期',desc:'京粮龙江在途420吨预计延迟2天，影响果糖F55生产计划680吨',time:'09:15',link:'procurement'},
+{rid:2,level:'warning',cat:'stock',title:'果糖F55库存低于目标水位',desc:'当前1,850吨，预计可支撑6.2天，低于目标覆盖天数',time:'08:30',link:'inventory'},
+{rid:3,level:'warning',cat:'order',title:'可口可乐果糖F55交期风险',desc:'500吨订单预计延迟1天，建议协调异构化线加班',time:'08:10',link:'production'},
+{rid:4,level:'info',cat:'energy',title:'果糖F55单位蒸汽成本偏高',desc:'当前119元/吨，较目标高8元/吨，建议检查疏水阀',time:'07:45',link:'costing'},
+{rid:5,level:'warning',cat:'material',title:'山东福宽连续到货质量波动',desc:'最近3批玉米淀粉水分波动，果糖F55投料前需加强质检',time:'07:20',link:'trace'},
+{rid:6,level:'info',cat:'order',title:'联合利华果糖F55需求增加',desc:'新增意向订单360吨，需核对在手合同与可承诺量',time:'06:50',link:'production'}
 ];
 
 var ALERT_ROOT={
-  0:{cause:'2#液化喷射泵叶轮磨损，导致出口压力漂移至 0.72MPa，超过上限 0.65MPa。',impact:'1#液化线产能下降约 15%，波及本周 3 个 F55 订单。',action:'立即切换至备用泵，安排叶轮更换（预计 2h）。',module:'生产排程'},
-  1:{cause:'山东供应商运输车辆故障，SD-003 玉米预计延迟 2 天到货。',impact:'影响下周生产计划 680 吨，2#线存在断料风险。',action:'启动齐齐哈尔备用供应商补量，或将下周排程延后 680 吨。',module:'采购优化'},
-  2:{cause:'麦芽糊精近期出货加快，当前库存 285 吨低于安全库存 300 吨。',impact:'预计 3 天后缺货，影响喷雾干燥线连续生产。',action:'触发生产补充建议，或调整发货节奏。',module:'成品库存优化'},
-  3:{cause:'客户 C012 订单 500 吨 F55，3#异构化线负荷已接近上限。',impact:'预计延迟 1 天交付。',action:'协调 3#线加班，或与客户协商分批发货。',module:'生产排程'},
-  4:{cause:'疏水阀老化，蒸汽单耗升至 1.28 t/t，高于目标 1.2 t/t。',impact:'能耗成本月超支约 ¥5.4 万。',action:'安排疏水阀更换，恢复蒸汽单耗至目标值。',module:'成本核算'},
-  5:{cause:'4#喷雾干燥塔出口温度 82°C，低于设定值 85°C。',impact:'影响麦芽糊精水分指标，存在质量风险。',action:'检查加热蒸汽供应与进料流量。',module:'生产排程'},
-  6:{cause:'结晶葡萄糖库存 1850 吨，接近上限 2000 吨。',impact:'库容紧张，占用资金约 ¥260 万。',action:'加速发运，或调整包装线转产。',module:'成品库存优化'}
+  0:{cause:'果糖F55异构化线循环泵叶轮磨损，出口压力升至 0.72MPa，超过上限 0.65MPa。',impact:'异构化有效产能下降约 15%，波及本周 3 个果糖F55订单。',action:'立即切换备用泵并安排叶轮更换，预计 2 小时恢复。',module:'生产排程'},
+  1:{cause:'京粮龙江生物工程有限公司承运车辆故障，在途玉米淀粉预计延迟 2 天到达太仓工厂。',impact:'影响下周果糖F55生产计划 680 吨，存在断料风险。',action:'从山东福宽生物工程有限公司或中粮生物科技（天津）有限公司-内部协调补量。',module:'采购优化'},
+  2:{cause:'可口可乐与百事可乐当期提货加快，果糖F55当前库存低于目标覆盖天数。',impact:'若生产计划不调整，未来 4 天交付缓冲将明显收窄。',action:'进入库存分析核对SKU水位，并联动生产排程补充果糖F55。',module:'成品库存优化'},
+  3:{cause:'可口可乐500吨果糖F55订单交期提前，异构化线负荷已接近上限。',impact:'预计延迟 1 天交付，未履约销量增加。',action:'协调异构化线加班，或与可口可乐确认分批发货。',module:'生产排程'},
+  4:{cause:'果糖F55生产线疏水阀效率下降，单位蒸汽成本升至119元/吨。',impact:'按当前产量预计本月能源成本超支约5.4万元。',action:'安排疏水阀检修，并复核果糖F55单位成本。',module:'成本核算'},
+  5:{cause:'山东福宽生物工程有限公司最近3批玉米淀粉水分指标波动。',impact:'果糖F55投料稳定性承压，可能影响一次合格率。',action:'强化到货抽检并追溯对应采购批次。',module:'全程追溯'},
+  6:{cause:'联合利华新增果糖F55意向订单360吨。',impact:'在手销售合同量增加，现有交付窗口需要重新核对。',action:'核对可承诺量并评估生产计划调整。',module:'生产排程'}
 };
 
 var SANDBOX_METRICS=[
@@ -60,11 +60,11 @@ severity:function(v){return Math.max(0,Math.min(2,Number(v.capacityReduction)/30
 };
 
 SANDBOX_SCENARIOS.cost={
-  name:'原料价格与生产负荷',priority:'成本与利润',desc:'固定售价合同下，依次调整销售节奏、玉米淀粉采购节奏与价格、生产负荷，由系统计算计划生产量并查看履约与利润。',
+  name:'销售、生产和采购决策博弈',priority:'经营决策',desc:'自主设定销售合同与交付节奏，联动玉米淀粉采购、辅料包材配套成本和周度生产负荷，推演跨月补交、期末违约与合同利润。',
   params:[
-    {key:'contractId',label:'销售合同',type:'select',value:'SC-DEMO-F55-001'}
+    {key:'productKey',label:'销售产品',type:'select',value:'F55'}
   ],
-  modules:[{name:'合同与BOM',note:'读取合同总量、折算比例和原料总需求'},{name:'销售节奏',note:'校验月度履约销量与合同总量'},{name:'采购节奏',note:'结转原料库存和移动加权价格'},{name:'生产负荷',note:'计算系统计划生产量与单位成本'},{name:'经营结果',note:'汇总实际履约、收入、成本和利润'}]
+  modules:[{name:'销售合同',note:'校验产品、数量、价格、期限与违约条款'},{name:'交付节奏',note:'校验月度交付总量并滚动待履约量'},{name:'采购决策',note:'结转玉米淀粉库存与辅料包材配套成本'},{name:'周度生产',note:'按 M、负荷、原料与启停约束计算产量和成本'},{name:'经营结果',note:'汇总跨月补交、期末违约、收入、成本和利润'}]
 };
 
 var SANDBOX_PRODUCT_CASES={

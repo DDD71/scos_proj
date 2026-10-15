@@ -1,23 +1,32 @@
-/* Fixed, illustrative snapshots. No live prices or production records. */
+/* Fixed, illustrative decision-game configuration. No live contract or production records. */
 window.SANDBOX_COST_DATA = {
-  meta: {snapshotId:'COST-SNAP-20261012',asOfDate:'2026-10-12',modelVersion:'COST-SIM-V10',dataVersion:'COST-DEMO-V6',currency:'CNY',taxBasis:'excludingTax',demo:true},
-  defaults: {contractId:'SC-DEMO-F55-001'},
-  contracts: [
+  meta: {
+    snapshotId:'DECISION-SNAP-20261014',asOfDate:'2026-10-14',modelVersion:'DECISION-GAME-V3.2',
+    dataVersion:'DECISION-DEMO-V1.2',currency:'CNY',taxBasis:'excludingTax',weekDefinition:'周六至下周五',demo:true
+  },
+  defaults: {
+    productKey:'F55',customer:'华东饮料客户（模拟）',contractQuantity:6000,salePrice:3500,
+    startMonth:'2026-11',durationMonths:6,penaltyMode:'amount',penaltyValue:260,capacityM:350,
+    initialRawQty:480,initialRawPrice:3160
+  },
+  products: [
     {
-      id:'SC-DEMO-F55-001',customer:'示例饮料客户 A',product:'果糖 F55',line:'果葡糖浆产线',
-      startDate:'2026-11-01',endDate:'2027-04-30',salePrice:3500,material:'玉米淀粉',materialCode:'RM-CORN-STARCH',bomVersion:'BOM-F55-V3',baseRawPrice:3000,
-      rawUsagePerTon:0.8,rawUsageBasis:'Mock：吨玉米淀粉 / 吨合格成品，已含收率与正常损耗',monthlyCapacity:1250,baseLoadPct:80,
-      processingCostByLoad:{'100':300,'70':358,'50':440},processingCostVersion:'F55-PROC-MOCK-V1',
-      monthlyDeliveries:['2026-11','2026-12','2027-01','2027-02','2027-03','2027-04'].map(function(month){return {month:month,quantity:1000};}),
-      monthlyPurchasePrices:[3000,3050,3150,3200,3100,3000]
+      key:'F55',product:'果糖 F55',line:'果葡糖浆产线',bomVersion:'BOM-F55-V3',rawUsagePerTon:0.8,
+      auxPackUnitCost:118,weeklyCapacity:350,baseLoadPct:85,fixedCostPerWeek:42000,
+      energyCostAt100:92,energyCurveFactor:0.65,shutdownCost:45000,startupCost:60000,
+      baseRawPrice:3180,initialRawQty:480,defaultSalePrice:3500,purchasePricePattern:[3180,3200,3170,3210,3190,3160]
     },
     {
-      id:'SC-DEMO-MALT-002',customer:'示例食品客户 B',product:'麦芽糖 M2',line:'麦芽糖 M2 产线',
-      startDate:'2026-11-01',endDate:'2027-10-31',salePrice:3300,material:'玉米淀粉',materialCode:'RM-CORN-STARCH',bomVersion:'BOM-MALT-M2-V2',baseRawPrice:2900,
-      rawUsagePerTon:0.76,rawUsageBasis:'Mock：吨玉米淀粉 / 吨合格成品，已含收率与正常损耗',monthlyCapacity:1200,baseLoadPct:70,
-      processingCostByLoad:{'100':320,'70':390,'50':480},processingCostVersion:'MALT-PROC-MOCK-V1',
-      monthlyDeliveries:['2026-11','2026-12','2027-01','2027-02','2027-03','2027-04','2027-05','2027-06','2027-07','2027-08','2027-09','2027-10'].map(function(month,i){return {month:month,quantity:[800,1000,600,0,900,1100,1200,1000,800,900,1100,1000][i]};}),
-      monthlyPurchasePrices:[2900,2940,3010,3060,3120,3100,3040,3000,2960,2980,3020,3050]
+      key:'F42',product:'果糖 F42',line:'果葡糖浆产线',bomVersion:'BOM-F42-V3',rawUsagePerTon:0.82,
+      auxPackUnitCost:112,weeklyCapacity:340,baseLoadPct:82,fixedCostPerWeek:41000,
+      energyCostAt100:88,energyCurveFactor:0.65,shutdownCost:44000,startupCost:58000,
+      baseRawPrice:3170,initialRawQty:450,defaultSalePrice:3460,purchasePricePattern:[3170,3190,3160,3200,3180,3150]
+    },
+    {
+      key:'M2',product:'麦芽糖 M2',line:'麦芽糖 M2 产线',bomVersion:'BOM-MALT-M2-V2',rawUsagePerTon:0.76,
+      auxPackUnitCost:105,weeklyCapacity:320,baseLoadPct:80,fixedCostPerWeek:39000,
+      energyCostAt100:86,energyCurveFactor:0.65,shutdownCost:42000,startupCost:56000,
+      baseRawPrice:3150,initialRawQty:420,defaultSalePrice:3300,purchasePricePattern:[3150,3170,3140,3180,3160,3130]
     }
   ]
 };

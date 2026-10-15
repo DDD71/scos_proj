@@ -3,16 +3,15 @@
 .cost3-inline input:focus,.cost3-inline select:focus{border-color:#3b82f6;box-shadow:0 0 0 2px rgba(59,130,246,.1)}
 .cost3-catalog-table,.cost3-pool-catalog{max-height:430px}
 .cost3-catalog-table .cost-table{min-width:1420px}
-.cost3-pool-catalog .cost-table{min-width:1660px}
+.cost3-pool-catalog .cost-table{min-width:1780px}
 .cost3-master-detail{display:grid;grid-template-columns:minmax(520px,.95fr) minmax(720px,1.35fr);gap:14px;align-items:start}
 .cost3-master-detail>div{min-width:0}
 .cost3-batch-table{max-height:610px}
 .cost3-batch-table .cost-table{min-width:1080px}
 .cost3-result-layout .cost3-batch-table .cost-table{min-width:1500px}
 .cost3-detail-table{max-height:610px}
-.cost3-detail-table .cost-table{min-width:1320px}
-.cost3-detail-table .cost-table td:nth-child(2) strong{display:block;color:#e5edf8;font-weight:600}
-.cost3-detail-table .cost-table td:nth-child(2) small,.cost3-pool-catalog .cost-table td:first-child small{display:block;color:#64748b;font-size:9px;margin-top:3px}
+.cost3-detail-table .cost-table{min-width:1450px}
+.cost3-detail-table .cost-table td:nth-child(3) strong{color:#e5edf8;font-weight:600}
 .cost3-group-row td{background:#151f34!important;color:#dbeafe!important;border-top:1px solid #334155;border-bottom:1px solid #334155!important}
 .cost3-group-row td:first-child{position:relative;padding-left:28px}
 .cost3-group-row td:first-child::before{content:'';position:absolute;left:12px;top:50%;width:7px;height:7px;border-radius:50%;background:#3b82f6;transform:translateY(-50%);box-shadow:0 0 8px rgba(59,130,246,.55)}

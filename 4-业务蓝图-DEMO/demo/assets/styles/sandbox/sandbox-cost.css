@@ -2,6 +2,12 @@
 #page-sandbox .sandbox-scenario-tab-list{flex-wrap:wrap}
 #page-sandbox .cost-period-note{font-size:12px;color:var(--text-muted)}
 #page-sandbox .cost-contract,#page-sandbox .cost-assumption,#page-sandbox .cost-error{grid-column:1/-1}
+#page-sandbox .cost-contract{padding:16px;background:rgba(15,23,42,.36);border:1px solid var(--border);border-left:3px solid #3b82f6;border-radius:10px}
+#page-sandbox .cost-contract-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-top:12px}
+#page-sandbox .cost-contract-field{display:flex;flex-direction:column;gap:7px;min-width:0;color:var(--text-secondary);font-size:12px}
+#page-sandbox .cost-contract-field input,#page-sandbox .cost-contract-field select{width:100%;height:38px;padding:6px 9px;border:1px solid var(--border-light);border-radius:6px;background:var(--bg-card);color:var(--text-primary);font-family:inherit;font-size:13px}
+#page-sandbox .cost-contract-field input:focus,#page-sandbox .cost-contract-field select:focus{outline:2px solid var(--blue);outline-offset:1px}
+#page-sandbox .cost-contract-field small{min-height:16px;color:var(--text-muted);font-size:11px;line-height:1.45}
 #page-sandbox .cost-horizon{grid-column:1/-1;display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 12px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:8px;font-size:12px}
 #page-sandbox .cost-horizon .cost-summary{margin:0}
 #page-sandbox .cost-summary{font-size:12px;color:var(--text-muted);line-height:1.7;margin-top:7px}
@@ -36,11 +42,23 @@
 #page-sandbox .cost-step{display:inline-grid;place-items:center;width:24px;height:24px;flex:0 0 24px;border-radius:50%;background:rgba(59,130,246,.2);border:1px solid rgba(96,165,250,.55);color:#93c5fd;font-size:12px;font-weight:700}
 #page-sandbox .cost-purchase-section .cost-step{background:rgba(139,92,246,.18);border-color:rgba(167,139,250,.55);color:#c4b5fd}
 #page-sandbox .cost-production-section .cost-step{background:rgba(16,185,129,.18);border-color:rgba(52,211,153,.5);color:#6ee7b7}
+#page-sandbox .cost-capacity-editor{display:flex;align-items:flex-end;gap:14px;flex-wrap:wrap;margin:0 0 12px;padding:12px 14px;border:1px solid rgba(52,211,153,.32);border-radius:8px;background:rgba(16,185,129,.06)}
+#page-sandbox .cost-capacity-editor label{display:flex;flex-direction:column;gap:6px;color:var(--text-secondary);font-size:12px}
+#page-sandbox .cost-capacity-editor input{width:180px;height:36px;padding:5px 8px;border:1px solid var(--border-light);border-radius:6px;background:var(--bg-card);color:var(--text-primary);font-family:inherit;text-align:center;font-variant-numeric:tabular-nums}
+#page-sandbox .cost-capacity-editor input:focus{outline:2px solid var(--blue);outline-offset:1px}
+#page-sandbox .cost-capacity-editor small{padding-bottom:8px;color:var(--text-muted);font-size:11px}
 #page-sandbox .cost-production-rule{margin:0 0 12px;padding:9px 12px;border-radius:7px;background:rgba(16,185,129,.07);color:#a7f3d0;font-size:12px;line-height:1.6}
 #page-sandbox .cost-plan-table{min-width:760px}
 #page-sandbox .cost-sales-table{min-width:560px}
 #page-sandbox .cost-purchase-table{min-width:760px}
-#page-sandbox .cost-production-table{min-width:1260px}
+#page-sandbox .cost-production-table{min-width:2060px}
+#page-sandbox .cost-production-table th small,#page-sandbox .cost-result-table th small,#page-sandbox .cost-week-result-table th small{display:inline-block;margin-top:3px;color:var(--text-muted);font-size:10px;font-weight:400;white-space:nowrap}
+#page-sandbox .cost-breakdown{display:flex;min-width:122px;flex-direction:column;align-items:center;gap:4px;font-variant-numeric:tabular-nums;white-space:nowrap}
+#page-sandbox .cost-breakdown b{color:var(--text-primary);font-size:12px;font-weight:600}
+#page-sandbox .cost-breakdown small{color:var(--cyan);font-size:11px}
+#page-sandbox .cost-week-scroll{max-height:620px}
+#page-sandbox .cost-production-table thead{position:sticky;top:0;z-index:2}
+#page-sandbox .cost-production-table .cost-state{min-width:96px}
 #page-sandbox .cost-plan-table th,#page-sandbox .cost-plan-table td,#page-sandbox .cost-result-table th,#page-sandbox .cost-result-table td{text-align:center;vertical-align:middle}
 #page-sandbox .cost-plan-table input{width:116px;max-width:100%;height:34px;padding:5px 8px;border:1px solid var(--border-light);border-radius:6px;background:var(--bg-card);color:var(--text-primary);font-family:inherit;text-align:center;font-variant-numeric:tabular-nums}
 #page-sandbox .cost-plan-table input:focus{outline:2px solid var(--blue);outline-offset:1px}
@@ -76,6 +94,7 @@
 #page-sandbox .cost-month-values div{display:flex;flex-direction:column;gap:9px}
 #page-sandbox .cost-month-values span{font-size:12px;color:var(--text-muted)}
 #page-sandbox .cost-month-values b{font-size:17px;font-variant-numeric:tabular-nums}
+#page-sandbox .cost-month-values b small{display:block;margin-top:5px;color:var(--cyan);font-size:11px;font-weight:500}
 #page-sandbox .cost-story{font-size:13px;color:var(--text-secondary);line-height:1.8;min-height:24px}
 #page-sandbox .cost-controls{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 10px}
 #page-sandbox .cost-controls select{background:var(--bg-card);color:var(--text-primary);border:1px solid var(--border);border-radius:6px;padding:5px}
@@ -88,15 +107,24 @@
 #page-sandbox .cost-kpis-5{grid-template-columns:repeat(5,minmax(0,1fr))}
 #page-sandbox .cost-month-values-6{grid-template-columns:repeat(6,minmax(0,1fr))}
 #page-sandbox .cost-month-values-7{grid-template-columns:repeat(7,minmax(0,1fr))}
-#page-sandbox .cost-result-table{min-width:2120px}
+#page-sandbox .cost-result-table{min-width:2300px}
+#page-sandbox .cost-week-result-table{min-width:1940px}
+#page-sandbox .cost-composition{margin:14px 0;padding:15px;border:1px solid var(--border);border-radius:9px;background:var(--bg-secondary)}
+#page-sandbox .cost-composition>div{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-top:12px}
+#page-sandbox .cost-composition span{display:flex;flex-direction:column;gap:5px;padding:10px;border-radius:7px;background:rgba(15,23,42,.45);text-align:center}
+#page-sandbox .cost-composition small{color:var(--text-muted)}
+#page-sandbox .cost-composition strong{color:var(--cyan);font-variant-numeric:tabular-nums}
+#page-sandbox .cost-composition em{color:var(--text-secondary);font-size:11px;font-style:normal;font-variant-numeric:tabular-nums}
+#page-sandbox .cost-composition .cost-composition-total{margin:11px 0 0;text-align:right;color:var(--text-primary);font-size:12px;font-weight:600}
 #page-sandbox .cost-compare-title{font-size:13px;margin:20px 0 12px}
 #page-sandbox #costDataDetails p{font-size:12px;line-height:1.8;color:var(--text-secondary)}
-@media(max-width:1100px){#page-sandbox .cost-kpis,#page-sandbox .cost-kpis-5,#page-sandbox .cost-month-input-grid,#page-sandbox .cost-reconciliation{grid-template-columns:repeat(2,minmax(0,1fr))}#page-sandbox .cost-month-values-6,#page-sandbox .cost-month-values-7{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:1100px){#page-sandbox .cost-kpis,#page-sandbox .cost-kpis-5,#page-sandbox .cost-month-input-grid,#page-sandbox .cost-reconciliation,#page-sandbox .cost-contract-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#page-sandbox .cost-month-values-6,#page-sandbox .cost-month-values-7{grid-template-columns:repeat(3,minmax(0,1fr))}#page-sandbox .cost-composition>div{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:640px){
  #page-sandbox .cost-mode .sandbox-param-grid{grid-template-columns:minmax(0,1fr)}
  #page-sandbox .cost-kpi{padding:12px}#page-sandbox .cost-kpi strong{font-size:20px}
  #page-sandbox .cost-month-values{grid-template-columns:repeat(2,minmax(0,1fr))}
  #page-sandbox .cost-reconciliation{grid-template-columns:minmax(0,1fr)}
+ #page-sandbox .cost-contract-grid,#page-sandbox .cost-composition>div{grid-template-columns:minmax(0,1fr)}
  #page-sandbox .cost-result .sim-overview{align-items:flex-start;flex-direction:column}
  #page-sandbox .cost-month-panel{padding:12px}#page-sandbox .cost-chart-title span{display:block;margin:5px 0}
  #page-sandbox .cost-period-note{max-width:100%;text-align:left}

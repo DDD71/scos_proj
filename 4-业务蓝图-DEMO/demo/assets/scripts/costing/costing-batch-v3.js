@@ -139,17 +139,17 @@ function groupedDetailTable(rows,mode){
   var body=[];
   groups.forEach(function(group){
     var subtotal=group.rows.reduce(function(total,row){return total+Number(row.amount||0);},0);
-    body.push('<tr class="cost3-group-row"><td colspan="7"><strong>'+h(group.label)+'</strong><span>'+group.rows.length+'项</span></td><td class="num '+(subtotal<0?'negative':'')+'">'+money(subtotal)+'</td><td></td></tr>');
+    body.push('<tr class="cost3-group-row"><td colspan="8"><strong>'+h(group.label)+'</strong><span>'+group.rows.length+'项</span></td><td class="num '+(subtotal<0?'negative':'')+'">'+money(subtotal)+'</td><td></td></tr>');
     group.rows.forEach(function(row){
       var costName=row.costName;
       var source=mode==='pool'?(row.poolCode+' · '+row.driverName):(row.evidence||row.source||'—');
       var quantity=mode==='pool'?row.driverQuantity:row.quantity;
       var unit=mode==='pool'?row.driverUnit:row.unit;
       var unitPrice=mode==='pool'?row.allocationRate:row.unitPrice;
-      body.push('<tr><td>'+h(mode==='result'?row.component:group.label)+'</td><td><strong>'+h(costName)+'</strong>'+(row.itemCode?'<small>'+h(row.itemCode)+'</small>':'')+'</td><td>'+h(row.productCategory)+'</td><td>'+h(row.stage)+'</td><td class="num">'+qty(quantity)+'</td><td>'+h(unit)+'</td><td class="num">'+money(unitPrice)+'</td><td class="num '+(Number(row.amount)<0?'negative':'')+'">'+money(row.amount)+'</td><td>'+h(source)+'</td></tr>');
+      body.push('<tr><td>'+h(mode==='result'?row.component:group.label)+'</td><td class="text-mono">'+h(row.itemCode||'—')+'</td><td><strong>'+h(costName)+'</strong></td><td>'+h(row.productCategory)+'</td><td>'+h(row.stage)+'</td><td class="num">'+qty(quantity)+'</td><td>'+h(unit)+'</td><td class="num">'+money(unitPrice)+'</td><td class="num '+(Number(row.amount)<0?'negative':'')+'">'+money(row.amount)+'</td><td>'+h(source)+'</td></tr>');
     });
   });
-  return table(['成本构成/类别','成本名称','成品类别','批次层级','数量','单位','单价/分摊率','金额','来源/动因'],body,'cost3-detail-table');
+  return table(['成本构成/类别','成本项编码','成本名称','成品类别','批次层级','数量','单位','单价/分摊率','金额','来源/动因'],body,'cost3-detail-table');
 }
 
 function batchSummaryTable(rows,mode,selectedId){
@@ -184,12 +184,12 @@ function directView(){
 
 function poolView(){
   var lines=D.poolCostLines.filter(function(row){return(!S.poolView||row.costView===S.poolView)&&contains(row,S.poolQuery,['code','name','poolCode','poolName','category','subcategory']);});
-  var lineRows=lines.map(function(row){return '<tr><td><strong>'+h(row.poolCode)+'</strong><small>'+h(row.poolName)+'</small></td><td>'+h(row.code)+'</td><td>'+h(row.category)+' / '+h(row.subcategory)+'</td><td>'+h(row.name)+'</td><td class="num '+(row.periodAmount<0?'negative':'')+'">'+money(row.periodAmount)+'</td><td>'+h(row.benefitScope)+'</td><td>'+h(row.primaryDriver)+'</td><td>'+h(row.backupDriver)+'</td><td>'+badge(row.allocationStatus,tone(row.allocationStatus))+'</td></tr>';});
+  var lineRows=lines.map(function(row){return '<tr><td class="text-mono">'+h(row.poolCode)+'</td><td>'+h(row.poolName)+'</td><td class="text-mono">'+h(row.code)+'</td><td>'+h(row.category)+' / '+h(row.subcategory)+'</td><td>'+h(row.name)+'</td><td class="num '+(row.periodAmount<0?'negative':'')+'">'+money(row.periodAmount)+'</td><td>'+h(row.benefitScope)+'</td><td>'+h(row.primaryDriver)+'</td><td>'+h(row.backupDriver)+'</td><td>'+badge(row.allocationStatus,tone(row.allocationStatus))+'</td></tr>';});
   var summaries=D.poolSummaries.filter(function(row){return contains(row,S.poolQuery,['batch','material','stage','line']);});
   var current=selected(D.poolSummaries,S.poolBatch);S.poolBatch=current.batch;
   var details=D.poolAllocations.filter(function(row){return row.batch===current.batch;});
   return '<div class="cost-kpis">'+kpi('费用池成本项目',String(D.stats.poolCostLines),'含制造与完全成本视图','#3b82f6')+kpi('费用池',String(D.stats.poolCount),'均配置受益范围和动因','#06b6d4')+kpi('制造费用池金额',wan(D.stats.manufacturingPoolTotal),'本期可分摊金额','#8b5cf6')+kpi('批次分摊明细',D.stats.poolAllocations.toLocaleString()+'条','按实际受益批次生成','#10b981')+kpi('分摊对账差额',money(D.stats.poolReconciliationDifference),'制造池分配金额一致','#10b981')+'</div>'+
-  '<div class="cost-card"><div class="cost-card-head"><div><div class="cost-card-title">费用池成本明细与分摊动因</div><div class="cost-card-note">首选动因不可用时才使用备选动因；完全经营成本不回写生产批次</div></div><div class="cost3-inline"><input id="cost3PoolQuery" value="'+h(S.poolQuery)+'" placeholder="费用池/成本名称"><select id="cost3PoolView"><option value="">全部成本视图</option><option '+(S.poolView==='生产制造成本'?'selected':'')+'>生产制造成本</option><option '+(S.poolView==='完全经营成本'?'selected':'')+'>完全经营成本</option></select><button class="cost-btn" onclick="costV3Apply(\'pools\')">查询</button></div></div>'+table(['费用池','费用项编码','成本类别','成本名称','本期金额','受益范围','首选动因','备选动因','状态'],lineRows,'cost3-pool-catalog')+'</div>'+
+  '<div class="cost-card"><div class="cost-card-head"><div><div class="cost-card-title">费用池成本明细与分摊动因</div><div class="cost-card-note">首选动因不可用时才使用备选动因；完全经营成本不回写生产批次</div></div><div class="cost3-inline"><input id="cost3PoolQuery" value="'+h(S.poolQuery)+'" placeholder="费用池/成本名称"><select id="cost3PoolView"><option value="">全部成本视图</option><option '+(S.poolView==='生产制造成本'?'selected':'')+'>生产制造成本</option><option '+(S.poolView==='完全经营成本'?'selected':'')+'>完全经营成本</option></select><button class="cost-btn" onclick="costV3Apply(\'pools\')">查询</button></div></div>'+table(['费用池编码','费用池名称','费用项编码','成本类别','成本名称','本期金额','受益范围','首选动因','备选动因','状态'],lineRows,'cost3-pool-catalog')+'</div>'+
   '<div class="cost-card"><div class="cost-card-head"><div><div class="cost-card-title">费用池分摊后的批次成本总和与明细</div><div class="cost-card-note">分摊金额=费用池分摊率×批次有效动因量，尾差保留在分摊日志</div></div></div><div class="cost3-master-detail"><div>'+batchSummaryTable(summaries,'pool',current.batch)+'</div><div>'+batchDetailHead(current,'批次费用池成本明细',details.length+'条分摊记录')+groupedDetailTable(details,'pool')+'</div></div></div>';
 }
 

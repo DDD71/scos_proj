@@ -12,157 +12,110 @@ for (const name of ['sandbox-cost-data.js', 'sandbox-cost.js']) {
 const api = ctx.window.SCOS_COST_SANDBOX;
 const data = ctx.window.SANDBOX_COST_DATA;
 const copy = value => JSON.parse(JSON.stringify(value));
-const total = (rows, key) => Number(rows.reduce((sum, row) => sum + Number(row[key] || 0), 0).toFixed(2));
-const byMonth = (months, values) => Object.fromEntries(months.map((month, index) => [month, values[index]]));
 const before = JSON.stringify(data);
+const defaults = copy(data.defaults);
 
-const baseline = api.calculate(data, {contractId: data.defaults.contractId});
-assert.equal(data.meta.modelVersion, 'COST-SIM-V10');
-assert.equal(data.meta.dataVersion, 'COST-DEMO-V6');
+const baseline = api.calculate(data, defaults);
+assert.equal(data.meta.modelVersion, 'DECISION-GAME-V3.2');
+assert.equal(data.meta.weekDefinition, '周六至下周五');
+assert.equal(baseline.name, '销售、生产和采购决策博弈');
+assert.equal(baseline.snapshot.contract.product, '果糖 F55');
 assert.equal(baseline.snapshot.contract.salePrice, 3500);
 assert.equal(baseline.contractQuantity, 6000);
 assert.equal(baseline.rawRequirement, 4800);
-assert.equal(baseline.snapshot.contract.rawUsagePerTon, 0.8);
-assert.equal(Number((1 / baseline.snapshot.contract.rawUsagePerTon).toFixed(4)), 1.25);
 assert.equal(baseline.period.months.length, 6);
-assert.equal(baseline.simulation.production, 6000);
-assert.equal(baseline.simulation.fulfilled, 6000);
-assert.equal(baseline.simulation.abandoned, 0);
+assert.ok(baseline.period.weeks.length >= 26);
+assert.ok(baseline.weeklyRows.every(row => row.capacityM === defaults.capacityM), 'all weeks must share the single maintained capacity M');
+assert.ok(baseline.weeklyRows.every((row, index) => {
+  const start = new Date(`${row.start}T00:00:00Z`);
+  const end = new Date(`${row.end}T00:00:00Z`);
+  return start.getUTCDay() === 6 && end.getUTCDay() === 5 && (end - start) / 86400000 === 6 && row.label.startsWith(`W${String(index + 1).padStart(2, '0')}`);
+}));
+assert.equal(baseline.simulation.unfulfilled, 0);
 assert.equal(baseline.simulation.fulfillmentRate, 100);
+assert.equal(baseline.simulation.penaltyCost, 0);
 assert.equal(baseline.simulation.revenue, 21_000_000);
-assert.equal(baseline.simulation.cost, 16_832_000.2);
-assert.equal(baseline.simulation.profit, 4_167_999.8);
-assert.equal(baseline.simulation.consumedRawCost, 14_800_000);
-assert.equal(baseline.simulation.processingAmount, 2_032_000.2);
-assert.equal(baseline.monthlyRows[0].unitRawCost, 2400);
-assert.equal(baseline.monthlyRows[0].unitProductionCost, 2738.6667);
-assert.equal(baseline.simulation.endingRawQty, 0);
-assert.equal(baseline.simulation.endingFgQty, 0);
-assert.equal(total(baseline.monthlyRows, 'salesPlan'), baseline.contractQuantity);
-assert.equal(total(baseline.monthlyRows, 'purchaseQty'), baseline.rawRequirement);
-assert.equal(total(baseline.monthlyRows, 'plannedProduction'), baseline.simulation.production);
-assert.equal(total(baseline.monthlyRows, 'revenue'), baseline.simulation.revenue);
-assert.equal(total(baseline.monthlyRows, 'cost'), baseline.simulation.cost);
-assert.equal(total(baseline.monthlyRows, 'profit'), baseline.simulation.profit);
+assert.ok(baseline.simulation.production >= baseline.simulation.fulfilled);
+assert.ok(baseline.simulation.rawCost > 0);
+assert.ok(baseline.simulation.auxPackCost > 0);
+assert.ok(baseline.simulation.energyCost > 0);
+assert.ok(baseline.simulation.fixedCost > 0);
+assert.equal(baseline.simulation.startStopCost, 0);
 assert.equal(Number((baseline.simulation.revenue - baseline.simulation.cost).toFixed(2)), baseline.simulation.profit);
-assert.ok(baseline.monthlyRows.every(row => row.loadPct === 80));
-assert.ok(baseline.monthlyRows.every(row => row.plannedProduction === row.salesPlan));
-assert.ok(baseline.monthlyRows.every(row => Number((row.unitRawCost + row.processingCost).toFixed(4)) === row.unitProductionCost));
-assert.equal(JSON.stringify(data), before, 'calculation must not mutate source data');
-assert.deepEqual(api.calculate(data, {contractId: data.defaults.contractId}), baseline, 'same inputs must be deterministic');
+assert.equal(JSON.stringify(data), before, 'calculation must not mutate source configuration');
+assert.deepEqual(api.calculate(data, copy(defaults)), baseline, 'same inputs must be deterministic');
 
-const months = baseline.period.months;
-const priceChanged = api.calculate(data, {
-  contractId: data.defaults.contractId,
-  monthlyPurchasePrices: byMonth(months, [3300, 3350, 3450, 3500, 3400, 3300])
-});
-assert.equal(priceChanged.simulation.fulfilled, baseline.simulation.fulfilled);
-assert.ok(priceChanged.simulation.cost > baseline.simulation.cost);
-assert.ok(priceChanged.simulation.profit < baseline.simulation.profit);
-
-const lowerLoad = api.calculate(data, {
-  contractId: data.defaults.contractId,
-  monthlyLoads: byMonth(months, [50, 80, 80, 80, 80, 80])
-});
-assert.equal(lowerLoad.monthlyRows[0].plannedProduction, baseline.monthlyRows[0].plannedProduction);
-assert.equal(lowerLoad.monthlyRows[0].rawWac, baseline.monthlyRows[0].rawWac);
-assert.equal(lowerLoad.monthlyRows[0].unitRawCost, baseline.monthlyRows[0].unitRawCost);
-assert.equal(lowerLoad.monthlyRows[0].processingCost, 440);
-assert.equal(lowerLoad.monthlyRows[0].unitProductionCost, 2840);
-assert.ok(lowerLoad.monthlyRows[0].unitProductionCost > baseline.monthlyRows[0].unitProductionCost);
-assert.ok(lowerLoad.simulation.cost > baseline.simulation.cost);
-assert.ok(lowerLoad.simulation.profit < baseline.simulation.profit);
-
-const purchases = byMonth(months, [0, 800, 800, 800, 800, 1600]);
-const delayedPurchase = api.calculate(data, {
-  contractId: data.defaults.contractId,
-  monthlyPurchases: purchases
-});
-assert.equal(total(delayedPurchase.monthlyRows, 'purchaseQty'), 4800);
-assert.equal(delayedPurchase.monthlyRows[0].availableRaw, 0);
-assert.equal(delayedPurchase.monthlyRows[0].plannedProduction, 0);
-assert.equal(delayedPurchase.monthlyRows[5].plannedProduction, 1000);
-assert.equal(delayedPurchase.simulation.production, 5000);
-assert.equal(delayedPurchase.simulation.fulfilled, 5000);
-assert.equal(delayedPurchase.simulation.abandoned, 1000);
-assert.equal(delayedPurchase.simulation.endingRawQty, 800);
-assert.equal(delayedPurchase.simulation.endingRawValue, 2_400_000);
-assert.equal(delayedPurchase.simulation.endingFgQty, 0);
-assert.equal(delayedPurchase.simulation.revenue, 17_500_000);
-assert.equal(delayedPurchase.simulation.cost, 14_093_333.5);
-assert.equal(delayedPurchase.simulation.profit, 3_406_666.5);
-assert.equal(delayedPurchase.simulation.cost, Number((delayedPurchase.simulation.consumedRawCost + delayedPurchase.simulation.processingAmount).toFixed(2)), 'sales cost must include consumed raw plus processing only');
-assert.equal(delayedPurchase.simulation.purchaseAmount, Number((delayedPurchase.simulation.consumedRawCost + delayedPurchase.simulation.endingRawValue).toFixed(2)), 'unconsumed raw must remain an ending inventory asset');
-assert.notEqual(delayedPurchase.simulation.cost, Number((delayedPurchase.simulation.purchaseAmount + delayedPurchase.simulation.processingAmount).toFixed(2)), 'ending raw value must not enter contract sales cost');
-
-const changedSales = api.calculate(data, {
-  contractId: data.defaults.contractId,
-  monthlySales: byMonth(months, [1300, 700, 1000, 1000, 1000, 1000])
-});
-assert.equal(changedSales.monthlyRows[0].plannedProduction, 1000);
-assert.equal(changedSales.monthlyRows[0].abandoned, 300);
-assert.equal(changedSales.monthlyRows[1].plannedProduction, 700);
-assert.equal(changedSales.simulation.fulfilled, 5700);
-assert.equal(changedSales.simulation.endingRawQty, 240);
-
-const invalidCases = [
-  {monthlySales: byMonth(months, [1100, 1000, 1000, 1000, 1000, 1000])},
-  {monthlyPurchases: byMonth(months, [900, 800, 800, 800, 800, 800])},
-  {monthlyPurchasePrices: byMonth(months, [0, 3050, 3150, 3200, 3100, 3000])},
-  {monthlyLoads: byMonth(months, [49, 80, 80, 80, 80, 80])},
-  {monthlyLoads: byMonth(months, [101, 80, 80, 80, 80, 80])},
-  {monthlyLoads: byMonth(months, [80.5, 80, 80, 80, 80, 80])},
-  {contractId: 'missing'}
-];
-for (const params of invalidCases) {
-  assert.throws(() => api.calculate(data, {contractId: data.defaults.contractId, ...params}));
+const weekIds = baseline.period.weeks.map(week => week.id);
+const firstWeek = baseline.weeklyRows[0];
+assert.equal(firstWeek.theoreticalMax, Number((firstWeek.capacityM * firstWeek.loadPct / 100).toFixed(4)));
+const higherCapacity = api.calculate(data, {...defaults, capacityM: 420});
+assert.ok(higherCapacity.weeklyRows.every(row => row.capacityM === 420), 'one capacity input must propagate to every week');
+assert.equal(higherCapacity.weeklyRows[0].theoreticalMax, Number((420 * higherCapacity.weeklyRows[0].loadPct / 100).toFixed(4)));
+const lowLoad = api.calculate(data, {...defaults, weeklyLoads: {[weekIds[0]]: 50}});
+const fullLoad = api.calculate(data, {...defaults, weeklyLoads: {[weekIds[0]]: 100}});
+assert.equal(lowLoad.weeklyRows[0].theoreticalMax, lowLoad.weeklyRows[0].capacityM * 0.5);
+assert.ok(lowLoad.weeklyRows[0].energyUnitCost > fullLoad.weeklyRows[0].energyUnitCost, 'low load must increase unit energy cost');
+assert.ok(lowLoad.weeklyRows[0].energyCost < fullLoad.weeklyRows[0].energyCost, 'with equal M and sufficient raw material, total energy cost must rise with load');
+for (const row of [lowLoad.weeklyRows[0], fullLoad.weeklyRows[0]]) {
+  for (const [totalKey, unitKey] of [['fixedCost', 'fixedUnitCost'], ['rawCost', 'rawUnitCost'], ['auxPackCost', 'auxPackUnitCost'], ['energyCost', 'energyUnitCost'], ['startStopCost', 'startStopUnitCost']]) {
+    assert.ok(Math.abs(row[totalKey] / row.production - row[unitKey]) < 0.01, `${unitKey} must reconcile to total / production`);
+  }
+  assert.ok(Math.abs((row.fixedUnitCost + row.rawUnitCost + row.auxPackUnitCost + row.energyUnitCost + row.startStopUnitCost) - row.unitCost) < 0.02, 'component unit costs must add up to unit production cost');
 }
+assert.ok(Math.abs(fullLoad.simulation.productionCost / fullLoad.simulation.production - fullLoad.simulation.unitProductionCost) < 0.01);
+assert.ok(fullLoad.monthlyRows.every(row => row.production === 0 || Math.abs(row.productionCost / row.production - row.unitProductionCost) < 0.01));
 
-const badDataCases = [
-  d => { d.contracts[0].monthlyDeliveries.pop(); },
-  d => { d.contracts[0].monthlyDeliveries.push(copy(d.contracts[0].monthlyDeliveries[0])); },
-  d => { d.contracts[0].processingCostByLoad['70'] = undefined; },
-  d => { d.contracts[0].rawUsagePerTon = 0; },
-  d => { d.contracts[0].baseLoadPct = 40; },
-  d => { d.contracts[0].monthlyCapacity = 0; },
-  d => { d.contracts[0].endDate = '2026-11-31'; }
-];
-for (const mutate of badDataCases) {
-  const changed = copy(data);
-  mutate(changed);
-  assert.throws(() => api.calculate(changed, {contractId: data.defaults.contractId}));
-}
+const stopStart = api.calculate(data, {
+  ...defaults,
+  weeklyStates: {[weekIds[0]]: 'shutdown', [weekIds[1]]: 'startup'}
+});
+assert.equal(stopStart.weeklyRows[0].effectiveLoad, 20);
+assert.equal(stopStart.weeklyRows[1].effectiveLoad, 20);
+assert.equal(stopStart.weeklyRows[0].theoreticalMax, stopStart.weeklyRows[0].capacityM * 0.2);
+assert.equal(stopStart.weeklyRows[0].startStopCost, data.products[0].shutdownCost);
+assert.equal(stopStart.weeklyRows[1].startStopCost, data.products[0].startupCost);
+assert.ok(stopStart.simulation.startStopCost > 0);
+assert.throws(() => api.calculate(data, {...defaults, weeklyStates: {[weekIds[0]]: 'shutdown'}}), /下一周必须为开车状态/);
+assert.throws(() => api.calculate(data, {...defaults, weeklyStates: {[weekIds[0]]: 'startup'}}), /必须紧随停车周/);
 
-const other = api.calculate(data, {contractId: data.contracts[1].id});
-assert.equal(other.snapshot.contract.salePrice, 3300);
-assert.equal(other.period.months.length, 12);
-assert.equal(other.contractQuantity, 10400);
-assert.equal(other.rawRequirement, 7904);
-assert.equal(Number((1 / other.snapshot.contract.rawUsagePerTon).toFixed(4)), 1.3158);
-assert.equal(other.monthlyRows[0].unitRawCost, 2204);
-assert.equal(other.monthlyRows[0].processingCost, 390);
-assert.equal(other.monthlyRows[0].unitProductionCost, 2594);
-assert.equal(other.simulation.revenue, 34_320_000);
-assert.equal(other.simulation.cost, 27_885_040);
-assert.equal(other.simulation.profit, 6_434_960);
-assert.ok(other.monthlyRows.every(row => Number((row.unitRawCost + row.processingCost).toFixed(4)) === row.unitProductionCost));
-const zeroMonth = other.monthlyRows.find(row => row.salesPlan === 0);
-assert.equal(zeroMonth.plannedProduction, 0);
-assert.equal(zeroMonth.revenue, 0);
-assert.equal(zeroMonth.cost, 0);
-assert.equal(zeroMonth.profit, 0);
+const monthKeys = baseline.period.months;
+const basePurchase = Object.fromEntries(baseline.monthlyRows.map(row => [row.month, row.purchaseQty]));
+const delayedPurchases = {...basePurchase};
+delayedPurchases[monthKeys[1]] += delayedPurchases[monthKeys[0]];
+delayedPurchases[monthKeys[0]] = 0;
+const delayed = api.calculate(data, {...defaults, initialRawQty: 0, monthlyPurchases: delayedPurchases});
+assert.ok(delayed.monthlyRows[0].endingBacklog > 0, 'first-month shortage must become rolling backlog');
+assert.ok(delayed.monthlyRows.slice(1).some(row => row.fulfilled > row.due), 'later spare capacity must be able to catch up prior backlog');
+
+const zeroPurchases = Object.fromEntries(monthKeys.map(month => [month, 0]));
+const breached = api.calculate(data, {...defaults, initialRawQty: 0, monthlyPurchases: zeroPurchases});
+assert.equal(breached.simulation.unfulfilled, defaults.contractQuantity);
+assert.equal(breached.simulation.penaltyCost, defaults.contractQuantity * defaults.penaltyValue);
+assert.equal(breached.monthlyRows.slice(0, -1).reduce((sum, row) => sum + row.penaltyCost, 0), 0, 'intermediate backlog must not incur breach cost');
+assert.equal(breached.monthlyRows.at(-1).penaltyCost, breached.simulation.penaltyCost);
+
+const ratePenalty = api.calculate(data, {...defaults, penaltyMode: 'rate', penaltyValue: 10, initialRawQty: 0, monthlyPurchases: zeroPurchases});
+assert.equal(ratePenalty.snapshot.contract.penaltyUnit, 350);
+assert.equal(ratePenalty.simulation.penaltyCost, defaults.contractQuantity * 350);
+
+const badDeliveries = Object.fromEntries(monthKeys.map((month, index) => [month, index === 0 ? 1100 : 1000]));
+assert.throws(() => api.calculate(data, {...defaults, monthlyDeliveries: badDeliveries}), /交付量合计必须等于销售合同量/);
+assert.throws(() => api.calculate(data, {...defaults, durationMonths: 0}));
+assert.throws(() => api.calculate(data, {...defaults, salePrice: 0}));
+assert.throws(() => api.calculate(data, {...defaults, weeklyLoads: {[weekIds[0]]: 49}}), /50%～100%/);
+assert.throws(() => api.calculate(data, {...defaults, capacityM: 0}), /统一产能上限 M/);
 
 baseline.id = 'TEST-BASELINE';
-baseline.time = '2026-10-12 00:00:00';
+baseline.time = '2026-10-14 00:00:00';
 const report = api.report(baseline);
-assert.match(report, /BOM 折算玉米淀粉总采购需求：4,800\.00 吨/);
-assert.match(report, /合同固定售价：3,500\.00 元\/吨/);
-assert.match(report, /销售成本（已耗用原料 \+ 加工）/);
-assert.match(report, /库存资产，不计入本合同销售成本/);
-assert.match(report, /1 吨玉米淀粉约可生产 1\.2500 吨成品/);
-assert.match(report, /单位原料成本 = 原料移动加权价 × 固定 BOM 耗用系数（单位换算，与负荷无关）；负荷仅影响单位加工成本/);
-assert.match(report, /履约销量\t采购量\t采购价\t累计可用原料\t系统计划生产\t产能负荷%\t预计单位原料成本\t单位加工成本\t预计单位生产成本/);
+assert.match(report, /销售、生产和采购决策博弈/);
+assert.match(report, /单位违约金：260\.00 元\/吨/);
+assert.match(report, /月度欠交可由后续月份补交/);
+assert.match(report, /周度生产明细/);
+assert.match(report, /成本类别\t总额（元）\t单位成本（元\/吨）/);
+assert.match(report, /固定总额\t固定单位\t原料总额\t原料单位/);
+assert.match(report, /能源总额\t能源单位\t启停总额\t启停单位/);
 assert.doesNotMatch(report, /NaN|undefined/);
-assert.equal(JSON.stringify(data), before, 'all calculations must keep the business snapshot immutable');
+assert.equal(JSON.stringify(data), before, 'all calculations must keep the source configuration immutable');
 
-console.log('PASS: BOM unit conversion, load-independent raw unit cost, F55 price 3500 and MALT price 3300, raw-plus-processing unit cost, system-planned production, ending-raw exclusion from contract cost, validation, reporting and immutable inputs.');
+console.log('PASS: configurable contract, monthly delivery/procurement, one shared weekly capacity M, Saturday-Friday weekly production, load/raw constraints, falling unit/rising total energy, all component unit costs, stop-start linkage, rolling backlog, final breach penalty, reporting and immutable inputs.');

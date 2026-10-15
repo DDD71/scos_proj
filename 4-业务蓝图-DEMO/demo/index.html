@@ -431,6 +431,24 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
 .disabled-note{opacity:.72;pointer-events:none;}
 .dashboard-control-strip{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:16px;padding:9px 12px;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg-secondary);}
 .dashboard-control-strip .spacer{flex:1;}
+.dash-kpi-switcher{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin-bottom:10px;padding:8px;border:1px solid var(--border);border-radius:10px;background:var(--bg-secondary);}
+.dash-kpi-switch{appearance:none;display:flex;align-items:center;justify-content:center;gap:9px;min-height:44px;border:1px solid transparent;border-radius:8px;background:transparent;color:var(--text-muted);font:600 14px 'Noto Sans SC',sans-serif;cursor:pointer;transition:border-color .16s,background .16s,color .16s;}
+.dash-kpi-switch .dot{width:9px;height:9px;border-radius:50%;opacity:.65}.dash-kpi-switch small{font:500 10px 'JetBrains Mono',monospace;color:#64748b}.dash-kpi-switch:hover{background:rgba(30,41,59,.68);color:#dbe7f5}.dash-kpi-switch.active{border-color:color-mix(in srgb,var(--tone) 48%,transparent);background:color-mix(in srgb,var(--tone) 11%,transparent);color:#f1f5f9;box-shadow:inset 0 2px 0 var(--tone)}.dash-kpi-switch.active .dot{opacity:1;box-shadow:0 0 10px color-mix(in srgb,var(--tone) 65%,transparent)}.dash-kpi-switch.blue{--tone:var(--blue)}.dash-kpi-switch.cyan{--tone:var(--cyan)}.dash-kpi-switch.green{--tone:var(--green)}.dash-kpi-switch.yellow{--tone:var(--yellow)}.dash-kpi-switch.purple{--tone:var(--purple)}
+.dash-kpi-grid{display:block;margin-bottom:16px;}
+.dash-kpi-group{display:none;grid-template-columns:minmax(0,1fr);align-items:stretch;min-height:136px;padding:16px 18px;min-width:0;}
+.dash-kpi-group.active{display:grid;}
+.dash-kpi-metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;min-width:0;}
+.dash-kpi-metric{appearance:none;width:100%;min-height:104px;border:1px solid rgba(51,65,85,.58);border-radius:9px;background:rgba(15,21,37,.72);padding:14px 15px 12px;color:inherit;text-align:left;cursor:pointer;font-family:'Noto Sans SC',sans-serif;transition:border-color .16s,background .16s,transform .16s;}
+.dash-kpi-metric:hover{border-color:var(--border-light);background:rgba(30,41,59,.7);transform:translateY(-1px);}
+.dash-kpi-metric-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:4px;}
+.dash-kpi-metric-name{font-size:14px;color:#aab8ca;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.dash-kpi-metric-value{margin-top:7px;font:700 27px 'JetBrains Mono',monospace;color:var(--text-primary);white-space:nowrap;}
+.dash-kpi-metric-change{font:600 13px 'JetBrains Mono',monospace;white-space:nowrap;}
+.dash-kpi-metric-change.good{color:var(--green);}.dash-kpi-metric-change.bad{color:var(--red);}.dash-kpi-metric-change.neutral{color:var(--cyan);}
+.dash-kpi-metric-foot{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-top:8px;font-size:11px;color:var(--text-muted);}
+.dash-kpi-metric-foot span:last-child{color:var(--cyan);opacity:.78;}
+.dash-analysis-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;}
+.dash-analysis-chart{height:300px;width:100%;min-width:0;}
 .drag-enabled .kpi-card{cursor:grab;border-style:dashed;}
 .drag-enabled .kpi-card:active{cursor:grabbing;}
 .kpi-card.dragging{opacity:.35;transform:scale(.98);}
@@ -454,9 +472,9 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
 .demo-allocation-fill{height:100%;background:var(--cyan);border-radius:5px;}
 .demo-status{padding:9px 11px;border-left:3px solid var(--green);border-radius:var(--radius);background:rgba(16,185,129,.05);font-size:11px;color:var(--text-secondary);line-height:1.7;}
 .demo-status.warning{border-left-color:var(--red);background:rgba(239,68,68,.05);}
-@media(max-width:1200px){.sandbox-baseline{grid-template-columns:repeat(3,1fr)}.sandbox-workspace{grid-template-columns:210px minmax(0,1fr)}.sandbox-stock-visual{grid-template-columns:1fr}.sandbox-stock-panel{min-height:0;display:grid;grid-template-columns:120px 110px 1fr;align-items:center}.sandbox-stock-panel-head{grid-column:1;text-align:left}.sandbox-stock-tank-wrap{grid-column:1;grid-row:2/5;height:165px}.sandbox-stock-value,.sandbox-stock-status{grid-column:2}.sandbox-stock-flows,.sandbox-stock-policy{grid-column:3;margin-top:0}.sandbox-module-results{grid-template-columns:repeat(2,1fr)}.sandbox-case-kpis{grid-template-columns:repeat(2,1fr)}.sandbox-day-grid{grid-template-columns:repeat(2,1fr)}.sandbox-detail-grid{grid-template-columns:1fr}.grid-5{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:1200px){.sandbox-baseline{grid-template-columns:repeat(3,1fr)}.sandbox-workspace{grid-template-columns:210px minmax(0,1fr)}.sandbox-stock-visual{grid-template-columns:1fr}.sandbox-stock-panel{min-height:0;display:grid;grid-template-columns:120px 110px 1fr;align-items:center}.sandbox-stock-panel-head{grid-column:1;text-align:left}.sandbox-stock-tank-wrap{grid-column:1;grid-row:2/5;height:165px}.sandbox-stock-value,.sandbox-stock-status{grid-column:2}.sandbox-stock-flows,.sandbox-stock-policy{grid-column:3;margin-top:0}.sandbox-module-results{grid-template-columns:repeat(2,1fr)}.sandbox-case-kpis{grid-template-columns:repeat(2,1fr)}.sandbox-day-grid{grid-template-columns:repeat(2,1fr)}.sandbox-detail-grid{grid-template-columns:1fr}.grid-5{grid-template-columns:repeat(3,1fr)}.dash-kpi-grid{grid-template-columns:1fr}.dash-kpi-group:last-child{grid-column:auto}.dash-kpi-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.dash-analysis-grid{grid-template-columns:1fr}}
 @media(max-width:768px){
-html,body{overflow:hidden}.sidebar{display:none}.main-wrap{width:100vw}.header{padding:0 12px}.header-breadcrumb,.header-env,.header-user{display:none}.header-right{gap:8px}.content{padding:12px;overflow-x:hidden}.content::before{left:0}.page-header{align-items:flex-start;gap:10px;flex-direction:column}.page-header>.flex{width:100%;overflow-x:auto;padding-bottom:3px}.grid-2,.grid-3,.grid-4,.grid-5,.grid-6,.grid-23,.grid-32,.grid-13{grid-template-columns:1fr!important}.tab-bar{overflow-x:auto}.tab-btn{padding:7px 10px}.dash-map-wrap{height:320px}.sandbox-workspace{grid-template-columns:1fr}.sandbox-baseline{grid-template-columns:1fr 1fr}.sandbox-param-grid{grid-template-columns:1fr}.sandbox-result-grid{grid-template-columns:1fr}.sandbox-stock-panel{display:block}.sandbox-stock-panel-head{text-align:center}.sandbox-stock-tank-wrap{height:190px}.sandbox-stock-flows,.sandbox-stock-policy{margin-top:9px}.sandbox-module-results{grid-template-columns:1fr}.sandbox-case-main{grid-template-columns:1fr}.sandbox-case-kpis{grid-template-columns:1fr 1fr}.sandbox-causal-strip{grid-template-columns:1fr}.sandbox-causal-arrow{height:20px;transform:rotate(90deg)}.sandbox-day-toolbar{grid-template-columns:1fr}.sandbox-day-current{text-align:left}.sandbox-day-grid{grid-template-columns:1fr 1fr}.sandbox-detail-grid{grid-template-columns:1fr}.logic-flow{align-items:stretch}.logic-arrow{transform:rotate(90deg);justify-content:center}.dashboard-control-strip .spacer{display:none}.prediction-item{grid-template-columns:70px 1fr}.prediction-item .tag{grid-column:2}.audit-row{grid-template-columns:80px 70px 1fr}.audit-row>:last-child{display:none}
+html,body{overflow:hidden}.sidebar{display:none}.main-wrap{width:100vw}.header{padding:0 12px}.header-breadcrumb,.header-env,.header-user{display:none}.header-right{gap:8px}.content{padding:12px;overflow-x:hidden}.content::before{left:0}.page-header{align-items:flex-start;gap:10px;flex-direction:column}.page-header>.flex{width:100%;overflow-x:auto;padding-bottom:3px}.grid-2,.grid-3,.grid-4,.grid-5,.grid-6,.grid-23,.grid-32,.grid-13{grid-template-columns:1fr!important}.tab-bar{overflow-x:auto}.tab-btn{padding:7px 10px}.dash-map-wrap{height:320px}.dash-kpi-switcher{grid-template-columns:repeat(5,minmax(108px,1fr));overflow-x:auto}.dash-kpi-switch{min-height:40px;font-size:13px}.dash-kpi-grid{grid-template-columns:1fr}.dash-kpi-group{grid-template-columns:1fr}.dash-kpi-group:last-child{grid-column:auto}.dash-kpi-metrics{grid-template-columns:1fr}.dash-kpi-metric-value{font-size:24px}.dash-analysis-grid{grid-template-columns:1fr}.dash-analysis-chart{height:260px}.sandbox-workspace{grid-template-columns:1fr}.sandbox-baseline{grid-template-columns:1fr 1fr}.sandbox-param-grid{grid-template-columns:1fr}.sandbox-result-grid{grid-template-columns:1fr}.sandbox-stock-panel{display:block}.sandbox-stock-panel-head{text-align:center}.sandbox-stock-tank-wrap{height:190px}.sandbox-stock-flows,.sandbox-stock-policy{margin-top:9px}.sandbox-module-results{grid-template-columns:1fr}.sandbox-case-main{grid-template-columns:1fr}.sandbox-case-kpis{grid-template-columns:1fr 1fr}.sandbox-causal-strip{grid-template-columns:1fr}.sandbox-causal-arrow{height:20px;transform:rotate(90deg)}.sandbox-day-toolbar{grid-template-columns:1fr}.sandbox-day-current{text-align:left}.sandbox-day-grid{grid-template-columns:1fr 1fr}.sandbox-detail-grid{grid-template-columns:1fr}.logic-flow{align-items:stretch}.logic-arrow{transform:rotate(90deg);justify-content:center}.dashboard-control-strip .spacer{display:none}.prediction-item{grid-template-columns:70px 1fr}.prediction-item .tag{grid-column:2}.audit-row{grid-template-columns:80px 70px 1fr}.audit-row>:last-child{display:none}
 }
 </style>
 <link rel="stylesheet" href="assets/styles/sandbox/sandbox-simple.css">
@@ -495,8 +513,9 @@ html,body{overflow:hidden}.sidebar{display:none}.main-wrap{width:100vw}.header{p
 </div></div>
 </div>
 <div class="nav-inventory-group nav-procurement-group" id="procurementNavGroup">
-<div class="nav-item inventory-parent" data-page="procurement" role="button" tabindex="0" onclick="navigateProcurement('plans')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();navigateProcurement('plans')}"><span class="nav-icon">◆</span><span class="nav-label">采购优化</span><button class="nav-expand" type="button" aria-label="展开或收起采购优化子模块" onclick="event.stopPropagation();toggleProcurementMenu()">⌄</button></div>
+<div class="nav-item inventory-parent" data-page="procurement" role="button" tabindex="0" onclick="navigateProcurement('orderplan')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();navigateProcurement('orderplan')}"><span class="nav-icon">◆</span><span class="nav-label">采购优化</span><button class="nav-expand" type="button" aria-label="展开或收起采购优化子模块" onclick="event.stopPropagation();toggleProcurementMenu()">⌄</button></div>
 <div class="nav-submenu" id="procurementSubmenu"><div class="nav-submenu-inner">
+<button class="nav-subitem" data-proc-section="orderplan" onclick="navigateProcurement('orderplan')">采购优化总览</button>
 <button class="nav-subitem" data-proc-section="suppliers" onclick="navigateProcurement('suppliers')">供应商资料库</button>
 <button class="nav-subitem" data-proc-section="forecast" onclick="navigateProcurement('forecast')">大宗原料价格预测提报</button>
 <button class="nav-subitem" data-proc-section="plans" onclick="navigateProcurement('plans')">玉米淀粉采购方案管理</button>
@@ -571,7 +590,7 @@ document.getElementById('headerTitle').textContent=PT[p]||'';
 document.getElementById('headerBread').textContent=PB[p]||'';
 ({config:initConfig,dashboard:initDashboard,sandbox:initSandbox,procurement:initProcurement,requisition:initRequisition,inventory:initInventory,production:initProduction,costing:initCosting,trace:initTrace})[p]();
 }
-function initChart(id,opt){if(charts[id]){charts[id].dispose();delete charts[id];}const el=document.getElementById(id);if(!el)return null;const c=echarts.init(el);c.setOption(opt);charts[id]=c;return c;}
+function initChart(id,opt){if(/^dash(?:Sales|Finished|Raw|Prod|Proc|Supplier|Operating|Cash)/.test(id)&&opt&&opt.title&&!(opt.grid&&opt.grid.top===82&&opt.legend&&opt.legend.top===28))opt=dashAnalysisOpt(opt);if(charts[id]){charts[id].dispose();delete charts[id];}const el=document.getElementById(id);if(!el)return null;const c=echarts.init(el);c.setOption(opt);charts[id]=c;return c;}
 function switchTab(g,i){document.querySelectorAll('.tab-btn[data-group="'+g+'"]').forEach((b,j)=>b.classList.toggle('active',j===i));document.querySelectorAll('.tab-content[data-group="'+g+'"]').forEach((t,j)=>{t.classList.toggle('active',j===i);});}
 /* ===== PLACEHOLDER PAGES ===== */
 function buildInventoryHTMLLegacy(){
@@ -1694,78 +1713,70 @@ initChart('cfgModelPerf',mOpt({grid:{top:30,bottom:25,left:45,right:15},legend:{
 
 /* ===== PAGE 2: DASHBOARD ===== */
 function buildDashboardHTML(){
-return `<div class="page-header"><div><div class="page-title">供应链驾驶舱</div><div class="page-subtitle">Supply Chain Cockpit — 角色化态势感知、趋势预测与异常协同</div></div>
+return `<div class="page-header"><div><div class="page-title">供应链驾驶舱</div><div class="page-subtitle">Supply Chain Cockpit — 销售、库存、生产、采购与经营一体化态势感知</div></div>
 <div class="flex gap-8"><button class="btn btn-sm" onclick="initDashboard();appendDashAudit('刷新驾驶舱','成功')">刷新</button><button class="btn btn-sm btn-green" onclick="customizeDashboard()">个性化配置</button><button class="btn btn-sm" onclick="exportDashboardReport()">导出报告</button></div></div>
 <div class="dashboard-control-strip"><span class="text-xs text-muted">当前角色</span><select class="control-select" id="dashRoleSelect" onchange="applyDashboardRole(this.value)"><option value="director">供应链总监</option><option value="gm">工厂总经理</option><option value="dispatcher">工厂调度员</option><option value="group">上级管理公司领导</option></select><span class="tag tag-blue" id="dashRoleScope">全厂供应链 · 成本字段可见</span><span class="status-dot green"></span><span class="text-xs text-muted">关键运营数据延迟 <span class="text-mono text-green">3.2秒</span></span><span class="text-xs text-muted">更新于 <span class="text-mono text-cyan" id="dashUpdateTime">--:--</span></span><span class="spacer"></span><button class="btn btn-sm" onclick="showAccessAudit()">角色权限与审计</button><button class="btn btn-sm" onclick="showMobilePreview()">移动端视图</button><button class="btn btn-sm" onclick="showHelpCenter()">操作帮助</button></div>
-<!-- KPI ROW -->
-<div class="grid grid-5 mb-16" id="dashKpiGrid">
-<div class="kpi-card blue" data-kpi="prod" draggable="false" onclick="drillKPI('prod')" title="点击下钻；开启编辑后可拖拽"><div class="kpi-label">今日产销达成率</div><div class="kpi-value">92.3%</div><div class="kpi-change up">▲ +1.8%</div><div class="kpi-drill">钻取溯源 ▸</div></div>
-<div class="kpi-card cyan" data-kpi="inv" draggable="false" onclick="drillKPI('inv')" title="点击下钻；开启编辑后可拖拽"><div class="kpi-label">成品库存周转天数</div><div class="kpi-value">8.2<span style="font-size:13px">天</span></div><div class="kpi-change down">▼ -0.5天</div><div class="kpi-drill">钻取溯源 ▸</div></div>
-<div class="kpi-card green" data-kpi="otd" draggable="false" onclick="drillKPI('otd')" title="点击下钻；开启编辑后可拖拽"><div class="kpi-label">订单准时交付率OTD</div><div class="kpi-value">96.7%</div><div class="kpi-change up">▲ +0.3%</div><div class="kpi-drill">钻取溯源 ▸</div></div>
-<div class="kpi-card yellow" data-kpi="cost" draggable="false" onclick="drillKPI('cost')" title="点击下钻；开启编辑后可拖拽"><div class="kpi-label">供应链总运营成本</div><div class="kpi-value">¥2,847<span style="font-size:12px">万/月</span></div><div class="kpi-change flat">— 持平</div><div class="kpi-drill">钻取溯源 ▸</div></div>
-<div class="kpi-card purple" data-kpi="cash" draggable="false" onclick="drillKPI('cash')" title="点击下钻；开启编辑后可拖拽"><div class="kpi-label">现金循环周期</div><div class="kpi-value">45<span style="font-size:13px">天</span></div><div class="kpi-change down">▼ -3天</div><div class="kpi-drill">钻取溯源 ▸</div></div>
+<!-- FIVE-DOMAIN KPI OVERVIEW -->
+<div class="dash-kpi-switcher" role="tablist" aria-label="驾驶舱指标类别">
+<button class="dash-kpi-switch blue active" type="button" role="tab" aria-selected="true" data-kpi-tab="sales" onclick="selectDashKpi('sales')"><span class="dot" style="background:var(--blue)"></span>销售<small>4项</small></button>
+<button class="dash-kpi-switch cyan" type="button" role="tab" aria-selected="false" data-kpi-tab="inventory" onclick="selectDashKpi('inventory')"><span class="dot" style="background:var(--cyan)"></span>库存<small>4项</small></button>
+<button class="dash-kpi-switch green" type="button" role="tab" aria-selected="false" data-kpi-tab="production" onclick="selectDashKpi('production')"><span class="dot" style="background:var(--green)"></span>生产<small>3项</small></button>
+<button class="dash-kpi-switch yellow" type="button" role="tab" aria-selected="false" data-kpi-tab="procurement" onclick="selectDashKpi('procurement')"><span class="dot" style="background:var(--yellow)"></span>采购<small>5项</small></button>
+<button class="dash-kpi-switch purple" type="button" role="tab" aria-selected="false" data-kpi-tab="operation" onclick="selectDashKpi('operation')"><span class="dot" style="background:var(--purple)"></span>经营<small>4项</small></button>
+</div>
+<div class="dash-kpi-grid" id="dashKpiGrid">
+<div class="kpi-card dash-kpi-group blue active" data-kpi="sales" draggable="false"><div class="dash-kpi-metrics">
+<button class="dash-kpi-metric" onclick="drillKPI('salesQty')"><div class="dash-kpi-metric-top"><span class="dash-kpi-metric-name">销量</span><span class="dash-kpi-metric-change good">▲ 4.8%</span></div><div class="dash-kpi-metric-value">12,860 吨</div><div class="dash-kpi-metric-foot"><span>本月累计</span><span>钻取溯源 ▸</span></div></button>
+<button class="dash-kpi-metric" onclick="drillKPI('salesAmount')"><div class="dash-kpi-metric-top"><span class="dash-kpi-metric-name">销售金额</span><span class="dash-kpi-metric-change good">▲ 5.3%</span></div><div class="dash-kpi-metric-value">¥4,501 万</div><div class="dash-kpi-metric-foot"><span>本月累计</span><span>钻取溯源 ▸</span></div></button>
+<button class="dash-kpi-metric" onclick="drillKPI('salesContractQty')"><div class="dash-kpi-metric-top"><span class="dash-kpi-metric-name">在手销售合同量</span><span class="dash-kpi-metric-change good">▲ 2.1%</span></div><div class="dash-kpi-metric-value">28,400 吨</div><div class="dash-kpi-metric-foot"><span>未履约余额</span><span>钻取溯源 ▸</span></div></button>
+<button class="dash-kpi-metric" onclick="drillKPI('salesContractAmount')"><div class="dash-kpi-metric-top"><span class="dash-kpi-metric-name">在手销售合同金额</span><span class="dash-kpi-metric-change good">▲ 2.6%</span></div><div class="dash-kpi-metric-value">¥9,940 万</div><div class="dash-kpi-metric-foot"><span>未履约余额</span><span>钻取溯源 ▸</span></div></button>
+</div></div>
+<div class="kpi-card dash-kpi-group cyan" data-kpi="inventory" draggable="false"><div class="dash-kpi-metrics">
+<button class="dash-kpi-metric" onclick="drillKPI('fgStockQty')"><div class="dash-kpi-metric-top"><span class="dash-kpi-metric-name">成品库存量</span><span class="dash-kpi-metric-change neutral">▼ 3.2%</span></div><div class="dash-kpi-metric-value">3,635 吨</div><div class="dash-kpi-metric-foot"><span>当前可用</span><span>钻取溯源 ▸</span></div></button>
+<button class="dash-kpi-metric" onclick="drillKPI('fgTurnDays')"><div class="dash-kpi-metric-top"><span class="dash-kpi-metric-name">成品周转天数</span><span class="dash-kpi-metric-change good">▼ 0.5天</span></div><div class="dash-kpi-metric-value">8.2 天</div><div class="dash-kpi-metric-foot"><span>近30日滚动</span><span>钻取溯源 ▸</span></div></button>
+<button class="dash-kpi-metric" onclick="drillKPI('rmStockQty')"><div class="dash-kpi-metric-top"><span class="dash-kpi-metric-name">原料库存量</span><span class="dash-kpi-metric-change bad">▼ 6.4%</span></div><div class="dash-kpi-metric-value">1,860 吨</div><div class="dash-kpi-metric-foot"><span>含质检可用</span><span>钻取溯源 ▸</span></div></button>
+<button class="dash-kpi-metric" onclick="drillKPI('rmTurnDays')"><div class="dash-kpi-metric-top"><span class="dash-kpi-metric-name">原料周转天数</span><span class="dash-kpi-metric-change good">▼ 0.1天</span></div><div class="dash-kpi-metric-value">1.3 天</div><div class="dash-kpi-metric-foot"><span>近30日滚动</span><span>钻取溯源 ▸</span></div></button>
+</div></div>
+<div class="kpi-card dash-kpi-group green" data-kpi="production" draggable="false"><div class="dash-kpi-metrics">
+<button class="dash-kpi-metric" onclick="drillKPI('prodPlanRate')"><div class="dash-kpi-metric-top"><span class="dash-kpi-metric-name">生产计划达成率</span><span class="dash-kpi-metric-change good">▲ 1.8%</span></div><div class="dash-kpi-metric-value">94.2%</div><div class="dash-kpi-metric-foot"><span>本月累计</span><span>钻取溯源 ▸</span></div></button>
+<button class="dash-kpi-metric" onclick="drillKPI('prodFpy')"><div class="dash-kpi-metric-top"><span class="dash-kpi-metric-name">生产一次合格率</span><span class="dash-kpi-metric-change good">▲ 0.4%</span></div><div class="dash-kpi-metric-value">98.7%</div><div class="dash-kpi-metric-foot"><span>首检合格</span><span>钻取溯源 ▸</span></div></button>
+<button class="dash-kpi-metric sensitive" onclick="drillKPI('prodCost')"><div class="dash-kpi-metric-top"><span class="dash-kpi-metric-name">生产成本</span><span class="dash-kpi-metric-change good">▼ 2.7%</span></div><div class="dash-kpi-metric-value">¥3,146 万</div><div class="dash-kpi-metric-foot"><span>本月累计</span><span>钻取溯源 ▸</span></div></button>
+</div></div>
+<div class="kpi-card dash-kpi-group yellow" data-kpi="procurement" draggable="false"><div class="dash-kpi-metrics">
+<button class="dash-kpi-metric" onclick="drillKPI('purchaseQty')"><div class="dash-kpi-metric-top"><span class="dash-kpi-metric-name">采购量</span><span class="dash-kpi-metric-change good">▲ 3.6%</span></div><div class="dash-kpi-metric-value">10,300 吨</div><div class="dash-kpi-metric-foot"><span>本月入库</span><span>钻取溯源 ▸</span></div></button>
+<button class="dash-kpi-metric sensitive" onclick="drillKPI('purchaseCost')"><div class="dash-kpi-metric-top"><span class="dash-kpi-metric-name">采购成本</span><span class="dash-kpi-metric-change bad">▲ 1.9%</span></div><div class="dash-kpi-metric-value">¥3,296 万</div><div class="dash-kpi-metric-foot"><span>本月累计</span><span>钻取溯源 ▸</span></div></button>
+<button class="dash-kpi-metric" onclick="drillKPI('purchaseContractQty')"><div class="dash-kpi-metric-top"><span class="dash-kpi-metric-name">在手采购合同量</span><span class="dash-kpi-metric-change neutral">▼ 4.2%</span></div><div class="dash-kpi-metric-value">7,340 吨</div><div class="dash-kpi-metric-foot"><span>未执行余额</span><span>钻取溯源 ▸</span></div></button>
+<button class="dash-kpi-metric sensitive" onclick="drillKPI('purchaseContractAmount')"><div class="dash-kpi-metric-top"><span class="dash-kpi-metric-name">在手采购合同金额</span><span class="dash-kpi-metric-change neutral">▼ 3.7%</span></div><div class="dash-kpi-metric-value">¥2,351 万</div><div class="dash-kpi-metric-foot"><span>未执行余额</span><span>钻取溯源 ▸</span></div></button>
+<button class="dash-kpi-metric" onclick="drillKPI('supplierOtd')"><div class="dash-kpi-metric-top"><span class="dash-kpi-metric-name">原料准时交货率</span><span class="dash-kpi-metric-change bad">▼ 1.2%</span></div><div class="dash-kpi-metric-value">95.8%</div><div class="dash-kpi-metric-foot"><span>本月到货</span><span>钻取溯源 ▸</span></div></button>
+</div></div>
+<div class="kpi-card dash-kpi-group purple" data-kpi="operation" draggable="false"><div class="dash-kpi-metrics">
+<button class="dash-kpi-metric sensitive" onclick="drillKPI('revenue')"><div class="dash-kpi-metric-top"><span class="dash-kpi-metric-name">营收</span><span class="dash-kpi-metric-change good">▲ 5.3%</span></div><div class="dash-kpi-metric-value">¥4,501 万</div><div class="dash-kpi-metric-foot"><span>本月累计</span><span>钻取溯源 ▸</span></div></button>
+<button class="dash-kpi-metric sensitive" onclick="drillKPI('operatingCost')"><div class="dash-kpi-metric-top"><span class="dash-kpi-metric-name">成本</span><span class="dash-kpi-metric-change bad">▲ 2.4%</span></div><div class="dash-kpi-metric-value">¥3,722 万</div><div class="dash-kpi-metric-foot"><span>完全成本</span><span>钻取溯源 ▸</span></div></button>
+<button class="dash-kpi-metric sensitive" onclick="drillKPI('profit')"><div class="dash-kpi-metric-top"><span class="dash-kpi-metric-name">利润</span><span class="dash-kpi-metric-change good">▲ 11.8%</span></div><div class="dash-kpi-metric-value">¥779 万</div><div class="dash-kpi-metric-foot"><span>本月累计</span><span>钻取溯源 ▸</span></div></button>
+<button class="dash-kpi-metric sensitive" onclick="drillKPI('cashCycle')"><div class="dash-kpi-metric-top"><span class="dash-kpi-metric-name">现金循环周期</span><span class="dash-kpi-metric-change good">▼ 3天</span></div><div class="dash-kpi-metric-value">45 天</div><div class="dash-kpi-metric-foot"><span>DIO+DSO-DPO</span><span>钻取溯源 ▸</span></div></button>
+</div></div>
 </div>
 <!-- MAP + ALERTS -->
 <div class="grid grid-23 mb-16">
 <div class="dash-map-wrap"><div id="dashMap" style="width:100%;height:100%"></div></div>
 <div class="card" style="max-height:420px;overflow-y:auto"><div class="card-title"><span class="dot" style="background:var(--red)"></span>实时预警中心 <span class="tag tag-red" style="margin-left:auto">7条</span></div>
 <div id="dashAlertMini">
-<div class="alert-item" onclick="showAlertRoot(0)" title="点击查看根因"><div class="alert-level critical"></div><div class="alert-body"><div class="alert-title-text">2#液化喷射泵压力异常</div><div class="alert-desc">当前压力0.72MPa，超出上限0.65MPa</div><div class="alert-meta"><span class="alert-time">09:42</span><span class="tag tag-red">设备故障</span></div></div></div>
-<div class="alert-item" onclick="showAlertRoot(1)" title="点击查看根因"><div class="alert-level critical"></div><div class="alert-body"><div class="alert-title-text">山东供应商玉米发货延迟</div><div class="alert-desc">供应商SD-003预计延迟2天到货</div><div class="alert-meta"><span class="alert-time">09:15</span><span class="tag tag-yellow">原辅料</span></div></div></div>
-<div class="alert-item" onclick="showAlertRoot(2)" title="点击查看根因"><div class="alert-level warning"></div><div class="alert-body"><div class="alert-title-text">麦芽糊精库存低于安全线</div><div class="alert-desc">当前库存285吨，安全库存300吨</div><div class="alert-meta"><span class="alert-time">08:30</span><span class="tag tag-yellow">库存</span></div></div></div>
-<div class="alert-item" onclick="showAlertRoot(3)" title="点击查看根因"><div class="alert-level warning"></div><div class="alert-body"><div class="alert-title-text">客户C012订单交期风险</div><div class="alert-desc">F55果葡糖浆500吨，预计延迟1天</div><div class="alert-meta"><span class="alert-time">08:10</span><span class="tag tag-blue">订单</span></div></div></div>
-<div class="alert-item" onclick="showAlertRoot(4)" title="点击查看根因"><div class="alert-level info"></div><div class="alert-body"><div class="alert-title-text">蒸汽单耗超出目标值</div><div class="alert-desc">当前1.28t/t产品，目标1.2t/t</div><div class="alert-meta"><span class="alert-time">07:45</span><span class="tag tag-purple">能耗</span></div></div></div>
+<div class="alert-item" onclick="showAlertRoot(0)" title="点击查看根因"><div class="alert-level critical"></div><div class="alert-body"><div class="alert-title-text">果糖F55异构化线压力异常</div><div class="alert-desc">当前压力0.72MPa，超出上限0.65MPa</div><div class="alert-meta"><span class="alert-time">09:42</span><span class="tag tag-red">设备故障</span></div></div></div>
+<div class="alert-item" onclick="showAlertRoot(1)" title="点击查看根因"><div class="alert-level critical"></div><div class="alert-body"><div class="alert-title-text">京粮龙江玉米淀粉到货延期</div><div class="alert-desc">在途420吨预计延迟2天到达太仓工厂</div><div class="alert-meta"><span class="alert-time">09:15</span><span class="tag tag-yellow">原辅料</span></div></div></div>
+<div class="alert-item" onclick="showAlertRoot(2)" title="点击查看根因"><div class="alert-level warning"></div><div class="alert-body"><div class="alert-title-text">果糖F55库存低于目标水位</div><div class="alert-desc">当前1,850吨，预计可支撑6.2天</div><div class="alert-meta"><span class="alert-time">08:30</span><span class="tag tag-yellow">库存</span></div></div></div>
+<div class="alert-item" onclick="showAlertRoot(3)" title="点击查看根因"><div class="alert-level warning"></div><div class="alert-body"><div class="alert-title-text">可口可乐果糖F55交期风险</div><div class="alert-desc">500吨订单预计延迟1天</div><div class="alert-meta"><span class="alert-time">08:10</span><span class="tag tag-blue">订单</span></div></div></div>
+<div class="alert-item" onclick="showAlertRoot(4)" title="点击查看根因"><div class="alert-level info"></div><div class="alert-body"><div class="alert-title-text">果糖F55单位蒸汽成本偏高</div><div class="alert-desc">当前119元/吨，较目标高8元/吨</div><div class="alert-meta"><span class="alert-time">07:45</span><span class="tag tag-purple">能耗</span></div></div></div>
 </div></div>
 </div>
 <!-- TABBED ANALYSIS -->
 <div class="card mb-16"><div class="card-title"><span class="dot" style="background:var(--blue)"></span>多维运营分析</div>
-<div class="tab-bar" style="margin-bottom:12px"><button class="tab-btn active" data-group="dash" onclick="switchTab('dash',0);initDashSubCharts(0)">产销</button><button class="tab-btn" data-group="dash" onclick="switchTab('dash',1);initDashSubCharts(1)">储运</button><button class="tab-btn" data-group="dash" onclick="switchTab('dash',2);initDashSubCharts(2)">环保</button><button class="tab-btn" data-group="dash" onclick="switchTab('dash',3);initDashSubCharts(3)">资金</button></div>
-<!-- 产销 -->
-<div class="tab-content active" data-group="dash">
-<div class="grid grid-3 gap-16">
-<div style="grid-column:span 2"><div id="dashDemandChart" style="height:260px;width:100%"></div></div>
-<div><div class="section-title text-sm">产线进度</div>
-<div class="mb-12"><div class="flex justify-between text-xs mb-4"><span>1#液化线</span><span class="text-mono text-green">96%</span></div><div class="progress"><div class="progress-bar green" style="width:96%"></div></div></div>
-<div class="mb-12"><div class="flex justify-between text-xs mb-4"><span>2#糖化线</span><span class="text-mono text-blue">88%</span></div><div class="progress"><div class="progress-bar blue" style="width:88%"></div></div></div>
-<div class="mb-12"><div class="flex justify-between text-xs mb-4"><span>3#异构化线</span><span class="text-mono text-yellow">72%</span></div><div class="progress"><div class="progress-bar yellow" style="width:72%"></div></div></div>
-<div class="mb-12"><div class="flex justify-between text-xs mb-4"><span>4#喷雾干燥线</span><span class="text-mono text-green">91%</span></div><div class="progress"><div class="progress-bar green" style="width:91%"></div></div></div>
-<div class="mt-16 section-title text-sm">原料匹配</div>
-<div id="dashGauge" style="height:120px;width:100%"></div>
-</div></div>
+<div class="tab-bar" style="margin-bottom:12px"><button class="tab-btn active" data-group="dash" onclick="switchTab('dash',0);initDashSubCharts(0)">销售</button><button class="tab-btn" data-group="dash" onclick="switchTab('dash',1);initDashSubCharts(1)">库存</button><button class="tab-btn" data-group="dash" onclick="switchTab('dash',2);initDashSubCharts(2)">生产</button><button class="tab-btn" data-group="dash" onclick="switchTab('dash',3);initDashSubCharts(3)">采购</button><button class="tab-btn" data-group="dash" onclick="switchTab('dash',4);initDashSubCharts(4)">经营</button></div>
+<div class="tab-content active" data-group="dash"><div class="dash-analysis-grid"><div id="dashSalesTrend" class="dash-analysis-chart"></div><div id="dashSalesCustomer" class="dash-analysis-chart"></div></div></div>
+<div class="tab-content" data-group="dash"><div class="dash-analysis-grid"><div id="dashFinishedInv" class="dash-analysis-chart"></div><div id="dashRawInv" class="dash-analysis-chart"></div></div></div>
+<div class="tab-content" data-group="dash"><div class="dash-analysis-grid"><div id="dashProdPlan" class="dash-analysis-chart"></div><div id="dashProdCost" class="dash-analysis-chart"></div></div></div>
+<div class="tab-content" data-group="dash"><div class="dash-analysis-grid"><div id="dashProcTrend" class="dash-analysis-chart"></div><div id="dashSupplierPerf" class="dash-analysis-chart"></div></div></div>
+<div class="tab-content" data-group="dash"><div class="dash-analysis-grid"><div id="dashOperatingProfit" class="dash-analysis-chart"></div><div id="dashCashCycle" class="dash-analysis-chart"></div></div></div>
 </div>
-<!-- 储运 -->
-<div class="tab-content" data-group="dash">
-<div class="grid grid-3 gap-16">
-<div><div id="dashInvBar" style="height:260px;width:100%"></div></div>
-<div><div id="dashWhHeat" style="height:260px;width:100%"></div></div>
-<div><div class="section-title text-sm">物流KPI</div>
-<div class="mini-kpi mb-8"><span>车辆满载率</span><span class="val text-green" style="margin-left:auto">82.3%</span></div>
-<div class="mini-kpi mb-8"><span>平均在途时效</span><span class="val text-cyan" style="margin-left:auto">18.6h</span></div>
-<div class="mini-kpi mb-8"><span>运输成本</span><span class="val text-yellow" style="margin-left:auto">¥342/吨</span></div>
-<div class="mini-kpi mb-8"><span>在途车辆</span><span class="val text-blue" style="margin-left:auto">23辆</span></div>
-<div class="mini-kpi mb-8"><span>今日仓库吞吐</span><span class="val text-cyan" style="margin-left:auto">3,240吨</span></div>
-<div class="mini-kpi"><span>今日发运</span><span class="val text-purple" style="margin-left:auto">1,450吨</span></div>
-</div></div>
-</div>
-<!-- 环保 -->
-<div class="tab-content" data-group="dash">
-<div class="grid grid-3 gap-16">
-<div><div id="dashEnergy" style="height:260px;width:100%"></div></div>
-<div><div id="dashEnvComp" style="height:260px;width:100%"></div></div>
-<div><div id="dashEnergyCost" style="height:260px;width:100%"></div></div>
-</div>
-</div>
-<!-- 资金 -->
-<div class="tab-content" data-group="dash">
-<div class="grid grid-3 gap-16">
-<div><div id="dashARAP" style="height:260px;width:100%"></div></div>
-<div><div id="dashInvCap" style="height:260px;width:100%"></div></div>
-<div><div id="dashMargin" style="height:260px;width:100%"></div></div>
-</div>
-</div>
-</div>
-<!-- PREDICTION CENTER -->
-<div class="card mb-16"><div class="card-title"><span class="dot" style="background:var(--purple)"></span>趋势预测与主动预警 <span class="tag tag-blue" style="margin-left:auto">未来7天</span></div><div class="grid grid-2 gap-16"><div id="dashPredictionChart" style="height:270px;width:100%"></div><div class="prediction-list"><div class="prediction-item"><span class="prediction-time">08-26</span><span><b>麦芽糊精库存预计跌破安全线</b><br><span class="text-xs text-muted">预测区间 260～295吨 · 影响喷雾干燥线</span></span><span class="tag tag-red">高</span></div><div class="prediction-item"><span class="prediction-time">08-28</span><span><b>F55订单交付能力趋紧</b><br><span class="text-xs text-muted">OTD预测 93.8%～95.2% · 关联客户C012</span></span><span class="tag tag-yellow">中</span></div><div class="prediction-item"><span class="prediction-time">08-30</span><span><b>天津港仓利用率可能超过95%</b><br><span class="text-xs text-muted">建议前移华北订单发运窗口</span></span><span class="tag tag-yellow">中</span></div><div class="scope-note"><b>预测说明：</b>显示预测值、置信区间、风险发生时间与影响对象；点击预警仍需进入业务模块确认处理。</div></div></div></div>
 <!-- ALERT CENTER -->
 <div class="card mb-16"><div class="card-title"><span class="dot" style="background:var(--yellow)"></span>智能预警中心</div>
 <div class="filter-bar"><button class="filter-btn active" onclick="filterAlerts(this,'all')">全部</button><button class="filter-btn" onclick="filterAlerts(this,'equip')">设备故障</button><button class="filter-btn" onclick="filterAlerts(this,'material')">原辅料</button><button class="filter-btn" onclick="filterAlerts(this,'stock')">库存</button><button class="filter-btn" onclick="filterAlerts(this,'order')">订单</button><button class="filter-btn" onclick="filterAlerts(this,'energy')">能耗</button></div>
@@ -1781,7 +1792,7 @@ return `<div class="page-header"><div><div class="page-title">沙盘推演</div>
 <button class="sandbox-scenario-item active" role="tab" aria-selected="true" data-scenario="demand" onclick="selectSandboxScenario('demand')"><span class="sandbox-scenario-name">客户增单</span><span class="sandbox-scenario-meta">订单多了，能按时交吗？</span></button>
 <button class="sandbox-scenario-item" role="tab" aria-selected="false" data-scenario="supply" onclick="selectSandboxScenario('supply')"><span class="sandbox-scenario-name">到货延迟</span><span class="sandbox-scenario-meta">原料晚了，能撑几天？</span></button>
 <button class="sandbox-scenario-item" role="tab" aria-selected="false" data-scenario="production" onclick="selectSandboxScenario('production')"><span class="sandbox-scenario-name">产能下降</span><span class="sandbox-scenario-meta">生产慢了，库存够吗？</span></button>
-<button class="sandbox-scenario-item" role="tab" aria-selected="false" data-scenario="cost" onclick="selectSandboxScenario('cost')"><span class="sandbox-scenario-name">原料价格与生产负荷</span><span class="sandbox-scenario-meta">售价固定，合同还赚钱吗？</span></button>
+<button class="sandbox-scenario-item" role="tab" aria-selected="false" data-scenario="cost" onclick="selectSandboxScenario('cost')"><span class="sandbox-scenario-name">销售、生产和采购决策博弈</span><span class="sandbox-scenario-meta">自定合同，联动交付、采购与周生产</span></button>
 </div></div>
 <div class="sandbox-editor">
 <div class="sim-config-title"><span>2　调整条件</span><span id="costPeriodNote" class="cost-period-note" hidden></span><div class="sandbox-horizon"><span class="sandbox-horizon-label">观察未来</span><button class="sandbox-horizon-btn active" data-horizon="7" onclick="setSandboxHorizon(7)">7天</button><button class="sandbox-horizon-btn" data-horizon="14" onclick="setSandboxHorizon(14)">14天</button></div></div>
@@ -2073,7 +2084,7 @@ var state=document.getElementById('sandboxRunState');if(state)state.classList.re
 function resetSandboxScenario(){selectSandboxScenario(sandboxScenarioKey);}
 function saveSandboxDraft(){appendDashAudit('保存沙盘情景草稿：'+SANDBOX_SCENARIOS[sandboxScenarioKey].name,'成功');alert('情景草稿已保存到沙盘结果库。\n仅保存快照引用与参数差量，不影响正式业务数据。');}
 function refreshSandboxSnapshot(){
-if(sandboxScenarioKey==='cost'){invalidateSandboxResult();SCOS_COST_SANDBOX.updateParams();appendDashAudit('重新读取固定成本演示快照','成功');return;}
+if(sandboxScenarioKey==='cost'){invalidateSandboxResult();SCOS_COST_SANDBOX.updateParams();appendDashAudit('重新读取决策博弈演示快照','成功');return;}
 if(sandboxRunning)return;var d=new Date();var pad=function(n){return String(n).padStart(2,'0');};
 var id='SNAP-'+d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate())+'-'+pad(d.getHours())+pad(d.getMinutes());
 var ts=d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())+' '+pad(d.getHours())+':'+pad(d.getMinutes());
@@ -2100,7 +2111,7 @@ var label=document.getElementById('sandboxRunLabel');var percent=document.getEle
 var steps=['锁定基线快照并校验数据质量'].concat(sc.modules.map(function(m){return '调用 '+m.name+' 模拟接口';})).concat(['聚合跨模块指标并生成影响链']);
 for(var i=0;i<steps.length;i++){
 if(token!==sandboxRunToken)return;
-if(label)label.textContent=preparedCost?'正在联动推演销售、采购、生产负荷与经营结果…':'正在计算未来'+sandboxHorizon+'天的生产与库存变化…';var pct=Math.round(i/steps.length*100);if(percent)percent.textContent=pct+'%';if(bar)bar.style.width=pct+'%';
+if(label)label.textContent=preparedCost?'正在联动推演销售合同、采购与周度生产决策…':'正在计算未来'+sandboxHorizon+'天的生产与库存变化…';var pct=Math.round(i/steps.length*100);if(percent)percent.textContent=pct+'%';if(bar)bar.style.width=pct+'%';
 if(i>0&&i<=sc.modules.length)renderSandboxFlow(i-1,i-1);
 await sandboxWait(100);
 }
@@ -2156,31 +2167,56 @@ appendDashAudit('导出沙盘模拟报告：'+result.name,'成功');
 function initDashboard(){
 const el=document.getElementById('page-dashboard');
 el.innerHTML=buildDashboardHTML();
+selectDashKpi(dashKpiActive,false);
 document.getElementById('dashUpdateTime').textContent=new Date().toLocaleTimeString('zh-CN',{hour12:false,hour:'2-digit',minute:'2-digit'});
 filterAlerts(document.querySelector('#page-dashboard .filter-btn'),'all');
 // MAP
 if(mapGeoJSON){
-var factories=[{name:'长春工厂',value:[125.32,43.87,1200],status:'正常'},{name:'秦皇岛工厂',value:[119.60,39.94,800],status:'正常'},{name:'连云港工厂',value:[119.18,34.60,600],status:'检修'},{name:'巢湖工厂',value:[117.87,31.60,400],status:'正常'}];
-var warehouses=[{name:'长春中心仓',value:[125.5,43.7],util:92},{name:'天津港仓',value:[117.2,39.1],util:87},{name:'上海分仓',value:[121.47,31.23],util:71},{name:'广州分仓',value:[113.26,23.13],util:58},{name:'武汉中转仓',value:[114.3,30.6],util:82},{name:'成都分仓',value:[104.07,30.67],util:65},{name:'郑州分仓',value:[113.65,34.76],util:78},{name:'济南分仓',value:[117.0,36.65],util:85}];
-var vehicles=[{name:'冷链车 吉A·T3827',value:[121.2,38.5],status:'正常',dest:'天津港仓',cargo:'果葡糖浆F55 32吨'},{name:'罐车 冀B·L9012',value:[115.8,33.5],status:'延迟',dest:'郑州分仓',cargo:'麦芽糊精 28吨'},{name:'厢车 苏C·M4561',value:[118.1,32.8],status:'正常',dest:'上海分仓',cargo:'结晶葡萄糖 20吨'},{name:'冷链车 鲁D·K7890',value:[118.5,36.1],status:'正常',dest:'济南分仓',cargo:'果葡糖浆F42 35吨'},{name:'罐车 沪E·P2345',value:[116.5,30.2],status:'预警',dest:'武汉中转仓',cargo:'果葡糖浆F55 30吨'}];
-var suppliers=[{name:'德州玉米供应商',value:[116.36,37.44],score:87},{name:'吉林玉米供应商',value:[126.55,43.84],score:92},{name:'周口淀粉供应商',value:[114.65,33.63],score:72},{name:'齐齐哈尔供应商',value:[123.97,47.35],score:81}];
-var customers=[{name:'统一集团',value:[117.20,39.09],level:'A'},{name:'康师傅',value:[120.15,30.27],level:'A'},{name:'娃哈哈',value:[120.20,30.31],level:'A'},{name:'农夫山泉',value:[119.28,29.47],level:'B'},{name:'蒙牛',value:[111.75,40.84],level:'B'},{name:'伊利',value:[111.65,40.83],level:'B'},{name:'达利食品',value:[118.58,24.87],level:'C'},{name:'今麦郎',value:[114.77,37.35],level:'C'}];
-// transport route lines (supplier->factory, factory->warehouse)
+var factories=[{name:'太仓工厂',fullName:'中粮太仓工厂',value:[121.13,31.46,1200],status:'正常'}];
+var suppliers=[
+  {name:'裕米生物',fullName:'裕米生物科技(山东)有限公司',value:[118.85,35.63],contractQty:820,labelPos:'right'},
+  {name:'玉峰实业',fullName:'玉峰实业集团有限公司',value:[114.82,37.48],contractQty:1100,labelPos:'left'},
+  {name:'河北德瑞',fullName:'河北德瑞淀粉有限公司',value:[115.32,38.15],contractQty:760,labelPos:'top'},
+  {name:'中粮天津',fullName:'中粮生物科技（天津）有限公司-内部',value:[117.20,39.12],contractQty:950,labelPos:'right'},
+  {name:'山东福宽',fullName:'山东福宽生物工程有限公司',value:[116.66,36.28],contractQty:1250,labelPos:'left'},
+  {name:'京粮龙江',fullName:'京粮龙江生物工程有限公司',value:[126.11,46.69],contractQty:1480,labelPos:'left'},
+  {name:'山东大泽成',fullName:'山东大泽成生物科技有限公司',value:[115.89,34.95],contractQty:980,labelPos:'bottom'}
+];
+var customers=[
+  {name:'福敬德',fullName:'上海福敬德食品有限公司',value:[121.39,31.28],labelValue:[108.0,35.6],unfulfilledQty:980},
+  {name:'不凡帝',fullName:'不凡帝范梅勒糖果（中国）有限公司',value:[121.42,31.02],labelValue:[126.0,26.5],unfulfilledQty:1120},
+  {name:'可口可乐',fullName:'太古可口可乐（苏州）饮料有限公司',value:[121.00,31.38],labelValue:[126.0,35.0],unfulfilledQty:1680},
+  {name:'百事可乐',fullName:'上海百事可乐饮料有限公司',value:[121.40,31.03],labelValue:[127.0,32.2],unfulfilledQty:1560},
+  {name:'康师傅',fullName:'天津顶益食品有限公司',value:[117.73,39.03],labelValue:[121.5,42.0],unfulfilledQty:1320},
+  {name:'超克',fullName:'超克（天舜（杭州）食品股份有限公司）',value:[120.08,30.16],labelValue:[109.2,24.8],unfulfilledQty:760},
+  {name:'奇异鸟',fullName:'杭州奇异鸟食品连锁有限公司',value:[120.10,30.36],labelValue:[108.5,28.8],unfulfilledQty:840},
+  {name:'冠生园',fullName:'上海冠生园天山食品有限公司',value:[121.34,30.75],labelValue:[120.5,23.0],unfulfilledQty:1180},
+  {name:'德凯',fullName:'浙江德凯食品有限公司（现浙江菲诺食品有限公司）',value:[120.55,30.59],labelValue:[114.8,25.8],unfulfilledQty:920},
+  {name:'上好佳',fullName:'上好佳（中国）有限公司',value:[121.14,31.17],labelValue:[107.5,32.3],unfulfilledQty:1060},
+  {name:'味好美',fullName:'上海味好美食品有限公司',value:[121.43,31.09],labelValue:[126.5,28.8],unfulfilledQty:890},
+  {name:'联合利华',fullName:'联合利华（中国）有限公司',value:[117.21,31.75],labelValue:[108.0,30.5],unfulfilledQty:1450}
+];
+var factoryPoint=factories[0].value.slice(0,2);
+var inboundTransit=[260,340,180,220,310,420,275];
+var inboundEta=['10-15 08:30','10-15 14:20','10-16 09:10','10-15 18:00','10-16 11:40','10-18 16:20','10-16 20:30'];
+var outboundTransit=[88,115,168,154,132,76,84,126,92,108,97,144];
+var outboundEta=['10-14 18:40','10-14 20:10','10-14 16:50','10-14 21:20','10-16 09:30','10-15 08:40','10-15 10:20','10-14 22:10','10-15 06:50','10-14 19:30','10-14 20:50','10-15 12:40'];
 var routeLines=[];
-var routeStyle={normal:{color:'#3b82f6',width:1,opacity:0.4,curveness:0.2,type:'dashed'},emphasis:{width:2,opacity:0.8}};
-// supplier -> factory routes
-[[126.55,43.84,125.32,43.87],[116.36,37.44,119.60,39.94],[114.65,33.63,119.18,34.60],[123.97,47.35,125.32,43.87]].forEach(function(r){routeLines.push({coords:[[r[0],r[1]],[r[2],r[3]]]});});
-// factory -> warehouse delivery routes
-[[125.32,43.87,117.2,39.1],[125.32,43.87,121.47,31.23],[119.60,39.94,117.0,36.65],[119.60,39.94,113.65,34.76],[119.18,34.60,121.47,31.23],[119.18,34.60,114.3,30.6],[117.87,31.60,113.26,23.13],[117.87,31.60,104.07,30.67]].forEach(function(r){routeLines.push({coords:[[r[0],r[1]],[r[2],r[3]]]});});
+suppliers.forEach(function(s,i){routeLines.push({name:s.name+' → 太仓工厂',kind:'原料入厂',from:s.fullName,to:'太仓工厂',coords:[s.value,factoryPoint],transitQty:inboundTransit[i],eta:inboundEta[i],lineStyle:{color:'#f59e0b',type:'dashed'}});});
+customers.forEach(function(c,i){routeLines.push({name:'太仓工厂 → '+c.name,kind:'成品配送',from:'太仓工厂',to:c.fullName,coords:[factoryPoint,c.value],transitQty:outboundTransit[i],eta:outboundEta[i],lineStyle:{color:'#3b82f6',type:'solid'}});});
+var customerLabelGuides=customers.map(function(c){return {coords:[c.value,c.labelValue]};});
+var dashMapElement=document.getElementById('dashMap');
+dashMapElement.dataset.factoryCount=String(factories.length);dashMapElement.dataset.supplierCount=String(suppliers.length);dashMapElement.dataset.customerCount=String(customers.length);dashMapElement.dataset.routeCount=String(routeLines.length);
+dashMapElement.setAttribute('role','img');dashMapElement.setAttribute('aria-label','供应网络与客户履约地图：1个太仓工厂、7家玉米淀粉供应商、12家指定客户、19条运输路线。供应商显示在手合同量，客户显示未履约销量，路线显示在途量和预计到达时间。');
 initChart('dashMap',{backgroundColor:'transparent',
-geo:{map:'china',roam:true,zoom:1.2,center:[112,34],
+geo:{map:'china',roam:true,zoom:1.45,center:[116.5,35.5],
   itemStyle:{areaColor:'#0f1a2e',borderColor:'#1e3a5f',borderWidth:0.8},
   emphasis:{itemStyle:{areaColor:'#162a4a'},label:{show:false}},
   label:{show:false},
   regions:[{name:'南海诸岛',itemStyle:{opacity:0},label:{show:false}}]
 },
 legend:{show:true,orient:'horizontal',bottom:6,left:'center',
-  data:['工厂','仓库','在途车辆','供应商','客户','运输线路'],
+  data:['工厂','供应商','客户','运输线路'],
   textStyle:{color:'#94a3b8',fontSize:10},itemWidth:14,itemHeight:10,itemGap:16,
   inactiveColor:'#334155'
 },
@@ -2190,15 +2226,21 @@ series:[
   // Transport routes
   {name:'运输线路',type:'lines',coordinateSystem:'geo',zlevel:1,
     data:routeLines,
-    lineStyle:{color:'#3b82f6',width:1,opacity:0.3,curveness:0.2,type:'dashed'},
-    emphasis:{lineStyle:{width:2,opacity:0.7}},
-    effect:{show:true,period:8,trailLength:0.15,symbol:'arrow',symbolSize:5,color:'rgba(59,130,246,.6)'},
-    silent:false
+    lineStyle:{width:1.6,opacity:0.42,curveness:0.18},
+    emphasis:{lineStyle:{width:3.5,opacity:0.95}},
+    effect:{show:true,period:8,trailLength:0.12,symbol:'arrow',symbolSize:5,color:'rgba(226,232,240,.72)'},
+    silent:false,
+    tooltip:{formatter:function(p){var d=p.data;return '<div style="font-weight:600;margin-bottom:5px;">'+d.kind+'路线</div><div style="font-size:11px;">'+d.from+' → '+d.to+'</div><div style="font-size:11px;margin-top:4px;">在途量：<span style="color:#06b6d4;font-weight:600;">'+d.transitQty.toLocaleString()+'</span> 吨</div><div style="font-size:11px;">预计到达：<span style="color:#f1f5f9;font-weight:600;">'+d.eta+'</span></div>';}}
+  },
+  {name:'客户名称引导线',type:'lines',coordinateSystem:'geo',zlevel:2,silent:true,
+    data:customerLabelGuides,symbol:['none','none'],
+    lineStyle:{color:'rgba(52,211,153,.32)',width:.8,type:'dotted',opacity:.75},
+    tooltip:{show:false}
   },
   // Factories
   {name:'工厂',type:'effectScatter',coordinateSystem:'geo',zlevel:2,
-    data:factories.map(function(f){return {name:f.name,value:f.value,status:f.status};}),
-    symbolSize:function(v){return 12+v[2]/150;},
+    data:factories.map(function(f){return {name:f.name,fullName:f.fullName,value:f.value,status:f.status};}),
+    symbolSize:20,
     rippleEffect:{brushType:'stroke',scale:4,period:5},
     itemStyle:{color:function(p){return p.data.status==='检修'?'#f59e0b':'#06b6d4';},shadowBlur:12,shadowColor:'rgba(6,182,212,.5)'},
     label:{show:true,formatter:'{b}',position:'right',fontSize:10,color:'#e2e8f0',
@@ -2206,72 +2248,45 @@ series:[
     encode:{value:2},
     tooltip:{formatter:function(p){
       var s=p.data.status;var c=s==='正常'?'#10b981':s==='检修'?'#f59e0b':'#ef4444';
-      return '<div style="font-weight:600;margin-bottom:4px;">'+p.name+'</div>'+
+      return '<div style="font-weight:600;margin-bottom:4px;">'+p.data.fullName+'</div>'+
         '<div style="font-size:11px;">日产能: <span style="color:#06b6d4;font-weight:600;">'+p.value[2]+'</span> 吨</div>'+
         '<div style="font-size:11px;">状态: <span style="color:'+c+';font-weight:600;">● '+s+'</span></div>';
     }}
   },
-  // Warehouses
-  {name:'仓库',type:'scatter',coordinateSystem:'geo',zlevel:2,
-    data:warehouses.map(function(w){return {name:w.name,value:w.value,util:w.util};}),
-    symbol:'roundRect',symbolSize:12,
-    itemStyle:{color:function(p){var u=p.data.util;return u>=90?'#ef4444':u>=80?'#f59e0b':'#3b82f6';},
-      borderColor:'rgba(255,255,255,.2)',borderWidth:1},
-    label:{show:true,formatter:'{b}',position:'right',fontSize:9,color:'#94a3b8',
-      textBorderColor:'#0a0e1a',textBorderWidth:2},
-    tooltip:{formatter:function(p){
-      var u=p.data.util;var c=u>=90?'#ef4444':u>=80?'#f59e0b':'#10b981';
-      return '<div style="font-weight:600;margin-bottom:4px;">'+p.name+'</div>'+
-        '<div style="font-size:11px;">利用率: <span style="color:'+c+';font-weight:600;">'+u+'%</span></div>'+
-        '<div style="margin-top:4px;height:6px;background:rgba(255,255,255,.1);border-radius:3px;overflow:hidden;">'+
-        '<div style="height:100%;width:'+u+'%;background:'+c+';border-radius:3px;"></div></div>';
-    }}
-  },
-  // Vehicles
-  {name:'在途车辆',type:'scatter',coordinateSystem:'geo',zlevel:3,
-    data:vehicles.map(function(v){return {name:v.name,value:v.value,status:v.status,dest:v.dest,cargo:v.cargo};}),
-    symbol:'path://M10 0 L20 8 L16 8 L16 20 L4 20 L4 8 L0 8 Z',symbolSize:12,
-    itemStyle:{color:function(p){var s=p.data.status;return s==='延迟'?'#ef4444':s==='预警'?'#f59e0b':'#10b981';}},
-    tooltip:{formatter:function(p){
-      var s=p.data.status;var c=s==='正常'?'#10b981':s==='延迟'?'#ef4444':'#f59e0b';
-      return '<div style="font-weight:600;margin-bottom:4px;">'+p.name+'</div>'+
-        '<div style="font-size:11px;">状态: <span style="color:'+c+';font-weight:600;">● '+s+'</span></div>'+
-        '<div style="font-size:11px;">货物: '+p.data.cargo+'</div>'+
-        '<div style="font-size:11px;">目的地: '+p.data.dest+'</div>';
-    }}
-  },
   // Suppliers
   {name:'供应商',type:'scatter',coordinateSystem:'geo',zlevel:2,
-    data:suppliers.map(function(s){return {name:s.name,value:s.value,score:s.score};}),
-    symbol:'diamond',symbolSize:12,
+    data:suppliers.map(function(s){return {name:s.name,fullName:s.fullName,value:s.value,contractQty:s.contractQty,label:{position:s.labelPos,distance:5}};}),
+    symbol:'diamond',symbolSize:14,
     itemStyle:{color:'#f59e0b',borderColor:'rgba(245,158,11,.3)',borderWidth:2},
-    label:{show:true,formatter:'{b}',position:'left',fontSize:9,color:'#94a3b8',
+    label:{show:true,formatter:'{b}',position:'left',fontSize:9,color:'#fbbf24',
       textBorderColor:'#0a0e1a',textBorderWidth:2},
+    labelLayout:{hideOverlap:false},
     tooltip:{formatter:function(p){
-      var sc=p.data.score;var c=sc>=85?'#10b981':sc>=75?'#f59e0b':'#ef4444';
-      return '<div style="font-weight:600;margin-bottom:4px;">'+p.name+'</div>'+
-        '<div style="font-size:11px;">综合评分: <span style="color:'+c+';font-weight:600;">'+sc+'</span></div>'+
-        '<div style="margin-top:4px;height:6px;background:rgba(255,255,255,.1);border-radius:3px;overflow:hidden;">'+
-        '<div style="height:100%;width:'+sc+'%;background:'+c+';border-radius:3px;"></div></div>';
+      return '<div style="font-weight:600;margin-bottom:4px;">'+p.data.fullName+'</div>'+
+        '<div style="font-size:11px;">地图简称：'+p.name+'</div>'+
+        '<div style="font-size:11px;margin-top:4px;">在手合同量：<span style="color:#fbbf24;font-weight:600;">'+p.data.contractQty.toLocaleString()+'</span> 吨</div>';
     }}
   },
   // Customers
   {name:'客户',type:'scatter',coordinateSystem:'geo',zlevel:2,
-    data:customers.map(function(c){return {name:c.name,value:c.value,level:c.level};}),
+    data:customers.map(function(c){return {name:c.name,fullName:c.fullName,value:c.value,unfulfilledQty:c.unfulfilledQty};}),
     symbol:'circle',symbolSize:12,
     itemStyle:{color:'#10b981',borderColor:'rgba(16,185,129,.4)',borderWidth:2},
-    label:{show:true,formatter:'{b}',position:'bottom',fontSize:9,color:'#86efac',
-      textBorderColor:'#0a0e1a',textBorderWidth:2},
+    label:{show:false},
+    emphasis:{label:{show:false}},
     tooltip:{formatter:function(p){
-      var lv=p.data.level;var c=lv==='A'?'#10b981':lv==='B'?'#3b82f6':'#f59e0b';
-      return '<div style="font-weight:600;margin-bottom:4px;">'+p.name+'</div>'+
-        '<div style="font-size:11px;">客户等级: <span style="color:'+c+';font-weight:600;">'+lv+'级</span></div>'+
-        '<div style="font-size:11px;margin-top:4px;color:#94a3b8;">点击查看订单与交付状态 ▸</div>';
+      return '<div style="font-weight:600;margin-bottom:4px;">'+p.data.fullName+'</div>'+
+        '<div style="font-size:11px;">未履约销量：<span style="color:#34d399;font-weight:600;">'+p.data.unfulfilledQty.toLocaleString()+'</span> 吨</div>';
     }}
+  },
+  {name:'客户名称',type:'scatter',coordinateSystem:'geo',zlevel:3,silent:true,
+    data:customers.map(function(c){return {name:c.name,value:c.labelValue};}),symbolSize:1,
+    itemStyle:{color:'transparent'},
+    label:{show:true,formatter:'{b}',position:'inside',fontSize:9,fontWeight:600,color:'#bbf7d0',backgroundColor:'rgba(10,14,26,.86)',borderColor:'rgba(16,185,129,.28)',borderWidth:.5,borderRadius:3,padding:[2,4]},
+    labelLayout:{hideOverlap:false},tooltip:{show:false}
   }
 ]});}
 initDashSubCharts(0);
-initDashPrediction();
 enableDashboardDragDrop();
 applyDashboardRole('director');
 }
@@ -2283,36 +2298,88 @@ selectSandboxScenario(sandboxScenarioKey||'demand');
 document.querySelectorAll('.sandbox-horizon-btn').forEach(function(b){b.classList.toggle('active',Number(b.dataset.horizon)===sandboxHorizon);});document.getElementById('sandboxHorizonLabel').textContent='未来'+sandboxHorizon+'天';
 }
 
+function dashAnalysisOpt(option){
+const o=mOpt(option),styleXAxis=function(axis){
+  const next=Object.assign({},axis||{});
+  next.nameGap=22;
+  next.nameTextStyle=Object.assign({color:'#73839a',fontSize:10,padding:[8,0,0,0]},next.nameTextStyle||{});
+  next.splitLine={show:false};
+  return next;
+},styleYAxis=function(axis,index,total){
+  const next=Object.assign({},axis||{}),right=total>1&&index>0;
+  next.position=right?'right':'left';
+  next.nameLocation='middle';
+  next.nameGap=50;
+  next.nameRotate=right?-90:90;
+  next.nameTextStyle=Object.assign({color:'#8291a6',fontSize:10,fontWeight:600,align:'center',verticalAlign:'middle',padding:0},next.nameTextStyle||{});
+  next.splitLine=Object.assign({show:true,lineStyle:{type:'dashed',color:'rgba(100,116,139,.18)',width:1}},next.splitLine||{});
+  next.splitLine.lineStyle=Object.assign({},next.splitLine.lineStyle||{},{type:'dashed',color:'rgba(100,116,139,.18)',width:1});
+  return next;
+};
+o.title=Object.assign({},o.title||{},{top:0,left:0,textStyle:Object.assign({color:'#a9b7ca',fontSize:13,fontWeight:600},o.title&&o.title.textStyle||{})});
+o.legend=Object.assign({},o.legend||{},{type:'scroll',top:28,left:0,right:0});
+const yAxes=Array.isArray(o.yAxis)?o.yAxis:[o.yAxis],dual=yAxes.length>1;
+o.grid=Object.assign({},o.grid||{},{top:82,left:dual?72:62,right:dual?72:30,bottom:46,containLabel:true});
+o.xAxis=Array.isArray(o.xAxis)?o.xAxis.map(styleXAxis):styleXAxis(o.xAxis);
+o.yAxis=Array.isArray(o.yAxis)?o.yAxis.map(function(axis,index){return styleYAxis(axis,index,yAxes.length);}):styleYAxis(o.yAxis,0,1);
+return o;
+}
+
 function initDashSubCharts(idx){
 if(idx===0){
-const days=['04-03','04-04','04-05','04-06','04-07','04-08','04-09'];
-initChart('dashDemandChart',mOpt({title:{text:'需求预测 vs 实际产出 (7日)',textStyle:{color:'#94a3b8',fontSize:12},left:0,top:0},legend:{data:['需求预测','实际产出','偏差率'],top:0,right:0},xAxis:{type:'category',data:days},yAxis:[{type:'value',name:'吨',axisLabel:{formatter:'{value}'}},{type:'value',name:'%',max:10,axisLabel:{formatter:'{value}%'}}],series:[{name:'需求预测',type:'bar',data:[1850,1920,1780,1860,1900,1950,1880],itemStyle:{color:'rgba(59,130,246,.6)',borderRadius:[3,3,0,0]}},{name:'实际产出',type:'bar',data:[1810,1895,1750,1830,1870,1920,1740],itemStyle:{color:'rgba(6,182,212,.6)',borderRadius:[3,3,0,0]}},{name:'偏差率',type:'line',yAxisIndex:1,data:[2.2,1.3,1.7,1.6,1.6,1.5,7.4],smooth:true,itemStyle:{color:'#f59e0b'},lineStyle:{type:'dashed'}}]}));
-initChart('dashGauge',{backgroundColor:'transparent',series:[{type:'gauge',center:['50%','60%'],radius:'85%',min:0,max:100,startAngle:200,endAngle:-20,axisLine:{lineStyle:{width:12,color:[[0.3,'#ef4444'],[0.7,'#f59e0b'],[1,'#10b981']]}},axisTick:{show:false},splitLine:{show:false},axisLabel:{show:false},pointer:{width:4,length:'60%'},title:{offsetCenter:[0,'20%'],fontSize:11,color:'#94a3b8'},detail:{offsetCenter:[0,'45%'],fontSize:16,fontFamily:'JetBrains Mono',fontWeight:700,color:'#06b6d4',formatter:'{value}%'},data:[{value:78,name:'原料匹配度'}]}]});
+const months=['5月','6月','7月','8月','9月','10月'];
+initChart('dashSalesTrend',dashAnalysisOpt({title:{text:'销售规模与单价趋势',textStyle:{color:'#94a3b8',fontSize:12},left:0,top:0},legend:{data:['销量','销售金额','平均售价'],top:0,right:0},xAxis:{type:'category',data:months},yAxis:[{type:'value',name:'吨'},{type:'value',name:'万元 / 元吨'}],series:[{name:'销量',type:'bar',data:[10840,11260,11980,12140,12270,12860],itemStyle:{color:'rgba(59,130,246,.65)',borderRadius:[4,4,0,0]}},{name:'销售金额',type:'line',yAxisIndex:1,data:[3720,3875,4142,4220,4275,4501],smooth:true,itemStyle:{color:'#10b981'}},{name:'平均售价',type:'line',yAxisIndex:1,data:[3432,3441,3457,3476,3484,3500],smooth:true,lineStyle:{type:'dashed',color:'#f59e0b'},itemStyle:{color:'#f59e0b'}}]}));
+initChart('dashSalesCustomer',dashAnalysisOpt({title:{text:'果糖F55重点客户履约',textStyle:{color:'#94a3b8',fontSize:12},left:0,top:0},legend:{data:['合同量','已履约','履约率'],top:0,right:0},grid:{top:44,right:48,bottom:34,left:58},xAxis:{type:'category',data:['可口可乐','百事可乐','康师傅','不凡帝','联合利华','上好佳']},yAxis:[{type:'value',name:'吨'},{type:'value',name:'%',min:70,max:100}],series:[{name:'合同量',type:'bar',data:[3200,2860,2440,1980,2260,1820],itemStyle:{color:'rgba(139,92,246,.5)'}},{name:'已履约',type:'bar',data:[2680,2440,2180,1760,1810,1660],itemStyle:{color:'rgba(6,182,212,.68)'}},{name:'履约率',type:'line',yAxisIndex:1,data:[83.8,85.3,89.3,88.9,80.1,91.2],smooth:true,itemStyle:{color:'#f59e0b'}}]}));
 }else if(idx===1){
-const locs=['长春','秦皇岛','连云港','巢湖','天津','上海','广州','武汉'];
-initChart('dashInvBar',mOpt({title:{text:'各基地库存与90天+库龄(吨)',textStyle:{color:'#94a3b8',fontSize:12},left:0,top:0},legend:{data:['原料','在制品','成品','90天+库龄'],top:0,right:0},xAxis:{type:'category',data:locs,axisLabel:{fontSize:10,rotate:30}},yAxis:{type:'value'},series:[{name:'原料',type:'bar',stack:'inv',data:[3200,2800,1900,1500,800,600,400,1200],itemStyle:{color:'#3b82f6',borderRadius:0}},{name:'在制品',type:'bar',stack:'inv',data:[450,380,290,220,0,0,0,0],itemStyle:{color:'#8b5cf6'}},{name:'成品',type:'bar',stack:'inv',data:[1800,1500,1200,900,1600,1100,800,1400],itemStyle:{color:'#06b6d4',borderRadius:[3,3,0,0]}},{name:'90天+库龄',type:'line',data:[95,72,66,43,120,88,35,79],smooth:true,itemStyle:{color:'#ef4444'},lineStyle:{type:'dashed'}}]}));
-const whData=[];const whs=['长春中心','秦皇岛','连云港','巢湖','天津港','上海','广州','武汉'];const caps=[92,87,78,65,85,71,58,82];
-whs.forEach((w,i)=>{whData.push([0,i,caps[i]]);});
-initChart('dashWhHeat',mOpt({title:{text:'仓库利用率(%)',textStyle:{color:'#94a3b8',fontSize:12},left:0,top:0},tooltip:{formatter:function(p){return whs[p.data[1]]+': '+p.data[2]+'%';}},grid:{top:35,bottom:10,left:80,right:30},xAxis:{show:false,type:'category',data:['利用率']},yAxis:{type:'category',data:whs,axisLabel:{fontSize:10}},visualMap:{show:true,min:50,max:100,orient:'horizontal',left:'center',bottom:0,inRange:{color:['#0f1525','#1e40af','#3b82f6','#f59e0b','#ef4444']},textStyle:{color:'#64748b',fontSize:10}},series:[{type:'heatmap',data:whData,label:{show:true,formatter:function(p){return p.data[2]+'%';},fontSize:11,fontFamily:'JetBrains Mono',color:'#f1f5f9'},itemStyle:{borderRadius:4}}]}));
+const products=['果糖F55','果糖F42','麦芽糖高DE','麦芽糖中DE','麦芽糖低DE'];
+initChart('dashFinishedInv',mOpt({title:{text:'各成品库存水位',textStyle:{color:'#94a3b8',fontSize:12},left:0,top:0},legend:{data:['当前库存','安全库存','库存上限'],top:0,right:0},xAxis:{type:'category',data:products,axisLabel:{interval:0,rotate:16}},yAxis:{type:'value',name:'吨'},series:[{name:'当前库存',type:'bar',data:[1850,920,315,290,260],itemStyle:{color:function(p){return p.dataIndex===4?'rgba(239,68,68,.72)':'rgba(6,182,212,.72)';},borderRadius:[4,4,0,0]}},{name:'安全库存',type:'line',data:[385,245,210,185,180],symbol:'none',lineStyle:{type:'dashed',color:'#f59e0b'}},{name:'库存上限',type:'line',data:[2600,1800,720,680,640],symbol:'none',lineStyle:{type:'dashed',color:'#8b5cf6'}}]}));
+const materials=['玉米淀粉','液化酶','糖化酶','活性炭','包装材料'];
+initChart('dashRawInv',mOpt({title:{text:'各原料库存水位与在途量',textStyle:{color:'#94a3b8',fontSize:12},left:0,top:0},legend:{data:['可用库存','质检冻结','在途量','安全库存'],top:0,right:0},xAxis:{type:'category',data:materials,axisLabel:{interval:0,rotate:12}},yAxis:{type:'value',name:'吨 / 万件'},series:[{name:'可用库存',type:'bar',stack:'raw',data:[1570,34,29,52,116],itemStyle:{color:'#3b82f6'}},{name:'质检冻结',type:'bar',stack:'raw',data:[162,4,3,6,18],itemStyle:{color:'#64748b'}},{name:'在途量',type:'bar',data:[680,16,12,24,68],itemStyle:{color:'#10b981',borderRadius:[4,4,0,0]}},{name:'安全库存',type:'line',data:[900,18,15,24,80],symbol:'circle',itemStyle:{color:'#f59e0b'},lineStyle:{type:'dashed'}}]}));
 }else if(idx===2){
-initChart('dashEnergy',{backgroundColor:'transparent',title:{text:'吨产品能耗',textStyle:{color:'#94a3b8',fontSize:12},left:'center',top:0},series:[{type:'gauge',center:['20%','60%'],radius:'50%',min:0,max:15,axisLine:{lineStyle:{width:8,color:[[0.6,'#10b981'],[0.8,'#f59e0b'],[1,'#ef4444']]}},axisTick:{show:false},splitLine:{show:false},axisLabel:{show:false},pointer:{width:3,length:'50%'},title:{offsetCenter:[0,'30%'],fontSize:10,color:'#94a3b8'},detail:{offsetCenter:[0,'55%'],fontSize:13,fontFamily:'JetBrains Mono',fontWeight:700,color:'#06b6d4',formatter:'{value}m\u00B3'},data:[{value:8.2,name:'耗水'}]},{type:'gauge',center:['50%','60%'],radius:'50%',min:0,max:500,axisLine:{lineStyle:{width:8,color:[[0.5,'#10b981'],[0.7,'#f59e0b'],[1,'#ef4444']]}},axisTick:{show:false},splitLine:{show:false},axisLabel:{show:false},pointer:{width:3,length:'50%'},title:{offsetCenter:[0,'30%'],fontSize:10,color:'#94a3b8'},detail:{offsetCenter:[0,'55%'],fontSize:13,fontFamily:'JetBrains Mono',fontWeight:700,color:'#3b82f6',formatter:'{value}kWh'},data:[{value:285,name:'耗电'}]},{type:'gauge',center:['80%','60%'],radius:'50%',min:0,max:2,axisLine:{lineStyle:{width:8,color:[[0.5,'#10b981'],[0.75,'#f59e0b'],[1,'#ef4444']]}},axisTick:{show:false},splitLine:{show:false},axisLabel:{show:false},pointer:{width:3,length:'50%'},title:{offsetCenter:[0,'30%'],fontSize:10,color:'#94a3b8'},detail:{offsetCenter:[0,'55%'],fontSize:13,fontFamily:'JetBrains Mono',fontWeight:700,color:'#f59e0b',formatter:'{value}t'},data:[{value:1.2,name:'耗汽'}]}]});
-initChart('dashEnvComp',mOpt({title:{text:'环保达标',textStyle:{color:'#94a3b8',fontSize:12},left:0,top:0},legend:{data:['实际值','国标限值'],top:0,right:0},xAxis:{type:'category',data:['废水排放\n(m\u00B3/d)','COD浓度\n(mg/L)','SS浓度\n(mg/L)','氨氮\n(mg/L)']},yAxis:{type:'value'},series:[{name:'实际值',type:'bar',data:[1200,85,42,12],itemStyle:{color:'rgba(6,182,212,.7)',borderRadius:[3,3,0,0]}},{name:'国标限值',type:'bar',data:[2000,150,70,25],itemStyle:{color:'rgba(239,68,68,.3)',borderRadius:[3,3,0,0]}}]}));
-const months=['10月','11月','12月','1月','2月','3月'];
-initChart('dashEnergyCost',mOpt({title:{text:'能源成本vs产量',textStyle:{color:'#94a3b8',fontSize:12},left:0,top:0},xAxis:{type:'value',name:'月产量(万吨)',nameTextStyle:{color:'#64748b'}},yAxis:{type:'value',name:'能源成本(万元)',nameTextStyle:{color:'#64748b'}},series:[{type:'scatter',data:[[4.2,380],[4.5,410],[4.1,365],[4.8,445],[4.3,392],[4.6,425]],symbolSize:14,itemStyle:{color:'#8b5cf6'},label:{show:true,formatter:function(p){return months[p.dataIndex];},position:'top',fontSize:10,color:'#94a3b8'}}]}));
+const weeks=['W37','W38','W39','W40','W41','W42'];
+initChart('dashProdPlan',mOpt({title:{text:'果糖F55周生产计划与完成',textStyle:{color:'#94a3b8',fontSize:12},left:0,top:0},legend:{data:['计划产量','实际产量','一次合格率'],top:0,right:0},xAxis:{type:'category',data:weeks},yAxis:[{type:'value',name:'吨'},{type:'value',name:'%',min:94,max:100}],series:[{name:'计划产量',type:'bar',data:[3250,3300,3180,3360,3420,3380],itemStyle:{color:'rgba(59,130,246,.5)'}},{name:'实际产量',type:'bar',data:[3180,3265,3020,3290,3340,3220],itemStyle:{color:'rgba(16,185,129,.7)'}},{name:'一次合格率',type:'line',yAxisIndex:1,data:[98.4,98.7,97.9,99.0,98.8,98.7],smooth:true,itemStyle:{color:'#f59e0b'}}]}));
+initChart('dashProdCost',mOpt({title:{text:'果糖F55单位生产成本构成',textStyle:{color:'#94a3b8',fontSize:12},left:0,top:0},legend:{data:['原料','辅料包材','能源','人工制造','其他'],top:0,right:0},xAxis:{type:'category',data:weeks},yAxis:{type:'value',name:'元/吨',min:2500},series:[{name:'原料',type:'bar',stack:'cost',data:[2508,2512,2526,2518,2534,2522],itemStyle:{color:'#3b82f6'}},{name:'辅料包材',type:'bar',stack:'cost',data:[96,97,95,98,99,97],itemStyle:{color:'#06b6d4'}},{name:'能源',type:'bar',stack:'cost',data:[126,121,138,119,117,132],itemStyle:{color:'#f59e0b'}},{name:'人工制造',type:'bar',stack:'cost',data:[178,175,189,171,168,184],itemStyle:{color:'#8b5cf6'}},{name:'其他',type:'bar',stack:'cost',data:[82,81,85,80,79,83],itemStyle:{color:'#64748b',borderRadius:[3,3,0,0]}}]}));
 }else if(idx===3){
-initChart('dashARAP',mOpt({title:{text:'应收/应付账龄分析',textStyle:{color:'#94a3b8',fontSize:12},left:0,top:0},legend:{data:['应收账款','应付账款'],top:0,right:0},xAxis:{type:'category',data:['30天内','31-60天','61-90天','90-120天','120天+']},yAxis:{type:'value',name:'万元'},series:[{name:'应收账款',type:'bar',data:[4200,1800,950,420,180],itemStyle:{color:'rgba(59,130,246,.7)',borderRadius:[3,3,0,0]}},{name:'应付账款',type:'bar',data:[3800,1500,720,310,95],itemStyle:{color:'rgba(245,158,11,.7)',borderRadius:[3,3,0,0]}}]}));
-initChart('dashInvCap',{backgroundColor:'transparent',title:{text:'库存资金占用',textStyle:{color:'#94a3b8',fontSize:12},left:'center',top:0},tooltip:{trigger:'item',formatter:'{b}: ¥{c}万 ({d}%)'},series:[{type:'pie',radius:['40%','65%'],center:['50%','55%'],data:[{value:3200,name:'玉米淀粉',itemStyle:{color:'#3b82f6'}},{value:2100,name:'果葡糖浆',itemStyle:{color:'#06b6d4'}},{value:1500,name:'结晶葡萄糖',itemStyle:{color:'#10b981'}},{value:890,name:'麦芽糊精',itemStyle:{color:'#f59e0b'}},{value:650,name:'辅料及包材',itemStyle:{color:'#8b5cf6'}}],label:{color:'#94a3b8',fontSize:10},labelLine:{lineStyle:{color:'#334155'}}}]});
-initChart('dashMargin',mOpt({title:{text:'产品利润贡献(万元)',textStyle:{color:'#94a3b8',fontSize:12},left:0,top:0},xAxis:{type:'category',data:['收入','玉米成本','加工成本','能源成本','物流成本','管理费用','毛利润'],axisLabel:{fontSize:10,rotate:20}},yAxis:{type:'value',name:'万元'},series:[{type:'bar',data:[{value:8500,itemStyle:{color:'rgba(16,185,129,.7)'}},{value:-4200,itemStyle:{color:'rgba(239,68,68,.6)'}},{value:-1350,itemStyle:{color:'rgba(239,68,68,.5)'}},{value:-680,itemStyle:{color:'rgba(239,68,68,.4)'}},{value:-520,itemStyle:{color:'rgba(239,68,68,.3)'}},{value:-380,itemStyle:{color:'rgba(239,68,68,.2)'}},{value:1370,itemStyle:{color:'rgba(59,130,246,.7)'}}],label:{show:true,position:'top',fontSize:10,fontFamily:'JetBrains Mono',color:'#94a3b8',formatter:function(p){return p.value>0?p.value:Math.abs(p.value);}}}]}));
+const months=['5月','6月','7月','8月','9月','10月'];
+initChart('dashProcTrend',mOpt({title:{text:'玉米淀粉采购量与采购成本',textStyle:{color:'#94a3b8',fontSize:12},left:0,top:0},legend:{data:['采购量','采购成本','加权采购价'],top:0,right:0},xAxis:{type:'category',data:months},yAxis:[{type:'value',name:'吨 / 万元'},{type:'value',name:'元/吨',min:3000}],series:[{name:'采购量',type:'bar',data:[9200,9650,9880,10150,9940,10300],itemStyle:{color:'rgba(245,158,11,.65)',borderRadius:[4,4,0,0]}},{name:'采购成本',type:'line',data:[2898,3059,3146,3241,3166,3296],smooth:true,itemStyle:{color:'#8b5cf6'}},{name:'加权采购价',type:'line',yAxisIndex:1,data:[3150,3170,3184,3193,3185,3200],smooth:true,lineStyle:{type:'dashed',color:'#06b6d4'},itemStyle:{color:'#06b6d4'}}]}));
+initChart('dashSupplierPerf',mOpt({title:{text:'指定供应商交付表现',textStyle:{color:'#94a3b8',fontSize:12},left:0,top:0},legend:{data:['在手合同量','准时交货率'],top:0,right:0},grid:{top:44,right:46,bottom:58,left:54},xAxis:{type:'category',data:['裕米生物','玉峰实业','河北德瑞','中粮天津','山东福宽','京粮龙江','山东大泽成'],axisLabel:{interval:0,rotate:25}},yAxis:[{type:'value',name:'吨'},{type:'value',name:'%',min:86,max:100}],series:[{name:'在手合同量',type:'bar',data:[820,1100,760,950,1250,1480,980],itemStyle:{color:'rgba(59,130,246,.64)'}},{name:'准时交货率',type:'line',yAxisIndex:1,data:[97.2,96.5,95.8,98.1,94.6,89.8,96.9],smooth:true,itemStyle:{color:'#f59e0b'}}]}));
+}else if(idx===4){
+const months=['5月','6月','7月','8月','9月','10月'];
+initChart('dashOperatingProfit',mOpt({title:{text:'营收、成本与利润',textStyle:{color:'#94a3b8',fontSize:12},left:0,top:0},legend:{data:['营收','成本','利润率'],top:0,right:0},xAxis:{type:'category',data:months},yAxis:[{type:'value',name:'万元'},{type:'value',name:'%',min:0,max:25}],series:[{name:'营收',type:'bar',data:[3720,3875,4142,4220,4275,4501],itemStyle:{color:'rgba(16,185,129,.65)'}},{name:'成本',type:'bar',data:[3208,3304,3506,3555,3635,3722],itemStyle:{color:'rgba(59,130,246,.56)'}},{name:'利润率',type:'line',yAxisIndex:1,data:[13.8,14.7,15.4,15.8,15.0,17.3],smooth:true,itemStyle:{color:'#f59e0b'}}]}));
+initChart('dashCashCycle',mOpt({title:{text:'现金循环周期拆解',textStyle:{color:'#94a3b8',fontSize:12},left:0,top:0},legend:{data:['库存周转DIO','应收周转DSO','应付周转DPO','现金循环周期'],top:0,right:0},xAxis:{type:'category',data:months},yAxis:{type:'value',name:'天'},series:[{name:'库存周转DIO',type:'bar',stack:'days',data:[37,36,35,34,33,32],itemStyle:{color:'#3b82f6'}},{name:'应收周转DSO',type:'bar',stack:'days',data:[41,40,40,39,39,38],itemStyle:{color:'#8b5cf6'}},{name:'应付周转DPO',type:'bar',data:[24,24,25,25,25,25],itemStyle:{color:'rgba(245,158,11,.58)'}},{name:'现金循环周期',type:'line',data:[54,52,50,48,47,45],smooth:true,itemStyle:{color:'#10b981'},lineStyle:{width:3}}]}));
 }
 }
 
 /* ===== DASHBOARD INTERACTIONS: DRILL-DOWN / CUSTOMIZE / LIVE REFRESH / ALERT ROOT-CAUSE ===== */
+var dashKpiActive='sales';
+function selectDashKpi(key,audit){
+  var valid=['sales','inventory','production','procurement','operation'];
+  dashKpiActive=valid.indexOf(key)>=0?key:'sales';
+  document.querySelectorAll('#page-dashboard [data-kpi-tab]').forEach(function(btn){var active=btn.dataset.kpiTab===dashKpiActive;btn.classList.toggle('active',active);btn.setAttribute('aria-selected',active?'true':'false');});
+  document.querySelectorAll('#dashKpiGrid .dash-kpi-group').forEach(function(group){var active=group.dataset.kpi===dashKpiActive;group.classList.toggle('active',active);group.hidden=!active;});
+  if(audit!==false)appendDashAudit('切换指标类别：'+({sales:'销售',inventory:'库存',production:'生产',procurement:'采购',operation:'经营'}[dashKpiActive]),'成功');
+}
 var KPI_META={
-  prod:{name:'今日产销达成率',value:'92.3%',formula:'今日实际产量 ÷ 今日计划产量 × 100%',src:'MES / 生产排程',freq:'≤ 5秒',tab:0,target:'dash',path:['KPI总览','产销协同视图','产线明细','生产工单'],desc:'反映当日生产对计划的达成情况。当前 1#液化线 96%、2#糖化线 88%、3#异构化线 72%、4#喷雾干燥线 91%，整体达成 92.3%。'},
-  inv:{name:'成品库存周转天数',value:'8.2天',formula:'平均成品库存数量 ÷ 日均出库量（近30日滚动）',src:'WMS / SAP',freq:'≤ 5秒',tab:1,target:'dash',path:['KPI总览','储运效率视图','库存明细','SKU库龄'],desc:'衡量成品库存健康度。当前 8.2 天，环比下降 0.5 天，库存结构持续优化。'},
-  otd:{name:'订单准时交付率(OTD)',value:'96.7%',formula:'按期交付订单数 ÷ 应交付订单总数 × 100%（按期=实际交付日 ≤ 承诺交付日）',src:'SAP / TMS',freq:'≤ 5秒',tab:0,target:'dash',path:['KPI总览','产销协同视图','延迟订单','生产排程'],desc:'衡量交付履约质量。当前 96.7%，主要延迟来自客户 C012 的 F55 订单。'},
-  cost:{name:'供应链总运营成本',value:'¥2,847万/月',formula:'采购成本 + 生产成本 + 库存持有成本 + 物流成本 + 环保/能源成本 + 资金占用成本',src:'成本核算模块 / SAP',freq:'≤ 5秒(当日) / ≤ 1小时(累计)',tab:-1,target:'costing',path:['KPI总览','资金效率视图','成本结构','成本核算模块'],desc:'端到端供应链总成本。原料成本占主导（约70%），物流与能耗为持续优化重点。'},
-  cash:{name:'现金循环周期(CCC)',value:'45天',formula:'DIO + DSO − DPO',src:'SAP',freq:'≤ 1小时',tab:3,target:'dash',path:['KPI总览','资金效率视图','账龄明细','SAP财务'],desc:'DIO 32天 + DSO 38天 − DPO 25天 = 45天。环比下降 3 天，资金运营效率持续提升。'}
+  salesQty:{name:'销量',value:'12,860吨',formula:'周期内销售出库数量合计',src:'SAP销售 / WMS',freq:'≤ 5秒',tab:0,path:['五类指标总览','销售分析','客户与产品明细','销售出库单'],desc:'本月销量较上期增长 4.8%，其中果糖F55贡献 61.4%。'},
+  salesAmount:{name:'销售金额',value:'¥4,501万',formula:'Σ 销售出库数量 × 结算单价',src:'SAP销售',freq:'≤ 1小时',tab:0,path:['五类指标总览','销售分析','客户与产品明细','销售结算单'],desc:'销售金额随销量增长 5.3%，平均售价保持在 3,500 元/吨附近。'},
+  salesContractQty:{name:'在手销售合同量',value:'28,400吨',formula:'Σ 合同数量 − Σ 已履约数量',src:'SAP合同 / 销售协同',freq:'≤ 5秒',tab:0,path:['五类指标总览','销售分析','合同余额明细','销售合同'],desc:'展示已生效且未完全履约的销售合同数量余额，可下钻到客户、产品和合同。'},
+  salesContractAmount:{name:'在手销售合同金额',value:'¥9,940万',formula:'Σ 未履约合同数量 × 合同结算单价',src:'SAP合同',freq:'≤ 1小时',tab:0,path:['五类指标总览','销售分析','合同金额明细','销售合同'],desc:'在手合同金额较上期增长 2.6%，与在手合同量保持一致。'},
+  fgStockQty:{name:'成品库存量',value:'3,635吨',formula:'Σ 已放行成品库存 + 待检成品库存',src:'WMS / LIMS',freq:'≤ 5秒',tab:1,path:['五类指标总览','库存分析','成品SKU水位','库存批次'],desc:'按SKU展示当前水位、安全库存和库存上限，果糖F55当前库存 1,850 吨。'},
+  fgTurnDays:{name:'成品库存周转天数',value:'8.2天',formula:'近30日平均成品库存 ÷ 近30日日均销售出库量',src:'WMS / SAP',freq:'≤ 5秒',tab:1,path:['五类指标总览','库存分析','成品周转明细','SKU库龄'],desc:'成品周转天数环比下降 0.5 天，可继续下钻查看各SKU库龄。'},
+  rmStockQty:{name:'原料库存量',value:'1,860吨',formula:'Σ 原料可用库存 + 质检冻结库存',src:'WMS / LIMS',freq:'≤ 5秒',tab:1,path:['五类指标总览','库存分析','原料水位明细','原料批次'],desc:'吨计原料库存合计 1,860 吨，其中玉米淀粉 1,732 吨；包装材料按万件单独计量，在途量另行展示。'},
+  rmTurnDays:{name:'原料库存周转天数',value:'1.3天',formula:'近30日平均原料库存 ÷ 近30日日均生产耗用量',src:'WMS / MES',freq:'≤ 5秒',tab:1,path:['五类指标总览','库存分析','原料周转明细','领料单'],desc:'原料周转天数较上期下降 0.1 天，需结合在途量与安全库存判断供应风险。'},
+  prodPlanRate:{name:'生产计划达成率',value:'94.2%',formula:'实际完成产量 ÷ 计划产量 × 100%',src:'MES / 生产排程',freq:'≤ 5秒',tab:2,path:['五类指标总览','生产分析','周计划达成','生产工单'],desc:'本月计划达成率提升 1.8 个百分点，可下钻到周、产线与工单。'},
+  prodFpy:{name:'生产一次合格率',value:'98.7%',formula:'首检合格批次数 ÷ 完工批次数 × 100%',src:'MES / LIMS',freq:'≤ 5秒',tab:2,path:['五类指标总览','生产分析','产品质量明细','生产批次'],desc:'果糖F55一次合格率为 98.7%，较上期提升 0.4 个百分点。'},
+  prodCost:{name:'生产成本',value:'¥3,146万',formula:'原料 + 辅料包材 + 能源 + 人工制造 + 其他生产成本',src:'成本核算 / MES',freq:'≤ 1小时',tab:2,path:['五类指标总览','生产分析','成本构成','生产批次成本'],desc:'生产成本按成本类别和生产批次归集，当前单位生产成本较上期下降 2.7%。'},
+  purchaseQty:{name:'采购量',value:'10,300吨',formula:'周期内已收货采购数量合计',src:'SAP采购 / WMS',freq:'≤ 5秒',tab:3,path:['五类指标总览','采购分析','供应商收货明细','采购收货单'],desc:'本月采购量增长 3.6%，以玉米淀粉为主。'},
+  purchaseCost:{name:'采购成本',value:'¥3,296万',formula:'Σ 入库数量 ×（采购价 + 运费及附加）',src:'SAP采购 / 成本核算',freq:'≤ 1小时',tab:3,path:['五类指标总览','采购分析','采购成本明细','采购订单'],desc:'采购成本增长 1.9%，低于采购量增幅，反映加权采购价有所改善。'},
+  purchaseContractQty:{name:'在手采购合同量',value:'7,340吨',formula:'Σ 生效采购合同量 − Σ 已执行量',src:'SAP采购合同',freq:'≤ 5秒',tab:3,path:['五类指标总览','采购分析','合同执行明细','采购合同'],desc:'展示仍待执行的采购合同量，并可追溯供应商与预计到货日期。'},
+  purchaseContractAmount:{name:'在手采购合同金额',value:'¥2,351万',formula:'Σ 未执行合同量 × 合同含税价',src:'SAP采购合同',freq:'≤ 1小时',tab:3,path:['五类指标总览','采购分析','合同金额明细','采购合同'],desc:'在手采购合同金额较上期下降 3.7%，与合同量执行进度一致。'},
+  supplierOtd:{name:'原料准时交货率',value:'95.8%',formula:'准时到货批次 ÷ 应到货批次 × 100%',src:'SAP采购 / TMS / WMS',freq:'≤ 5秒',tab:3,path:['五类指标总览','采购分析','供应商交付表现','采购订单'],desc:'京粮龙江当期到货延期导致整体准时交货率下降 1.2 个百分点。'},
+  revenue:{name:'营收',value:'¥4,501万',formula:'周期内已确认销售收入合计',src:'SAP财务',freq:'≤ 1小时',tab:4,path:['五类指标总览','经营分析','收入构成','财务凭证'],desc:'本月营收增长 5.3%，主要由果糖F55销量增长驱动。'},
+  operatingCost:{name:'成本',value:'¥3,722万',formula:'销售产品对应采购、生产、库存、物流及期间成本',src:'SAP财务 / 成本核算',freq:'≤ 1小时',tab:4,path:['五类指标总览','经营分析','成本构成','成本凭证'],desc:'完全成本增长 2.4%，低于营收增幅。'},
+  profit:{name:'利润',value:'¥779万',formula:'营收 − 完全成本',src:'SAP财务 / 成本核算',freq:'≤ 1小时',tab:4,path:['五类指标总览','经营分析','产品利润明细','财务凭证'],desc:'本月利润增长 11.8%，利润率提升至 17.3%。'},
+  cashCycle:{name:'现金循环周期',value:'45天',formula:'库存周转天数DIO + 应收周转天数DSO − 应付周转天数DPO',src:'SAP财务',freq:'≤ 1小时',tab:4,path:['五类指标总览','经营分析','周期构成','应收应付凭证'],desc:'DIO 32天 + DSO 38天 − DPO 25天 = 45天，较上期缩短 3 天。'}
 };
 var DASH_ROLE_META={
   director:{name:'李明哲 · 供应链总监',avatar:'李',scope:'全厂供应链 · 成本字段可见',hidden:[]},
@@ -2330,10 +2397,7 @@ function appendDashAudit(action,result){
 }
 function applyDashboardRole(value){
   var m=DASH_ROLE_META[value]||DASH_ROLE_META.director;var av=document.getElementById('headerAvatar'),user=document.getElementById('headerUserText'),scope=document.getElementById('dashRoleScope');if(av)av.textContent=m.avatar;if(user)user.textContent=m.name;if(scope)scope.textContent=m.scope;
-  document.querySelectorAll('#dashKpiGrid .kpi-card').forEach(function(card){card.style.display=m.hidden.indexOf(card.dataset.kpi)>=0?'none':'';});var sandbox=document.getElementById('sandboxCard');if(sandbox)sandbox.style.display=value==='dispatcher'?'none':'';appendDashAudit('切换角色视图：'+m.name,'成功');
-}
-function initDashPrediction(){
-  initChart('dashPredictionChart',mOpt({legend:{data:['成品库存预测','预测下界','安全库存'],top:0,right:0},xAxis:{type:'category',data:['08-23','08-24','08-25','08-26','08-27','08-28','08-29','08-30']},yAxis:{type:'value',name:'吨'},series:[{name:'成品库存预测',type:'line',data:[465,430,385,332,305,278,265,248],smooth:true,itemStyle:{color:'#8b5cf6'},areaStyle:{color:'rgba(139,92,246,.10)'}},{name:'预测下界',type:'line',data:[445,405,352,295,275,252,238,221],smooth:true,symbol:'none',lineStyle:{type:'dashed',color:'#f59e0b'}},{name:'安全库存',type:'line',data:[300,300,300,300,300,300,300,300],symbol:'none',lineStyle:{type:'dashed',color:'#ef4444'}}]}));
+  document.querySelectorAll('#dashKpiGrid .sensitive').forEach(function(metric){metric.style.display=value==='dispatcher'?'none':'';});selectDashKpi(dashKpiActive,false);var sandbox=document.getElementById('sandboxCard');if(sandbox)sandbox.style.display=value==='dispatcher'?'none':'';appendDashAudit('切换角色视图：'+m.name,'成功');
 }
 var dashDragEnabled=false,dashDragged=null;
 function enableDashboardDragDrop(){
@@ -2348,10 +2412,10 @@ function showAccessAudit(){
   var html='<div class="modal-mask" onclick="if(event.target===this)closeModal(\'auditModal\')"><div class="modal-panel" style="max-width:900px"><button class="modal-close" onclick="closeModal(\'auditModal\')">×</button><div class="page-title" style="font-size:18px">角色权限与操作审计</div><div class="text-xs text-muted mb-12">RBAC按角色授权；组织、成本及客户字段按数据权限过滤。</div><div class="overflow-auto"><table class="data-table"><thead><tr><th>角色</th><th>数据范围</th><th>功能权限</th></tr></thead><tbody>'+roles+'</tbody></table></div><div class="section-title text-sm mt-16"><span class="icon">●</span>最近审计日志</div><div class="overflow-auto"><table class="data-table"><thead><tr><th>时间</th><th>用户</th><th>操作</th><th>结果</th></tr></thead><tbody>'+audit+'</tbody></table></div></div></div>';var mask=document.createElement('div');mask.id='auditModal';mask.innerHTML=html;document.body.appendChild(mask);
 }
 function showMobilePreview(){
-  var html='<div class="modal-mask" onclick="if(event.target===this)closeModal(\'mobileModal\')"><div class="modal-panel"><button class="modal-close" onclick="closeModal(\'mobileModal\')">×</button><div class="page-title" style="font-size:18px">移动端指标与预警</div><div class="mobile-frame"><div class="mobile-frame-head"><span>SCOS 掌上驾驶舱</span><span class="tag tag-green">实时</span></div><div class="mobile-kpi"><span>今日产销达成率</span><b class="text-cyan">92.3%</b></div><div class="mobile-kpi"><span>OTD</span><b class="text-green">96.7%</b></div><div class="mobile-kpi"><span>成品库存周转</span><b>8.2天</b></div><div class="prediction-item"><span class="tag tag-red">紧急</span><span>2#液化喷射泵压力异常<br><span class="text-xs text-muted">10:28 · 点击进入处置</span></span></div><div class="prediction-item"><span class="tag tag-yellow">预测</span><span>08-26 麦芽糊精库存越线</span></div></div><div class="scope-note mt-12">移动端只展示角色授权的核心KPI、预警及处置进度；沙盘不在移动端直接下发。</div></div></div>';var mask=document.createElement('div');mask.id='mobileModal';mask.innerHTML=html;document.body.appendChild(mask);appendDashAudit('查看移动端驾驶舱','成功');
+  var html='<div class="modal-mask" onclick="if(event.target===this)closeModal(\'mobileModal\')"><div class="modal-panel"><button class="modal-close" onclick="closeModal(\'mobileModal\')">×</button><div class="page-title" style="font-size:18px">移动端指标与预警</div><div class="mobile-frame"><div class="mobile-frame-head"><span>SCOS 掌上驾驶舱</span><span class="tag tag-green">实时</span></div><div class="mobile-kpi"><span>销售 · 销量</span><b class="text-cyan">12,860吨</b></div><div class="mobile-kpi"><span>生产 · 计划达成率</span><b class="text-green">94.2%</b></div><div class="mobile-kpi"><span>经营 · 利润</span><b>¥779万</b></div><div class="prediction-item"><span class="tag tag-red">紧急</span><span>京粮龙江玉米淀粉到货延期<br><span class="text-xs text-muted">09:15 · 点击查看根因</span></span></div><div class="prediction-item"><span class="tag tag-yellow">交期</span><span>可口可乐果糖F55订单存在1天延迟风险</span></div></div><div class="scope-note mt-12">移动端展示角色授权的五类核心指标、实时预警及处置进度。</div></div></div>';var mask=document.createElement('div');mask.id='mobileModal';mask.innerHTML=html;document.body.appendChild(mask);appendDashAudit('查看移动端驾驶舱','成功');
 }
 function showHelpCenter(){
-  var html='<div class="modal-mask" onclick="if(event.target===this)closeModal(\'helpModal\')"><div class="modal-panel"><button class="modal-close" onclick="closeModal(\'helpModal\')">×</button><div class="page-title" style="font-size:18px">演示导航与验收口径</div><div class="text-sm text-secondary" style="line-height:2.1">1. 切换角色，核验高层、调度、总监与总经理视图。<br>2. 点击KPI查看公式、数据源和逐级下钻。<br>3. 查看供需、储运、环保、资金四个主题和统一预警。<br>4. 在个性化配置中拖拽KPI卡片排序。<br>5. 在沙盘中执行需求+20%、供应商延迟7天和成本波动情景，结果仅用于认知支持。</div><div class="grid grid-3 gap-8 mt-16"><div class="scope-note"><b>页面加载</b><br><span class="text-green">演示 1.6秒 / 要求 ≤3秒</span></div><div class="scope-note"><b>KPI下钻</b><br><span class="text-green">演示 0.4秒 / 要求 ≤2秒</span></div><div class="scope-note"><b>并发用户</b><br><span class="text-green">容量 50用户</span></div></div><div class="scope-note warning mt-12"><b>说明：</b>本页性能与业务效果为演示口径，项目验收以实际部署环境压测和用户签字为准。</div></div></div>';var mask=document.createElement('div');mask.id='helpModal';mask.innerHTML=html;document.body.appendChild(mask);
+  var html='<div class="modal-mask" onclick="if(event.target===this)closeModal(\'helpModal\')"><div class="modal-panel"><button class="modal-close" onclick="closeModal(\'helpModal\')">×</button><div class="page-title" style="font-size:18px">演示导航与验收口径</div><div class="text-sm text-secondary" style="line-height:2.1">1. 切换角色，核验高层、调度、总监与总经理视图。<br>2. 点击五类指标中的任一指标，查看公式、数据源和逐级下钻。<br>3. 查看销售、库存、生产、采购、经营五个多维分析主题。<br>4. 从实时预警或智能预警进入根因分析和业务处置。<br>5. 在个性化配置中拖拽五类指标组排序。</div><div class="grid grid-3 gap-8 mt-16"><div class="scope-note"><b>页面加载</b><br><span class="text-green">演示 1.6秒 / 要求 ≤3秒</span></div><div class="scope-note"><b>KPI下钻</b><br><span class="text-green">演示 0.4秒 / 要求 ≤2秒</span></div><div class="scope-note"><b>并发用户</b><br><span class="text-green">容量 50用户</span></div></div><div class="scope-note warning mt-12"><b>说明：</b>本页性能与业务效果为演示口径，项目验收以实际部署环境压测和用户签字为准。</div></div></div>';var mask=document.createElement('div');mask.id='helpModal';mask.innerHTML=html;document.body.appendChild(mask);
 }
 function drillKPI(key){
   var m=KPI_META[key];if(!m)return;
@@ -2379,9 +2443,9 @@ function closeModal(id){var el=document.getElementById(id);if(el)el.remove();}
 function toggleKpi(i,checked){var cards=document.querySelectorAll('#page-dashboard .kpi-card');if(cards[i])cards[i].style.display=checked?'':'none';}
 function toggleDashTab(i,checked){var btns=document.querySelectorAll('.tab-btn[data-group="dash"]');if(btns[i])btns[i].style.display=checked?'':'none';}
 function customizeDashboard(){
-  var kpis=[['今日产销达成率',0,true],['成品库存周转天数',1,true],['订单准时交付率OTD',2,true],['供应链总运营成本',3,true],['现金循环周期',4,true]];
+  var kpis=[['销售指标组',0,true],['库存指标组',1,true],['生产指标组',2,true],['采购指标组',3,true],['经营指标组',4,true]];
   var kpiHtml=kpis.map(function(k){return `<label class="check-row"><input type="checkbox" ${k[2]?'checked':''} onchange="toggleKpi(${k[1]},this.checked)"><span>${k[0]}</span></label>`;}).join('');
-  var views=[['产销协同视图',0],['储运效率视图',1],['环保合规视图',2],['资金效率视图',3]];
+  var views=[['销售分析',0],['库存分析',1],['生产分析',2],['采购分析',3],['经营分析',4]];
   var viewHtml=views.map(function(v){return `<label class="check-row"><input type="checkbox" checked onchange="toggleDashTab(${v[1]},this.checked)"><span>${v[0]}</span></label>`;}).join('');
   var html=`<div class="modal-mask" onclick="if(event.target===this)closeModal('cfgModal')">
     <div class="modal-panel">
@@ -2396,7 +2460,7 @@ function customizeDashboard(){
     <button class="btn btn-sm mb-12" id="dashDragToggle" onclick="toggleDashboardDrag()">开启KPI拖拽排序</button>
     <div class="flex gap-8 mb-12">
       <button class="scenario-btn" onclick="closeModal('cfgModal');alert('已切换为「高层总览」模板：仅保留核心KPI + 资金视图')">高层总览</button>
-      <button class="scenario-btn" onclick="closeModal('cfgModal');alert('已切换为「运营监控」模板：产销/储运/环保/预警全开')">运营监控</button>
+      <button class="scenario-btn" onclick="closeModal('cfgModal');alert('已切换为「运营监控」模板：销售/库存/生产/采购/预警全开')">运营监控</button>
       <button class="scenario-btn" onclick="closeModal('cfgModal');alert('已恢复角色默认看板')">恢复默认</button>
     </div>
     <div class="flex gap-8"><button class="btn btn-primary btn-sm" onclick="appendDashAudit('保存个性化看板','成功');closeModal('cfgModal');alert('个性化看板已保存')">保存看板</button><button class="btn btn-sm" onclick="closeModal('cfgModal')">关闭</button></div>
@@ -2406,7 +2470,7 @@ function customizeDashboard(){
 }
 function exportDashboardReport(){
   var t=document.getElementById('dashUpdateTime');var tm=t?t.textContent:new Date().toLocaleTimeString('zh-CN',{hour12:false});
-  var lines=['SCOS 供应链驾驶舱 态势报告','生成时间: '+tm,'','【核心 KPI】','今日产销达成率: 92.3%','成品库存周转天数: 8.2天','订单准时交付率(OTD): 96.7%','供应链总运营成本: ¥2,847万/月','现金循环周期(CCC): 45天','','【实时预警】 共 7 条（2 紧急 / 3 警告 / 2 提示）','- [紧急] 2#液化喷射泵压力异常（设备故障）','- [紧急] 山东供应商玉米发货延迟（原辅料）','- [警告] 麦芽糊精库存低于安全线（库存）','- [警告] 客户C012订单交期风险（订单）','- [提示] 蒸汽单耗超出目标值（能耗）','','【在途车辆】 23 辆（正常 18 / 延迟 3 / 预警 2）',''];
+  var lines=['SCOS 供应链驾驶舱 态势报告','生成时间: '+tm,'','【销售】','销量: 12,860吨（▲4.8%）','销售金额: ¥4,501万（▲5.3%）','在手销售合同量: 28,400吨（▲2.1%）','在手销售合同金额: ¥9,940万（▲2.6%）','','【库存】','成品库存量: 3,635吨（▼3.2%）','成品周转天数: 8.2天（▼0.5天）','原料库存量: 1,860吨（▼6.4%）','原料周转天数: 1.3天（▼0.1天）','','【生产】','生产计划达成率: 94.2%（▲1.8%）','生产一次合格率: 98.7%（▲0.4%）','生产成本: ¥3,146万（▼2.7%）','','【采购】','采购量: 10,300吨（▲3.6%）','采购成本: ¥3,296万（▲1.9%）','在手采购合同量: 7,340吨（▼4.2%）','在手采购合同金额: ¥2,351万（▼3.7%）','原料准时交货率: 95.8%（▼1.2%）','','【经营】','营收: ¥4,501万（▲5.3%）','成本: ¥3,722万（▲2.4%）','利润: ¥779万（▲11.8%）','现金循环周期: 45天（▼3天）','','【实时预警】 共 7 条（2 紧急 / 3 警告 / 2 提示）','- [紧急] 果糖F55异构化线压力异常（设备故障）','- [紧急] 京粮龙江玉米淀粉到货延期（原辅料）','- [警告] 果糖F55库存低于目标水位（库存）','- [警告] 可口可乐果糖F55交期风险（订单）','- [提示] 果糖F55单位蒸汽成本偏高（能耗）',''];
   var blob=new Blob([lines.join('\n')],{type:'text/plain;charset=utf-8'});
   var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='SCOS驾驶舱态势报告.txt';document.body.appendChild(a);a.click();document.body.removeChild(a);
 }
