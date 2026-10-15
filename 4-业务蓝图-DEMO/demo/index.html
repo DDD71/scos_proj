@@ -218,6 +218,13 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;heigh
 .scenario-btn:hover{border-color:var(--blue);color:var(--blue);background:rgba(59,130,246,.08);}
 .dash-map-wrap{position:relative;height:420px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;}
 .dash-map-wrap::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--cyan),var(--blue),var(--cyan));opacity:.6;z-index:1;}
+.dash-map-controls{position:absolute;top:14px;right:14px;z-index:30;display:flex;align-items:center;gap:4px;padding:4px;background:rgba(10,14,26,.9);border:1px solid rgba(59,130,246,.38);border-radius:8px;box-shadow:0 6px 20px rgba(0,0,0,.32);backdrop-filter:blur(8px);}
+.dash-map-control{height:32px;min-width:32px;padding:0 9px;border:1px solid transparent;border-radius:5px;background:transparent;color:#cbd5e1;font:600 16px/1 'Noto Sans SC',sans-serif;cursor:pointer;transition:background .15s,border-color .15s,color .15s,opacity .15s;}
+.dash-map-control:hover{background:rgba(59,130,246,.16);border-color:rgba(59,130,246,.45);color:#f8fafc;}
+.dash-map-control:focus-visible{outline:2px solid var(--cyan);outline-offset:2px;}
+.dash-map-control:disabled{cursor:not-allowed;opacity:.35;background:transparent;border-color:transparent;}
+.dash-map-control.reset{font-size:11px;min-width:42px;}
+.dash-map-zoom-value{min-width:44px;text-align:center;color:var(--cyan);font:600 11px/1 'JetBrains Mono',monospace;user-select:none;}
 .mini-kpi{display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius);font-size:12px;}
 .mini-kpi .val{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:14px;}
 .gantt-row{display:flex;align-items:center;border-bottom:1px solid rgba(30,41,59,.3);min-height:40px;}
@@ -1758,7 +1765,15 @@ return `<div class="page-header"><div><div class="page-title">供应链驾驶舱
 </div>
 <!-- MAP + ALERTS -->
 <div class="grid grid-23 mb-16">
-<div class="dash-map-wrap"><div id="dashMap" style="width:100%;height:100%"></div></div>
+<div class="dash-map-wrap">
+<div class="dash-map-controls" role="group" aria-label="地图比例缩放">
+<button type="button" class="dash-map-control" id="dashMapZoomOut" onclick="adjustDashMapZoom(-1)" aria-label="缩小地图" title="缩小地图">−</button>
+<span class="dash-map-zoom-value" id="dashMapZoomValue" aria-live="polite">100%</span>
+<button type="button" class="dash-map-control" id="dashMapZoomIn" onclick="adjustDashMapZoom(1)" aria-label="放大地图" title="放大地图">＋</button>
+<button type="button" class="dash-map-control reset" id="dashMapZoomReset" onclick="resetDashMapView()" aria-label="恢复地图默认视图" title="恢复默认视图">复位</button>
+</div>
+<div id="dashMap" style="width:100%;height:100%"></div>
+</div>
 <div class="card" style="max-height:420px;overflow-y:auto"><div class="card-title"><span class="dot" style="background:var(--red)"></span>实时预警中心 <span class="tag tag-red" style="margin-left:auto">7条</span></div>
 <div id="dashAlertMini">
 <div class="alert-item" onclick="showAlertRoot(0)" title="点击查看根因"><div class="alert-level critical"></div><div class="alert-body"><div class="alert-title-text">果糖F55异构化线压力异常</div><div class="alert-desc">当前压力0.72MPa，超出上限0.65MPa</div><div class="alert-meta"><span class="alert-time">09:42</span><span class="tag tag-red">设备故障</span></div></div></div>
@@ -2204,12 +2219,26 @@ var outboundEta=['10-14 18:40','10-14 20:10','10-14 16:50','10-14 21:20','10-16 
 var routeLines=[];
 suppliers.forEach(function(s,i){routeLines.push({name:s.name+' → 太仓工厂',kind:'原料入厂',from:s.fullName,to:'太仓工厂',coords:[s.value,factoryPoint],transitQty:inboundTransit[i],eta:inboundEta[i],lineStyle:{color:'#f59e0b',type:'dashed'}});});
 customers.forEach(function(c,i){routeLines.push({name:'太仓工厂 → '+c.name,kind:'成品配送',from:'太仓工厂',to:c.fullName,coords:[factoryPoint,c.value],transitQty:outboundTransit[i],eta:outboundEta[i],lineStyle:{color:'#3b82f6',type:'solid'}});});
-var customerLabelGuides=customers.map(function(c){return {coords:[c.value,c.labelValue]};});
+var dashMapBaseZoom=1.45;
+var dashMapMinZoom=Number((dashMapBaseZoom*.01).toFixed(4));
+var dashMapMaxZoom=Number((dashMapBaseZoom*20).toFixed(2));
+var dashMapDefaultCenter=[116.5,35.5];
+function customerLabelPoint(c,zoom){
+  var currentZoom=Math.max(dashMapBaseZoom,Number(zoom)||dashMapBaseZoom);
+  var anchorRatio=Math.max(.12,.42*dashMapBaseZoom/currentZoom);
+  return [
+    c.value[0]+(c.labelValue[0]-c.value[0])*anchorRatio,
+    c.value[1]+(c.labelValue[1]-c.value[1])*anchorRatio
+  ];
+}
+function customerLabelGuidesAtZoom(zoom){return customers.map(function(c){return {coords:[c.value,customerLabelPoint(c,zoom)]};});}
+function customerLabelsAtZoom(zoom){return customers.map(function(c){return {name:c.name,value:customerLabelPoint(c,zoom)};});}
+var customerLabelGuides=customerLabelGuidesAtZoom(dashMapBaseZoom);
 var dashMapElement=document.getElementById('dashMap');
 dashMapElement.dataset.factoryCount=String(factories.length);dashMapElement.dataset.supplierCount=String(suppliers.length);dashMapElement.dataset.customerCount=String(customers.length);dashMapElement.dataset.routeCount=String(routeLines.length);
 dashMapElement.setAttribute('role','img');dashMapElement.setAttribute('aria-label','供应网络与客户履约地图：1个太仓工厂、7家玉米淀粉供应商、12家指定客户、19条运输路线。供应商显示在手合同量，客户显示未履约销量，路线显示在途量和预计到达时间。');
-initChart('dashMap',{backgroundColor:'transparent',
-geo:{map:'china',roam:true,zoom:1.45,center:[116.5,35.5],
+var dashMapOption={backgroundColor:'transparent',
+geo:{map:'china',roam:true,zoom:dashMapBaseZoom,center:dashMapDefaultCenter,scaleLimit:{min:dashMapMinZoom,max:dashMapMaxZoom},
   itemStyle:{areaColor:'#0f1a2e',borderColor:'#1e3a5f',borderWidth:0.8},
   emphasis:{itemStyle:{areaColor:'#162a4a'},label:{show:false}},
   label:{show:false},
@@ -2224,21 +2253,21 @@ tooltip:{trigger:'item',backgroundColor:'rgba(10,14,26,.95)',borderColor:'rgba(5
   textStyle:{color:'#f1f5f9',fontSize:12},extraCssText:'border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,.5);'},
 series:[
   // Transport routes
-  {name:'运输线路',type:'lines',coordinateSystem:'geo',zlevel:1,
+  {id:'dash-routes',name:'运输线路',type:'lines',coordinateSystem:'geo',zlevel:1,
     data:routeLines,
     lineStyle:{width:1.6,opacity:0.42,curveness:0.18},
     emphasis:{lineStyle:{width:3.5,opacity:0.95}},
-    effect:{show:true,period:8,trailLength:0.12,symbol:'arrow',symbolSize:5,color:'rgba(226,232,240,.72)'},
+    effect:{show:true,period:8,trailLength:0,symbol:'arrow',symbolSize:5,color:'rgba(226,232,240,.72)'},
     silent:false,
     tooltip:{formatter:function(p){var d=p.data;return '<div style="font-weight:600;margin-bottom:5px;">'+d.kind+'路线</div><div style="font-size:11px;">'+d.from+' → '+d.to+'</div><div style="font-size:11px;margin-top:4px;">在途量：<span style="color:#06b6d4;font-weight:600;">'+d.transitQty.toLocaleString()+'</span> 吨</div><div style="font-size:11px;">预计到达：<span style="color:#f1f5f9;font-weight:600;">'+d.eta+'</span></div>';}}
   },
-  {name:'客户名称引导线',type:'lines',coordinateSystem:'geo',zlevel:2,silent:true,
+  {id:'dash-customer-label-guides',name:'客户名称引导线',type:'lines',coordinateSystem:'geo',zlevel:2,silent:true,
     data:customerLabelGuides,symbol:['none','none'],
     lineStyle:{color:'rgba(52,211,153,.32)',width:.8,type:'dotted',opacity:.75},
     tooltip:{show:false}
   },
   // Factories
-  {name:'工厂',type:'effectScatter',coordinateSystem:'geo',zlevel:2,
+  {id:'dash-factory',name:'工厂',type:'effectScatter',coordinateSystem:'geo',zlevel:8,z:100,
     data:factories.map(function(f){return {name:f.name,fullName:f.fullName,value:f.value,status:f.status};}),
     symbolSize:20,
     rippleEffect:{brushType:'stroke',scale:4,period:5},
@@ -2254,7 +2283,7 @@ series:[
     }}
   },
   // Suppliers
-  {name:'供应商',type:'scatter',coordinateSystem:'geo',zlevel:2,
+  {name:'供应商',type:'scatter',coordinateSystem:'geo',zlevel:3,
     data:suppliers.map(function(s){return {name:s.name,fullName:s.fullName,value:s.value,contractQty:s.contractQty,label:{position:s.labelPos,distance:5}};}),
     symbol:'diamond',symbolSize:14,
     itemStyle:{color:'#f59e0b',borderColor:'rgba(245,158,11,.3)',borderWidth:2},
@@ -2268,7 +2297,7 @@ series:[
     }}
   },
   // Customers
-  {name:'客户',type:'scatter',coordinateSystem:'geo',zlevel:2,
+  {name:'客户',type:'scatter',coordinateSystem:'geo',zlevel:3,
     data:customers.map(function(c){return {name:c.name,fullName:c.fullName,value:c.value,unfulfilledQty:c.unfulfilledQty};}),
     symbol:'circle',symbolSize:12,
     itemStyle:{color:'#10b981',borderColor:'rgba(16,185,129,.4)',borderWidth:2},
@@ -2279,13 +2308,52 @@ series:[
         '<div style="font-size:11px;">未履约销量：<span style="color:#34d399;font-weight:600;">'+p.data.unfulfilledQty.toLocaleString()+'</span> 吨</div>';
     }}
   },
-  {name:'客户名称',type:'scatter',coordinateSystem:'geo',zlevel:3,silent:true,
-    data:customers.map(function(c){return {name:c.name,value:c.labelValue};}),symbolSize:1,
+  {id:'dash-customer-labels',name:'客户名称',type:'scatter',coordinateSystem:'geo',zlevel:4,silent:true,
+    data:customerLabelsAtZoom(dashMapBaseZoom),symbolSize:1,
     itemStyle:{color:'transparent'},
     label:{show:true,formatter:'{b}',position:'inside',fontSize:9,fontWeight:600,color:'#bbf7d0',backgroundColor:'rgba(10,14,26,.86)',borderColor:'rgba(16,185,129,.28)',borderWidth:.5,borderRadius:3,padding:[2,4]},
     labelLayout:{hideOverlap:false},tooltip:{show:false}
   }
-]});}
+]};
+var dashMapChart=initChart('dashMap',dashMapOption);
+function syncDashMapZoomState(zoom){
+  zoom=Math.max(dashMapMinZoom,Math.min(dashMapMaxZoom,Number(zoom)||dashMapBaseZoom));
+  dashMapChart.setOption({series:[
+    {id:'dash-customer-label-guides',data:customerLabelGuidesAtZoom(zoom)},
+    {id:'dash-customer-labels',data:customerLabelsAtZoom(zoom)}
+  ]});
+  dashMapElement.dataset.zoom=String(zoom);
+  var zoomValue=document.getElementById('dashMapZoomValue');
+  if(zoomValue)zoomValue.textContent=Math.round(zoom/dashMapBaseZoom*100)+'%';
+  var zoomOut=document.getElementById('dashMapZoomOut');
+  var zoomIn=document.getElementById('dashMapZoomIn');
+  if(zoomOut)zoomOut.disabled=zoom<=dashMapMinZoom*1.001;
+  if(zoomIn)zoomIn.disabled=zoom>=dashMapMaxZoom*.999;
+}
+window.adjustDashMapZoom=function(direction){
+  if(!dashMapChart||dashMapChart.isDisposed())return;
+  var geoOption=dashMapChart.getOption().geo;
+  var geoState=geoOption&&geoOption[0]||{};
+  var currentZoom=Number(geoState.zoom)||dashMapBaseZoom;
+  var factor=direction>0?1.25:.8;
+  var nextZoom=Math.max(dashMapMinZoom,Math.min(dashMapMaxZoom,Number((currentZoom*factor).toFixed(4))));
+  dashMapChart.setOption({geo:{zoom:nextZoom,center:geoState.center||dashMapDefaultCenter}});
+  syncDashMapZoomState(nextZoom);
+};
+window.resetDashMapView=function(){
+  if(!dashMapChart||dashMapChart.isDisposed())return;
+  dashMapChart.clear();
+  dashMapChart.setOption(dashMapOption,{notMerge:true,lazyUpdate:false});
+  syncDashMapZoomState(dashMapBaseZoom);
+};
+if(dashMapChart){
+  syncDashMapZoomState(dashMapBaseZoom);
+  dashMapChart.on('geoRoam',function(){
+    var geoOption=dashMapChart.getOption().geo;
+    var zoom=geoOption&&geoOption[0]&&Number(geoOption[0].zoom)||dashMapBaseZoom;
+    syncDashMapZoomState(zoom);
+  });
+}}
 initDashSubCharts(0);
 enableDashboardDragDrop();
 applyDashboardRole('director');
