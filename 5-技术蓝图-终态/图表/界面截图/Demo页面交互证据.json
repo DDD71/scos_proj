@@ -1,0 +1,1996 @@
+[
+  {
+    "id": "3-1-01",
+    "title": "驾驶舱总览",
+    "action": "navigate('dashboard')",
+    "filename": "图3-1-01_驾驶舱总览.png",
+    "pageTitle": "供应链驾驶舱",
+    "sectionTitles": [
+      "实时预警中心 7条",
+      "多维运营分析",
+      "智能预警中心"
+    ],
+    "buttons": [
+      "刷新",
+      "个性化配置",
+      "导出报告",
+      "角色权限与审计",
+      "移动端视图",
+      "操作帮助",
+      "销售4项",
+      "库存4项",
+      "生产3项",
+      "采购5项",
+      "经营4项",
+      "销量▲ 4.8%12,860 吨本月累计钻取溯源 ▸",
+      "销售金额▲ 5.3%¥4,501 万本月累计钻取溯源 ▸",
+      "在手销售合同量▲ 2.1%28,400 吨未履约余额钻取溯源 ▸",
+      "在手销售合同金额▲ 2.6%¥9,940 万未履约余额钻取溯源 ▸",
+      "−",
+      "＋",
+      "复位",
+      "销售",
+      "库存",
+      "生产",
+      "采购",
+      "经营",
+      "全部",
+      "设备故障",
+      "原辅料",
+      "库存",
+      "订单",
+      "能耗",
+      "联动分析"
+    ],
+    "inputs": [
+      {
+        "tag": "SELECT",
+        "type": "select-one",
+        "placeholder": "",
+        "value": "director"
+      }
+    ]
+  },
+  {
+    "id": "3-1-02",
+    "title": "沙盘推演",
+    "action": "navigate('sandbox')",
+    "filename": "图3-1-02_沙盘推演.png",
+    "pageTitle": "沙盘推演",
+    "sectionTitles": [],
+    "buttons": [
+      "客户增单订单多了，能按时交吗？",
+      "到货延迟原料晚了，能撑几天？",
+      "产能下降生产慢了，库存够吗？",
+      "销售、生产和采购决策博弈自定合同，联动交付、采购与周生产",
+      "7天",
+      "14天",
+      "▶ 开始推演",
+      "恢复默认"
+    ],
+    "inputs": [
+      {
+        "tag": "SELECT",
+        "type": "select-one",
+        "placeholder": "",
+        "value": "果葡糖浆F55"
+      },
+      {
+        "tag": "SELECT",
+        "type": "select-one",
+        "placeholder": "",
+        "value": "客户C012"
+      },
+      {
+        "tag": "INPUT",
+        "type": "range",
+        "placeholder": "",
+        "value": "20"
+      },
+      {
+        "tag": "INPUT",
+        "type": "range",
+        "placeholder": "",
+        "value": "2"
+      }
+    ]
+  },
+  {
+    "id": "3-2-01",
+    "title": "成品库存优化-模块总览",
+    "action": "navigateInventory('overview')",
+    "filename": "图3-2-01_成品库存优化-模块总览.png",
+    "pageTitle": "成品库存优化",
+    "sectionTitles": [
+      "动态策略运行成效",
+      "成品库存水位",
+      "库存预警 5条未关闭",
+      "SKU库存监控明细",
+      "我的待办",
+      "未来28天库存趋势"
+    ],
+    "buttons": [
+      "刷新数据",
+      "操作记录",
+      "导出数据",
+      "查看并处置",
+      "查看并处置",
+      "查看并处置",
+      "查看并处置",
+      "查看并处置",
+      "查看详情",
+      "查看详情",
+      "查看详情",
+      "查看详情",
+      "查看详情",
+      "查看详情",
+      "查看详情",
+      "1待制定计划自动创建的计划草稿等待业务调整进入处理 ›",
+      "1待审批计划已确认并提交发布进入处理 ›",
+      "0异常调整任务重大变化影响策略和关联计划进入处理 ›",
+      "1健康报告本月评价草稿待确认进入处理 ›"
+    ],
+    "inputs": [
+      {
+        "tag": "SELECT",
+        "type": "select-one",
+        "placeholder": "",
+        "value": "FG-F55"
+      }
+    ]
+  },
+  {
+    "id": "3-2-02",
+    "title": "成品库存优化-库存策略",
+    "action": "navigateInventory('strategy')",
+    "filename": "图3-2-02_成品库存优化-库存策略.png",
+    "pageTitle": "库存策略",
+    "sectionTitles": [
+      "有效库存策略",
+      "策略分布",
+      "最近策略版本"
+    ],
+    "buttons": [
+      "刷新数据",
+      "操作记录",
+      "导出数据",
+      "＋ 配置策略",
+      "重置筛选",
+      "配置策略",
+      "计算详情",
+      "配置策略",
+      "计算详情",
+      "配置策略",
+      "计算详情",
+      "配置策略",
+      "计算详情",
+      "配置策略",
+      "计算详情",
+      "配置策略",
+      "计算详情",
+      "配置策略",
+      "计算详情"
+    ],
+    "inputs": [
+      {
+        "tag": "SELECT",
+        "type": "select-one",
+        "placeholder": "",
+        "value": "all"
+      },
+      {
+        "tag": "SELECT",
+        "type": "select-one",
+        "placeholder": "",
+        "value": "all"
+      },
+      {
+        "tag": "SELECT",
+        "type": "select-one",
+        "placeholder": "",
+        "value": "all"
+      }
+    ]
+  },
+  {
+    "id": "3-2-03",
+    "title": "成品库存优化-计划管理",
+    "action": "navigateInventory('plans')",
+    "filename": "图3-2-03_成品库存优化-计划管理.png",
+    "pageTitle": "计划管理",
+    "sectionTitles": [
+      "计划列表",
+      "上下游计划关系",
+      "自动创建任务"
+    ],
+    "buttons": [
+      "刷新数据",
+      "操作记录",
+      "导出数据",
+      "执行自动创建任务",
+      "＋ 人工创建计划",
+      "查询",
+      "查看明细",
+      "审批通过",
+      "审批退回",
+      "查看明细",
+      "制定计划",
+      "修改",
+      "删除",
+      "查看明细",
+      "查看明细",
+      "MP-202610-V1月计划 · 2026-10-01顶层计划",
+      "WP-20260926-V1周计划 · 2026-09-26上游 MP-202610-V1",
+      "DP-20260928-V1日计划 · 2026-09-28上游 WP-20260926-V1"
+    ],
+    "inputs": [
+      {
+        "tag": "SELECT",
+        "type": "select-one",
+        "placeholder": "",
+        "value": "all"
+      },
+      {
+        "tag": "SELECT",
+        "type": "select-one",
+        "placeholder": "",
+        "value": "全部状态"
+      },
+      {
+        "tag": "INPUT",
+        "type": "month",
+        "placeholder": "",
+        "value": "2026-10"
+      }
+    ]
+  },
+  {
+    "id": "3-2-03A",
+    "title": "成品库存优化-计划制定与审批发布工作区",
+    "action": "navigateInventory('plans');inv3OpenPlan('DP-20260929-D1')",
+    "filename": "图3-2-03A_成品库存优化-计划制定与审批发布工作区.png",
+    "pageTitle": "计划管理",
+    "sectionTitles": [
+      "果糖F55未来28天库存与补货",
+      "滚动计划状态",
+      "果糖F55未来28天逐日补货计划"
+    ],
+    "buttons": [
+      "刷新数据",
+      "操作记录",
+      "导出数据",
+      "← 返回计划列表",
+      "审批退回",
+      "审批通过并正式发布"
+    ],
+    "inputs": [
+      {
+        "tag": "SELECT",
+        "type": "select-one",
+        "placeholder": "",
+        "value": "FG-F55"
+      },
+      {
+        "tag": "TEXTAREA",
+        "type": "textarea",
+        "placeholder": "",
+        "value": "按动态库存策略逐日复核系统建议，锁定期外结合生产承接和日级容量结果调整。"
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "placeholder": "",
+        "value": "0"
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "placeholder": "",
+        "value": "0"
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "placeholder": "",
+        "value": "0"
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "placeholder": "",
+        "value": "0"
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "placeholder": "",
+        "value": "600"
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "placeholder": "",
+        "value": "0"
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "placeholder": "",
+        "value": "0"
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "placeholder": "",
+        "value": "0"
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "placeholder": "",
+        "value": "0"
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "placeholder": "",
+        "value": "600"
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "placeholder": "",
+        "value": "0"
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "placeholder": "",
+        "value": "600"
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "placeholder": "",
+        "value": "0"
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "placeholder": "",
+        "value": "900"
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "placeholder": "",
+        "value": "0"
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "placeholder": "",
+        "value": "600"
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "placeholder": "",
+        "value": "0"
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "placeholder": "",
+        "value": "600"
+      }
+    ]
+  },
+  {
+    "id": "3-2-04",
+    "title": "成品库存优化-策略异常调整",
+    "action": "navigateInventory('abnormal')",
+    "filename": "图3-2-04_成品库存优化-策略异常调整.png",
+    "pageTitle": "策略异常调整",
+    "sectionTitles": [
+      "登记重大业务变化",
+      "当前有效版本",
+      "调整任务"
+    ],
+    "buttons": [
+      "刷新数据",
+      "操作记录",
+      "导出数据",
+      "登记并生成影响评估",
+      "进入策略调整",
+      "进入月计划重制",
+      "进入周计划重制",
+      "进入日计划重制"
+    ],
+    "inputs": [
+      {
+        "tag": "SELECT",
+        "type": "select-one",
+        "placeholder": "",
+        "value": "果糖F55需求计划上调20%"
+      },
+      {
+        "tag": "SELECT",
+        "type": "select-one",
+        "placeholder": "",
+        "value": "FG-F55"
+      },
+      {
+        "tag": "INPUT",
+        "type": "date",
+        "placeholder": "",
+        "value": "2026-10-01"
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "placeholder": "",
+        "value": "14"
+      },
+      {
+        "tag": "TEXTAREA",
+        "type": "textarea",
+        "placeholder": "",
+        "value": "大客户促销活动导致需求计划显著上调，需要重新校验库存策略和关联计划。"
+      }
+    ]
+  },
+  {
+    "id": "3-2-05",
+    "title": "成品库存优化-库存健康度",
+    "action": "navigateInventory('health')",
+    "filename": "图3-2-05_成品库存优化-库存健康度.png",
+    "pageTitle": "库存健康度",
+    "sectionTitles": [
+      "2026年9月库存健康度评价",
+      "库存健康度分布",
+      "历史报告"
+    ],
+    "buttons": [
+      "刷新数据",
+      "操作记录",
+      "导出数据",
+      "保存草稿",
+      "确认评价结果",
+      "查看",
+      "查看"
+    ],
+    "inputs": [
+      {
+        "tag": "SELECT",
+        "type": "select-one",
+        "placeholder": "",
+        "value": "容量限制"
+      },
+      {
+        "tag": "TEXTAREA",
+        "type": "textarea",
+        "placeholder": "",
+        "value": "保持服务水平，优化共享罐补充时窗"
+      },
+      {
+        "tag": "SELECT",
+        "type": "select-one",
+        "placeholder": "",
+        "value": "进入下月策略"
+      },
+      {
+        "tag": "SELECT",
+        "type": "select-one",
+        "placeholder": "",
+        "value": "需求变化"
+      },
+      {
+        "tag": "TEXTAREA",
+        "type": "textarea",
+        "placeholder": "",
+        "value": "保持98%服务水平并跟踪需求波动"
+      },
+      {
+        "tag": "SELECT",
+        "type": "select-one",
+        "placeholder": "",
+        "value": "继续观察"
+      },
+      {
+        "tag": "SELECT",
+        "type": "select-one",
+        "placeholder": "",
+        "value": "容量限制"
+      },
+      {
+        "tag": "TEXTAREA",
+        "type": "textarea",
+        "placeholder": "",
+        "value": "保持产品级周期配置并调整共享库容时窗"
+      },
+      {
+        "tag": "SELECT",
+        "type": "select-one",
+        "placeholder": "",
+        "value": "进入下月策略"
+      },
+      {
+        "tag": "SELECT",
+        "type": "select-one",
+        "placeholder": "",
+        "value": "参数设置"
+      },
+      {
+        "tag": "TEXTAREA",
+        "type": "textarea",
+        "placeholder": "",
+        "value": "保持分类参数"
+      },
+      {
+        "tag": "SELECT",
+        "type": "select-one",
+        "placeholder": "",
+        "value": "继续观察"
+      },
+      {
+        "tag": "SELECT",
+        "type": "select-one",
+        "placeholder": "",
+        "value": "参数设置"
+      },
+      {
+        "tag": "TEXTAREA",
+        "type": "textarea",
+        "placeholder": "",
+        "value": "保持当前配置"
+      },
+      {
+        "tag": "SELECT",
+        "type": "select-one",
+        "placeholder": "",
+        "value": "继续观察"
+      },
+      {
+        "tag": "SELECT",
+        "type": "select-one",
+        "placeholder": "",
+        "value": "参数设置"
+      },
+      {
+        "tag": "TEXTAREA",
+        "type": "textarea",
+        "placeholder": "",
+        "value": "评估改为产品级动态策略"
+      },
+      {
+        "tag": "SELECT",
+        "type": "select-one",
+        "placeholder": "",
+        "value": "进入下月策略"
+      },
+      {
+        "tag": "SELECT",
+        "type": "select-one",
+        "placeholder": "",
+        "value": "需求变化"
+      },
+      {
+        "tag": "TEXTAREA",
+        "type": "textarea",
+        "placeholder": "",
+        "value": "评估动态策略并继续监控历史波动可靠性"
+      }
+    ]
+  },
+  {
+    "id": "3-3-01",
+    "title": "原料采购优化-采购优化总览",
+    "action": "navigateProcurement('orderplan')",
+    "filename": "图3-3-01_原料采购优化-采购优化总览.png",
+    "pageTitle": "采购优化总览",
+    "sectionTitles": [],
+    "buttons": [
+      "从 SAP 刷新订单",
+      "重新计算采购方案",
+      "新增同行工厂",
+      "删除",
+      "删除",
+      "删除"
+    ],
+    "inputs": [
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "placeholder": "",
+        "value": "3198"
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "placeholder": "",
+        "value": "1000"
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "placeholder": "",
+        "value": "3224"
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "placeholder": "",
+        "value": "850"
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "placeholder": "",
+        "value": "3174"
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "placeholder": "",
+        "value": "750"
+      },
+      {
+        "tag": "INPUT",
+        "type": "text",
+        "placeholder": "",
+        "value": "益海嘉里（周口）工厂"
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "placeholder": "",
+        "value": "3210"
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "placeholder": "",
+        "value": "1200"
+      },
+      {
+        "tag": "INPUT",
+        "type": "text",
+        "placeholder": "",
+        "value": "诸城兴贸淀粉糖工厂"
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "placeholder": "",
+        "value": "3186"
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "placeholder": "",
+        "value": "900"
+      },
+      {
+        "tag": "INPUT",
+        "type": "text",
+        "placeholder": "",
+        "value": "寿光巨能金玉米工厂"
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "placeholder": "",
+        "value": "3232"
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "placeholder": "",
+        "value": "700"
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "placeholder": "",
+        "value": "3204"
+      }
+    ]
+  },
+  {
+    "id": "3-3-02",
+    "title": "原料采购优化-供应商资料库",
+    "action": "navigateProcurement('suppliers')",
+    "filename": "图3-3-02_原料采购优化-供应商资料库.png",
+    "pageTitle": "供应商资料库",
+    "sectionTitles": [],
+    "buttons": [
+      "导出供应商清单",
+      "准入标准配置",
+      "新增供应商",
+      "查看画像",
+      "编辑",
+      "查看画像",
+      "编辑",
+      "查看画像",
+      "编辑",
+      "查看画像",
+      "编辑",
+      "查看画像",
+      "编辑",
+      "查看画像",
+      "编辑",
+      "查看画像",
+      "编辑",
+      "查看画像",
+      "编辑",
+      "查看画像",
+      "编辑",
+      "查看画像",
+      "编辑",
+      "查看画像",
+      "编辑",
+      "查看画像",
+      "编辑",
+      "查看画像",
+      "编辑",
+      "查看画像"
+    ],
+    "inputs": [
+      {
+        "tag": "INPUT",
+        "type": "text",
+        "placeholder": "名称、编码或区域",
+        "value": ""
+      },
+      {
+        "tag": "SELECT",
+        "type": "select-one",
+        "placeholder": "",
+        "value": "全部"
+      }
+    ]
+  },
+  {
+    "id": "3-3-03",
+    "title": "原料采购优化-大宗原料价格预测提报",
+    "action": "navigateProcurement('forecast')",
+    "filename": "图3-3-03_原料采购优化-大宗原料价格预测提报.png",
+    "pageTitle": "大宗原料价格预测提报",
+    "sectionTitles": [],
+    "buttons": [
+      "刷新",
+      "新建价格预测",
+      "查看",
+      "查看",
+      "查看",
+      "编辑",
+      "删除"
+    ],
+    "inputs": [
+      {
+        "tag": "SELECT",
+        "type": "select-one",
+        "placeholder": "",
+        "value": "全部"
+      }
+    ]
+  },
+  {
+    "id": "3-3-04",
+    "title": "原料采购优化-采购方案管理",
+    "action": "navigateProcurement('plans')",
+    "filename": "图3-3-04_原料采购优化-采购方案管理.png",
+    "pageTitle": "玉米淀粉采购方案管理",
+    "sectionTitles": [
+      "玉米淀粉原料保障能力",
+      "采购方案"
+    ],
+    "buttons": [
+      "刷新",
+      "新建采购方案",
+      "继续制定",
+      "删除",
+      "查看",
+      "查看"
+    ],
+    "inputs": []
+  },
+  {
+    "id": "3-3-04A",
+    "title": "原料采购优化-五步制定工作台-供应商选择",
+    "action": "navigateProcurement('plans');proc2OpenPlan('PUR-202610-D1')",
+    "filename": "图3-3-04A_原料采购优化-五步制定工作台-供应商选择.png",
+    "pageTitle": "玉米淀粉采购方案管理",
+    "sectionTitles": [
+      "当期供应商候选池"
+    ],
+    "buttons": [
+      "返回方案列表",
+      "保存草稿",
+      "1当期供应商选择",
+      "2评价与准入预警",
+      "3当期供应商报价",
+      "4采购优化",
+      "5协同确认与发布",
+      "全选可准入",
+      "清空选择",
+      "维护",
+      "维护",
+      "维护",
+      "维护",
+      "维护",
+      "维护",
+      "维护",
+      "维护",
+      "维护",
+      "维护",
+      "维护",
+      "维护",
+      "维护",
+      "维护",
+      "维护",
+      "维护",
+      "维护",
+      "维护",
+      "维护",
+      "维护",
+      "维护"
+    ],
+    "inputs": [
+      {
+        "tag": "INPUT",
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on"
+      },
+      {
+        "tag": "INPUT",
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on"
+      },
+      {
+        "tag": "INPUT",
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on"
+      },
+      {
+        "tag": "INPUT",
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on"
+      },
+      {
+        "tag": "INPUT",
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on"
+      },
+      {
+        "tag": "INPUT",
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on"
+      },
+      {
+        "tag": "INPUT",
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on"
+      },
+      {
+        "tag": "INPUT",
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on"
+      },
+      {
+        "tag": "INPUT",
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on"
+      },
+      {
+        "tag": "INPUT",
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on"
+      },
+      {
+        "tag": "INPUT",
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on"
+      },
+      {
+        "tag": "INPUT",
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on"
+      },
+      {
+        "tag": "INPUT",
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on"
+      },
+      {
+        "tag": "INPUT",
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on"
+      },
+      {
+        "tag": "INPUT",
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on"
+      },
+      {
+        "tag": "INPUT",
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on"
+      },
+      {
+        "tag": "INPUT",
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on"
+      },
+      {
+        "tag": "INPUT",
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on"
+      },
+      {
+        "tag": "INPUT",
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on"
+      },
+      {
+        "tag": "INPUT",
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on"
+      }
+    ]
+  },
+  {
+    "id": "3-3-04B",
+    "title": "原料采购优化-五步制定工作台-采购优化",
+    "action": "proc2AdvancePlan(4)",
+    "filename": "图3-3-04B_原料采购优化-五步制定工作台-采购优化.png",
+    "pageTitle": "玉米淀粉采购方案管理",
+    "sectionTitles": [
+      "玉米淀粉历史价格及同环比价格对比",
+      "定性趋势判断",
+      "已发布预测提报",
+      "采购优化参数",
+      "MILP 求解状态",
+      "推荐采购方案"
+    ],
+    "buttons": [
+      "返回方案列表",
+      "保存草稿",
+      "✓当期供应商选择",
+      "✓评价与准入预警",
+      "✓当期供应商报价",
+      "4采购优化",
+      "5协同确认与发布",
+      "2027年02月↗温和上涨春节前备货启动，阶段性需求增强判断把握：高",
+      "2027年03月→轻微平稳节后需求回归常态，供需进入平衡判断把握：中",
+      "2027年04月↘温和回落原粮到货改善，供应压力逐步缓解判断把握：中",
+      "直接维护价格 已发布PF-202610-P012026年10月—2026年11月 · 王宁 · 09-29 10:123,198–3,220 元/吨",
+      "维护涨跌幅度 已发布PF-202612-C012026年12月—2027年01月 · 赵敏 · 09-29 14:05累计 -0.2% · 折算 3,213.5 元/吨",
+      "仅维护趋势 已发布PF-202702-T012027年02月—2027年04月 · 王宁 · 09-30 09:10↑温和上升 → →轻微平稳 → ↓温和下降",
+      "运行采购优化",
+      "查看模型",
+      "选择此方案",
+      "选择此方案",
+      "返回报价",
+      "确认所选方案并进入协同"
+    ],
+    "inputs": [
+      {
+        "tag": "INPUT",
+        "type": "text",
+        "placeholder": "",
+        "value": "10300"
+      },
+      {
+        "tag": "INPUT",
+        "type": "text",
+        "placeholder": "",
+        "value": "10300"
+      },
+      {
+        "tag": "INPUT",
+        "type": "text",
+        "placeholder": "",
+        "value": "10300"
+      },
+      {
+        "tag": "INPUT",
+        "type": "text",
+        "placeholder": "",
+        "value": "3"
+      },
+      {
+        "tag": "INPUT",
+        "type": "text",
+        "placeholder": "",
+        "value": "10"
+      },
+      {
+        "tag": "INPUT",
+        "type": "text",
+        "placeholder": "",
+        "value": "45"
+      },
+      {
+        "tag": "INPUT",
+        "type": "text",
+        "placeholder": "",
+        "value": "3.8"
+      },
+      {
+        "tag": "INPUT",
+        "type": "text",
+        "placeholder": "",
+        "value": "3"
+      },
+      {
+        "tag": "INPUT",
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on"
+      },
+      {
+        "tag": "INPUT",
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on"
+      },
+      {
+        "tag": "INPUT",
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on"
+      },
+      {
+        "tag": "INPUT",
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on"
+      },
+      {
+        "tag": "INPUT",
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on"
+      },
+      {
+        "tag": "INPUT",
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on"
+      },
+      {
+        "tag": "INPUT",
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on"
+      },
+      {
+        "tag": "INPUT",
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on"
+      },
+      {
+        "tag": "INPUT",
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on"
+      }
+    ]
+  },
+  {
+    "id": "3-3-05",
+    "title": "原料采购优化-采购方案滚动调整",
+    "action": "navigateProcurement('rolling')",
+    "filename": "图3-3-05_原料采购优化-采购方案滚动调整.png",
+    "pageTitle": "采购方案滚动调整",
+    "sectionTitles": [
+      "调整原因与数量边界",
+      "调整范围构成",
+      "滚动调整承接建议"
+    ],
+    "buttons": [
+      "查看执行状态",
+      "运行影响评估"
+    ],
+    "inputs": []
+  },
+  {
+    "id": "3-3-06",
+    "title": "原料采购优化-采购方案执行追踪",
+    "action": "navigateProcurement('execution')",
+    "filename": "图3-3-06_原料采购优化-采购方案执行追踪.png",
+    "pageTitle": "采购方案执行追踪",
+    "sectionTitles": [
+      "订单执行进度",
+      "执行预警"
+    ],
+    "buttons": [
+      "评估滚动调整",
+      "刷新执行状态",
+      "纳入滚动调整",
+      "查看订单详情",
+      "查看订单详情",
+      "查看详情",
+      "查看详情",
+      "查看详情",
+      "查看详情"
+    ],
+    "inputs": [
+      {
+        "tag": "SELECT",
+        "type": "select-one",
+        "placeholder": "",
+        "value": "全部"
+      }
+    ]
+  },
+  {
+    "id": "3-4-01",
+    "title": "原辅包要货计划-要货计划总览",
+    "action": "navigateRequisition('overview')",
+    "filename": "图3-4-01_原辅包要货计划-要货计划总览.png",
+    "pageTitle": "原辅包要货计划",
+    "sectionTitles": [
+      "未来14天库存与到货",
+      "待处理事项",
+      "今日到货与执行",
+      "最近操作记录"
+    ],
+    "buttons": [
+      "刷新",
+      "进入今日计划",
+      "查看全部",
+      "处理",
+      "处理",
+      "处理"
+    ],
+    "inputs": []
+  },
+  {
+    "id": "3-4-02",
+    "title": "原辅包要货计划-基础条件与顺序",
+    "action": "navigateRequisition('conditions')",
+    "filename": "图3-4-02_原辅包要货计划-基础条件与顺序.png",
+    "pageTitle": "基础条件与供应商顺序",
+    "sectionTitles": [
+      "有效合同与送货条件"
+    ],
+    "buttons": [
+      "恢复默认顺序",
+      "确认并发布条件版本",
+      "↑",
+      "↓",
+      "↑",
+      "↓",
+      "↑",
+      "↓",
+      "↑",
+      "↓",
+      "↑",
+      "↓"
+    ],
+    "inputs": [
+      {
+        "tag": "INPUT",
+        "type": "text",
+        "placeholder": "",
+        "value": "黑龙江厂库"
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "placeholder": "",
+        "value": "2"
+      },
+      {
+        "tag": "INPUT",
+        "type": "date",
+        "placeholder": "",
+        "value": "2026-10-01"
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "placeholder": "",
+        "value": "300"
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "placeholder": "",
+        "value": "800"
+      },
+      {
+        "tag": "INPUT",
+        "type": "text",
+        "placeholder": "",
+        "value": "黑龙江厂库"
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "placeholder": "",
+        "value": "3"
+      },
+      {
+        "tag": "INPUT",
+        "type": "date",
+        "placeholder": "",
+        "value": "2026-10-02"
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "placeholder": "",
+        "value": "300"
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "placeholder": "",
+        "value": "700"
+      },
+      {
+        "tag": "INPUT",
+        "type": "text",
+        "placeholder": "",
+        "value": "黑龙江厂库"
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "placeholder": "",
+        "value": "4"
+      },
+      {
+        "tag": "INPUT",
+        "type": "date",
+        "placeholder": "",
+        "value": "2026-10-04"
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "placeholder": "",
+        "value": "250"
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "placeholder": "",
+        "value": "650"
+      },
+      {
+        "tag": "INPUT",
+        "type": "text",
+        "placeholder": "",
+        "value": "内蒙古厂库"
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "placeholder": "",
+        "value": "2"
+      },
+      {
+        "tag": "INPUT",
+        "type": "date",
+        "placeholder": "",
+        "value": "2026-10-01"
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "placeholder": "",
+        "value": "200"
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "placeholder": "",
+        "value": "600"
+      }
+    ]
+  },
+  {
+    "id": "3-4-03",
+    "title": "原辅包要货计划-日度要货计划",
+    "action": "navigateRequisition('planning')",
+    "filename": "图3-4-03_原辅包要货计划-日度要货计划.png",
+    "pageTitle": "日度要货计划",
+    "sectionTitles": [
+      "未来28天库存投影",
+      "计划校验",
+      "推荐到货明细"
+    ],
+    "buttons": [
+      "查看优化模型",
+      "重新生成系统方案",
+      "确认并发布",
+      "调整",
+      "移除",
+      "调整",
+      "移除",
+      "调整",
+      "移除",
+      "调整",
+      "移除",
+      "调整",
+      "移除",
+      "调整",
+      "移除",
+      "调整",
+      "移除",
+      "调整",
+      "移除",
+      "调整",
+      "移除",
+      "调整",
+      "移除",
+      "调整",
+      "移除",
+      "调整",
+      "移除",
+      "调整",
+      "移除",
+      "调整"
+    ],
+    "inputs": [
+      {
+        "tag": "SELECT",
+        "type": "select-one",
+        "placeholder": "",
+        "value": "RM-CS-001"
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "placeholder": "",
+        "value": "1950"
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "placeholder": "",
+        "value": "2"
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "placeholder": "",
+        "value": "180"
+      },
+      {
+        "tag": "INPUT",
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on"
+      },
+      {
+        "tag": "INPUT",
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on"
+      },
+      {
+        "tag": "INPUT",
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on"
+      },
+      {
+        "tag": "INPUT",
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on"
+      },
+      {
+        "tag": "INPUT",
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on"
+      },
+      {
+        "tag": "INPUT",
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on"
+      },
+      {
+        "tag": "INPUT",
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on"
+      },
+      {
+        "tag": "INPUT",
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on"
+      },
+      {
+        "tag": "INPUT",
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on"
+      },
+      {
+        "tag": "INPUT",
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on"
+      },
+      {
+        "tag": "INPUT",
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on"
+      },
+      {
+        "tag": "INPUT",
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on"
+      },
+      {
+        "tag": "INPUT",
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on"
+      },
+      {
+        "tag": "INPUT",
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on"
+      },
+      {
+        "tag": "INPUT",
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on"
+      },
+      {
+        "tag": "INPUT",
+        "type": "checkbox",
+        "placeholder": "",
+        "value": "on"
+      }
+    ]
+  },
+  {
+    "id": "3-4-04",
+    "title": "原辅包要货计划-下达与执行跟踪",
+    "action": "navigateRequisition('execution')",
+    "filename": "图3-4-04_原辅包要货计划-下达与执行跟踪.png",
+    "pageTitle": "下达与执行跟踪",
+    "sectionTitles": [
+      "要货执行进度"
+    ],
+    "buttons": [
+      "刷新执行状态",
+      "下达已确认计划",
+      "查看",
+      "查看",
+      "查看",
+      "查看",
+      "查看"
+    ],
+    "inputs": []
+  },
+  {
+    "id": "3-4-05",
+    "title": "原辅包要货计划-滚动调整",
+    "action": "navigateRequisition('rolling')",
+    "filename": "图3-4-05_原辅包要货计划-滚动调整.png",
+    "pageTitle": "要货计划滚动调整",
+    "sectionTitles": [
+      "最新业务变化",
+      "固定与可调整范围"
+    ],
+    "buttons": [
+      "恢复当前版本",
+      "运行影响评估与重算"
+    ],
+    "inputs": []
+  },
+  {
+    "id": "3-4-06",
+    "title": "原辅包要货计划-缺口与异常协调",
+    "action": "navigateRequisition('exceptions')",
+    "filename": "图3-4-06_原辅包要货计划-缺口与异常协调.png",
+    "pageTitle": "缺口与异常协调",
+    "sectionTitles": [],
+    "buttons": [
+      "重新识别风险",
+      "协调处理",
+      "协调处理",
+      "协调处理"
+    ],
+    "inputs": []
+  },
+  {
+    "id": "3-4-07",
+    "title": "原辅包要货计划-供应商禁运管理",
+    "action": "navigateRequisition('embargo')",
+    "filename": "图3-4-07_原辅包要货计划-供应商禁运管理.png",
+    "pageTitle": "供应商禁运管理",
+    "sectionTitles": [],
+    "buttons": [
+      "新建禁运或解除申请",
+      "查看",
+      "查看"
+    ],
+    "inputs": []
+  },
+  {
+    "id": "3-5-01",
+    "title": "成本分摊核算分析-批次和批次谱系管理",
+    "action": "navigateCosting('lineage')",
+    "filename": "图3-5-01_成本分摊核算分析-批次和批次谱系管理.png",
+    "pageTitle": "",
+    "sectionTitles": [],
+    "buttons": [
+      "查看划分规则",
+      "查看本期生成记录",
+      "当月批次台账",
+      "上下游关系台账",
+      "多对多谱系图",
+      "查询",
+      "重置",
+      "260810-001-DZJYM",
+      "完整链路",
+      "260810-002-DZJYM",
+      "完整链路",
+      "260810-003-DZJYM",
+      "完整链路",
+      "260810-004-DZJYM",
+      "完整链路",
+      "260810-005-DZJYM",
+      "完整链路",
+      "260811-006-DZJYM",
+      "完整链路",
+      "260811-007-DZJYM",
+      "完整链路",
+      "260811-008-DZJYM",
+      "完整链路",
+      "260811-009-DZJYM",
+      "完整链路",
+      "260811-010-DZJYM",
+      "完整链路",
+      "260812-012-DZJYM",
+      "完整链路",
+      "260812-013-DZJYM"
+    ],
+    "inputs": [
+      {
+        "tag": "SELECT",
+        "type": "select-one",
+        "placeholder": "",
+        "value": ""
+      },
+      {
+        "tag": "SELECT",
+        "type": "select-one",
+        "placeholder": "",
+        "value": ""
+      },
+      {
+        "tag": "SELECT",
+        "type": "select-one",
+        "placeholder": "",
+        "value": ""
+      },
+      {
+        "tag": "SELECT",
+        "type": "select-one",
+        "placeholder": "",
+        "value": ""
+      },
+      {
+        "tag": "SELECT",
+        "type": "select-one",
+        "placeholder": "",
+        "value": ""
+      },
+      {
+        "tag": "INPUT",
+        "type": "text",
+        "placeholder": "例：260810-TH03-001",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "3-5-01A",
+    "title": "成本分摊核算分析-多对多谱系图",
+    "action": "lv3SetView('graph')",
+    "filename": "图3-5-01A_成本分摊核算分析-多对多谱系图.png",
+    "pageTitle": "",
+    "sectionTitles": [],
+    "buttons": [
+      "查看划分规则",
+      "查看本期生成记录",
+      "当月批次台账",
+      "上下游关系台账",
+      "多对多谱系图",
+      "查询完整链路",
+      "查看批次明细",
+      "查看相关关系"
+    ],
+    "inputs": [
+      {
+        "tag": "INPUT",
+        "type": "text",
+        "placeholder": "输入或选择任一样例批次",
+        "value": "260813-F01-01"
+      }
+    ]
+  },
+  {
+    "id": "3-5-02",
+    "title": "成本分摊核算分析-批次成本管理",
+    "action": "navigateCosting('batch')",
+    "filename": "图3-5-02_成本分摊核算分析-批次成本管理.png",
+    "pageTitle": "",
+    "sectionTitles": [],
+    "buttons": [
+      "刷新",
+      "导出",
+      "批次直接成本",
+      "费用池管理",
+      "批次成本",
+      "成本异常预警",
+      "成本差异分析与追溯",
+      "成本计算规则引擎",
+      "筛选",
+      "查询",
+      "20260812-F42-0100",
+      "20260812-F42-0900",
+      "20260812-F42-1700",
+      "20260813-F42-0100",
+      "20260813-F42-0900",
+      "20260813-F42-1700",
+      "20260814-F42-0100",
+      "20260814-F42-0900",
+      "20260812-H-1500",
+      "20260812-H-2100",
+      "20260813-H-0300",
+      "20260813-H-0900",
+      "20260813-H-1500",
+      "20260813-H-2100",
+      "20260814-H-0300",
+      "20260814-H-0900",
+      "20260814-H-1500",
+      "20260814-H-2100",
+      "20260815-H-0300",
+      "260812-Q01-01"
+    ],
+    "inputs": [
+      {
+        "tag": "SELECT",
+        "type": "select-one",
+        "placeholder": "",
+        "value": ""
+      },
+      {
+        "tag": "INPUT",
+        "type": "text",
+        "placeholder": "批次号/物料",
+        "value": ""
+      },
+      {
+        "tag": "SELECT",
+        "type": "select-one",
+        "placeholder": "",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "3-5-02A",
+    "title": "成本分摊核算分析-费用池管理",
+    "action": "costBatchTab('pools')",
+    "filename": "图3-5-02A_成本分摊核算分析-费用池管理.png",
+    "pageTitle": "",
+    "sectionTitles": [],
+    "buttons": [
+      "刷新",
+      "导出",
+      "批次直接成本",
+      "费用池管理",
+      "批次成本",
+      "成本异常预警",
+      "成本差异分析与追溯",
+      "成本计算规则引擎",
+      "查询",
+      "20260812-F42-0100",
+      "20260812-F42-0900",
+      "20260812-F42-1700",
+      "20260813-F42-0100",
+      "20260813-F42-0900",
+      "20260813-F42-1700",
+      "20260814-F42-0100",
+      "20260814-F42-0900",
+      "20260812-H-1500",
+      "20260812-H-2100",
+      "20260813-H-0300",
+      "20260813-H-0900",
+      "20260813-H-1500",
+      "20260813-H-2100",
+      "20260814-H-0300",
+      "20260814-H-0900",
+      "20260814-H-1500",
+      "20260814-H-2100",
+      "20260815-H-0300",
+      "260812-Q01-01",
+      "260812-Q02-01"
+    ],
+    "inputs": [
+      {
+        "tag": "INPUT",
+        "type": "text",
+        "placeholder": "费用池/成本名称",
+        "value": ""
+      },
+      {
+        "tag": "SELECT",
+        "type": "select-one",
+        "placeholder": "",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "3-5-02B",
+    "title": "成本分摊核算分析-成本异常预警",
+    "action": "costBatchTab('alerts')",
+    "filename": "图3-5-02B_成本分摊核算分析-成本异常预警.png",
+    "pageTitle": "",
+    "sectionTitles": [],
+    "buttons": [
+      "刷新",
+      "导出",
+      "批次直接成本",
+      "费用池管理",
+      "批次成本",
+      "成本异常预警",
+      "成本差异分析与追溯",
+      "成本计算规则引擎",
+      "查询",
+      "260815-Q01-10",
+      "260815-Q05-09",
+      "20260814-F90-2100",
+      "260816-F06-01",
+      "260812-Q01-01",
+      "查看批次成本",
+      "确认异常",
+      "标记非异常"
+    ],
+    "inputs": [
+      {
+        "tag": "INPUT",
+        "type": "text",
+        "placeholder": "批次/物料/原因",
+        "value": ""
+      },
+      {
+        "tag": "SELECT",
+        "type": "select-one",
+        "placeholder": "",
+        "value": ""
+      },
+      {
+        "tag": "TEXTAREA",
+        "type": "textarea",
+        "placeholder": "",
+        "value": "请复核批次数量、费用池动因与上游成本传导，确认是否属于真实业务异常。"
+      }
+    ]
+  },
+  {
+    "id": "3-5-02C",
+    "title": "成本分摊核算分析-成本差异分析与追溯",
+    "action": "costBatchTab('variance')",
+    "filename": "图3-5-02C_成本分摊核算分析-成本差异分析与追溯.png",
+    "pageTitle": "",
+    "sectionTitles": [],
+    "buttons": [
+      "刷新",
+      "导出",
+      "批次直接成本",
+      "费用池管理",
+      "批次成本",
+      "成本异常预警",
+      "成本差异分析与追溯",
+      "成本计算规则引擎",
+      "查询",
+      "260815-Q01-10",
+      "260815-Q05-09",
+      "20260814-F90-2100",
+      "260816-F06-01",
+      "260812-Q01-01",
+      "查看批次成本"
+    ],
+    "inputs": [
+      {
+        "tag": "INPUT",
+        "type": "text",
+        "placeholder": "批次/物料/原因",
+        "value": ""
+      },
+      {
+        "tag": "SELECT",
+        "type": "select-one",
+        "placeholder": "",
+        "value": "large"
+      }
+    ]
+  },
+  {
+    "id": "3-5-02D",
+    "title": "成本分摊核算分析-成本计算规则引擎",
+    "action": "costBatchTab('rules')",
+    "filename": "图3-5-02D_成本分摊核算分析-成本计算规则引擎.png",
+    "pageTitle": "",
+    "sectionTitles": [],
+    "buttons": [
+      "刷新",
+      "导出",
+      "批次直接成本",
+      "费用池管理",
+      "批次成本",
+      "成本异常预警",
+      "成本差异分析与追溯",
+      "成本计算规则引擎",
+      "全部规则13条查看四类引擎",
+      "批次划分3条DIV-202608-V3",
+      "批次关联3条REL-202608-V4",
+      "批次直接成本计算3条DIR-202608-V4",
+      "费用池分摊4条POOL-202608-V4",
+      "查询",
+      "立即全量自查",
+      "DIV-001",
+      "DIV-002",
+      "DIV-003",
+      "REL-001",
+      "REL-002",
+      "REL-003",
+      "DIR-001",
+      "DIR-002",
+      "DIR-003",
+      "POOL-001",
+      "POOL-002",
+      "POOL-003",
+      "POOL-004",
+      "执行逻辑",
+      "公式与参数"
+    ],
+    "inputs": [
+      {
+        "tag": "INPUT",
+        "type": "text",
+        "placeholder": "规则/引擎/逻辑",
+        "value": ""
+      },
+      {
+        "tag": "TEXTAREA",
+        "type": "textarea",
+        "placeholder": "",
+        "value": "已核对当前规则版本、业务口径、源数据与本期运行结果。"
+      }
+    ]
+  },
+  {
+    "id": "3-5-03",
+    "title": "成本分摊核算分析-多维度成本和盈利分析",
+    "action": "navigateCosting('multidim')",
+    "filename": "图3-5-03_成本分摊核算分析-多维度成本和盈利分析.png",
+    "pageTitle": "",
+    "sectionTitles": [],
+    "buttons": [
+      "查看对账",
+      "应用筛选",
+      "导出",
+      "逐级下钻",
+      "逐级下钻",
+      "逐级下钻",
+      "逐级下钻",
+      "逐级下钻",
+      "逐级下钻",
+      "MO-2608-F55-01",
+      "MO-2608-F55-02",
+      "MO-2608-F55-03",
+      "MO-2608-F55-04",
+      "MO-2608-F55-05",
+      "MO-2608-F55-06",
+      "MO-2608-MM-01",
+      "MO-2608-ML-01",
+      "MO-2608-MH-01",
+      "SO-2608-001",
+      "SO-2608-002",
+      "SO-2608-003",
+      "SO-2608-004"
+    ],
+    "inputs": [
+      {
+        "tag": "INPUT",
+        "type": "date",
+        "placeholder": "",
+        "value": "2026-08-01"
+      },
+      {
+        "tag": "INPUT",
+        "type": "date",
+        "placeholder": "",
+        "value": "2026-08-31"
+      },
+      {
+        "tag": "SELECT",
+        "type": "select-one",
+        "placeholder": "",
+        "value": "customer"
+      },
+      {
+        "tag": "SELECT",
+        "type": "select-one",
+        "placeholder": "",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "3-5-04",
+    "title": "成本分摊核算分析-管理决策分析",
+    "action": "navigateCosting('management')",
+    "filename": "图3-5-04_成本分摊核算分析-管理决策分析.png",
+    "pageTitle": "",
+    "sectionTitles": [],
+    "buttons": [
+      "导出管理简报",
+      "应用分析",
+      "查看资金明细",
+      "查看明细",
+      "查看与下钻",
+      "查看与下钻",
+      "查看与下钻"
+    ],
+    "inputs": [
+      {
+        "tag": "SELECT",
+        "type": "select-one",
+        "placeholder": "",
+        "value": "2026-08"
+      },
+      {
+        "tag": "SELECT",
+        "type": "select-one",
+        "placeholder": "",
+        "value": "budget"
+      }
+    ]
+  }
+]

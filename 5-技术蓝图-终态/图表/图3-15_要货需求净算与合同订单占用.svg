@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1000" viewBox="0 0 1800 1000">
+<defs><filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#143E66" flood-opacity="0.12"/></filter><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#6E8295"/></marker></defs>
+<rect width="1800" height="1000" fill="#FFFFFF"/>
+<rect x="0" y="0" width="1800" height="112" rx="0" fill="#143E66" stroke="#143E66" stroke-width="2"/>
+<text x="70" y="70" font-family="STHeiti, PingFang SC, sans-serif" font-size="38" font-weight="700" fill="#FFFFFF" text-anchor="start">要货需求净算与合同/订单占用</text>
+<text x="70" y="99" font-family="STHeiti, PingFang SC, sans-serif" font-size="19" font-weight="400" fill="#D7E7F5" text-anchor="start">先扣除可用库存、固定到货和有效在途，再在可用合同/订单余量内安排</text>
+<text x="1655" y="80" font-family="STHeiti, PingFang SC, sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" text-anchor="middle">SCOS</text>
+<line x1="70" y1="135" x2="1730" y2="135" stroke="#B9C7D4" stroke-width="2"/>
+<rect x="100" y="260" width="300" height="105" rx="18" fill="#F5F8FB" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="100" y="260" width="12" height="105" rx="6" fill="#1F6FB2" stroke="#1F6FB2" stroke-width="2"/>
+<text x="256.0" y="309" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">生产物料需求</text>
+<text x="256.0" y="348" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">外部生产计划 / MES 提供</text>
+<rect x="100" y="445" width="300" height="105" rx="18" fill="#F5F8FB" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="100" y="445" width="12" height="105" rx="6" fill="#0B8F87" stroke="#0B8F87" stroke-width="2"/>
+<text x="256.0" y="494" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">保障与锁定</text>
+<text x="256.0" y="533" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">安全保障量 · 已锁定需求</text>
+<line x1="400" y1="312" x2="590" y2="405" stroke="#6E8295" stroke-width="4" marker-end="url(#arrow)"/>
+<line x1="400" y1="497" x2="590" y2="405" stroke="#6E8295" stroke-width="4" marker-end="url(#arrow)"/>
+<rect x="590" y="335" width="360" height="140" rx="18" fill="#FFFFFF" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="590" y="335" width="12" height="140" rx="6" fill="#46A35B" stroke="#46A35B" stroke-width="2"/>
+<text x="776.0" y="384" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">累计需求</text>
+<text x="776.0" y="423" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">汇总需求、保障量及各类扣减项</text>
+<rect x="100" y="650" width="300" height="105" rx="18" fill="#F5F8FB" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="100" y="650" width="12" height="105" rx="6" fill="#E98A32" stroke="#E98A32" stroke-width="2"/>
+<text x="256.0" y="699" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">库存与在途</text>
+<text x="256.0" y="738" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">可用库存 · 已下达 · 已发货</text>
+<line x1="400" y1="702" x2="770" y2="475" stroke="#6E8295" stroke-width="4" marker-end="url(#arrow)"/>
+<line x1="950" y1="405" x2="1120" y2="405" stroke="#6E8295" stroke-width="4" marker-end="url(#arrow)"/>
+<rect x="1120" y="335" width="300" height="140" rx="18" fill="#FFFFFF" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="1120" y="335" width="12" height="140" rx="6" fill="#C94F55" stroke="#C94F55" stroke-width="2"/>
+<text x="1276.0" y="384" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">净要货需求</text>
+<text x="1276.0" y="423" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">按物料与日期的缺口曲线</text>
+<line x1="1420" y1="405" x2="1560" y2="405" stroke="#6E8295" stroke-width="4" marker-end="url(#arrow)"/>
+<rect x="1500" y="235" width="250" height="125" rx="18" fill="#F5F8FB" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="1500" y="235" width="12" height="125" rx="6" fill="#0B8F87" stroke="#0B8F87" stroke-width="2"/>
+<text x="1631.0" y="284" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">合同余量</text>
+<text x="1631.0" y="323" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">按合同总量及执行、冻结</text>
+<text x="1631.0" y="346" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">、占用状态计算</text>
+<rect x="1500" y="475" width="250" height="125" rx="18" fill="#F5F8FB" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="1500" y="475" width="12" height="125" rx="6" fill="#1F6FB2" stroke="#1F6FB2" stroke-width="2"/>
+<text x="1631.0" y="524" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">采购订单余量</text>
+<text x="1631.0" y="563" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">按订单总量及收货、取消</text>
+<text x="1631.0" y="586" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">、安排状态计算</text>
+<line x1="1625" y1="360" x2="1625" y2="475" stroke="#6E8295" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="690" y="690" width="440" height="120" rx="18" fill="#F5F8FB" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="690" y="690" width="12" height="120" rx="6" fill="#143E66" stroke="#143E66" stroke-width="2"/>
+<text x="916.0" y="739" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">占用平衡</text>
+<text x="916.0" y="777" font-family="STHeiti, PingFang SC, sans-serif" font-size="17" font-weight="400" fill="#5D6B78" text-anchor="middle">计划数量不得超过合同/订单可安排量；同一余量不</text>
+<text x="916.0" y="799" font-family="STHeiti, PingFang SC, sans-serif" font-size="17" font-weight="400" fill="#5D6B78" text-anchor="middle">可重复占用</text>
+<line x1="1330" y1="475" x2="1080" y2="690" stroke="#143E66" stroke-width="4" marker-end="url(#arrow)"/>
+<rect x="450" y="185" width="900" height="58" rx="29" fill="#EAF4FB" stroke="#EAF4FB" stroke-width="2"/>
+<text x="900.0" y="223.0" font-family="STHeiti, PingFang SC, sans-serif" font-size="22" font-weight="700" fill="#143E66" text-anchor="middle">固定、已下达、已发货、在途与人工计划优先进入保护区</text>
+</svg>

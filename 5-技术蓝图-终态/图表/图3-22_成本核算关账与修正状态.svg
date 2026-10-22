@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1000" viewBox="0 0 1800 1000">
+<defs><filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#143E66" flood-opacity="0.12"/></filter><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#6E8295"/></marker></defs>
+<rect width="1800" height="1000" fill="#FFFFFF"/>
+<rect x="0" y="0" width="1800" height="112" rx="0" fill="#143E66" stroke="#143E66" stroke-width="2"/>
+<text x="70" y="70" font-family="STHeiti, PingFang SC, sans-serif" font-size="38" font-weight="700" fill="#FFFFFF" text-anchor="start">成本核算、关账与修正状态</text>
+<text x="70" y="99" font-family="STHeiti, PingFang SC, sans-serif" font-size="19" font-weight="400" fill="#D7E7F5" text-anchor="start">历史版本只追加不覆盖；关账后修正通过调整版本处理</text>
+<text x="1655" y="80" font-family="STHeiti, PingFang SC, sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" text-anchor="middle">SCOS</text>
+<line x1="70" y1="135" x2="1730" y2="135" stroke="#B9C7D4" stroke-width="2"/>
+<rect x="90" y="350" width="235" height="140" rx="26" fill="#FFFFFF" stroke="#1F6FB2" stroke-width="4" filter="url(#shadow)"/>
+<text x="207" y="418" font-family="STHeiti, PingFang SC, sans-serif" font-size="24" font-weight="700" fill="#1F6FB2" text-anchor="middle">数据准备</text>
+<text x="207" y="465" font-family="STHeiti, PingFang SC, sans-serif" font-size="19" font-weight="400" fill="#5D6B78" text-anchor="middle">V1</text>
+<line x1="325" y1="420" x2="375" y2="420" stroke="#6E8295" stroke-width="4" marker-end="url(#arrow)"/>
+<rect x="375" y="350" width="235" height="140" rx="26" fill="#FFFFFF" stroke="#0B8F87" stroke-width="4" filter="url(#shadow)"/>
+<text x="492" y="418" font-family="STHeiti, PingFang SC, sans-serif" font-size="24" font-weight="700" fill="#0B8F87" text-anchor="middle">试算中</text>
+<text x="492" y="465" font-family="STHeiti, PingFang SC, sans-serif" font-size="19" font-weight="400" fill="#5D6B78" text-anchor="middle">V2</text>
+<line x1="610" y1="420" x2="660" y2="420" stroke="#6E8295" stroke-width="4" marker-end="url(#arrow)"/>
+<rect x="660" y="350" width="235" height="140" rx="26" fill="#FFFFFF" stroke="#46A35B" stroke-width="4" filter="url(#shadow)"/>
+<text x="777" y="418" font-family="STHeiti, PingFang SC, sans-serif" font-size="24" font-weight="700" fill="#46A35B" text-anchor="middle">待确认</text>
+<text x="777" y="465" font-family="STHeiti, PingFang SC, sans-serif" font-size="19" font-weight="400" fill="#5D6B78" text-anchor="middle">V3</text>
+<line x1="895" y1="420" x2="945" y2="420" stroke="#6E8295" stroke-width="4" marker-end="url(#arrow)"/>
+<rect x="945" y="350" width="235" height="140" rx="26" fill="#FFFFFF" stroke="#E98A32" stroke-width="4" filter="url(#shadow)"/>
+<text x="1062" y="418" font-family="STHeiti, PingFang SC, sans-serif" font-size="24" font-weight="700" fill="#E98A32" text-anchor="middle">已发布</text>
+<text x="1062" y="465" font-family="STHeiti, PingFang SC, sans-serif" font-size="19" font-weight="400" fill="#5D6B78" text-anchor="middle">V4</text>
+<line x1="1180" y1="420" x2="1230" y2="420" stroke="#6E8295" stroke-width="4" marker-end="url(#arrow)"/>
+<rect x="1230" y="350" width="235" height="140" rx="26" fill="#FFFFFF" stroke="#C94F55" stroke-width="4" filter="url(#shadow)"/>
+<text x="1347" y="418" font-family="STHeiti, PingFang SC, sans-serif" font-size="24" font-weight="700" fill="#C94F55" text-anchor="middle">已关账</text>
+<text x="1347" y="465" font-family="STHeiti, PingFang SC, sans-serif" font-size="19" font-weight="400" fill="#5D6B78" text-anchor="middle">V5</text>
+<line x1="1465" y1="420" x2="1515" y2="420" stroke="#6E8295" stroke-width="4" marker-end="url(#arrow)"/>
+<rect x="1515" y="350" width="235" height="140" rx="26" fill="#FFFFFF" stroke="#143E66" stroke-width="4" filter="url(#shadow)"/>
+<text x="1632" y="418" font-family="STHeiti, PingFang SC, sans-serif" font-size="24" font-weight="700" fill="#143E66" text-anchor="middle">调整版本</text>
+<text x="1632" y="465" font-family="STHeiti, PingFang SC, sans-serif" font-size="19" font-weight="400" fill="#5D6B78" text-anchor="middle">V6</text>
+<rect x="320" y="670" width="380" height="120" rx="18" fill="#F5F8FB" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="320" y="670" width="12" height="120" rx="6" fill="#1F6FB2" stroke="#1F6FB2" stroke-width="2"/>
+<text x="516.0" y="719" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">未关账重算</text>
+<text x="516.0" y="758" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">迟到数据或修正产生新试算版本</text>
+<rect x="760" y="670" width="380" height="120" rx="18" fill="#F5F8FB" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="760" y="670" width="12" height="120" rx="6" fill="#C94F55" stroke="#C94F55" stroke-width="2"/>
+<text x="956.0" y="719" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">关账控制</text>
+<text x="956.0" y="758" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">冻结输入、费率、结果和对账证据</text>
+<rect x="1200" y="670" width="380" height="120" rx="18" fill="#F5F8FB" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="1200" y="670" width="12" height="120" rx="6" fill="#143E66" stroke="#143E66" stroke-width="2"/>
+<text x="1396.0" y="719" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">跨期调整</text>
+<text x="1396.0" y="758" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">引用原版本并生成调整额，不回写覆盖</text>
+<rect x="490" y="205" width="820" height="58" rx="29" fill="#EAF4FB" stroke="#EAF4FB" stroke-width="2"/>
+<text x="900.0" y="243.0" font-family="STHeiti, PingFang SC, sans-serif" font-size="22" font-weight="700" fill="#143E66" text-anchor="middle">状态迁移由 Java 工作流控制，计算由 Python 成本服务执行</text>
+</svg>

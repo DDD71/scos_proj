@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1000" viewBox="0 0 1800 1000">
+<defs><filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#143E66" flood-opacity="0.12"/></filter><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#6E8295"/></marker></defs>
+<rect width="1800" height="1000" fill="#FFFFFF"/>
+<rect x="0" y="0" width="1800" height="112" rx="0" fill="#143E66" stroke="#143E66" stroke-width="2"/>
+<text x="70" y="70" font-family="STHeiti, PingFang SC, sans-serif" font-size="38" font-weight="700" fill="#FFFFFF" text-anchor="start">端到端业务决策闭环</text>
+<text x="70" y="99" font-family="STHeiti, PingFang SC, sans-serif" font-size="19" font-weight="400" fill="#D7E7F5" text-anchor="start">事实快照驱动专业决策，审批发布后由外部系统执行</text>
+<text x="1655" y="80" font-family="STHeiti, PingFang SC, sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" text-anchor="middle">SCOS</text>
+<line x1="70" y1="135" x2="1730" y2="135" stroke="#B9C7D4" stroke-width="2"/>
+<rect x="655" y="375" width="490" height="320" rx="160" fill="#F3F8FC" stroke="#1F6FB2" stroke-width="3"/>
+<text x="900" y="484" font-family="STHeiti, PingFang SC, sans-serif" font-size="34" font-weight="700" fill="#143E66" text-anchor="middle">SCOS 决策内核</text>
+<text x="900" y="539" font-family="STHeiti, PingFang SC, sans-serif" font-size="24" font-weight="700" fill="#5D6B78" text-anchor="middle">数据快照</text>
+<text x="900" y="589" font-family="STHeiti, PingFang SC, sans-serif" font-size="24" font-weight="700" fill="#5D6B78" text-anchor="middle">模型运行与版本</text>
+<text x="900" y="639" font-family="STHeiti, PingFang SC, sans-serif" font-size="24" font-weight="700" fill="#5D6B78" text-anchor="middle">权限 · 审批 · 审计</text>
+<rect x="730.0" y="190.0" width="340" height="130" rx="18" fill="#FFFFFF" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="730.0" y="190.0" width="12" height="130" rx="6" fill="#1F6FB2" stroke="#1F6FB2" stroke-width="2"/>
+<text x="906.0" y="239.0" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">业务事实</text>
+<text x="906.0" y="278.0" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">需求 · 库存 · 合同 · 生产 · 质量</text>
+<text x="906.0" y="301.0" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle"> · 成本</text>
+<rect x="1214.9742261192855" y="330.0" width="340" height="130" rx="18" fill="#FFFFFF" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="1214.9742261192855" y="330.0" width="12" height="130" rx="6" fill="#0B8F87" stroke="#0B8F87" stroke-width="2"/>
+<text x="1390.9742261192855" y="379.0" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">统一快照</text>
+<text x="1390.9742261192855" y="418.0" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">截止时间 · 口径 · 数据质量</text>
+<rect x="1214.9742261192857" y="610.0" width="340" height="130" rx="18" fill="#FFFFFF" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="1214.9742261192857" y="610.0" width="12" height="130" rx="6" fill="#46A35B" stroke="#46A35B" stroke-width="2"/>
+<text x="1390.9742261192857" y="659.0" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">专业计算</text>
+<text x="1390.9742261192857" y="698.0" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">库存 · 采购 · 要货 · 成本分析</text>
+<rect x="730.0" y="750.0" width="340" height="130" rx="18" fill="#FFFFFF" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="730.0" y="750.0" width="12" height="130" rx="6" fill="#E98A32" stroke="#E98A32" stroke-width="2"/>
+<text x="906.0" y="799.0" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">方案评审</text>
+<text x="906.0" y="838.0" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">解释 · 人工调整 · 审批</text>
+<rect x="245.02577388071444" y="610.0000000000001" width="340" height="130" rx="18" fill="#FFFFFF" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="245.02577388071444" y="610.0000000000001" width="12" height="130" rx="6" fill="#C94F55" stroke="#C94F55" stroke-width="2"/>
+<text x="421.02577388071444" y="659.0000000000001" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">外部执行</text>
+<text x="421.02577388071444" y="698.0000000000001" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">权威系统落单与执行</text>
+<rect x="245.02577388071438" y="330.0" width="340" height="130" rx="18" fill="#FFFFFF" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="245.02577388071438" y="330.0" width="12" height="130" rx="6" fill="#143E66" stroke="#143E66" stroke-width="2"/>
+<text x="421.0257738807144" y="379.0" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">反馈复盘</text>
+<text x="421.0257738807144" y="418.0" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">状态 · 偏差 · 改进</text>
+<line x1="1070.0" y1="304.0747728811182" x2="1214.9742261192855" y2="345.9252271188818" stroke="#6E8295" stroke-width="5" marker-end="url(#arrow)"/>
+<line x1="1384.9742261192855" y1="460.0" x2="1384.9742261192857" y2="610.0" stroke="#6E8295" stroke-width="5" marker-end="url(#arrow)"/>
+<line x1="1214.9742261192857" y1="724.0747728811182" x2="1070.0" y2="765.9252271188818" stroke="#6E8295" stroke-width="5" marker-end="url(#arrow)"/>
+<line x1="730.0" y1="765.9252271188818" x2="585.0257738807145" y2="724.0747728811183" stroke="#6E8295" stroke-width="5" marker-end="url(#arrow)"/>
+<line x1="415.02577388071444" y1="610.0000000000001" x2="415.0257738807144" y2="460.0" stroke="#6E8295" stroke-width="5" marker-end="url(#arrow)"/>
+<line x1="585.0257738807144" y1="345.9252271188818" x2="730.0" y2="304.0747728811182" stroke="#6E8295" stroke-width="5" marker-end="url(#arrow)"/>
+<rect x="590" y="905" width="620" height="54" rx="27" fill="#EAF4FB" stroke="#EAF4FB" stroke-width="2"/>
+<text x="900.0" y="941.0" font-family="STHeiti, PingFang SC, sans-serif" font-size="22" font-weight="700" fill="#143E66" text-anchor="middle">每次循环保留数据快照、运行、方案与链路标识</text>
+</svg>

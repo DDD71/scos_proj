@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1000" viewBox="0 0 1800 1000">
+<defs><filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#143E66" flood-opacity="0.12"/></filter><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#6E8295"/></marker></defs>
+<rect width="1800" height="1000" fill="#FFFFFF"/>
+<rect x="0" y="0" width="1800" height="112" rx="0" fill="#143E66" stroke="#143E66" stroke-width="2"/>
+<text x="70" y="70" font-family="STHeiti, PingFang SC, sans-serif" font-size="38" font-weight="700" fill="#FFFFFF" text-anchor="start">需求、设计、测试与验收证据追溯链</text>
+<text x="70" y="99" font-family="STHeiti, PingFang SC, sans-serif" font-size="19" font-weight="400" fill="#D7E7F5" text-anchor="start">每项业务要求都必须落到技术对象、测试用例和可复核验收证据</text>
+<text x="1655" y="80" font-family="STHeiti, PingFang SC, sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" text-anchor="middle">SCOS</text>
+<line x1="70" y1="135" x2="1730" y2="135" stroke="#B9C7D4" stroke-width="2"/>
+<rect x="60" y="320" width="300" height="175" rx="18" fill="#FFFFFF" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="60" y="320" width="12" height="175" rx="6" fill="#1F6FB2" stroke="#1F6FB2" stroke-width="2"/>
+<text x="216.0" y="369" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">业务蓝图与技术要求</text>
+<text x="216.0" y="408" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">业务场景 · 规则 · 边界</text>
+<rect x="410" y="320" width="300" height="175" rx="18" fill="#FFFFFF" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="410" y="320" width="12" height="175" rx="6" fill="#0B8F87" stroke="#0B8F87" stroke-width="2"/>
+<text x="566.0" y="369" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">技术蓝图设计</text>
+<text x="566.0" y="408" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">功能 · 数据 · 模型 · 接口</text>
+<rect x="760" y="320" width="300" height="175" rx="18" fill="#FFFFFF" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="760" y="320" width="12" height="175" rx="6" fill="#46A35B" stroke="#46A35B" stroke-width="2"/>
+<text x="916.0" y="369" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">研发实现对象</text>
+<text x="916.0" y="408" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">页面 · API · 表 · 模型版本</text>
+<rect x="1110" y="320" width="300" height="175" rx="18" fill="#FFFFFF" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="1110" y="320" width="12" height="175" rx="6" fill="#E98A32" stroke="#E98A32" stroke-width="2"/>
+<text x="1266.0" y="369" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">测试用例与结果</text>
+<text x="1266.0" y="408" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">正常 · 异常 · 边界 · 回归</text>
+<rect x="1460" y="320" width="300" height="175" rx="18" fill="#FFFFFF" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="1460" y="320" width="12" height="175" rx="6" fill="#C94F55" stroke="#C94F55" stroke-width="2"/>
+<text x="1616.0" y="369" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">验收证据与结论</text>
+<text x="1616.0" y="408" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">截图 · 报告 · 对账 · 签字</text>
+<line x1="360.0" y1="407.5" x2="410.0" y2="407.5" stroke="#6E8295" stroke-width="4" marker-end="url(#arrow)"/>
+<line x1="710.0" y1="407.5" x2="760.0" y2="407.5" stroke="#6E8295" stroke-width="4" marker-end="url(#arrow)"/>
+<line x1="1060.0" y1="407.5" x2="1110.0" y2="407.5" stroke="#6E8295" stroke-width="4" marker-end="url(#arrow)"/>
+<line x1="1410.0" y1="407.5" x2="1460.0" y2="407.5" stroke="#6E8295" stroke-width="4" marker-end="url(#arrow)"/>
+<rect x="155" y="650" width="420" height="120" rx="18" fill="#F5F8FB" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="155" y="650" width="12" height="120" rx="6" fill="#1F6FB2" stroke="#1F6FB2" stroke-width="2"/>
+<text x="371.0" y="699" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">追溯标识</text>
+<text x="371.0" y="737" font-family="STHeiti, PingFang SC, sans-serif" font-size="17" font-weight="400" fill="#5D6B78" text-anchor="middle">REQ · RULE · FUNC · MODEL · API · TC</text>
+<rect x="690" y="650" width="420" height="120" rx="18" fill="#F5F8FB" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="690" y="650" width="12" height="120" rx="6" fill="#E98A32" stroke="#E98A32" stroke-width="2"/>
+<text x="906.0" y="699" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">覆盖规则</text>
+<text x="906.0" y="737" font-family="STHeiti, PingFang SC, sans-serif" font-size="17" font-weight="400" fill="#5D6B78" text-anchor="middle">一项需求可对应多项设计与用例；不得存在孤立项</text>
+<rect x="1225" y="650" width="420" height="120" rx="18" fill="#F5F8FB" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="1225" y="650" width="12" height="120" rx="6" fill="#143E66" stroke="#143E66" stroke-width="2"/>
+<text x="1441.0" y="699" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">变更闭环</text>
+<text x="1441.0" y="738" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">变更同步更新设计、用例、证据和验收结论</text>
+<rect x="405" y="850" width="990" height="58" rx="29" fill="#EAF4FB" stroke="#EAF4FB" stroke-width="2"/>
+<text x="900.0" y="888.0" font-family="STHeiti, PingFang SC, sans-serif" font-size="22" font-weight="700" fill="#143E66" text-anchor="middle">追溯矩阵以版本冻结；遗留问题记录责任人、期限、临时措施和复验结果</text>
+</svg>

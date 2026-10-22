@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1000" viewBox="0 0 1800 1000">
+<defs><filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#143E66" flood-opacity="0.12"/></filter><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#6E8295"/></marker></defs>
+<rect width="1800" height="1000" fill="#FFFFFF"/>
+<rect x="0" y="0" width="1800" height="112" rx="0" fill="#143E66" stroke="#143E66" stroke-width="2"/>
+<text x="70" y="70" font-family="STHeiti, PingFang SC, sans-serif" font-size="38" font-weight="700" fill="#FFFFFF" text-anchor="start">方案审批、发布、锁定与执行反馈状态机</text>
+<text x="70" y="99" font-family="STHeiti, PingFang SC, sans-serif" font-size="19" font-weight="400" fill="#D7E7F5" text-anchor="start">人工干预形成新版本；已发布和执行中的对象不被模型静默覆盖</text>
+<text x="1655" y="80" font-family="STHeiti, PingFang SC, sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" text-anchor="middle">SCOS</text>
+<line x1="70" y1="135" x2="1730" y2="135" stroke="#B9C7D4" stroke-width="2"/>
+<rect x="70" y="315" width="245" height="150" rx="18" fill="#FFFFFF" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="70" y="315" width="12" height="150" rx="6" fill="#1F6FB2" stroke="#1F6FB2" stroke-width="2"/>
+<text x="198.5" y="364" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">草稿</text>
+<text x="198.5" y="403" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">可计算、可删除草稿</text>
+<rect x="360" y="315" width="245" height="150" rx="18" fill="#FFFFFF" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="360" y="315" width="12" height="150" rx="6" fill="#0B8F87" stroke="#0B8F87" stroke-width="2"/>
+<text x="488.5" y="364" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">待校验</text>
+<text x="488.5" y="403" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">质量与可行性门禁</text>
+<rect x="650" y="315" width="245" height="150" rx="18" fill="#FFFFFF" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="650" y="315" width="12" height="150" rx="6" fill="#46A35B" stroke="#46A35B" stroke-width="2"/>
+<text x="778.5" y="364" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">待审批</text>
+<text x="778.5" y="403" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">职责分离与意见留痕</text>
+<rect x="940" y="315" width="245" height="150" rx="18" fill="#FFFFFF" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="940" y="315" width="12" height="150" rx="6" fill="#E98A32" stroke="#E98A32" stroke-width="2"/>
+<text x="1068.5" y="364" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">已发布</text>
+<text x="1068.5" y="403" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">生成发布批次与快照</text>
+<rect x="1230" y="315" width="245" height="150" rx="18" fill="#FFFFFF" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="1230" y="315" width="12" height="150" rx="6" fill="#C94F55" stroke="#C94F55" stroke-width="2"/>
+<text x="1358.5" y="364" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">执行中</text>
+<text x="1358.5" y="403" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">外部编号与反馈追加</text>
+<rect x="1520" y="315" width="245" height="150" rx="18" fill="#FFFFFF" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="1520" y="315" width="12" height="150" rx="6" fill="#143E66" stroke="#143E66" stroke-width="2"/>
+<text x="1648.5" y="364" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">已关闭</text>
+<text x="1648.5" y="403" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">只读归档与复盘</text>
+<line x1="315.0" y1="390.0" x2="360.0" y2="390.0" stroke="#6E8295" stroke-width="4" marker-end="url(#arrow)"/>
+<line x1="605.0" y1="390.0" x2="650.0" y2="390.0" stroke="#6E8295" stroke-width="4" marker-end="url(#arrow)"/>
+<line x1="895.0" y1="390.0" x2="940.0" y2="390.0" stroke="#6E8295" stroke-width="4" marker-end="url(#arrow)"/>
+<line x1="1185.0" y1="390.0" x2="1230.0" y2="390.0" stroke="#6E8295" stroke-width="4" marker-end="url(#arrow)"/>
+<line x1="1475.0" y1="390.0" x2="1520.0" y2="390.0" stroke="#6E8295" stroke-width="4" marker-end="url(#arrow)"/>
+<rect x="260" y="650" width="360" height="130" rx="18" fill="#F5F8FB" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="260" y="650" width="12" height="130" rx="6" fill="#E98A32" stroke="#E98A32" stroke-width="2"/>
+<text x="446.0" y="699" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">退回与重算</text>
+<text x="446.0" y="738" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">保留原版本；复制生成新草稿并记录原</text>
+<text x="446.0" y="761" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">因</text>
+<rect x="720" y="650" width="360" height="130" rx="18" fill="#F5F8FB" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="720" y="650" width="12" height="130" rx="6" fill="#C94F55" stroke="#C94F55" stroke-width="2"/>
+<text x="906.0" y="699" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">撤回与替代</text>
+<text x="906.0" y="738" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">仅撤回未执行部分；替代版本重新审批</text>
+<rect x="1180" y="650" width="360" height="130" rx="18" fill="#F5F8FB" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="1180" y="650" width="12" height="130" rx="6" fill="#143E66" stroke="#143E66" stroke-width="2"/>
+<text x="1366.0" y="699" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">异常关闭</text>
+<text x="1366.0" y="738" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">接受风险、取消或失败均需责任人与证</text>
+<text x="1366.0" y="761" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">据</text>
+<polyline points="440,650 440,565 360,565 360,465" fill="none" stroke="#E98A32" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<polyline points="900,650 900,565 1062,565 1062,465" fill="none" stroke="#C94F55" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<polyline points="1360,650 1360,565 1642,565 1642,465" fill="none" stroke="#143E66" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<rect x="455" y="845" width="890" height="58" rx="29" fill="#EAF4FB" stroke="#EAF4FB" stroke-width="2"/>
+<text x="900.0" y="883.0" font-family="STHeiti, PingFang SC, sans-serif" font-size="22" font-weight="700" fill="#143E66" text-anchor="middle">每次迁移记录：对象、源状态、目标状态、规则、操作者、时间与证据</text>
+</svg>

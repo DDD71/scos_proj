@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1000" viewBox="0 0 1800 1000">
+<defs><filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#143E66" flood-opacity="0.12"/></filter><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#6E8295"/></marker></defs>
+<rect width="1800" height="1000" fill="#FFFFFF"/>
+<rect x="0" y="0" width="1800" height="112" rx="0" fill="#143E66" stroke="#143E66" stroke-width="2"/>
+<text x="70" y="70" font-family="STHeiti, PingFang SC, sans-serif" font-size="38" font-weight="700" fill="#FFFFFF" text-anchor="start">固定、锁定、在途与滚动调整状态</text>
+<text x="70" y="99" font-family="STHeiti, PingFang SC, sans-serif" font-size="19" font-weight="400" fill="#D7E7F5" text-anchor="start">越接近执行，计划保护级别越高；模型只调整未锁定部分</text>
+<text x="1655" y="80" font-family="STHeiti, PingFang SC, sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" text-anchor="middle">SCOS</text>
+<line x1="70" y1="135" x2="1730" y2="135" stroke="#B9C7D4" stroke-width="2"/>
+<rect x="70" y="350" width="245" height="160" rx="24" fill="#FFFFFF" stroke="#1F6FB2" stroke-width="4" filter="url(#shadow)"/>
+<text x="192" y="413" font-family="STHeiti, PingFang SC, sans-serif" font-size="23" font-weight="700" fill="#1F6FB2" text-anchor="middle">候选建议</text>
+<text x="192" y="468" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">可重算</text>
+<line x1="315" y1="430" x2="360" y2="430" stroke="#6E8295" stroke-width="4" marker-end="url(#arrow)"/>
+<rect x="360" y="350" width="245" height="160" rx="24" fill="#FFFFFF" stroke="#0B8F87" stroke-width="4" filter="url(#shadow)"/>
+<text x="482" y="413" font-family="STHeiti, PingFang SC, sans-serif" font-size="23" font-weight="700" fill="#0B8F87" text-anchor="middle">待协同</text>
+<text x="482" y="468" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">可人工调整</text>
+<line x1="605" y1="430" x2="650" y2="430" stroke="#6E8295" stroke-width="4" marker-end="url(#arrow)"/>
+<rect x="650" y="350" width="245" height="160" rx="24" fill="#FFFFFF" stroke="#E98A32" stroke-width="4" filter="url(#shadow)"/>
+<text x="772" y="413" font-family="STHeiti, PingFang SC, sans-serif" font-size="23" font-weight="700" fill="#E98A32" text-anchor="middle">已确认/锁定</text>
+<text x="772" y="468" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">不得自动覆盖</text>
+<line x1="895" y1="430" x2="940" y2="430" stroke="#6E8295" stroke-width="4" marker-end="url(#arrow)"/>
+<rect x="940" y="350" width="245" height="160" rx="24" fill="#FFFFFF" stroke="#C94F55" stroke-width="4" filter="url(#shadow)"/>
+<text x="1062" y="413" font-family="STHeiti, PingFang SC, sans-serif" font-size="23" font-weight="700" fill="#C94F55" text-anchor="middle">已下达</text>
+<text x="1062" y="468" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">外部编号固定</text>
+<line x1="1185" y1="430" x2="1230" y2="430" stroke="#6E8295" stroke-width="4" marker-end="url(#arrow)"/>
+<rect x="1230" y="350" width="245" height="160" rx="24" fill="#FFFFFF" stroke="#143E66" stroke-width="4" filter="url(#shadow)"/>
+<text x="1352" y="413" font-family="STHeiti, PingFang SC, sans-serif" font-size="23" font-weight="700" fill="#143E66" text-anchor="middle">已发货/在途</text>
+<text x="1352" y="468" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">事实输入</text>
+<line x1="1475" y1="430" x2="1520" y2="430" stroke="#6E8295" stroke-width="4" marker-end="url(#arrow)"/>
+<rect x="1520" y="350" width="245" height="160" rx="24" fill="#FFFFFF" stroke="#52606D" stroke-width="4" filter="url(#shadow)"/>
+<text x="1642" y="413" font-family="STHeiti, PingFang SC, sans-serif" font-size="23" font-weight="700" fill="#52606D" text-anchor="middle">已收货/关闭</text>
+<text x="1642" y="468" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">只读归档</text>
+<rect x="270" y="680" width="420" height="120" rx="18" fill="#F5F8FB" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="270" y="680" width="12" height="120" rx="6" fill="#1F6FB2" stroke="#1F6FB2" stroke-width="2"/>
+<text x="486.0" y="729" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">滚动重算</text>
+<text x="486.0" y="768" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">只复制未锁定明细；保留基线与差异原因</text>
+<rect x="720" y="680" width="420" height="120" rx="18" fill="#F5F8FB" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="720" y="680" width="12" height="120" rx="6" fill="#E98A32" stroke="#E98A32" stroke-width="2"/>
+<text x="936.0" y="729" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">异常变更</text>
+<text x="936.0" y="768" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">经审批撤回未执行部分，再生成替代版本</text>
+<rect x="1170" y="680" width="420" height="120" rx="18" fill="#F5F8FB" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="1170" y="680" width="12" height="120" rx="6" fill="#143E66" stroke="#143E66" stroke-width="2"/>
+<text x="1386.0" y="729" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">执行反馈</text>
+<text x="1386.0" y="768" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">发货、到货、短收、拒收和取消以事件追加</text>
+<line x1="480" y1="680" x2="480" y2="510" stroke="#1F6FB2" stroke-width="3" marker-end="url(#arrow)"/>
+<line x1="930" y1="680" x2="930" y2="510" stroke="#E98A32" stroke-width="3" marker-end="url(#arrow)"/>
+<line x1="1380" y1="510" x2="1380" y2="680" stroke="#143E66" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="455" y="200" width="890" height="60" rx="30" fill="#EAF4FB" stroke="#EAF4FB" stroke-width="2"/>
+<text x="900.0" y="239.0" font-family="STHeiti, PingFang SC, sans-serif" font-size="22" font-weight="700" fill="#143E66" text-anchor="middle">保护优先级：已收货 &gt; 在途 &gt; 已下达 &gt; 已锁定 &gt; 候选建议</text>
+</svg>

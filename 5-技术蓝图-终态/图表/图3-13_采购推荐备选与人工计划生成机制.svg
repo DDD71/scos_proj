@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1000" viewBox="0 0 1800 1000">
+<defs><filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#143E66" flood-opacity="0.12"/></filter><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#6E8295"/></marker></defs>
+<rect width="1800" height="1000" fill="#FFFFFF"/>
+<rect x="0" y="0" width="1800" height="112" rx="0" fill="#143E66" stroke="#143E66" stroke-width="2"/>
+<text x="70" y="70" font-family="STHeiti, PingFang SC, sans-serif" font-size="38" font-weight="700" fill="#FFFFFF" text-anchor="start">采购推荐、备选与人工计划生成机制</text>
+<text x="70" y="99" font-family="STHeiti, PingFang SC, sans-serif" font-size="19" font-weight="400" fill="#D7E7F5" text-anchor="start">不同方案使用同一快照与约束版本，差异可重算、可解释</text>
+<text x="1655" y="80" font-family="STHeiti, PingFang SC, sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" text-anchor="middle">SCOS</text>
+<line x1="70" y1="135" x2="1730" y2="135" stroke="#B9C7D4" stroke-width="2"/>
+<rect x="690" y="190" width="420" height="120" rx="18" fill="#F5F8FB" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="690" y="190" width="12" height="120" rx="6" fill="#1F6FB2" stroke="#1F6FB2" stroke-width="2"/>
+<text x="906.0" y="239" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">基线模型运行</text>
+<text x="906.0" y="278" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">数据快照 · 模型版本 · 参数版本</text>
+<line x1="900" y1="310" x2="305" y2="465" stroke="#6E8295" stroke-width="4" marker-end="url(#arrow)"/>
+<rect x="130" y="465" width="350" height="145" rx="18" fill="#FFFFFF" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="130" y="465" width="12" height="145" rx="6" fill="#46A35B" stroke="#46A35B" stroke-width="2"/>
+<text x="311.0" y="514" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">推荐方案</text>
+<text x="311.0" y="553" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">最优或最好可行解</text>
+<rect x="130" y="690" width="350" height="120" rx="18" fill="#F5F8FB" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="130" y="690" width="12" height="120" rx="6" fill="#143E66" stroke="#143E66" stroke-width="2"/>
+<text x="311.0" y="739" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">统一比较</text>
+<text x="311.0" y="778" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">TCO · 风险 · 约束命中 · 最优间隙</text>
+<line x1="305" y1="610" x2="305" y2="690" stroke="#46A35B" stroke-width="3" marker-end="url(#arrow)"/>
+<line x1="900" y1="310" x2="700" y2="465" stroke="#6E8295" stroke-width="4" marker-end="url(#arrow)"/>
+<rect x="525" y="465" width="350" height="145" rx="18" fill="#FFFFFF" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="525" y="465" width="12" height="145" rx="6" fill="#0B8F87" stroke="#0B8F87" stroke-width="2"/>
+<text x="706.0" y="514" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">备选方案</text>
+<text x="706.0" y="553" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">排除推荐组合或限制相似度</text>
+<rect x="525" y="690" width="350" height="120" rx="18" fill="#F5F8FB" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="525" y="690" width="12" height="120" rx="6" fill="#143E66" stroke="#143E66" stroke-width="2"/>
+<text x="706.0" y="739" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">统一比较</text>
+<text x="706.0" y="778" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">TCO · 风险 · 约束命中 · 最优间隙</text>
+<line x1="700" y1="610" x2="700" y2="690" stroke="#0B8F87" stroke-width="3" marker-end="url(#arrow)"/>
+<line x1="900" y1="310" x2="1095" y2="465" stroke="#6E8295" stroke-width="4" marker-end="url(#arrow)"/>
+<rect x="920" y="465" width="350" height="145" rx="18" fill="#FFFFFF" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="920" y="465" width="12" height="145" rx="6" fill="#E98A32" stroke="#E98A32" stroke-width="2"/>
+<text x="1101.0" y="514" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">人工计划</text>
+<text x="1101.0" y="553" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">锁定供应商/数量后重新校验</text>
+<rect x="920" y="690" width="350" height="120" rx="18" fill="#F5F8FB" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="920" y="690" width="12" height="120" rx="6" fill="#143E66" stroke="#143E66" stroke-width="2"/>
+<text x="1101.0" y="739" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">统一比较</text>
+<text x="1101.0" y="778" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">TCO · 风险 · 约束命中 · 最优间隙</text>
+<line x1="1095" y1="610" x2="1095" y2="690" stroke="#E98A32" stroke-width="3" marker-end="url(#arrow)"/>
+<line x1="900" y1="310" x2="1490" y2="465" stroke="#6E8295" stroke-width="4" marker-end="url(#arrow)"/>
+<rect x="1315" y="465" width="350" height="145" rx="18" fill="#FFFFFF" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="1315" y="465" width="12" height="145" rx="6" fill="#C94F55" stroke="#C94F55" stroke-width="2"/>
+<text x="1496.0" y="514" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">情景方案</text>
+<text x="1496.0" y="553" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">修改价格、能力、需求或份额</text>
+<rect x="1315" y="690" width="350" height="120" rx="18" fill="#F5F8FB" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="1315" y="690" width="12" height="120" rx="6" fill="#143E66" stroke="#143E66" stroke-width="2"/>
+<text x="1496.0" y="739" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">统一比较</text>
+<text x="1496.0" y="778" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">TCO · 风险 · 约束命中 · 最优间隙</text>
+<line x1="1490" y1="610" x2="1490" y2="690" stroke="#C94F55" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="460" y="865" width="880" height="56" rx="28" fill="#EAF4FB" stroke="#EAF4FB" stroke-width="2"/>
+<text x="900.0" y="902.0" font-family="STHeiti, PingFang SC, sans-serif" font-size="22" font-weight="700" fill="#143E66" text-anchor="middle">只有可行、数据质量通过且审批完成的正式方案可发布建议</text>
+</svg>

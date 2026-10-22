@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1000" viewBox="0 0 1800 1000">
+<defs><filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#143E66" flood-opacity="0.12"/></filter><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#6E8295"/></marker></defs>
+<rect width="1800" height="1000" fill="#FFFFFF"/>
+<rect x="0" y="0" width="1800" height="112" rx="0" fill="#143E66" stroke="#143E66" stroke-width="2"/>
+<text x="70" y="70" font-family="STHeiti, PingFang SC, sans-serif" font-size="38" font-weight="700" fill="#FFFFFF" text-anchor="start">批次谱系与成本逐级传导</text>
+<text x="70" y="99" font-family="STHeiti, PingFang SC, sans-serif" font-size="19" font-weight="400" fill="#D7E7F5" text-anchor="start">可配置路由支持分流、汇流和共享设备；成本随实际质量关系传递</text>
+<text x="1655" y="80" font-family="STHeiti, PingFang SC, sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" text-anchor="middle">SCOS</text>
+<line x1="70" y1="135" x2="1730" y2="135" stroke="#B9C7D4" stroke-width="2"/>
+<rect x="90" y="260" width="255" height="110" rx="18" fill="#FFFFFF" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="90" y="260" width="12" height="110" rx="6" fill="#1F6FB2" stroke="#1F6FB2" stroke-width="2"/>
+<text x="223.5" y="309" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">原料批 A</text>
+<text x="223.5" y="348" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">质量 · 成本 · 状态</text>
+<rect x="90" y="570" width="255" height="110" rx="18" fill="#FFFFFF" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="90" y="570" width="12" height="110" rx="6" fill="#0B8F87" stroke="#0B8F87" stroke-width="2"/>
+<text x="223.5" y="619" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">原料批 B</text>
+<text x="223.5" y="658" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">质量 · 成本 · 状态</text>
+<rect x="430" y="245" width="255" height="110" rx="18" fill="#FFFFFF" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="430" y="245" width="12" height="110" rx="6" fill="#46A35B" stroke="#46A35B" stroke-width="2"/>
+<text x="563.5" y="294" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">连续窗口批 C1</text>
+<text x="563.5" y="333" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">质量 · 成本 · 状态</text>
+<rect x="430" y="585" width="255" height="110" rx="18" fill="#FFFFFF" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="430" y="585" width="12" height="110" rx="6" fill="#46A35B" stroke="#46A35B" stroke-width="2"/>
+<text x="563.5" y="634" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">连续窗口批 C2</text>
+<text x="563.5" y="673" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">质量 · 成本 · 状态</text>
+<rect x="780" y="210" width="255" height="110" rx="18" fill="#FFFFFF" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="780" y="210" width="12" height="110" rx="6" fill="#E98A32" stroke="#E98A32" stroke-width="2"/>
+<text x="913.5" y="259" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">中间罐批 D1</text>
+<text x="913.5" y="298" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">质量 · 成本 · 状态</text>
+<rect x="780" y="500" width="255" height="110" rx="18" fill="#FFFFFF" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="780" y="500" width="12" height="110" rx="6" fill="#E98A32" stroke="#E98A32" stroke-width="2"/>
+<text x="913.5" y="549" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">中间罐批 D2</text>
+<text x="913.5" y="588" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">质量 · 成本 · 状态</text>
+<rect x="1120" y="355" width="255" height="110" rx="18" fill="#FFFFFF" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="1120" y="355" width="12" height="110" rx="6" fill="#C94F55" stroke="#C94F55" stroke-width="2"/>
+<text x="1253.5" y="404" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">QC 批 E</text>
+<text x="1253.5" y="443" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">质量 · 成本 · 状态</text>
+<rect x="1450" y="355" width="255" height="110" rx="18" fill="#FFFFFF" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="1450" y="355" width="12" height="110" rx="6" fill="#143E66" stroke="#143E66" stroke-width="2"/>
+<text x="1583.5" y="404" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">成品罐批 F</text>
+<text x="1583.5" y="443" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">质量 · 成本 · 状态</text>
+<line x1="345" y1="315" x2="430" y2="300" stroke="#6E8295" stroke-width="4" marker-end="url(#arrow)"/>
+<line x1="345" y1="625" x2="430" y2="640" stroke="#6E8295" stroke-width="4" marker-end="url(#arrow)"/>
+<line x1="685" y1="300" x2="780" y2="265" stroke="#6E8295" stroke-width="4" marker-end="url(#arrow)"/>
+<line x1="685" y1="300" x2="780" y2="555" stroke="#6E8295" stroke-width="4" marker-end="url(#arrow)"/>
+<line x1="685" y1="640" x2="780" y2="555" stroke="#6E8295" stroke-width="4" marker-end="url(#arrow)"/>
+<line x1="1035" y1="265" x2="1120" y2="410" stroke="#6E8295" stroke-width="4" marker-end="url(#arrow)"/>
+<line x1="1035" y1="555" x2="1120" y2="410" stroke="#6E8295" stroke-width="4" marker-end="url(#arrow)"/>
+<line x1="1375" y1="410" x2="1450" y2="410" stroke="#6E8295" stroke-width="4" marker-end="url(#arrow)"/>
+<rect x="420" y="760" width="960" height="58" rx="29" fill="#EAF4FB" stroke="#EAF4FB" stroke-width="2"/>
+<text x="900.0" y="798.0" font-family="STHeiti, PingFang SC, sans-serif" font-size="22" font-weight="700" fill="#143E66" text-anchor="middle">关系同时保存：上游转出质量 · 下游接收质量 · 来源占比 · 去向占比 · 转化率</text>
+<rect x="620" y="835" width="560" height="92" rx="18" fill="#F5F8FB" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="620" y="835" width="12" height="92" rx="6" fill="#C94F55" stroke="#C94F55" stroke-width="2"/>
+<text x="906.0" y="884" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">返工边界</text>
+<text x="906.0" y="910" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">仅 QC 不合格批可进入返工辅助批；成品罐不得返流</text>
+</svg>

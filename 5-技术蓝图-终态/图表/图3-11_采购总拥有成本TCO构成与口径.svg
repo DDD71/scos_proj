@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1000" viewBox="0 0 1800 1000">
+<defs><filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#143E66" flood-opacity="0.12"/></filter><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#6E8295"/></marker></defs>
+<rect width="1800" height="1000" fill="#FFFFFF"/>
+<rect x="0" y="0" width="1800" height="112" rx="0" fill="#143E66" stroke="#143E66" stroke-width="2"/>
+<text x="70" y="70" font-family="STHeiti, PingFang SC, sans-serif" font-size="38" font-weight="700" fill="#FFFFFF" text-anchor="start">采购总拥有成本 TCO 构成与口径</text>
+<text x="70" y="99" font-family="STHeiti, PingFang SC, sans-serif" font-size="19" font-weight="400" fill="#D7E7F5" text-anchor="start">所有成本项统一币种、计价单位、含税标识、来源和有效期</text>
+<text x="1655" y="80" font-family="STHeiti, PingFang SC, sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" text-anchor="middle">SCOS</text>
+<line x1="70" y1="135" x2="1730" y2="135" stroke="#B9C7D4" stroke-width="2"/>
+<rect x="150" y="320" width="520" height="300" rx="24" fill="#F5F8FB" stroke="#1F6FB2" stroke-width="3" filter="url(#shadow)"/>
+<rect x="205" y="348" width="410" height="54" rx="27" fill="#1F6FB2" stroke="#1F6FB2" stroke-width="2"/>
+<text x="410.0" y="384.0" font-family="STHeiti, PingFang SC, sans-serif" font-size="22" font-weight="700" fill="#FFFFFF" text-anchor="middle">计入单位成本的项目</text>
+<rect x="195.0" y="425" width="205.0" height="48" rx="12" fill="#FFFFFF" stroke="#1F6FB2" stroke-width="2"/>
+<text x="297.5" y="456" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="700" fill="#1F6FB2" text-anchor="middle">采购价格</text>
+<rect x="420.0" y="425" width="205.0" height="48" rx="12" fill="#FFFFFF" stroke="#1F6FB2" stroke-width="2"/>
+<text x="522.5" y="456" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="700" fill="#1F6FB2" text-anchor="middle">运输装卸</text>
+<rect x="195.0" y="487" width="205.0" height="48" rx="12" fill="#FFFFFF" stroke="#1F6FB2" stroke-width="2"/>
+<text x="297.5" y="518" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="700" fill="#1F6FB2" text-anchor="middle">税费</text>
+<rect x="420.0" y="487" width="205.0" height="48" rx="12" fill="#FFFFFF" stroke="#1F6FB2" stroke-width="2"/>
+<text x="522.5" y="518" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="700" fill="#1F6FB2" text-anchor="middle">库存持有</text>
+<rect x="195.0" y="549" width="205.0" height="48" rx="12" fill="#FFFFFF" stroke="#1F6FB2" stroke-width="2"/>
+<text x="297.5" y="580" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="700" fill="#1F6FB2" text-anchor="middle">质量与供应风险</text>
+<rect x="720" y="320" width="360" height="300" rx="24" fill="#F5F8FB" stroke="#0B8F87" stroke-width="3" filter="url(#shadow)"/>
+<rect x="775" y="348" width="250" height="54" rx="27" fill="#0B8F87" stroke="#0B8F87" stroke-width="2"/>
+<text x="900.0" y="384.0" font-family="STHeiti, PingFang SC, sans-serif" font-size="22" font-weight="700" fill="#FFFFFF" text-anchor="middle">抵减或单列项目</text>
+<rect x="775" y="432" width="250" height="48" rx="12" fill="#FFFFFF" stroke="#0B8F87" stroke-width="2"/>
+<text x="900.0" y="463" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="700" fill="#0B8F87" text-anchor="middle">账期资金影响</text>
+<rect x="775" y="494" width="250" height="48" rx="12" fill="#FFFFFF" stroke="#0B8F87" stroke-width="2"/>
+<text x="900.0" y="525" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="700" fill="#0B8F87" text-anchor="middle">包装回收</text>
+<rect x="775" y="556" width="250" height="48" rx="12" fill="#FFFFFF" stroke="#0B8F87" stroke-width="2"/>
+<text x="900.0" y="587" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="700" fill="#0B8F87" text-anchor="middle">其他确定性抵扣</text>
+<rect x="1130" y="320" width="520" height="300" rx="24" fill="#F5F8FB" stroke="#E98A32" stroke-width="3" filter="url(#shadow)"/>
+<rect x="1185" y="348" width="410" height="54" rx="27" fill="#E98A32" stroke="#E98A32" stroke-width="2"/>
+<text x="1390.0" y="384.0" font-family="STHeiti, PingFang SC, sans-serif" font-size="22" font-weight="700" fill="#FFFFFF" text-anchor="middle">统一口径输出</text>
+<rect x="1175.0" y="425" width="205.0" height="48" rx="12" fill="#FFFFFF" stroke="#E98A32" stroke-width="2"/>
+<text x="1277.5" y="456" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="700" fill="#E98A32" text-anchor="middle">单位总拥有成本</text>
+<rect x="1400.0" y="425" width="205.0" height="48" rx="12" fill="#FFFFFF" stroke="#E98A32" stroke-width="2"/>
+<text x="1502.5" y="456" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="700" fill="#E98A32" text-anchor="middle">采购方案总成本</text>
+<rect x="1175.0" y="487" width="205.0" height="48" rx="12" fill="#FFFFFF" stroke="#E98A32" stroke-width="2"/>
+<text x="1277.5" y="518" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="700" fill="#E98A32" text-anchor="middle">固定费用单列</text>
+<rect x="1400.0" y="487" width="205.0" height="48" rx="12" fill="#FFFFFF" stroke="#E98A32" stroke-width="2"/>
+<text x="1502.5" y="515" font-family="STHeiti, PingFang SC, sans-serif" font-size="15" font-weight="700" fill="#E98A32" text-anchor="middle">现金流与会计成本分开展示</text>
+<line x1="670" y1="470" x2="720" y2="470" stroke="#6E8295" stroke-width="4" marker-end="url(#arrow)"/>
+<line x1="1080" y1="470" x2="1130" y2="470" stroke="#6E8295" stroke-width="4" marker-end="url(#arrow)"/>
+<rect x="430" y="190" width="940" height="60" rx="30" fill="#EAF4FB" stroke="#EAF4FB" stroke-width="2"/>
+<text x="900.0" y="229.0" font-family="STHeiti, PingFang SC, sans-serif" font-size="22" font-weight="700" fill="#143E66" text-anchor="middle">采购金额、现金流、会计成本与模型 TCO 分开展示，避免口径混淆</text>
+</svg>

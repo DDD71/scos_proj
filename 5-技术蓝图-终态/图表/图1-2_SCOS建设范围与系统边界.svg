@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1000" viewBox="0 0 1800 1000">
+<defs><filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#143E66" flood-opacity="0.12"/></filter><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#6E8295"/></marker></defs>
+<rect width="1800" height="1000" fill="#FFFFFF"/>
+<rect x="0" y="0" width="1800" height="112" rx="0" fill="#143E66" stroke="#143E66" stroke-width="2"/>
+<text x="70" y="70" font-family="STHeiti, PingFang SC, sans-serif" font-size="38" font-weight="700" fill="#FFFFFF" text-anchor="start">SCOS 建设范围与系统边界</text>
+<text x="70" y="99" font-family="STHeiti, PingFang SC, sans-serif" font-size="19" font-weight="400" fill="#D7E7F5" text-anchor="start">五大专业模块共享公共能力，权威系统保留交易执行职责</text>
+<text x="1655" y="80" font-family="STHeiti, PingFang SC, sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" text-anchor="middle">SCOS</text>
+<line x1="70" y1="135" x2="1730" y2="135" stroke="#B9C7D4" stroke-width="2"/>
+<text x="165" y="218" font-family="STHeiti, PingFang SC, sans-serif" font-size="28" font-weight="700" fill="#143E66" text-anchor="middle">外部权威系统</text>
+<rect x="55" y="245" width="225" height="76" rx="18" fill="#F5F8FB" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="55" y="245" width="12" height="76" rx="6" fill="#1F6FB2" stroke="#1F6FB2" stroke-width="2"/>
+<text x="173.5" y="294" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">销售/CRM</text>
+<line x1="280" y1="283" x2="400" y2="283" stroke="#6E8295" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="55" y="349" width="225" height="76" rx="18" fill="#F5F8FB" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="55" y="349" width="12" height="76" rx="6" fill="#1F6FB2" stroke="#1F6FB2" stroke-width="2"/>
+<text x="173.5" y="398" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">SAP</text>
+<line x1="280" y1="387" x2="400" y2="387" stroke="#6E8295" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="55" y="453" width="225" height="76" rx="18" fill="#F5F8FB" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="55" y="453" width="12" height="76" rx="6" fill="#1F6FB2" stroke="#1F6FB2" stroke-width="2"/>
+<text x="173.5" y="502" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">生产计划/MES</text>
+<line x1="280" y1="491" x2="400" y2="491" stroke="#6E8295" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="55" y="557" width="225" height="76" rx="18" fill="#F5F8FB" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="55" y="557" width="12" height="76" rx="6" fill="#1F6FB2" stroke="#1F6FB2" stroke-width="2"/>
+<text x="173.5" y="606" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">WMS/TMS</text>
+<line x1="280" y1="595" x2="400" y2="595" stroke="#6E8295" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="55" y="661" width="225" height="76" rx="18" fill="#F5F8FB" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="55" y="661" width="12" height="76" rx="6" fill="#1F6FB2" stroke="#1F6FB2" stroke-width="2"/>
+<text x="173.5" y="710" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">QMS/LIMS</text>
+<line x1="280" y1="699" x2="400" y2="699" stroke="#6E8295" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="55" y="765" width="225" height="76" rx="18" fill="#F5F8FB" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="55" y="765" width="12" height="76" rx="6" fill="#1F6FB2" stroke="#1F6FB2" stroke-width="2"/>
+<text x="173.5" y="814" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">E采平台</text>
+<line x1="280" y1="803" x2="400" y2="803" stroke="#6E8295" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="400" y="180" width="1010" height="660" rx="28" fill="#F8FBFE" stroke="#1F6FB2" stroke-width="3"/>
+<rect x="720" y="205" width="370" height="56" rx="28" fill="#143E66" stroke="#143E66" stroke-width="2"/>
+<text x="905.0" y="242.0" font-family="STHeiti, PingFang SC, sans-serif" font-size="22" font-weight="700" fill="#FFFFFF" text-anchor="middle">SCOS 系统建设边界</text>
+<rect x="470" y="295" width="870" height="96" rx="18" fill="#EAF4FB" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="470" y="295" width="12" height="96" rx="6" fill="#1F6FB2" stroke="#1F6FB2" stroke-width="2"/>
+<text x="911.0" y="344" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">统一数据服务与快照中心</text>
+<text x="911.0" y="370" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">标准编码 · 截止时间 · 质量状态 · 不可变快照</text>
+<rect x="455" y="450" width="250" height="108" rx="18" fill="#FFFFFF" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="455" y="450" width="12" height="108" rx="6" fill="#1F6FB2" stroke="#1F6FB2" stroke-width="2"/>
+<text x="586.0" y="499" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">供应链驾驶舱</text>
+<text x="586.0" y="538" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">方案 · 解释 · 版本</text>
+<rect x="740" y="450" width="250" height="108" rx="18" fill="#FFFFFF" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="740" y="450" width="12" height="108" rx="6" fill="#0B8F87" stroke="#0B8F87" stroke-width="2"/>
+<text x="871.0" y="499" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">成品库存优化</text>
+<text x="871.0" y="538" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">方案 · 解释 · 版本</text>
+<rect x="1025" y="450" width="250" height="108" rx="18" fill="#FFFFFF" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="1025" y="450" width="12" height="108" rx="6" fill="#46A35B" stroke="#46A35B" stroke-width="2"/>
+<text x="1156.0" y="499" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">原料采购优化</text>
+<text x="1156.0" y="538" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">方案 · 解释 · 版本</text>
+<rect x="455" y="595" width="250" height="108" rx="18" fill="#FFFFFF" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="455" y="595" width="12" height="108" rx="6" fill="#E98A32" stroke="#E98A32" stroke-width="2"/>
+<text x="586.0" y="644" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">原辅包要货计划</text>
+<text x="586.0" y="683" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">方案 · 解释 · 版本</text>
+<rect x="740" y="595" width="250" height="108" rx="18" fill="#FFFFFF" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="740" y="595" width="12" height="108" rx="6" fill="#C94F55" stroke="#C94F55" stroke-width="2"/>
+<text x="871.0" y="643" font-family="STHeiti, PingFang SC, sans-serif" font-size="24" font-weight="700" fill="#17212B" text-anchor="middle">成本分摊核算分析</text>
+<text x="871.0" y="683" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">方案 · 解释 · 版本</text>
+<rect x="1040" y="595" width="300" height="108" rx="18" fill="#FFFFFF" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="1040" y="595" width="12" height="108" rx="6" fill="#143E66" stroke="#143E66" stroke-width="2"/>
+<text x="1196.0" y="644" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">公共控制能力</text>
+<text x="1196.0" y="683" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">权限 · 工作流 · 审计 · 事件</text>
+<rect x="465" y="740" width="870" height="68" rx="18" fill="#EDF3F8" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="465" y="740" width="12" height="68" rx="6" fill="#143E66" stroke="#143E66" stroke-width="2"/>
+<text x="906.0" y="789" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">Vue Web + Java 业务服务 + MySQL + Python/SCIP独立算法容器</text>
+<text x="1590" y="218" font-family="STHeiti, PingFang SC, sans-serif" font-size="28" font-weight="700" fill="#143E66" text-anchor="middle">正式执行与反馈</text>
+<rect x="1500" y="260" width="235" height="82" rx="18" fill="#F5F8FB" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="1500" y="260" width="12" height="82" rx="6" fill="#E98A32" stroke="#E98A32" stroke-width="2"/>
+<text x="1623.5" y="309" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">审批/发布</text>
+<line x1="1410" y1="301" x2="1500" y2="301" stroke="#6E8295" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="1500" y="378" width="235" height="82" rx="18" fill="#F5F8FB" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="1500" y="378" width="12" height="82" rx="6" fill="#E98A32" stroke="#E98A32" stroke-width="2"/>
+<text x="1623.5" y="427" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">合同/订单</text>
+<line x1="1410" y1="419" x2="1500" y2="419" stroke="#6E8295" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="1500" y="496" width="235" height="82" rx="18" fill="#F5F8FB" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="1500" y="496" width="12" height="82" rx="6" fill="#E98A32" stroke="#E98A32" stroke-width="2"/>
+<text x="1623.5" y="545" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">外部生产计划</text>
+<line x1="1410" y1="537" x2="1500" y2="537" stroke="#6E8295" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="1500" y="614" width="235" height="82" rx="18" fill="#F5F8FB" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="1500" y="614" width="12" height="82" rx="6" fill="#E98A32" stroke="#E98A32" stroke-width="2"/>
+<text x="1623.5" y="663" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">收发与在途</text>
+<line x1="1410" y1="655" x2="1500" y2="655" stroke="#6E8295" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="1500" y="732" width="235" height="82" rx="18" fill="#F5F8FB" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="1500" y="732" width="12" height="82" rx="6" fill="#E98A32" stroke="#E98A32" stroke-width="2"/>
+<text x="1623.5" y="781" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">财务与成本</text>
+<line x1="1410" y1="773" x2="1500" y2="773" stroke="#6E8295" stroke-width="3" marker-end="url(#arrow)"/>
+<line x1="1615" y1="850" x2="340" y2="850" stroke="#0B8F87" stroke-width="3" marker-end="url(#arrow)"/>
+<text x="975" y="885" font-family="STHeiti, PingFang SC, sans-serif" font-size="21" font-weight="700" fill="#0B8F87" text-anchor="middle">执行状态、偏差和外部编号形成下一轮决策输入</text>
+</svg>

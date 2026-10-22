@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1000" viewBox="0 0 1800 1000">
+<defs><filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#143E66" flood-opacity="0.12"/></filter><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#6E8295"/></marker></defs>
+<rect width="1800" height="1000" fill="#FFFFFF"/>
+<rect x="0" y="0" width="1800" height="112" rx="0" fill="#143E66" stroke="#143E66" stroke-width="2"/>
+<text x="70" y="70" font-family="STHeiti, PingFang SC, sans-serif" font-size="38" font-weight="700" fill="#FFFFFF" text-anchor="start">动态库存策略与逐日推演</text>
+<text x="70" y="99" font-family="STHeiti, PingFang SC, sans-serif" font-size="19" font-weight="400" fill="#D7E7F5" text-anchor="start">库存位置触及补充触发线后，补充至目标库存；入罐与可销售日期分离</text>
+<text x="1655" y="80" font-family="STHeiti, PingFang SC, sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" text-anchor="middle">SCOS</text>
+<line x1="70" y1="135" x2="1730" y2="135" stroke="#B9C7D4" stroke-width="2"/>
+<line x1="170" y1="770" x2="1640" y2="770" stroke="#17212B" stroke-width="3" marker-end="url(#arrow)"/>
+<line x1="170" y1="770" x2="170" y2="240" stroke="#17212B" stroke-width="3" marker-end="url(#arrow)"/>
+<text x="120" y="242" font-family="STHeiti, PingFang SC, sans-serif" font-size="22" font-weight="700" fill="#17212B" text-anchor="middle">库存量</text>
+<text x="1660" y="817" font-family="STHeiti, PingFang SC, sans-serif" font-size="22" font-weight="700" fill="#17212B" text-anchor="middle">日期</text>
+<line x1="170" y1="315" x2="1640" y2="315" stroke="#46A35B" stroke-width="3" stroke-dasharray="10 8"/>
+<text x="1625" y="304" font-family="STHeiti, PingFang SC, sans-serif" font-size="21" font-weight="700" fill="#46A35B" text-anchor="start">目标库存上限</text>
+<line x1="170" y1="500" x2="1640" y2="500" stroke="#E98A32" stroke-width="3" stroke-dasharray="10 8"/>
+<text x="1625" y="489" font-family="STHeiti, PingFang SC, sans-serif" font-size="21" font-weight="700" fill="#E98A32" text-anchor="start">补充触发线</text>
+<line x1="170" y1="650" x2="1640" y2="650" stroke="#C94F55" stroke-width="3" stroke-dasharray="10 8"/>
+<text x="1625" y="639" font-family="STHeiti, PingFang SC, sans-serif" font-size="21" font-weight="700" fill="#C94F55" text-anchor="start">安全库存线</text>
+<line x1="180" y1="350" x2="400" y2="430" stroke="#1F6FB2" stroke-width="6"/>
+<line x1="400" y1="430" x2="620" y2="510" stroke="#1F6FB2" stroke-width="6"/>
+<line x1="620" y1="510" x2="820" y2="585" stroke="#1F6FB2" stroke-width="6"/>
+<line x1="820" y1="585" x2="970" y2="640" stroke="#1F6FB2" stroke-width="6"/>
+<line x1="970" y1="640" x2="1050" y2="330" stroke="#1F6FB2" stroke-width="6"/>
+<line x1="1050" y1="330" x2="1280" y2="410" stroke="#1F6FB2" stroke-width="6"/>
+<line x1="1280" y1="410" x2="1510" y2="505" stroke="#1F6FB2" stroke-width="6"/>
+<line x1="1510" y1="505" x2="1620" y2="560" stroke="#1F6FB2" stroke-width="6"/>
+<line x1="620" y1="220" x2="620" y2="770" stroke="#E98A32" stroke-width="3" stroke-dasharray="10 8"/>
+<text x="620" y="206" font-family="STHeiti, PingFang SC, sans-serif" font-size="21" font-weight="700" fill="#E98A32" text-anchor="middle">补充触发日</text>
+<line x1="860" y1="220" x2="860" y2="770" stroke="#0B8F87" stroke-width="3" stroke-dasharray="10 8"/>
+<text x="860" y="206" font-family="STHeiti, PingFang SC, sans-serif" font-size="21" font-weight="700" fill="#0B8F87" text-anchor="middle">预计入罐日</text>
+<line x1="1050" y1="220" x2="1050" y2="770" stroke="#46A35B" stroke-width="3" stroke-dasharray="10 8"/>
+<text x="1050" y="206" font-family="STHeiti, PingFang SC, sans-serif" font-size="21" font-weight="700" fill="#46A35B" text-anchor="middle">首个可销售日</text>
+<rect x="430" y="850" width="940" height="58" rx="29" fill="#EAF4FB" stroke="#EAF4FB" stroke-width="2"/>
+<text x="900.0" y="888.0" font-family="STHeiti, PingFang SC, sans-serif" font-size="22" font-weight="700" fill="#143E66" text-anchor="middle">原始补充量进入共享罐组前，仍须通过 SCIP 容量与兼容校验</text>
+</svg>

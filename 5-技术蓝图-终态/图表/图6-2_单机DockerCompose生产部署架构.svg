@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1000" viewBox="0 0 1800 1000">
+<defs><filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#143E66" flood-opacity="0.12"/></filter><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#6E8295"/></marker></defs>
+<rect width="1800" height="1000" fill="#FFFFFF"/>
+<rect x="0" y="0" width="1800" height="112" rx="0" fill="#143E66" stroke="#143E66" stroke-width="2"/>
+<text x="70" y="70" font-family="STHeiti, PingFang SC, sans-serif" font-size="38" font-weight="700" fill="#FFFFFF" text-anchor="start">单机 Docker Compose 生产部署架构</text>
+<text x="70" y="99" font-family="STHeiti, PingFang SC, sans-serif" font-size="19" font-weight="400" fill="#D7E7F5" text-anchor="start">在一台受控服务器上以容器和资源配额隔离前端、Java、Python、MySQL及观测组件</text>
+<text x="1655" y="80" font-family="STHeiti, PingFang SC, sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" text-anchor="middle">SCOS</text>
+<line x1="70" y1="135" x2="1730" y2="135" stroke="#B9C7D4" stroke-width="2"/>
+<rect x="110" y="190" width="1580" height="625" rx="32" fill="#F5F9FC" stroke="#143E66" stroke-width="5" filter="url(#shadow)"/>
+<rect x="570" y="220" width="660" height="60" rx="30" fill="#143E66" stroke="#143E66" stroke-width="2"/>
+<text x="900.0" y="259.0" font-family="STHeiti, PingFang SC, sans-serif" font-size="22" font-weight="700" fill="#FFFFFF" text-anchor="middle">SCOS 生产服务器 / Docker Compose</text>
+<rect x="180" y="345" width="285" height="150" rx="18" fill="#FFFFFF" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="180" y="345" width="12" height="150" rx="6" fill="#1F6FB2" stroke="#1F6FB2" stroke-width="2"/>
+<text x="328.5" y="394" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">reverse-proxy</text>
+<text x="328.5" y="433" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">TLS终止 · 静态资源 · 路由</text>
+<rect x="510" y="345" width="330" height="150" rx="18" fill="#FFFFFF" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="510" y="345" width="12" height="150" rx="6" fill="#0B8F87" stroke="#0B8F87" stroke-width="2"/>
+<text x="681.0" y="394" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">scos-java</text>
+<text x="681.0" y="433" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">Spring Boot · 五模块 · 平台能力</text>
+<rect x="885" y="345" width="330" height="150" rx="18" fill="#FFFFFF" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="885" y="345" width="12" height="150" rx="6" fill="#E98A32" stroke="#E98A32" stroke-width="2"/>
+<text x="1056.0" y="394" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">algorithm-python</text>
+<text x="1056.0" y="433" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">FastAPI · PySCIPOpt · SCIP</text>
+<rect x="1260" y="345" width="330" height="150" rx="18" fill="#FFFFFF" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="1260" y="345" width="12" height="150" rx="6" fill="#46A35B" stroke="#46A35B" stroke-width="2"/>
+<text x="1431.0" y="394" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">job-worker</text>
+<text x="1431.0" y="433" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">事件投递 · 批处理 · 监控任务</text>
+<line x1="465.0" y1="420.0" x2="510.0" y2="420.0" stroke="#6E8295" stroke-width="4" marker-end="url(#arrow)"/>
+<line x1="840.0" y1="420.0" x2="885.0" y2="420.0" stroke="#6E8295" stroke-width="4" marker-end="url(#arrow)"/>
+<polyline points="675,345 675,315 1425,315 1425,345" fill="none" stroke="#6E8295" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<rect x="260" y="595" width="330" height="130" rx="18" fill="#F5F8FB" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="260" y="595" width="12" height="130" rx="6" fill="#143E66" stroke="#143E66" stroke-width="2"/>
+<text x="431.0" y="644" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">mysql-8</text>
+<text x="431.0" y="683" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">业务数据 · 快照 · 事件 · 审计</text>
+<rect x="735" y="595" width="330" height="130" rx="18" fill="#F5F8FB" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="735" y="595" width="12" height="130" rx="6" fill="#1F6FB2" stroke="#1F6FB2" stroke-width="2"/>
+<text x="906.0" y="644" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">file-volume</text>
+<text x="906.0" y="683" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">附件 · 导出 · 模型证据 · 备份暂</text>
+<text x="906.0" y="706" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">存</text>
+<rect x="1210" y="595" width="330" height="130" rx="18" fill="#F5F8FB" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="1210" y="595" width="12" height="130" rx="6" fill="#C94F55" stroke="#C94F55" stroke-width="2"/>
+<text x="1381.0" y="644" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">observability</text>
+<text x="1381.0" y="683" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">日志 · 指标 · 健康检查 · 告警</text>
+<polyline points="675,495 675,555 425,555 425,595" fill="none" stroke="#0B8F87" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<polyline points="720,495 720,555 900,555 900,595" fill="none" stroke="#1F6FB2" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<polyline points="1000,495 1000,555 1375,555 1375,595" fill="none" stroke="#C94F55" stroke-width="3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<rect x="95" y="855" width="430" height="85" rx="18" fill="#F5F8FB" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="95" y="855" width="12" height="85" rx="6" fill="#1F6FB2" stroke="#1F6FB2" stroke-width="2"/>
+<text x="316.0" y="904" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">外部访问</text>
+<text x="316.0" y="930" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">企业网关/用户仅访问443端口</text>
+<rect x="685" y="855" width="430" height="85" rx="18" fill="#F5F8FB" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="685" y="855" width="12" height="85" rx="6" fill="#E98A32" stroke="#E98A32" stroke-width="2"/>
+<text x="906.0" y="904" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">资源隔离</text>
+<text x="906.0" y="930" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">CPU/内存/并发配额与健康检查</text>
+<rect x="1275" y="855" width="430" height="85" rx="18" fill="#F5F8FB" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="1275" y="855" width="12" height="85" rx="6" fill="#143E66" stroke="#143E66" stroke-width="2"/>
+<text x="1496.0" y="904" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">备份去向</text>
+<text x="1496.0" y="930" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">加密备份复制到服务器外介质</text>
+</svg>

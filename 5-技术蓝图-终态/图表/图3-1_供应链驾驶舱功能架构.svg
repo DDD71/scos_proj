@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1000" viewBox="0 0 1800 1000">
+<defs><filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#143E66" flood-opacity="0.12"/></filter><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#6E8295"/></marker></defs>
+<rect width="1800" height="1000" fill="#FFFFFF"/>
+<rect x="0" y="0" width="1800" height="112" rx="0" fill="#143E66" stroke="#143E66" stroke-width="2"/>
+<text x="70" y="70" font-family="STHeiti, PingFang SC, sans-serif" font-size="38" font-weight="700" fill="#FFFFFF" text-anchor="start">供应链驾驶舱功能架构</text>
+<text x="70" y="99" font-family="STHeiti, PingFang SC, sans-serif" font-size="19" font-weight="400" fill="#D7E7F5" text-anchor="start">一屏看全局、专题看结构、预警促协同、沙盘看影响</text>
+<text x="1655" y="80" font-family="STHeiti, PingFang SC, sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" text-anchor="middle">SCOS</text>
+<line x1="70" y1="135" x2="1730" y2="135" stroke="#B9C7D4" stroke-width="2"/>
+<rect x="640" y="290" width="520" height="390" rx="195" fill="#F1F7FC" stroke="#1F6FB2" stroke-width="4"/>
+<text x="900" y="391" font-family="STHeiti, PingFang SC, sans-serif" font-size="36" font-weight="700" fill="#143E66" text-anchor="middle">全局态势中心</text>
+<text x="900" y="453" font-family="STHeiti, PingFang SC, sans-serif" font-size="23" font-weight="400" fill="#5D6B78" text-anchor="middle">KPI · GIS · 趋势 · 截止时间</text>
+<text x="900" y="518" font-family="STHeiti, PingFang SC, sans-serif" font-size="26" font-weight="700" fill="#0B8F87" text-anchor="middle">健康度 · 分级预警</text>
+<text x="900" y="571" font-family="STHeiti, PingFang SC, sans-serif" font-size="21" font-weight="400" fill="#5D6B78" text-anchor="middle">组织 / 产品 / 客户 / 供应商</text>
+<rect x="110" y="250" width="390" height="140" rx="18" fill="#FFFFFF" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="110" y="250" width="12" height="140" rx="6" fill="#1F6FB2" stroke="#1F6FB2" stroke-width="2"/>
+<text x="311.0" y="299" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">经营专题</text>
+<text x="311.0" y="338" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">服务 · 交付 · 收入</text>
+<line x1="500.0" y1="342.2151898734177" x2="700" y2="365" stroke="#7E94A8" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="110" y="500" width="390" height="140" rx="18" fill="#FFFFFF" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="110" y="500" width="12" height="140" rx="6" fill="#0B8F87" stroke="#0B8F87" stroke-width="2"/>
+<text x="311.0" y="549" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">库存专题</text>
+<text x="311.0" y="588" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">库存策略 · 储罐风险</text>
+<line x1="500.0" y1="552.7941176470588" x2="645" y2="540" stroke="#7E94A8" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="1300" y="250" width="390" height="140" rx="18" fill="#FFFFFF" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="1300" y="250" width="12" height="140" rx="6" fill="#46A35B" stroke="#46A35B" stroke-width="2"/>
+<text x="1501.0" y="299" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">采购要货专题</text>
+<text x="1501.0" y="338" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">总成本 · 供应 · 到货</text>
+<line x1="1300.0" y1="342.2151898734177" x2="1100" y2="365" stroke="#7E94A8" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="1300" y="500" width="390" height="140" rx="18" fill="#FFFFFF" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="1300" y="500" width="12" height="140" rx="6" fill="#E98A32" stroke="#E98A32" stroke-width="2"/>
+<text x="1501.0" y="549" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">成本盈利专题</text>
+<text x="1501.0" y="588" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">批次成本 · 毛利 · 差异</text>
+<line x1="1300.0" y1="552.7941176470588" x2="1155" y2="540" stroke="#7E94A8" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="505" y="750" width="390" height="140" rx="18" fill="#FFFFFF" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="505" y="750" width="12" height="140" rx="6" fill="#C94F55" stroke="#C94F55" stroke-width="2"/>
+<text x="706.0" y="799" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">钻取与根因</text>
+<text x="706.0" y="838" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">指标 → 明细 → 源单 → 证据</text>
+<line x1="732.9411764705883" y1="750.0" x2="780" y2="650" stroke="#7E94A8" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="955" y="750" width="390" height="140" rx="18" fill="#FFFFFF" stroke="#B9C7D4" stroke-width="2" filter="url(#shadow)"/>
+<rect x="955" y="750" width="12" height="140" rx="6" fill="#143E66" stroke="#143E66" stroke-width="2"/>
+<text x="1156.0" y="799" font-family="STHeiti, PingFang SC, sans-serif" font-size="25" font-weight="700" fill="#17212B" text-anchor="middle">沙盘与协同</text>
+<text x="1156.0" y="838" font-family="STHeiti, PingFang SC, sans-serif" font-size="18" font-weight="400" fill="#5D6B78" text-anchor="middle">情景 → 比较 → 任务 → 闭环</text>
+<line x1="1096.4705882352941" y1="750.0" x2="1020" y2="650" stroke="#7E94A8" stroke-width="3" marker-end="url(#arrow)"/>
+<rect x="520" y="185" width="760" height="60" rx="30" fill="#EAF4FB" stroke="#EAF4FB" stroke-width="2"/>
+<text x="900.0" y="224.0" font-family="STHeiti, PingFang SC, sans-serif" font-size="22" font-weight="700" fill="#143E66" text-anchor="middle">角色化视图 · 数据权限 · 个性化配置 · 移动响应式</text>
+</svg>
