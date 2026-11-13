@@ -1,0 +1,17 @@
+:root {
+  --scos-primary: #087f8c;
+  --scos-primary-soft: #e8f6f5;
+  --scos-ink: #193447;
+  --scos-muted: #718493;
+  --scos-border: #e1e9ee;
+  --scos-background: #f3f6f8;
+  --scos-surface: #fff;
+  --scos-sidebar: #102c42;
+  --scos-radius: 12px;
+  --el-color-primary: var(--scos-primary);
+  --el-color-primary-light-3: #42a2aa;
+  --el-color-primary-light-5: #78bdc2;
+  --el-color-primary-light-7: #b3dcdf;
+  --el-color-primary-light-9: var(--scos-primary-soft);
+  --el-font-family: 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+}

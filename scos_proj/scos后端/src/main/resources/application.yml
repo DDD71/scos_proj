@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: scos-backend
+server:
+  address: ${SCOS_BIND_ADDRESS:127.0.0.1}
+  port: ${SCOS_PORT:8080}
+  shutdown: graceful
+  error:
+    include-message: never
+    include-stacktrace: never
+management:
+  endpoints:
+    web:
+      base-path: /api/actuator
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: never
+logging:
+  pattern:
+    level: "%5p [requestId=%X{requestId:-}]"
