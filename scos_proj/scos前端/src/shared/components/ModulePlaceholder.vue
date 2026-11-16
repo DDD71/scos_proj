@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
-import { ElEmpty, ElTag } from 'element-plus'
+import { ElEmpty } from 'element-plus'
 import PageHeader from './PageHeader.vue'
 import type { BusinessModule } from '@/shared/types/navigation'
 
@@ -15,12 +15,9 @@ const current = computed(() => props.module.sections.find((item) => item.path ==
     <PageHeader
       :title="current?.title || module.title"
       :description="current?.description || module.description"
-      :eyebrow="module.title"
-    >
-      <template #actions><ElTag type="info" effect="plain">待建设</ElTag></template>
-    </PageHeader>
+    />
     <nav
-      v-if="module.sections.length > 1"
+      v-if="module.sections.length > 1 && current?.key !== 'overview'"
       class="section-tabs"
       :aria-label="`${module.title}子页面`"
     >
@@ -29,8 +26,7 @@ const current = computed(() => props.module.sections.find((item) => item.path ==
       </RouterLink>
     </nav>
     <section class="surface empty-workspace">
-      <ElEmpty description="该功能正在建设，暂无业务数据。" />
-      <p>{{ current?.description }}</p>
+      <ElEmpty description="功能待建设" />
     </section>
   </div>
 </template>

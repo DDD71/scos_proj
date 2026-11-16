@@ -4,23 +4,20 @@ import { inventoryModule, inventoryRoutes } from '@/modules/inventory'
 import { procurementModule, procurementRoutes } from '@/modules/procurement'
 import { requisitionModule, requisitionRoutes } from '@/modules/requisition'
 import { costingModule, costingRoutes } from '@/modules/costing'
-import { traceabilityModule, traceabilityRoutes } from '@/modules/traceability'
-import { systemModule, systemRoutes } from '@/modules/system'
-import { integrationsModule, integrationsRoutes } from '@/modules/integrations'
-import type { BusinessModule } from '@/shared/types/navigation'
+import { traceabilityRoutes } from '@/modules/traceability'
+import { systemRoutes } from '@/modules/system'
+import { integrationsRoutes } from '@/modules/integrations'
+import { schedulingModule, schedulingRoutes } from '@/modules/scheduling'
 import type { RouteRecordRaw } from 'vue-router'
 
-export const businessModules: readonly BusinessModule[] = [
-  dashboardModule,
-  sandboxModule,
-  inventoryModule,
+export const sidebarModules = [
+  { ...dashboardModule, sections: [...dashboardModule.sections, ...sandboxModule.sections] },
   procurementModule,
   requisitionModule,
+  inventoryModule,
   costingModule,
-  traceabilityModule,
-  systemModule,
-  integrationsModule,
-]
+  schedulingModule,
+] as const
 
 export const businessRoutes: RouteRecordRaw[] = [
   ...dashboardRoutes,
@@ -29,6 +26,7 @@ export const businessRoutes: RouteRecordRaw[] = [
   ...procurementRoutes,
   ...requisitionRoutes,
   ...costingRoutes,
+  ...schedulingRoutes,
   ...traceabilityRoutes,
   ...systemRoutes,
   ...integrationsRoutes,

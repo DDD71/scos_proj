@@ -9,32 +9,20 @@ export const inventoryModule = {
     {
       key: 'overview',
       path: '/inventory/overview',
-      title: '库存总览',
-      description: '查看成品水位、可用库存、风险和待办。',
-    },
-    {
-      key: 'strategy',
-      path: '/inventory/strategy',
-      title: '库存策略',
-      description: '按 SKU、类目和 ABC 分类维护动态或静态策略及版本。',
+      title: '库存优化',
+      description: '查看成品库存预测、周汇总和日度库存日历，按成品调整库存策略。',
     },
     {
       key: 'plans',
       path: '/inventory/plans',
-      title: '计划管理',
-      description: '制定月、周、日计划，进行人工调整、审批和发布。',
-    },
-    {
-      key: 'abnormal',
-      path: '/inventory/abnormal',
-      title: '策略异常调整',
-      description: '登记重大变化，关联策略与月周日计划调整任务。',
+      title: '补货计划明细',
+      description: '管理月度补充额度、四周生产建议和逐日库存风险。',
     },
     {
       key: 'health',
       path: '/inventory/health',
       title: '库存健康度',
-      description: '复核周转、缺货、库容和临期表现，形成改进报告。',
+      description: '按月查看计划与实际偏差、自动预警、策略建议和跟进事项。',
     },
   ],
 } as const satisfies BusinessModule

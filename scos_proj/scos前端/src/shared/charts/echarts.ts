@@ -1,20 +1,28 @@
 import { use } from 'echarts/core'
-import { BarChart, LineChart, PieChart } from 'echarts/charts'
+import { BarChart, CandlestickChart, GraphChart, LineChart, PieChart } from 'echarts/charts'
 import {
+  DataZoomComponent,
   DatasetComponent,
   GridComponent,
   LegendComponent,
+  MarkAreaComponent,
+  MarkLineComponent,
   TooltipComponent,
 } from 'echarts/components'
 import { CanvasRenderer } from 'echarts/renderers'
 
 use([
   BarChart,
+  CandlestickChart,
+  GraphChart,
   LineChart,
   PieChart,
+  DataZoomComponent,
   DatasetComponent,
   GridComponent,
   LegendComponent,
+  MarkAreaComponent,
+  MarkLineComponent,
   TooltipComponent,
   CanvasRenderer,
 ])

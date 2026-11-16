@@ -1,8 +1,13 @@
 <script setup lang="ts">
-import ModulePlaceholder from '@/shared/components/ModulePlaceholder.vue'
-import { requisitionModule } from '../model/module'
+import { ElEmpty } from 'element-plus'
+import PageHeader from '@/shared/components/PageHeader.vue'
+
+defineProps<{ title: string; description: string }>()
 </script>
 
 <template>
-  <ModulePlaceholder :module="requisitionModule" />
+  <PageHeader :title="title" :description="description" />
+  <section class="surface empty-workspace">
+    <ElEmpty description="功能待建设" />
+  </section>
 </template>

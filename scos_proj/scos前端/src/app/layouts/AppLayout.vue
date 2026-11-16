@@ -1,22 +1,39 @@
 <script setup lang="ts">
-import { computed, watch } from 'vue'
+import { computed, useTemplateRef, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { ElButton, ElMenu, ElMenuItem, ElSubMenu, ElTag } from 'element-plus'
-import { businessModules } from '@/app/modules'
+import { ElButton, ElMenu, ElMenuItem, ElSubMenu, ElTag, type MenuInstance } from 'element-plus'
+import { sidebarModules } from '@/app/modules'
 import { useContextStore } from '@/app/stores/context'
 import { env } from '@/shared/config/env'
 
 const route = useRoute()
 const router = useRouter()
 const context = useContextStore()
-const groups = ['决策中心', '分析与追溯', '系统与协同'] as const
-const openMenus = computed(() => (route.meta.moduleId ? [route.meta.moduleId] : []))
+const sidebarMenu = useTemplateRef<MenuInstance>('sidebarMenu')
+const modulesWithSubmenus = ['dashboard', 'procurement', 'requisition', 'inventory']
+const activeMenu = computed(() => {
+  const module = sidebarModules.find((module) => module.id === route.meta.moduleId)
+  if (!module) return ''
+  if (!modulesWithSubmenus.includes(module.id)) return module.sections[0].path
+
+  return (
+    module.sections.find(
+      ({ key, path }) =>
+        route.meta.sectionKey === key || route.path === path || route.path.startsWith(`${path}/`),
+    )?.path ?? module.sections[0].path
+  )
+})
 watch(
   () => route.path,
-  () => context.closeNavigation(),
+  () => {
+    context.closeNavigation()
+    const moduleId = route.meta.moduleId
+    if (moduleId && modulesWithSubmenus.includes(moduleId)) sidebarMenu.value?.open(moduleId)
+  },
 )
 
 function selectPage(path: string) {
+  context.closeNavigation()
   void router.push(path)
 }
 </script>
@@ -41,33 +58,29 @@ function selectPage(path: string) {
       </RouterLink>
       <nav class="sidebar-navigation" aria-label="业务模块导航">
         <ElMenu
-          :default-active="route.path"
-          :default-openeds="openMenus"
+          ref="sidebarMenu"
+          :default-active="activeMenu"
           background-color="transparent"
           text-color="#b8cbd9"
           active-text-color="#70e6cf"
           @select="selectPage"
         >
-          <template v-for="group in groups" :key="group">
-            <li class="nav-group-label" role="presentation">{{ group }}</li>
-            <template
-              v-for="module in businessModules.filter((item) => item.group === group)"
-              :key="module.id"
+          <template v-for="module in sidebarModules" :key="module.id">
+            <ElSubMenu
+              v-if="modulesWithSubmenus.includes(module.id)"
+              :index="module.id"
+              :aria-label="module.title"
             >
-              <ElMenuItem v-if="module.sections.length === 1" :index="module.sections[0]!.path">
-                {{ module.title }}
+              <template #title>{{ module.title }}</template>
+              <ElMenuItem
+                v-for="section in module.sections"
+                :key="section.key"
+                :index="section.path"
+              >
+                {{ section.title }}
               </ElMenuItem>
-              <ElSubMenu v-else :index="module.id">
-                <template #title>{{ module.title }}</template>
-                <ElMenuItem
-                  v-for="section in module.sections"
-                  :key="section.key"
-                  :index="section.path"
-                >
-                  {{ section.title }}
-                </ElMenuItem>
-              </ElSubMenu>
-            </template>
+            </ElSubMenu>
+            <ElMenuItem v-else :index="module.sections[0].path">{{ module.title }}</ElMenuItem>
           </template>
         </ElMenu>
       </nav>

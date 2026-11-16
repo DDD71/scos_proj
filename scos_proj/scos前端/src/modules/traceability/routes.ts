@@ -1,7 +1,13 @@
-import { createModuleRoutes } from '@/shared/lib/create-module-routes'
-import { traceabilityModule } from './model/module'
+import type { RouteRecordRaw } from 'vue-router'
 
-export const traceabilityRoutes = createModuleRoutes(
-  traceabilityModule,
-  () => import('./pages/TraceabilityPage.vue'),
-)
+export const traceabilityRoutes: RouteRecordRaw[] = [
+  { path: '/traceability', redirect: { name: 'costing-traceability' } },
+  { path: '/traceability/query', redirect: { name: 'costing-traceability' } },
+  {
+    path: '/traceability/impact',
+    redirect: (to) => ({
+      name: 'costing-traceability',
+      query: { ...to.query, tab: 'impact' },
+    }),
+  },
+]
